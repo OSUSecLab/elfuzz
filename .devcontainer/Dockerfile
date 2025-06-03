@@ -76,7 +76,8 @@ RUN python3 -m pip install "pipx==1.7.1"
 RUN python3 -m pipx ensurepath
 
 ADD tmp/elfuzz_baselines.tar.zst /tmp/
-RUN pipx install /tmp/isla /tmp/islearn
+RUN pipx install isla --spec /tmp/isla 
+RUN pipx install islearn --spec /tmp/islearn
 
 RUN if [ $(uname -m) != "aarch64" ]; then pipx install "xonsh==0.19.3" "grammarinator==23.7"; else pipx install "xonsh==0.19.3" "grammarinator==23.7"; fi
 RUN pipx inject xonsh "click==8.1.8"
