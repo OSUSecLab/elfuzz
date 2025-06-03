@@ -1,0 +1,7 @@
+(forall <__tmp_rule_321> container in start:
+   exists <__tmp_rule_1122> elem in container:
+     (= elem "t") and
+exists int num:
+  forall <value_row> elem in start:
+    ((>= (str.to.int num) 1) and
+    count(elem, "<expr>", num)))

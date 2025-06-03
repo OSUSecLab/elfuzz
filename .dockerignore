@@ -1,0 +1,4 @@
+tmp/
+/evaluation/binary/
+/evaluation/workdir/
+gen*/

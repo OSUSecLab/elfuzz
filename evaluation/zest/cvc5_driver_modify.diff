@@ -1,0 +1,283 @@
+13a14,17
+> from copy import deepcopy
+> from typing import Collection
+> from functools import reduce
+> import numpy as np
+47a52,147
+> class Mutation:
+>     def __init__(self, start: int, length: int):
+>         assert start >= 0
+>         assert length >= 0
+>         self.start = start
+>         self.length = length
+> 
+> class PseudoRNG(io.BytesIO):
+>     def __init__(self, size: int, *, rand: random.Random, bytes: bytes | None = None) -> None:
+>         self.size = size
+>         self.__ptr = 0
+>         if bytes is not None:
+>             assert len(bytes) >= size
+>             self.bytes = bytes
+>         else:
+>             self.bytes = rand.randbytes(size)
+>         self.rand = rand
+>     
+>     def clone(self) -> 'PseudoRNG':
+>         return PseudoRNG(self.size, rand=self.rand, bytes=deepcopy(self.bytes))
+>     
+>     def apply(self, mutation: Mutation) -> None:
+>         start = mutation.start
+>         end = mutation.start + mutation.length
+>         
+>         if start >= self.size:
+>             return
+>         
+>         inrange = (start, min(end, self.size))
+> 
+>         new_bytes = self.bytes[:inrange[0]] + self.rand.randbytes(inrange[1] - inrange[0]) + (self.bytes[inrange[1]:] if inrange[1] < self.size else b'')
+>         self.bytes = new_bytes
+>     # @override
+>     def read(self, size: int) -> bytes:
+>         # return self.rand.randbytes(size)
+>         start = self.__ptr
+>         end = start + size
+>         
+>         if start < self.size:
+>             inrange = (start, min(end, self.size))
+>         else:
+>             inrange = None
+>         if end > self.size:
+>             outrange = (self.size, end)
+>         else:
+>             outrange = None
+> 
+>         self.__ptr = end
+>     
+>         if inrange is not None:
+>             first_part = self.bytes[inrange[0]:inrange[1]]
+>         else:
+>             first_part = b''
+>         if outrange is not None:
+>             second_part = self.rand.randbytes(outrange[1] - outrange[0])
+>         else:
+>             second_part = b''
+>         return first_part + second_part
+>     
+>     # @override
+>     def write(self, data: bytes) -> int:
+>         raise NotImplementedError()
+>     
+>     # @override
+>     def seek(self, offset: int, whence: int = 0) -> int:
+>         raise NotImplementedError()
+>     
+>     # @override
+>     def tell(self) -> int:
+>         raise NotImplementedError()
+> 
+> class Coverage:
+>     def __init__(self, edges: Collection[str]):
+>         self.edges = set(edges)
+>         
+>     def add(self, edge: str) -> None:
+>         self.edges.add(edge)
+>     
+>     def update(self, edges: Collection[str]) -> None:
+>         self.edges.update(edges)
+>     
+>     def contained_in(self, other: 'Coverage') -> bool:
+>         return self.edges.issubset(other.edges)
+>     
+>     def diff_count(self, other: 'Coverage') -> int:
+>         return len(self.edges - other.edges)
+>     
+>     def __or__(self, other: 'Coverage') -> 'Coverage':
+>         return Coverage(self.edges | other.edges)
+>     
+>     def __ror__(self, other: 'Coverage') -> 'Coverage':
+>         return other | self
+>     
+>     def __len__(self) -> int:
+>         return len(self.edges)
+> 
+52,53c152,172
+< def wrapper(module_names: list[str], function: str, outdir: str, num: int, callback: str | None) -> int:
+<     rng = RNG(random.Random())
+---
+> MAX_RANDOME_BYTES_LENGTH = 102400
+> 
+> def wrapper(module_names: list[str], function: str, outdir: str, num: int, callback: str | None, mutate_from: list[tuple[int, bytes]] = []) -> tuple[int, list[tuple[int, bytes]]]:
+>     sampled: list[PseudoRNG] = []
+>     if len(mutate_from) < num:
+>         for r in mutate_from:
+>             sampled.append(PseudoRNG(r[0], rand=random.Random(), bytes=r[1]))
+>     else:
+>         for r in random.sample(mutate_from, num):
+>             sampled.append(PseudoRNG(r[0], rand=random.Random(), bytes=r[1]))
+>     for r in sampled:
+>         mutation_num = np.random.geometric(0.025) # The mean of the geometric distribution is 4 as the Zest paper setting
+>         for _ in range(mutation_num):
+>             mutation_start = np.random.geometric(0.025)
+>             mutation_length = np.random.geometric(0.25)
+>             mutation = Mutation(mutation_start, mutation_length)
+>             r.apply(mutation)
+>     for _ in range(num - len(sampled)):
+>         sampled.append(PseudoRNG(MAX_RANDOME_BYTES_LENGTH, rand=random.Random()))
+>     random.shuffle(sampled)
+>     rngs = sampled
+64a184
+>         rng = rngs[i]
+78c198
+<     return error_count
+---
+>     return error_count, [(rng.size, rng.bytes) for rng in rngs]
+101a222,250
+> SELECTED_BATCH_SIZE = 3
+> def select_batch(i: int, cov: Coverage, selected_batches: dict[int, Coverage]) -> int:
+>     assert i not in selected_batches
+>     if len(selected_batches) < SELECTED_BATCH_SIZE:
+>         # selected_batches[i] = cov
+>         return -2
+>     sum_cov = reduce(lambda x, y: x | y, selected_batches.values())
+>     original_num = len(sum_cov)
+>     if cov.contained_in(sum_cov):
+>         return -1
+> 
+>     max_index = -1
+>     max_num = original_num
+>     for j in selected_batches:
+>         try_replace = deepcopy(selected_batches)
+>         del try_replace[j]
+>         try_replace[i] = cov
+>         new_num = len(reduce(lambda x, y: x | y, try_replace.values()))
+>         if new_num > max_num:
+>             max_num = new_num
+>             max_index = j
+>     if max_index == -1:
+>         return -1
+>     # del selected_batches[max_index]
+>     # selected_batches[i] = cov
+>     return max_index
+> 
+> PWD = os.path.realpath(os.path.dirname(__file__))
+> 
+121a271,272
+>     para_num = 1
+>     
+155c306
+<         cov_module.m_batch_size = batch_size
+---
+>         cov_module.m_batch_size = batch_size # type: ignore
+162c313
+<         
+---
+>         batch_idx = 0
+168a320,323
+> 
+>         selected_batches: dict[int, Coverage] = {}
+>         selected_rngs: dict[int, list[tuple[int, bytes]]] = {}
+>         tmp_rng_records: dict[int, list[tuple[int, bytes]]] = {}
+179c334,335
+<             if check_point > 0 and time_sum - last_checkpoint > check_point:
+---
+>             # if check_point > 0 and time_sum - last_checkpoint > check_point:
+>             if True:
+221a378,399
+>                             cov = Coverage(set())
+>                             try:
+>                                 with open(os.path.join(td, f'{i}.cov'), 'r') as batch_cov:
+>                                     for l in batch_cov:
+>                                         (edge, hit) = l.strip().split(':')
+>                                         cov.add(edge)
+>                                 logger.info(f"{len(cov)=}")
+>                                 r = select_batch(i, cov, selected_batches)
+>                                 if r == -2:
+>                                     selected_batches[i] = cov
+>                                     selected_rngs[i] = tmp_rng_records[i]
+>                                     logger.info(f'Batch {i} selected')
+>                                 elif r != -1:
+>                                     del selected_batches[r]
+>                                     del selected_rngs[r]
+>                                     selected_batches[i] = cov
+>                                     selected_rngs[i] = tmp_rng_records[i]
+>                                     logger.info(f'Batch {i} selected')
+>                                 
+>                                 del tmp_rng_records[i]
+>                             except Exception as e:
+>                                 logger.error(f'Error in batch cov selection for {i}: {e=}')
+251c429
+<             current = min(left, batch_size)
+---
+>             current = 1000
+259c437,450
+<             future = executor.submit(wrapper, fuzzer_module_names, function, batch_dir, current, callback)
+---
+>             assert len(selected_batches) == len(selected_rngs)
+>             tmp = []
+>             if len(selected_rngs) == SELECTED_BATCH_SIZE:
+>                 for r in selected_rngs.values():
+>                     tmp += r
+>             with open(os.path.join(PWD, f'survivor_{batch_idx}'), 'w') as f:
+>                 for idx in selected_batches.keys():
+>                     f.write(f'{idx}\n')
+>             future = executor.submit(wrapper, fuzzer_module_names, function, batch_dir, current, callback, 
+>                                      tmp)
+>             batch_idx += 1
+>             if batch_idx >= 11:
+>                 logger.info('Batch index exceeds 10, stopping')
+>                 break
+262c453,460
+<                 error_count = future.result(min(time_limit - time_sum, batch_timeout) if time_limit > 0 else batch_timeout)
+---
+>                 error_count, rngs = future.result(min(time_limit - time_sum, batch_timeout) if time_limit > 0 else batch_timeout)
+>                 tmp_rng_records[batch] = rngs
+>                 assert len(rngs) == 1
+>                 rng_size, rng_bytes = rngs[0]
+>                 with open(os.path.join(PWD, f'rng_size_{batch_idx-1}'), 'w') as rng_f:
+>                     rng_f.write(f'{rng_size}\n')
+>                 with open(os.path.join(PWD, f'rng_bytes_{batch_idx-1}'), 'wb') as rng_f:
+>                     rng_f.write(rng_bytes)
+298a497,517
+>                     cov = Coverage(set())
+>                     try:
+>                         with open(os.path.join(td, f'{batch_record + i}.cov'), 'r') as batch_cov:
+>                             for l in batch_cov:
+>                                 (edge, hit) = l.strip().split(':')
+>                                 cov.add(edge)
+>                         logger.info(f"{len(cov)=}")
+>                         r = select_batch(batch_record + i, cov, selected_batches)
+>                         if r == -2:
+>                             selected_batches[batch_record + i] = cov
+>                             selected_rngs[batch_record + i] = tmp_rng_records[batch_record + i]
+>                             logger.info(f'Batch {batch_record + i} selected')
+>                         elif r != -1:
+>                             logger.info(f'Batch {batch_record + i} selected')
+>                             del selected_batches[r]
+>                             del selected_rngs[r]
+>                             selected_batches[batch_record + i] = cov
+>                             selected_rngs[batch_record + i] = tmp_rng_records[batch_record + i]
+>                         del tmp_rng_records[batch_record + i]
+>                     except Exception as e:
+>                         logger.error(f'Error in batch cov selection for {batch_record + i}: {e=}')
+322a542,562
+>                 cov = Coverage(set())
+>                 try:
+>                     with open(os.path.join(td, f'{batch_record + i}.cov'), 'r') as batch_cov:
+>                         for l in batch_cov:
+>                             (edge, hit) = l.strip().split(':')
+>                             cov.add(edge)
+>                     r = select_batch(batch_record + i, cov, selected_batches)
+>                     logger.info(f"{len(cov)=}")
+>                     if r == -2:
+>                         selected_batches[batch_record + i] = cov
+>                         selected_rngs[batch_record + i] = tmp_rng_records[batch_record + i]
+>                         logger.info(f'Batch {batch_record + i} selected')
+>                     elif r != -1:
+>                         logger.info(f'Batch {batch_record + i} selected')
+>                         del selected_batches[r]
+>                         del selected_rngs[r]
+>                         selected_batches[batch_record + i] = cov
+>                         selected_rngs[batch_record + i] = tmp_rng_records[batch_record + i]
+>                     del tmp_rng_records[batch_record + i]
+>                 except Exception as e:
+>                     logger.error(f'Error in batch cov selection for {batch_record + i}: {e=}')

@@ -1,0 +1,16 @@
+services:
+  elmfuzz-dev:
+    image: ghcr.io/cychen2021/elmfuzz-dev:25.05
+    container_name: elmfuzz-dev
+    volumes:
+      - ..:/home/appuser/elmfuzz
+      - /tmp/fuzzdata:/tmp/fuzzdata
+      - /var/run/docker.sock:/var/run/docker.sock
+    hostname: host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "windows:host-gateway"
+    user: appuser
+    security_opt:
+      - seccomp:unconfined
+    entrypoint: bash -c "sudo /home/appuser/elmfuzz/.devcontainer/setup_docker.sh && sudo chmod 777 /tmp/fuzzdata && sudo service ssh restart && tail -f /dev/null"

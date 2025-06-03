@@ -1,0 +1,7 @@
+afl-fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/jsoncpp/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/binary/jsoncpp/jsoncpp_fuzzer @@ | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/jsoncpp_%FUZZER% | | 2
+afl-fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/libxml2/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/binary/libxml2/xml @@ | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/libxml2_%FUZZER% | | 5
+afl-fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/re2/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/binary/re2/fuzzer @@ | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/re2_%FUZZER% | | 4
+afl-fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/cpython3/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/workdir/cpython3/fuzzer @@ | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/cpython3_alm | %ROOT%/evaluation/inputgen/envs/cpython3 | 840
+afl-fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/cvc5/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/workdir/cvc5/cvc5 @@ | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/cvc5_alm | %ROOT%/evaluation/inputgen/envs/cvc5 | 5
+afl-fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/sqlite3/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/binary/sqlite3/ossfuzz @@ | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/sqlite3_%FUZZER% | | 5
+cargo afl fuzz -V %time -i %ROOT%/evaluation/inputgen/tmp/librsvg/%FUZZER%_cmin -o %out -- %ROOT%/evaluation/binary/librsvg/render_document_patched | %ROOT%/evaluation/inputgen/tmp/%REPEAT%/afl/librsvg_%FUZZER% | %ROOT%/evaluation/inputgen/envs/librsvg | 6

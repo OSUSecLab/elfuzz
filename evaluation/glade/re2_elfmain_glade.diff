@@ -1,0 +1,5 @@
+17,18c17
+<     LLVMFuzzerTestOneInput(data, size);
+<     return 0;
+---
+>     return LLVMFuzzerTestOneInput(data, size);

@@ -1,0 +1,22 @@
+diff --git a/genvariants_parallel.py b/genvariants_parallel.py
+index db501a3..0d75634 100644
+--- a/genvariants_parallel.py
++++ b/genvariants_parallel.py
+@@ -163,6 +163,7 @@ def generate_variant(i, generators, model, filename, args):
+         stop = ['\nif', '\nclass', '\nfor', '\nwhile']
+     else:
+         assert generator == 'complete'
++        assert False, 'Completion forbidden'
+         prefix, orig = random_completion(open(filename).read(), args.start_line)
+         suffix = ''
+         prompt = prefix
+@@ -324,7 +325,8 @@ def main():
+ 
+     generators = []
+     if not args.no_completion:
+-        generators += ['complete']
++        # generators += ['complete']
++        pass
+     if not args.no_fim:
+         generators += ['infilled']
+     if not args.no_splice:

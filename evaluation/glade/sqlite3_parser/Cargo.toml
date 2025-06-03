@@ -1,0 +1,7 @@
+[package]
+name = "sqlite3_parser"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+sqlparser = "0.56.0"

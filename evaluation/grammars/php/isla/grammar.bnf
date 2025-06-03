@@ -1,0 +1,3513 @@
+<start> ::= <htmlDocument>
+<htmlDocument> ::= <__tmp_rule_0> <__tmp_rule_2> <__white_space01_1463> <EOF>
+<__tmp_rule_0> ::= ""
+                 | <Shebang>
+<__tmp_rule_1> ::= <inlineHtml>
+                 | <phpBlock>
+<__tmp_rule_2> ::= ""
+                 | <__tmp_rule_1> <__tmp_rule_2>
+<inlineHtml> ::= <__tmp_rule_3>
+               | <scriptText>
+<__tmp_rule_3> ::= <htmlElement>
+                 | <htmlElement> <__white_space01_1463> <__tmp_rule_3>
+<htmlElement> ::= <HtmlDtd>
+                | <HtmlClose>
+                | <HtmlStyleOpen>
+                | <HtmlOpen>
+                | <HtmlName>
+                | <HtmlSlashClose>
+                | <HtmlSlash>
+                | <HtmlText>
+                | <HtmlEquals>
+                | <HtmlStartQuoteString>
+                | <HtmlEndQuoteString>
+                | <HtmlStartDoubleQuoteString>
+                | <HtmlEndDoubleQuoteString>
+                | <HtmlHex>
+                | <HtmlDecimal>
+                | <HtmlQuoteString>
+                | <HtmlDoubleQuoteString>
+                | <StyleBody>
+                | <HtmlScriptOpen>
+                | <HtmlScriptClose>
+                | <XmlStart> <__white_space01_1463> <__tmp_rule_4> <__white_space01_1463> <XmlClose>
+<__tmp_rule_4> ::= ""
+                 | <XmlText> <__white_space01_1463> <__tmp_rule_4>
+<scriptText> ::= <__tmp_rule_5>
+<__tmp_rule_5> ::= <ScriptText>
+                 | <ScriptText> <__white_space01_1463> <__tmp_rule_5>
+<phpBlock> ::= <__tmp_rule_6> <__tmp_rule_7>
+<__tmp_rule_6> ::= ""
+                 | <importStatement> <__white_space01_1463> <__tmp_rule_6>
+<__tmp_rule_7> ::= <topStatement>
+                 | <topStatement> <__white_space01_1463> <__tmp_rule_7>
+<importStatement> ::= <Import> <__white_space01_1463> <Namespace> <__white_space01_1463> <namespaceNameList> <__white_space01_1463> <SemiColon>
+<topStatement> ::= <statement>
+                 | <useDeclaration>
+                 | <namespaceDeclaration>
+                 | <functionDeclaration>
+                 | <classDeclaration>
+                 | <globalConstantDeclaration>
+                 | <enumDeclaration>
+<useDeclaration> ::= <Use> <__white_space01_1463> <__tmp_rule_9> <__white_space01_1463> <useDeclarationContentList> <__white_space01_1463> <SemiColon>
+<__tmp_rule_8> ::= <Function_>
+                 | <Const>
+<__tmp_rule_9> ::= ""
+                 | <__tmp_rule_8>
+<useDeclarationContentList> ::= <__tmp_rule_10> <__white_space01_1463> <useDeclarationContent> <__white_space01_1463> <__tmp_rule_13>
+<__tmp_rule_10> ::= ""
+                  | "\\"
+<__tmp_rule_12> ::= ""
+                  | "\\"
+<__tmp_rule_11> ::= "," <__tmp_rule_12> <__white_space01_1463> <useDeclarationContent>
+<__tmp_rule_13> ::= ""
+                  | <__tmp_rule_11> <__tmp_rule_13>
+<useDeclarationContent> ::= <namespaceNameList>
+<namespaceDeclaration> ::= <Namespace> <__white_space01_1463> <__tmp_rule_17>
+<__tmp_rule_15> ::= ""
+                  | <namespaceNameList>
+<__tmp_rule_16> ::= ""
+                  | <namespaceStatement> <__white_space01_1463> <__tmp_rule_16>
+<__tmp_rule_14> ::= <__tmp_rule_15> <__white_space01_1463> <OpenCurlyBracket> <__white_space01_1463> <__tmp_rule_16> <__white_space01_1463> <CloseCurlyBracket>
+                  | <namespaceNameList> <__white_space01_1463> <SemiColon>
+<__tmp_rule_17> ::= <__tmp_rule_14>
+<namespaceStatement> ::= <statement>
+                       | <useDeclaration>
+                       | <functionDeclaration>
+                       | <classDeclaration>
+                       | <globalConstantDeclaration>
+<functionDeclaration> ::= <__tmp_rule_18> <__white_space01_1463> <Function_> <__white_space01_1463> <__tmp_rule_19> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_20> "(" <formalParameterList> ")" <__tmp_rule_23> <__white_space01_1463> <blockStatement>
+<__tmp_rule_18> ::= ""
+                  | <attributes>
+<__tmp_rule_19> ::= ""
+                  | "&"
+<__tmp_rule_20> ::= ""
+                  | <typeParameterListInBrackets>
+<__tmp_rule_22> ::= ""
+                  | <QuestionMark>
+<__tmp_rule_21> ::= ":" <__tmp_rule_22> <__white_space01_1463> <typeHint>
+<__tmp_rule_23> ::= ""
+                  | <__tmp_rule_21>
+<classDeclaration> ::= <__tmp_rule_24> <__tmp_rule_25> <__tmp_rule_26> <__tmp_rule_27> <__tmp_rule_37> <__white_space01_1463> <OpenCurlyBracket> <__white_space01_1463> <__tmp_rule_38> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_24> ::= ""
+                  | <attributes>
+<__tmp_rule_25> ::= ""
+                  | <Private>
+<__tmp_rule_26> ::= ""
+                  | <modifier>
+<__tmp_rule_27> ::= ""
+                  | <Partial>
+<__tmp_rule_29> ::= ""
+                  | <typeParameterListInBrackets>
+<__tmp_rule_30> ::= <Extends> <__white_space01_1463> <qualifiedStaticTypeRef>
+<__tmp_rule_31> ::= ""
+                  | <__tmp_rule_30>
+<__tmp_rule_32> ::= <Implements> <__white_space01_1463> <interfaceList>
+<__tmp_rule_33> ::= ""
+                  | <__tmp_rule_32>
+<__tmp_rule_34> ::= ""
+                  | <typeParameterListInBrackets>
+<__tmp_rule_35> ::= <Extends> <__white_space01_1463> <interfaceList>
+<__tmp_rule_36> ::= ""
+                  | <__tmp_rule_35>
+<__tmp_rule_28> ::= <classEntryType> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_29> <__tmp_rule_31> <__tmp_rule_33>
+                  | <Interface> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_34> <__tmp_rule_36>
+<__tmp_rule_37> ::= <__tmp_rule_28>
+<__tmp_rule_38> ::= ""
+                  | <classStatement> <__white_space01_1463> <__tmp_rule_38>
+<classEntryType> ::= <Class>
+                   | <Trait>
+<interfaceList> ::= <qualifiedStaticTypeRef> <__white_space01_1463> <__tmp_rule_40>
+<__tmp_rule_39> ::= "," <qualifiedStaticTypeRef>
+<__tmp_rule_40> ::= ""
+                  | <__tmp_rule_39> <__tmp_rule_40>
+<typeParameterListInBrackets> ::= "<:" <typeParameterList> ":>"
+                                | "<:" <typeParameterWithDefaultsList> ":>"
+                                | "<:" <typeParameterList> "," <typeParameterWithDefaultsList> ":>"
+<typeParameterList> ::= <typeParameterDecl> <__white_space01_1463> <__tmp_rule_42>
+<__tmp_rule_41> ::= "," <typeParameterDecl>
+<__tmp_rule_42> ::= ""
+                  | <__tmp_rule_41> <__tmp_rule_42>
+<typeParameterWithDefaultsList> ::= <typeParameterWithDefaultDecl> <__white_space01_1463> <__tmp_rule_44>
+<__tmp_rule_43> ::= "," <typeParameterWithDefaultDecl>
+<__tmp_rule_44> ::= ""
+                  | <__tmp_rule_43> <__tmp_rule_44>
+<typeParameterDecl> ::= <__tmp_rule_45> <__white_space01_1463> <identifier>
+<__tmp_rule_45> ::= ""
+                  | <attributes>
+<typeParameterWithDefaultDecl> ::= <__tmp_rule_46> <__white_space01_1463> <identifier> <__white_space01_1463> <Eq> <__white_space01_1463> <__tmp_rule_48>
+<__tmp_rule_46> ::= ""
+                  | <attributes>
+<__tmp_rule_47> ::= <qualifiedStaticTypeRef>
+                  | <primitiveType>
+<__tmp_rule_48> ::= <__tmp_rule_47>
+<genericDynamicArgs> ::= "<:" <typeRef> <__white_space01_1463> <__tmp_rule_50> ":>"
+<__tmp_rule_49> ::= "," <typeRef>
+<__tmp_rule_50> ::= ""
+                  | <__tmp_rule_49> <__tmp_rule_50>
+<attributes> ::= <__tmp_rule_51>
+<__tmp_rule_51> ::= <attributeGroup>
+                  | <attributeGroup> <__white_space01_1463> <__tmp_rule_51>
+<attributeGroup> ::= <AttributeStart> <__white_space01_1463> <__tmp_rule_53> <__white_space01_1463> <attribute> <__white_space01_1463> <__tmp_rule_55> "]"
+<__tmp_rule_52> ::= <identifier> ":"
+<__tmp_rule_53> ::= ""
+                  | <__tmp_rule_52>
+<__tmp_rule_54> ::= "," <attribute>
+<__tmp_rule_55> ::= ""
+                  | <__tmp_rule_54> <__tmp_rule_55>
+<attribute> ::= <qualifiedNamespaceName> <__white_space01_1463> <__tmp_rule_56>
+<__tmp_rule_56> ::= ""
+                  | <arguments>
+<innerStatementList> ::= <__tmp_rule_57>
+<__tmp_rule_57> ::= ""
+                  | <innerStatement> <__white_space01_1463> <__tmp_rule_57>
+<innerStatement> ::= <statement>
+                   | <functionDeclaration>
+                   | <classDeclaration>
+<statement> ::= <identifier> ":"
+              | <blockStatement>
+              | <ifStatement>
+              | <whileStatement>
+              | <doWhileStatement>
+              | <forStatement>
+              | <switchStatement>
+              | <breakStatement>
+              | <continueStatement>
+              | <returnStatement>
+              | <yieldExpression> <__white_space01_1463> <SemiColon>
+              | <globalStatement>
+              | <staticVariableStatement>
+              | <echoStatement>
+              | <expressionStatement>
+              | <unsetStatement>
+              | <foreachStatement>
+              | <tryCatchFinally>
+              | <throwStatement>
+              | <gotoStatement>
+              | <declareStatement>
+              | <emptyStatement_>
+              | <inlineHtmlStatement>
+<emptyStatement_> ::= <SemiColon>
+<blockStatement> ::= <OpenCurlyBracket> <__white_space01_1463> <innerStatementList> <__white_space01_1463> <CloseCurlyBracket>
+<ifStatement> ::= <If> <__white_space01_1463> <parentheses> <__white_space01_1463> <statement> <__white_space01_1463> <__tmp_rule_58> <__tmp_rule_59>
+                | <If> <__white_space01_1463> <parentheses> ":" <innerStatementList> <__white_space01_1463> <__tmp_rule_60> <__tmp_rule_61> <__white_space01_1463> <EndIf> <__white_space01_1463> <SemiColon>
+<__tmp_rule_58> ::= ""
+                  | <elseIfStatement> <__white_space01_1463> <__tmp_rule_58>
+<__tmp_rule_59> ::= ""
+                  | <elseStatement>
+<__tmp_rule_60> ::= ""
+                  | <elseIfColonStatement> <__white_space01_1463> <__tmp_rule_60>
+<__tmp_rule_61> ::= ""
+                  | <elseColonStatement>
+<elseIfStatement> ::= <ElseIf> <__white_space01_1463> <parentheses> <__white_space01_1463> <statement>
+<elseIfColonStatement> ::= <ElseIf> <__white_space01_1463> <parentheses> ":" <innerStatementList>
+<elseStatement> ::= <Else> <__white_space01_1463> <statement>
+<elseColonStatement> ::= <Else> ":" <innerStatementList>
+<whileStatement> ::= <While> <__white_space01_1463> <parentheses> <__white_space01_1463> <__tmp_rule_63>
+<__tmp_rule_62> ::= <statement>
+                  | ":" <innerStatementList> <__white_space01_1463> <EndWhile> <__white_space01_1463> <SemiColon>
+<__tmp_rule_63> ::= <__tmp_rule_62>
+<doWhileStatement> ::= <Do> <__white_space01_1463> <statement> <__white_space01_1463> <While> <__white_space01_1463> <parentheses> <__white_space01_1463> <SemiColon>
+<forStatement> ::= <For> "(" <__tmp_rule_64> <__white_space01_1463> <SemiColon> <__white_space01_1463> <__tmp_rule_65> <__white_space01_1463> <SemiColon> <__white_space01_1463> <__tmp_rule_66> ")" <__tmp_rule_68>
+<__tmp_rule_64> ::= ""
+                  | <forInit>
+<__tmp_rule_65> ::= ""
+                  | <expressionList>
+<__tmp_rule_66> ::= ""
+                  | <forUpdate>
+<__tmp_rule_67> ::= <statement>
+                  | ":" <innerStatementList> <__white_space01_1463> <EndFor> <__white_space01_1463> <SemiColon>
+<__tmp_rule_68> ::= <__tmp_rule_67>
+<forInit> ::= <expressionList>
+<forUpdate> ::= <expressionList>
+<switchStatement> ::= <Switch> <__white_space01_1463> <parentheses> <__white_space01_1463> <__tmp_rule_74>
+<__tmp_rule_70> ::= ""
+                  | <SemiColon>
+<__tmp_rule_71> ::= ""
+                  | <switchBlock> <__white_space01_1463> <__tmp_rule_71>
+<__tmp_rule_72> ::= ""
+                  | <SemiColon>
+<__tmp_rule_73> ::= ""
+                  | <switchBlock> <__white_space01_1463> <__tmp_rule_73>
+<__tmp_rule_69> ::= <OpenCurlyBracket> <__white_space01_1463> <__tmp_rule_70> <__tmp_rule_71> <__white_space01_1463> <CloseCurlyBracket>
+                  | ":" <__tmp_rule_72> <__tmp_rule_73> <__white_space01_1463> <EndSwitch> <__white_space01_1463> <SemiColon>
+<__tmp_rule_74> ::= <__tmp_rule_69>
+<switchBlock> ::= <__tmp_rule_80> <__white_space01_1463> <innerStatementList>
+<__tmp_rule_76> ::= <Case> <__white_space01_1463> <expression>
+                  | <Default>
+<__tmp_rule_77> ::= <__tmp_rule_76>
+<__tmp_rule_78> ::= ":"
+                  | <SemiColon>
+<__tmp_rule_79> ::= <__tmp_rule_78>
+<__tmp_rule_75> ::= <__tmp_rule_77> <__tmp_rule_79>
+<__tmp_rule_80> ::= <__tmp_rule_75>
+                  | <__tmp_rule_75> <__tmp_rule_80>
+<breakStatement> ::= <Break> <__white_space01_1463> <__tmp_rule_81> <__white_space01_1463> <SemiColon>
+<__tmp_rule_81> ::= ""
+                  | <expression>
+<continueStatement> ::= <Continue> <__white_space01_1463> <__tmp_rule_82> <__white_space01_1463> <SemiColon>
+<__tmp_rule_82> ::= ""
+                  | <expression>
+<returnStatement> ::= <Return> <__white_space01_1463> <__tmp_rule_83> <__white_space01_1463> <SemiColon>
+<__tmp_rule_83> ::= ""
+                  | <expression>
+<expressionStatement> ::= <expression> <__white_space01_1463> <SemiColon>
+<unsetStatement> ::= <Unset> "(" <chainList> ")" <SemiColon>
+<foreachStatement> ::= <Foreach> <__white_space01_1463> <__tmp_rule_92> <__tmp_rule_94>
+<__tmp_rule_85> ::= ""
+                  | "&"
+<__tmp_rule_87> ::= ""
+                  | "&"
+<__tmp_rule_86> ::= "=>" <__tmp_rule_87> <__white_space01_1463> <chain>
+<__tmp_rule_88> ::= ""
+                  | <__tmp_rule_86>
+<__tmp_rule_90> ::= ""
+                  | "&"
+<__tmp_rule_89> ::= "=>" <__tmp_rule_90> <__white_space01_1463> <chain>
+<__tmp_rule_91> ::= ""
+                  | <__tmp_rule_89>
+<__tmp_rule_84> ::= "(" <expression> <__white_space01_1463> <As> <__white_space01_1463> <arrayDestructuring> ")"
+                  | "(" <chain> <__white_space01_1463> <As> <__white_space01_1463> <__tmp_rule_85> <__white_space01_1463> <assignable> <__white_space01_1463> <__tmp_rule_88> ")"
+                  | "(" <expression> <__white_space01_1463> <As> <__white_space01_1463> <assignable> <__white_space01_1463> <__tmp_rule_91> ")"
+                  | "(" <chain> <__white_space01_1463> <As> <__white_space01_1463> <List> "(" <assignmentList> ")" ")"
+<__tmp_rule_92> ::= <__tmp_rule_84>
+<__tmp_rule_93> ::= <statement>
+                  | ":" <innerStatementList> <__white_space01_1463> <EndForeach> <__white_space01_1463> <SemiColon>
+<__tmp_rule_94> ::= <__tmp_rule_93>
+<tryCatchFinally> ::= <Try> <__white_space01_1463> <blockStatement> <__white_space01_1463> <__tmp_rule_99>
+<__tmp_rule_96> ::= <catchClause>
+                  | <catchClause> <__white_space01_1463> <__tmp_rule_96>
+<__tmp_rule_97> ::= ""
+                  | <finallyStatement>
+<__tmp_rule_98> ::= ""
+                  | <catchClause> <__white_space01_1463> <__tmp_rule_98>
+<__tmp_rule_95> ::= <__tmp_rule_96> <__tmp_rule_97>
+                  | <__tmp_rule_98> <__white_space01_1463> <finallyStatement>
+<__tmp_rule_99> ::= <__tmp_rule_95>
+<catchClause> ::= <Catch> "(" <qualifiedStaticTypeRef> <__white_space01_1463> <__tmp_rule_101> <__tmp_rule_102> ")" <blockStatement>
+<__tmp_rule_100> ::= "|" <qualifiedStaticTypeRef>
+<__tmp_rule_101> ::= ""
+                   | <__tmp_rule_100> <__tmp_rule_101>
+<__tmp_rule_102> ::= ""
+                   | <VarName>
+<finallyStatement> ::= <Finally> <__white_space01_1463> <blockStatement>
+<throwStatement> ::= <Throw> <__white_space01_1463> <expression> <__white_space01_1463> <SemiColon>
+<gotoStatement> ::= <Goto> <__white_space01_1463> <identifier> <__white_space01_1463> <SemiColon>
+<declareStatement> ::= <Declare> "(" <declareList> ")" <__tmp_rule_104>
+<__tmp_rule_103> ::= <statement>
+                   | ":" <innerStatementList> <__white_space01_1463> <EndDeclare> <__white_space01_1463> <SemiColon>
+<__tmp_rule_104> ::= <__tmp_rule_103>
+<inlineHtmlStatement> ::= <__tmp_rule_105>
+<__tmp_rule_105> ::= <inlineHtml>
+                   | <inlineHtml> <__white_space01_1463> <__tmp_rule_105>
+<declareList> ::= <directive> <__white_space01_1463> <__tmp_rule_107>
+<__tmp_rule_106> ::= "," <directive>
+<__tmp_rule_107> ::= ""
+                   | <__tmp_rule_106> <__tmp_rule_107>
+<directive> ::= <Ticks> <__white_space01_1463> <Eq> <__white_space01_1463> <__tmp_rule_109>
+              | <Encoding> <__white_space01_1463> <Eq> <__white_space01_1463> <SingleQuoteString>
+              | <StrictTypes> <__white_space01_1463> <Eq> <__white_space01_1463> <numericConstant>
+<__tmp_rule_108> ::= <numericConstant>
+                   | <Real>
+<__tmp_rule_109> ::= <__tmp_rule_108>
+<formalParameterList> ::= <__tmp_rule_110> <__tmp_rule_112> <__tmp_rule_113>
+<__tmp_rule_110> ::= ""
+                   | <formalParameter>
+<__tmp_rule_111> ::= "," <formalParameter>
+<__tmp_rule_112> ::= ""
+                   | <__tmp_rule_111> <__tmp_rule_112>
+<__tmp_rule_113> ::= ""
+                   | ","
+<formalParameter> ::= <__tmp_rule_114> <__tmp_rule_115> <__tmp_rule_116> <__tmp_rule_117> <__tmp_rule_118> <__tmp_rule_119> <__white_space01_1463> <variableInitializer>
+<__tmp_rule_114> ::= ""
+                   | <attributes>
+<__tmp_rule_115> ::= ""
+                   | <memberModifier> <__white_space01_1463> <__tmp_rule_115>
+<__tmp_rule_116> ::= ""
+                   | <QuestionMark>
+<__tmp_rule_117> ::= ""
+                   | <typeHint>
+<__tmp_rule_118> ::= ""
+                   | "&"
+<__tmp_rule_119> ::= ""
+                   | "..."
+<typeHint> ::= <qualifiedStaticTypeRef>
+             | <Callable>
+             | <primitiveType>
+             | <typeHint> "|" <typeHint>
+<globalStatement> ::= <Global> <__white_space01_1463> <globalVar> <__white_space01_1463> <__tmp_rule_121> <__white_space01_1463> <SemiColon>
+<__tmp_rule_120> ::= "," <globalVar>
+<__tmp_rule_121> ::= ""
+                   | <__tmp_rule_120> <__tmp_rule_121>
+<globalVar> ::= <VarName>
+              | <Dollar> <__white_space01_1463> <chain>
+              | <Dollar> <__white_space01_1463> <OpenCurlyBracket> <__white_space01_1463> <expression> <__white_space01_1463> <CloseCurlyBracket>
+<echoStatement> ::= <Echo> <__white_space01_1463> <expressionList> <__white_space01_1463> <SemiColon>
+<staticVariableStatement> ::= <Static> <__white_space01_1463> <variableInitializer> <__white_space01_1463> <__tmp_rule_123> <__white_space01_1463> <SemiColon>
+<__tmp_rule_122> ::= "," <variableInitializer>
+<__tmp_rule_123> ::= ""
+                   | <__tmp_rule_122> <__tmp_rule_123>
+<classStatement> ::= <__tmp_rule_124> <__tmp_rule_139>
+                   | <Use> <__white_space01_1463> <qualifiedNamespaceNameList> <__white_space01_1463> <traitAdaptations>
+<__tmp_rule_124> ::= ""
+                   | <attributes>
+<__tmp_rule_126> ::= ""
+                   | <typeHint>
+<__tmp_rule_127> ::= "," <variableInitializer>
+<__tmp_rule_128> ::= ""
+                   | <__tmp_rule_127> <__tmp_rule_128>
+<__tmp_rule_129> ::= ""
+                   | <memberModifiers>
+<__tmp_rule_131> ::= ""
+                   | <typeHint>
+<__tmp_rule_132> ::= "," <identifierInitializer>
+<__tmp_rule_133> ::= ""
+                   | <__tmp_rule_132> <__tmp_rule_133>
+<__tmp_rule_134> ::= ""
+                   | "&"
+<__tmp_rule_135> ::= ""
+                   | <typeParameterListInBrackets>
+<__tmp_rule_136> ::= <baseCtorCall>
+                   | <returnTypeDecl>
+<__tmp_rule_137> ::= ""
+                   | <__tmp_rule_136>
+<__tmp_rule_130> ::= <Const> <__white_space01_1463> <__tmp_rule_131> <__white_space01_1463> <identifierInitializer> <__white_space01_1463> <__tmp_rule_133> <__white_space01_1463> <SemiColon>
+                   | <Function_> <__white_space01_1463> <__tmp_rule_134> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_135> "(" <formalParameterList> ")" <__tmp_rule_137> <__white_space01_1463> <methodBody>
+<__tmp_rule_138> ::= <__tmp_rule_130>
+<__tmp_rule_125> ::= <propertyModifiers> <__white_space01_1463> <__tmp_rule_126> <__white_space01_1463> <variableInitializer> <__white_space01_1463> <__tmp_rule_128> <__white_space01_1463> <SemiColon>
+                   | <__tmp_rule_129> <__tmp_rule_138>
+<__tmp_rule_139> ::= <__tmp_rule_125>
+<traitAdaptations> ::= <SemiColon>
+                     | <OpenCurlyBracket> <__white_space01_1463> <__tmp_rule_140> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_140> ::= ""
+                   | <traitAdaptationStatement> <__white_space01_1463> <__tmp_rule_140>
+<traitAdaptationStatement> ::= <traitPrecedence>
+                             | <traitAlias>
+<traitPrecedence> ::= <qualifiedNamespaceName> "::" <identifier> <__white_space01_1463> <InsteadOf> <__white_space01_1463> <qualifiedNamespaceNameList> <__white_space01_1463> <SemiColon>
+<traitAlias> ::= <traitMethodReference> <__white_space01_1463> <As> <__white_space01_1463> <__tmp_rule_143> <__white_space01_1463> <SemiColon>
+<__tmp_rule_142> ::= ""
+                   | <memberModifier>
+<__tmp_rule_141> ::= <memberModifier>
+                   | <__tmp_rule_142> <__white_space01_1463> <identifier>
+<__tmp_rule_143> ::= <__tmp_rule_141>
+<traitMethodReference> ::= <__tmp_rule_145> <__white_space01_1463> <identifier>
+<__tmp_rule_144> ::= <qualifiedNamespaceName> "::"
+<__tmp_rule_145> ::= ""
+                   | <__tmp_rule_144>
+<baseCtorCall> ::= ":" <identifier> <__white_space01_1463> <__tmp_rule_146>
+<__tmp_rule_146> ::= ""
+                   | <arguments>
+<returnTypeDecl> ::= ":" <__tmp_rule_147> <__white_space01_1463> <typeHint>
+<__tmp_rule_147> ::= ""
+                   | <QuestionMark>
+<methodBody> ::= <SemiColon>
+               | <blockStatement>
+<propertyModifiers> ::= <memberModifiers>
+                      | <Var>
+<memberModifiers> ::= <__tmp_rule_148>
+<__tmp_rule_148> ::= <memberModifier>
+                   | <memberModifier> <__white_space01_1463> <__tmp_rule_148>
+<variableInitializer> ::= <VarName> <__white_space01_1463> <__tmp_rule_150>
+<__tmp_rule_149> ::= <Eq> <__white_space01_1463> <constantInitializer>
+<__tmp_rule_150> ::= ""
+                   | <__tmp_rule_149>
+<identifierInitializer> ::= <identifier> <__white_space01_1463> <Eq> <__white_space01_1463> <constantInitializer>
+<globalConstantDeclaration> ::= <__tmp_rule_151> <__white_space01_1463> <Const> <__white_space01_1463> <identifierInitializer> <__white_space01_1463> <__tmp_rule_153> <__white_space01_1463> <SemiColon>
+<__tmp_rule_151> ::= ""
+                   | <attributes>
+<__tmp_rule_152> ::= "," <identifierInitializer>
+<__tmp_rule_153> ::= ""
+                   | <__tmp_rule_152> <__tmp_rule_153>
+<enumDeclaration> ::= <Enum_> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_157> <__tmp_rule_159> <__white_space01_1463> <OpenCurlyBracket> <__white_space01_1463> <__tmp_rule_160> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_155> ::= <IntType>
+                   | <StringType>
+<__tmp_rule_156> ::= <__tmp_rule_155>
+<__tmp_rule_154> ::= <Colon> <__white_space01_1463> <__tmp_rule_156>
+<__tmp_rule_157> ::= ""
+                   | <__tmp_rule_154>
+<__tmp_rule_158> ::= <Implements> <__white_space01_1463> <interfaceList>
+<__tmp_rule_159> ::= ""
+                   | <__tmp_rule_158>
+<__tmp_rule_160> ::= ""
+                   | <enumItem> <__white_space01_1463> <__tmp_rule_160>
+<enumItem> ::= <Case> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_162> <__white_space01_1463> <SemiColon>
+             | <__tmp_rule_163> <__white_space01_1463> <functionDeclaration>
+             | <Use> <__white_space01_1463> <qualifiedNamespaceNameList> <__white_space01_1463> <traitAdaptations>
+<__tmp_rule_161> ::= <Eq> <__white_space01_1463> <expression>
+<__tmp_rule_162> ::= ""
+                   | <__tmp_rule_161>
+<__tmp_rule_163> ::= ""
+                   | <memberModifiers>
+<expressionList> ::= <expression> <__white_space01_1463> <__tmp_rule_165>
+<__tmp_rule_164> ::= "," <expression>
+<__tmp_rule_165> ::= ""
+                   | <__tmp_rule_164> <__tmp_rule_165>
+<parentheses> ::= "(" <__tmp_rule_167> ")"
+<__tmp_rule_166> ::= <expression>
+                   | <yieldExpression>
+<__tmp_rule_167> ::= <__tmp_rule_166>
+<expression> ::= <Clone> <__white_space01_1463> <expression>
+               | <newExpr>
+               | <stringConstant> "[" <expression> "]"
+               | "(" <castOperation> ")" <expression>
+               | <__tmp_rule_169> <__white_space01_1463> <expression>
+               | <__tmp_rule_171> <__white_space01_1463> <expression>
+               | <__tmp_rule_173> <__white_space01_1463> <chain>
+               | <chain> <__white_space01_1463> <__tmp_rule_175>
+               | <Print> <__white_space01_1463> <expression>
+               | <arrayCreation>
+               | <chain>
+               | <constant>
+               | <string>
+               | <Label>
+               | <BackQuoteString>
+               | <parentheses>
+               | <Yield>
+               | <List> "(" <assignmentList> ")" <Eq> <__white_space01_1463> <expression>
+               | <IsSet> "(" <chainList> ")"
+               | <Empty> "(" <chain> ")"
+               | <Eval> "(" <expression> ")"
+               | <Exit> <__white_space01_1463> <__tmp_rule_177>
+               | <__tmp_rule_179> <__white_space01_1463> <expression>
+               | <__tmp_rule_181> <__white_space01_1463> <expression>
+               | <lambdaFunctionExpr>
+               | <matchExpr>
+               | <expression> "**" <expression>
+               | <expression> <__white_space01_1463> <InstanceOf> <__white_space01_1463> <typeRef>
+               | <expression> <__white_space01_1463> <__tmp_rule_182> <__white_space01_1463> <expression>
+               | <expression> <__white_space01_1463> <__tmp_rule_183> <__white_space01_1463> <expression>
+               | <expression> <__white_space01_1463> <__tmp_rule_184> <__white_space01_1463> <expression>
+               | <expression> <__white_space01_1463> <__tmp_rule_185> <__white_space01_1463> <expression>
+               | <expression> <__white_space01_1463> <__tmp_rule_186> <__white_space01_1463> <expression>
+               | <expression> "&" <expression>
+               | <expression> "^" <expression>
+               | <expression> "|" <expression>
+               | <expression> "&&" <expression>
+               | <expression> "||" <expression>
+               | <expression> <__white_space01_1463> <QuestionMark> <__white_space01_1463> <__tmp_rule_187> ":" <expression>
+               | <expression> "??" <expression>
+               | <expression> "<=>" <expression>
+               | <Throw> <__white_space01_1463> <expression>
+               | <arrayDestructuring> <__white_space01_1463> <Eq> <__white_space01_1463> <expression>
+               | <assignable> <__white_space01_1463> <assignmentOperator> <__white_space01_1463> <__tmp_rule_188> <__white_space01_1463> <expression>
+               | <assignable> <__white_space01_1463> <Eq> <__white_space01_1463> <__tmp_rule_189> "&" <__tmp_rule_191>
+               | <expression> <__white_space01_1463> <LogicalAnd> <__white_space01_1463> <expression>
+               | <expression> <__white_space01_1463> <LogicalXor> <__white_space01_1463> <expression>
+               | <expression> <__white_space01_1463> <LogicalOr> <__white_space01_1463> <expression>
+<__tmp_rule_168> ::= "~"
+                   | "@"
+<__tmp_rule_169> ::= <__tmp_rule_168>
+<__tmp_rule_170> ::= "!"
+                   | "+"
+                   | "-"
+<__tmp_rule_171> ::= <__tmp_rule_170>
+<__tmp_rule_172> ::= "++"
+                   | "--"
+<__tmp_rule_173> ::= <__tmp_rule_172>
+<__tmp_rule_174> ::= "++"
+                   | "--"
+<__tmp_rule_175> ::= <__tmp_rule_174>
+<__tmp_rule_176> ::= "(" ")"
+                   | <parentheses>
+<__tmp_rule_177> ::= ""
+                   | <__tmp_rule_176>
+<__tmp_rule_178> ::= <Include>
+                   | <IncludeOnce>
+<__tmp_rule_179> ::= <__tmp_rule_178>
+<__tmp_rule_180> ::= <Require>
+                   | <RequireOnce>
+<__tmp_rule_181> ::= <__tmp_rule_180>
+<__tmp_rule_182> ::= "*"
+                   | <Divide>
+                   | "%"
+<__tmp_rule_183> ::= "+"
+                   | "-"
+                   | "."
+<__tmp_rule_184> ::= "<<"
+                   | ">>"
+<__tmp_rule_185> ::= <Less>
+                   | "<="
+                   | <Greater>
+                   | ">="
+<__tmp_rule_186> ::= "==="
+                   | "!=="
+                   | "=="
+                   | <IsNotEq>
+<__tmp_rule_187> ::= ""
+                   | <expression>
+<__tmp_rule_188> ::= ""
+                   | <attributes>
+<__tmp_rule_189> ::= ""
+                   | <attributes>
+<__tmp_rule_190> ::= <chain>
+                   | <newExpr>
+<__tmp_rule_191> ::= <__tmp_rule_190>
+<assignable> ::= <chain>
+               | <arrayCreation>
+<arrayCreation> ::= <__tmp_rule_195> <__tmp_rule_197>
+<__tmp_rule_193> ::= ""
+                   | <arrayItemList>
+<__tmp_rule_194> ::= ""
+                   | <arrayItemList>
+<__tmp_rule_192> ::= <Array> "(" <__tmp_rule_193> ")"
+                   | "[" <__tmp_rule_194> "]"
+<__tmp_rule_195> ::= <__tmp_rule_192>
+<__tmp_rule_196> ::= "[" <expression> "]"
+<__tmp_rule_197> ::= ""
+                   | <__tmp_rule_196>
+<arrayDestructuring> ::= "[" <__tmp_rule_198> <__white_space01_1463> <indexedDestructItem> <__white_space01_1463> <__tmp_rule_201> <__tmp_rule_202> "]"
+                       | "[" <keyedDestructItem> <__white_space01_1463> <__tmp_rule_205> <__tmp_rule_206> "]"
+<__tmp_rule_198> ::= ""
+                   | "," <__tmp_rule_198>
+<__tmp_rule_200> ::= ","
+                   | "," <__tmp_rule_200>
+<__tmp_rule_199> ::= <__tmp_rule_200> <__white_space01_1463> <indexedDestructItem>
+<__tmp_rule_201> ::= ""
+                   | <__tmp_rule_199> <__tmp_rule_201>
+<__tmp_rule_202> ::= ""
+                   | "," <__tmp_rule_202>
+<__tmp_rule_204> ::= ","
+                   | "," <__tmp_rule_204>
+<__tmp_rule_203> ::= <__tmp_rule_204> <__white_space01_1463> <keyedDestructItem>
+<__tmp_rule_205> ::= ""
+                   | <__tmp_rule_203> <__tmp_rule_205>
+<__tmp_rule_206> ::= ""
+                   | ","
+<indexedDestructItem> ::= <__tmp_rule_207> <__white_space01_1463> <chain>
+<__tmp_rule_207> ::= ""
+                   | "&"
+<keyedDestructItem> ::= <__tmp_rule_209> <__tmp_rule_210> <__white_space01_1463> <chain>
+<__tmp_rule_208> ::= <expression> "=>"
+<__tmp_rule_209> ::= ""
+                   | <__tmp_rule_208>
+<__tmp_rule_210> ::= ""
+                   | "&"
+<lambdaFunctionExpr> ::= <__tmp_rule_211> <__white_space01_1463> <Function_> <__white_space01_1463> <__tmp_rule_212> "(" <formalParameterList> ")" <__tmp_rule_213> <__tmp_rule_215> <__white_space01_1463> <blockStatement>
+                       | <LambdaFn> "(" <formalParameterList> ")" "=>" <expression>
+<__tmp_rule_211> ::= ""
+                   | <Static>
+<__tmp_rule_212> ::= ""
+                   | "&"
+<__tmp_rule_213> ::= ""
+                   | <lambdaFunctionUseVars>
+<__tmp_rule_214> ::= ":" <typeHint>
+<__tmp_rule_215> ::= ""
+                   | <__tmp_rule_214>
+<matchExpr> ::= <Match_> "(" <expression> ")" <OpenCurlyBracket> <__white_space01_1463> <matchItem> <__white_space01_1463> <__tmp_rule_217> <__tmp_rule_218> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_216> ::= "," <matchItem>
+<__tmp_rule_217> ::= ""
+                   | <__tmp_rule_216> <__tmp_rule_217>
+<__tmp_rule_218> ::= ""
+                   | ","
+<matchItem> ::= <expression> <__white_space01_1463> <__tmp_rule_220> "=>" <expression>
+<__tmp_rule_219> ::= "," <expression>
+<__tmp_rule_220> ::= ""
+                   | <__tmp_rule_219> <__tmp_rule_220>
+<newExpr> ::= <New> <__white_space01_1463> <typeRef> <__white_space01_1463> <__tmp_rule_221>
+<__tmp_rule_221> ::= ""
+                   | <arguments>
+<assignmentOperator> ::= <Eq>
+                       | "+="
+                       | "-="
+                       | "*="
+                       | "**="
+                       | "/="
+                       | ".="
+                       | "%="
+                       | "&="
+                       | "|="
+                       | "^="
+                       | "<<="
+                       | ">>="
+                       | "??="
+<yieldExpression> ::= <Yield> <__white_space01_1463> <__tmp_rule_225>
+<__tmp_rule_223> ::= "=>" <expression>
+<__tmp_rule_224> ::= ""
+                   | <__tmp_rule_223>
+<__tmp_rule_222> ::= <expression> <__white_space01_1463> <__tmp_rule_224>
+                   | <From> <__white_space01_1463> <expression>
+<__tmp_rule_225> ::= <__tmp_rule_222>
+<arrayItemList> ::= <arrayItem> <__white_space01_1463> <__tmp_rule_227> <__tmp_rule_228>
+<__tmp_rule_226> ::= "," <arrayItem>
+<__tmp_rule_227> ::= ""
+                   | <__tmp_rule_226> <__tmp_rule_227>
+<__tmp_rule_228> ::= ""
+                   | ","
+<arrayItem> ::= <expression> <__white_space01_1463> <__tmp_rule_230>
+              | <__tmp_rule_232> "&" <chain>
+<__tmp_rule_229> ::= "=>" <expression>
+<__tmp_rule_230> ::= ""
+                   | <__tmp_rule_229>
+<__tmp_rule_231> ::= <expression> "=>"
+<__tmp_rule_232> ::= ""
+                   | <__tmp_rule_231>
+<lambdaFunctionUseVars> ::= <Use> "(" <lambdaFunctionUseVar> <__white_space01_1463> <__tmp_rule_234> ")"
+<__tmp_rule_233> ::= "," <lambdaFunctionUseVar>
+<__tmp_rule_234> ::= ""
+                   | <__tmp_rule_233> <__tmp_rule_234>
+<lambdaFunctionUseVar> ::= <__tmp_rule_235> <__white_space01_1463> <VarName>
+<__tmp_rule_235> ::= ""
+                   | "&"
+<qualifiedStaticTypeRef> ::= <qualifiedNamespaceName> <__white_space01_1463> <__tmp_rule_236>
+                           | <Static>
+<__tmp_rule_236> ::= ""
+                   | <genericDynamicArgs>
+<typeRef> ::= <__tmp_rule_238> <__tmp_rule_239>
+            | <primitiveType>
+            | <Static>
+            | <anonymousClass>
+<__tmp_rule_237> ::= <qualifiedNamespaceName>
+                   | <indirectTypeRef>
+<__tmp_rule_238> ::= <__tmp_rule_237>
+<__tmp_rule_239> ::= ""
+                   | <genericDynamicArgs>
+<anonymousClass> ::= <__tmp_rule_240> <__tmp_rule_241> <__tmp_rule_242> <__tmp_rule_243> <__tmp_rule_253> <__white_space01_1463> <OpenCurlyBracket> <__white_space01_1463> <__tmp_rule_254> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_240> ::= ""
+                   | <attributes>
+<__tmp_rule_241> ::= ""
+                   | <Private>
+<__tmp_rule_242> ::= ""
+                   | <modifier>
+<__tmp_rule_243> ::= ""
+                   | <Partial>
+<__tmp_rule_245> ::= ""
+                   | <typeParameterListInBrackets>
+<__tmp_rule_246> ::= <Extends> <__white_space01_1463> <qualifiedStaticTypeRef>
+<__tmp_rule_247> ::= ""
+                   | <__tmp_rule_246>
+<__tmp_rule_248> ::= <Implements> <__white_space01_1463> <interfaceList>
+<__tmp_rule_249> ::= ""
+                   | <__tmp_rule_248>
+<__tmp_rule_250> ::= ""
+                   | <typeParameterListInBrackets>
+<__tmp_rule_251> ::= <Extends> <__white_space01_1463> <interfaceList>
+<__tmp_rule_252> ::= ""
+                   | <__tmp_rule_251>
+<__tmp_rule_244> ::= <classEntryType> <__white_space01_1463> <__tmp_rule_245> <__tmp_rule_247> <__tmp_rule_249>
+                   | <Interface> <__white_space01_1463> <identifier> <__white_space01_1463> <__tmp_rule_250> <__tmp_rule_252>
+<__tmp_rule_253> ::= <__tmp_rule_244>
+<__tmp_rule_254> ::= ""
+                   | <classStatement> <__white_space01_1463> <__tmp_rule_254>
+<indirectTypeRef> ::= <chainBase> <__white_space01_1463> <__tmp_rule_256>
+<__tmp_rule_255> ::= "->" <keyedFieldName>
+<__tmp_rule_256> ::= ""
+                   | <__tmp_rule_255> <__tmp_rule_256>
+<qualifiedNamespaceName> ::= <__tmp_rule_257> <__tmp_rule_258> <__white_space01_1463> <namespaceNameList>
+<__tmp_rule_257> ::= ""
+                   | <Namespace>
+<__tmp_rule_258> ::= ""
+                   | "\\"
+<namespaceNameList> ::= <identifier>
+                      | <identifier> <__white_space01_1463> <__tmp_rule_260> <__tmp_rule_262>
+<__tmp_rule_259> ::= "\\" <identifier>
+<__tmp_rule_260> ::= ""
+                   | <__tmp_rule_259> <__tmp_rule_260>
+<__tmp_rule_261> ::= "\\" <namespaceNameTail>
+<__tmp_rule_262> ::= ""
+                   | <__tmp_rule_261>
+<namespaceNameTail> ::= <identifier> <__white_space01_1463> <__tmp_rule_264>
+                      | <OpenCurlyBracket> <__white_space01_1463> <namespaceNameTail> <__white_space01_1463> <__tmp_rule_266> <__tmp_rule_267> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_263> ::= <As> <__white_space01_1463> <identifier>
+<__tmp_rule_264> ::= ""
+                   | <__tmp_rule_263>
+<__tmp_rule_265> ::= "," <namespaceNameTail>
+<__tmp_rule_266> ::= ""
+                   | <__tmp_rule_265> <__tmp_rule_266>
+<__tmp_rule_267> ::= ""
+                   | ","
+<qualifiedNamespaceNameList> ::= <qualifiedNamespaceName> <__white_space01_1463> <__tmp_rule_269>
+<__tmp_rule_268> ::= "," <qualifiedNamespaceName>
+<__tmp_rule_269> ::= ""
+                   | <__tmp_rule_268> <__tmp_rule_269>
+<arguments> ::= "(" <__tmp_rule_273> <__tmp_rule_274> ")"
+<__tmp_rule_271> ::= "," <actualArgument>
+<__tmp_rule_272> ::= ""
+                   | <__tmp_rule_271> <__tmp_rule_272>
+<__tmp_rule_270> ::= <actualArgument> <__white_space01_1463> <__tmp_rule_272>
+                   | <yieldExpression>
+<__tmp_rule_273> ::= ""
+                   | <__tmp_rule_270>
+<__tmp_rule_274> ::= ""
+                   | ","
+<actualArgument> ::= <__tmp_rule_275> <__tmp_rule_276> <__white_space01_1463> <expression>
+                   | "&" <chain>
+<__tmp_rule_275> ::= ""
+                   | <argumentName>
+<__tmp_rule_276> ::= ""
+                   | "..."
+<argumentName> ::= <identifier> ":"
+<constantInitializer> ::= <constant>
+                        | <string>
+                        | <Array> "(" <__tmp_rule_279> ")"
+                        | "[" <__tmp_rule_282> "]"
+                        | <__tmp_rule_284> <__white_space01_1463> <constantInitializer>
+                        | <__tmp_rule_286> <__tmp_rule_290>
+<__tmp_rule_278> ::= ""
+                   | ","
+<__tmp_rule_277> ::= <arrayItemList> <__white_space01_1463> <__tmp_rule_278>
+<__tmp_rule_279> ::= ""
+                   | <__tmp_rule_277>
+<__tmp_rule_281> ::= ""
+                   | ","
+<__tmp_rule_280> ::= <arrayItemList> <__white_space01_1463> <__tmp_rule_281>
+<__tmp_rule_282> ::= ""
+                   | <__tmp_rule_280>
+<__tmp_rule_283> ::= "+"
+                   | "-"
+<__tmp_rule_284> ::= <__tmp_rule_283>
+<__tmp_rule_285> ::= <string>
+                   | <constant>
+<__tmp_rule_286> ::= <__tmp_rule_285>
+<__tmp_rule_288> ::= <string>
+                   | <constant>
+<__tmp_rule_289> ::= <__tmp_rule_288>
+<__tmp_rule_287> ::= "." <__tmp_rule_289>
+<__tmp_rule_290> ::= ""
+                   | <__tmp_rule_287> <__tmp_rule_290>
+<constant> ::= <Null>
+             | <literalConstant>
+             | <magicConstant>
+             | <classConstant>
+             | <qualifiedNamespaceName>
+<literalConstant> ::= <Real>
+                    | <BooleanConstant>
+                    | <numericConstant>
+                    | <stringConstant>
+<numericConstant> ::= <Octal>
+                    | <Decimal>
+                    | <Hex>
+                    | <Binary>
+<classConstant> ::= <__tmp_rule_292> "::" <__tmp_rule_294>
+                  | <__tmp_rule_296> "::" <__tmp_rule_298>
+<__tmp_rule_291> ::= <Class>
+                   | <Parent_>
+<__tmp_rule_292> ::= <__tmp_rule_291>
+<__tmp_rule_293> ::= <identifier>
+                   | <Constructor>
+                   | <Get>
+                   | <Set>
+<__tmp_rule_294> ::= <__tmp_rule_293>
+<__tmp_rule_295> ::= <qualifiedStaticTypeRef>
+                   | <keyedVariable>
+                   | <string>
+<__tmp_rule_296> ::= <__tmp_rule_295>
+<__tmp_rule_297> ::= <identifier>
+                   | <keyedVariable>
+<__tmp_rule_298> ::= <__tmp_rule_297>
+<stringConstant> ::= <Label>
+<string> ::= <StartHereDoc> <__white_space01_1463> <__tmp_rule_299>
+           | <StartNowDoc> <__white_space01_1463> <__tmp_rule_300>
+           | <SingleQuoteString>
+           | <DoubleQuote> <__white_space01_1463> <__tmp_rule_301> <__white_space01_1463> <DoubleQuote>
+<__tmp_rule_299> ::= <HereDocText>
+                   | <HereDocText> <__white_space01_1463> <__tmp_rule_299>
+<__tmp_rule_300> ::= <HereDocText>
+                   | <HereDocText> <__white_space01_1463> <__tmp_rule_300>
+<__tmp_rule_301> ::= ""
+                   | <interpolatedStringPart> <__white_space01_1463> <__tmp_rule_301>
+<interpolatedStringPart> ::= <StringPart>
+                           | <UnicodeEscape>
+                           | <chain>
+<chainList> ::= <chain> <__white_space01_1463> <__tmp_rule_303>
+<__tmp_rule_302> ::= "," <chain>
+<__tmp_rule_303> ::= ""
+                   | <__tmp_rule_302> <__tmp_rule_303>
+<chain> ::= <chainOrigin> <__white_space01_1463> <__tmp_rule_304>
+<__tmp_rule_304> ::= ""
+                   | <memberAccess> <__white_space01_1463> <__tmp_rule_304>
+<chainOrigin> ::= <chainBase>
+                | <functionCall>
+                | "(" <newExpr> ")"
+<memberAccess> ::= "->" <keyedFieldName> <__white_space01_1463> <__tmp_rule_305>
+<__tmp_rule_305> ::= ""
+                   | <actualArguments>
+<functionCall> ::= <functionCallName> <__white_space01_1463> <actualArguments>
+<functionCallName> ::= <qualifiedNamespaceName>
+                     | <classConstant>
+                     | <chainBase>
+                     | <parentheses>
+<actualArguments> ::= <__tmp_rule_306> <__tmp_rule_307> <__tmp_rule_308>
+<__tmp_rule_306> ::= ""
+                   | <genericDynamicArgs>
+<__tmp_rule_307> ::= <arguments>
+                   | <arguments> <__white_space01_1463> <__tmp_rule_307>
+<__tmp_rule_308> ::= ""
+                   | <squareCurlyExpression> <__white_space01_1463> <__tmp_rule_308>
+<chainBase> ::= <keyedVariable> <__white_space01_1463> <__tmp_rule_310>
+              | <qualifiedStaticTypeRef> "::" <keyedVariable>
+<__tmp_rule_309> ::= "::" <keyedVariable>
+<__tmp_rule_310> ::= ""
+                   | <__tmp_rule_309>
+<keyedFieldName> ::= <keyedSimpleFieldName>
+                   | <keyedVariable>
+<keyedSimpleFieldName> ::= <__tmp_rule_312> <__tmp_rule_313>
+<__tmp_rule_311> ::= <identifier>
+                   | <OpenCurlyBracket> <__white_space01_1463> <expression> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_312> ::= <__tmp_rule_311>
+<__tmp_rule_313> ::= ""
+                   | <squareCurlyExpression> <__white_space01_1463> <__tmp_rule_313>
+<keyedVariable> ::= <__tmp_rule_314> <__tmp_rule_316> <__tmp_rule_317>
+<__tmp_rule_314> ::= ""
+                   | <Dollar> <__white_space01_1463> <__tmp_rule_314>
+<__tmp_rule_315> ::= <VarName>
+                   | <Dollar> <__white_space01_1463> <OpenCurlyBracket> <__white_space01_1463> <expression> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_316> ::= <__tmp_rule_315>
+<__tmp_rule_317> ::= ""
+                   | <squareCurlyExpression> <__white_space01_1463> <__tmp_rule_317>
+<squareCurlyExpression> ::= "[" <__tmp_rule_318> "]"
+                          | <OpenCurlyBracket> <__white_space01_1463> <expression> <__white_space01_1463> <CloseCurlyBracket>
+<__tmp_rule_318> ::= ""
+                   | <expression>
+<assignmentList> ::= <__tmp_rule_319> <__tmp_rule_322>
+<__tmp_rule_319> ::= ""
+                   | <assignmentListElement>
+<__tmp_rule_321> ::= ""
+                   | <assignmentListElement>
+<__tmp_rule_320> ::= "," <__tmp_rule_321>
+<__tmp_rule_322> ::= ""
+                   | <__tmp_rule_320> <__tmp_rule_322>
+<assignmentListElement> ::= <chain>
+                          | <List> "(" <assignmentList> ")"
+                          | <arrayItem>
+<modifier> ::= <Abstract>
+             | <Final>
+<identifier> ::= <Label>
+               | <Abstract>
+               | <Array>
+               | <As>
+               | <BinaryCast>
+               | <BoolType>
+               | <BooleanConstant>
+               | <Break>
+               | <Callable>
+               | <Case>
+               | <Catch>
+               | <Class>
+               | <Clone>
+               | <Const>
+               | <Continue>
+               | <Declare>
+               | <Default>
+               | <Do>
+               | <DoubleCast>
+               | <DoubleType>
+               | <Echo>
+               | <Else>
+               | <ElseIf>
+               | <Empty>
+               | <EndDeclare>
+               | <EndFor>
+               | <EndForeach>
+               | <EndIf>
+               | <EndSwitch>
+               | <EndWhile>
+               | <Eval>
+               | <Exit>
+               | <Extends>
+               | <Final>
+               | <Finally>
+               | <FloatCast>
+               | <For>
+               | <Foreach>
+               | <Function_>
+               | <Global>
+               | <Goto>
+               | <If>
+               | <Implements>
+               | <Import>
+               | <Include>
+               | <IncludeOnce>
+               | <InstanceOf>
+               | <InsteadOf>
+               | <Int16Cast>
+               | <Int64Type>
+               | <Int8Cast>
+               | <Interface>
+               | <IntType>
+               | <IsSet>
+               | <LambdaFn>
+               | <List>
+               | <LogicalAnd>
+               | <LogicalOr>
+               | <LogicalXor>
+               | <Namespace>
+               | <New>
+               | <Null>
+               | <ObjectType>
+               | <Parent_>
+               | <Partial>
+               | <Print>
+               | <Private>
+               | <Protected>
+               | <Public>
+               | <Readonly>
+               | <Require>
+               | <RequireOnce>
+               | <Resource>
+               | <Return>
+               | <Static>
+               | <StringType>
+               | <Switch>
+               | <Throw>
+               | <Trait>
+               | <Try>
+               | <Typeof>
+               | <UintCast>
+               | <UnicodeCast>
+               | <Unset>
+               | <Use>
+               | <Var>
+               | <While>
+               | <Yield>
+               | <From>
+               | <Enum_>
+               | <Match_>
+               | <Ticks>
+               | <Encoding>
+               | <StrictTypes>
+               | <Get>
+               | <Set>
+               | <Call>
+               | <CallStatic>
+               | <Constructor>
+               | <Destruct>
+               | <Wakeup>
+               | <Sleep>
+               | <Autoload>
+               | <IsSet__>
+               | <Unset__>
+               | <ToString__>
+               | <Invoke>
+               | <SetState>
+               | <Clone__>
+               | <DebugInfo>
+               | <Namespace__>
+               | <Class__>
+               | <Traic__>
+               | <Function__>
+               | <Method__>
+               | <Line__>
+               | <File__>
+               | <Dir__>
+<memberModifier> ::= <Public>
+                   | <Protected>
+                   | <Private>
+                   | <Static>
+                   | <Abstract>
+                   | <Final>
+                   | <Readonly>
+<magicConstant> ::= <Namespace__>
+                  | <Class__>
+                  | <Traic__>
+                  | <Function__>
+                  | <Method__>
+                  | <Line__>
+                  | <File__>
+                  | <Dir__>
+<primitiveType> ::= <BoolType>
+                  | <IntType>
+                  | <Int64Type>
+                  | <DoubleType>
+                  | <StringType>
+                  | <Resource>
+                  | <ObjectType>
+                  | <Array>
+<castOperation> ::= <BoolType>
+                  | <Int8Cast>
+                  | <Int16Cast>
+                  | <IntType>
+                  | <Int64Type>
+                  | <UintCast>
+                  | <DoubleCast>
+                  | <DoubleType>
+                  | <FloatCast>
+                  | <StringType>
+                  | <BinaryCast>
+                  | <UnicodeCast>
+                  | <Array>
+                  | <ObjectType>
+                  | <Resource>
+                  | <Unset>
+<HtmlText> ::= <__tmp_rule_328>
+<__tmp_rule_327> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_326> ::= <__tmp_rule_327>
+                   | <__tmp_rule_327> <__tmp_rule_326>
+<__tmp_rule_328> ::= <__tmp_rule_326>
+<XmlStart> ::= "<?xml"
+<HtmlScriptOpen> ::= "<script"
+<HtmlStyleOpen> ::= "<style"
+<HtmlDtd> ::= <__tmp_rule_358> <__tmp_rule_361> <__tmp_rule_364>
+<__tmp_rule_358> ::= "<!"
+<__tmp_rule_360> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "<"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_359> ::= ""
+                   | <__tmp_rule_360> <__tmp_rule_359>
+<__tmp_rule_361> ::= <__tmp_rule_359>
+<__tmp_rule_364> ::= ">"
+<HtmlOpen> ::= "<"
+<Shebang> ::= <__tmp_rule_370> <__tmp_rule_373> <__tmp_rule_376>
+<__tmp_rule_370> ::= "#"
+<__tmp_rule_373> ::= "!"
+<__tmp_rule_375> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "<"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_374> ::= ""
+                   | <__tmp_rule_375> <__tmp_rule_374>
+<__tmp_rule_376> ::= <__tmp_rule_374>
+<XmlText> ::= <__tmp_rule_388>
+<__tmp_rule_387> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "<"
+                   | "="
+                   | ">"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_386> ::= <__tmp_rule_387>
+                   | <__tmp_rule_387> <__tmp_rule_386>
+<__tmp_rule_388> ::= <__tmp_rule_386>
+<XmlClose> ::= "?>"
+<HtmlClose> ::= ">"
+<HtmlSlashClose> ::= "/>"
+<HtmlSlash> ::= "/"
+<HtmlEquals> ::= "="
+<HtmlStartQuoteString> ::= "'"
+                         | "\\'"
+<HtmlStartDoubleQuoteString> ::= "\""
+                               | "\\\""
+<HtmlHex> ::= <__tmp_rule_427> <__tmp_rule_430>
+<__tmp_rule_427> ::= "#"
+<__tmp_rule_429> ::= "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+<__tmp_rule_428> ::= <__tmp_rule_429>
+                   | <__tmp_rule_429> <__tmp_rule_428>
+<__tmp_rule_430> ::= <__tmp_rule_428>
+<HtmlDecimal> ::= <__tmp_rule_433>
+<__tmp_rule_432> ::= "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+<__tmp_rule_431> ::= <__tmp_rule_432>
+                   | <__tmp_rule_432> <__tmp_rule_431>
+<__tmp_rule_433> ::= <__tmp_rule_431>
+<HtmlName> ::= <__tmp_rule_439> <__tmp_rule_442>
+<__tmp_rule_439> ::= ""
+                   | ":"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+<__tmp_rule_441> ::= ""
+                   | "-"
+                   | "."
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "_"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "\xb7"
+<__tmp_rule_440> ::= ""
+                   | <__tmp_rule_441> <__tmp_rule_440>
+<__tmp_rule_442> ::= <__tmp_rule_440>
+<HtmlEndQuoteString> ::= "'"
+                       | "''"
+<HtmlQuoteString> ::= <__tmp_rule_460>
+<__tmp_rule_459> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_458> ::= <__tmp_rule_459>
+                   | <__tmp_rule_459> <__tmp_rule_458>
+<__tmp_rule_460> ::= <__tmp_rule_458>
+<HtmlEndDoubleQuoteString> ::= "\""
+                             | "\"\""
+<HtmlDoubleQuoteString> ::= <__tmp_rule_478>
+<__tmp_rule_477> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_476> ::= <__tmp_rule_477>
+                   | <__tmp_rule_477> <__tmp_rule_476>
+<__tmp_rule_478> ::= <__tmp_rule_476>
+<ScriptText> ::= <__tmp_rule_484>
+<__tmp_rule_483> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_482> ::= <__tmp_rule_483>
+                   | <__tmp_rule_483> <__tmp_rule_482>
+<__tmp_rule_484> ::= <__tmp_rule_482>
+<HtmlScriptClose> ::= "</>"
+                    | "</script>"
+<StyleBody> ::= <__tmp_rule_505> <__tmp_rule_508> <__tmp_rule_511> <__tmp_rule_514>
+<__tmp_rule_504> ::= "\x00"
+                   | "\x01"
+                   | "\x02"
+                   | "\x03"
+                   | "\x04"
+                   | "\x05"
+                   | "\x06"
+                   | "\x07"
+                   | "\x08"
+                   | "\t"
+                   | "\n"
+                   | "\x0b"
+                   | "\x0c"
+                   | "\r"
+                   | "\x0e"
+                   | "\x0f"
+                   | "\x10"
+                   | "\x11"
+                   | "\x12"
+                   | "\x13"
+                   | "\x14"
+                   | "\x15"
+                   | "\x16"
+                   | "\x17"
+                   | "\x18"
+                   | "\x19"
+                   | "\x1a"
+                   | "\x1b"
+                   | "\x1c"
+                   | "\x1d"
+                   | "\x1e"
+                   | "\x1f"
+                   | " "
+                   | "!"
+                   | "\""
+                   | "#"
+                   | "$"
+                   | "%"
+                   | "&"
+                   | "'"
+                   | "("
+                   | ")"
+                   | "*"
+                   | "+"
+                   | ","
+                   | "-"
+                   | "."
+                   | "/"
+                   | "0"
+                   | "1"
+                   | "2"
+                   | "3"
+                   | "4"
+                   | "5"
+                   | "6"
+                   | "7"
+                   | "8"
+                   | "9"
+                   | ":"
+                   | ";"
+                   | "<"
+                   | "="
+                   | ">"
+                   | "?"
+                   | "@"
+                   | "A"
+                   | "B"
+                   | "C"
+                   | "D"
+                   | "E"
+                   | "F"
+                   | "G"
+                   | "H"
+                   | "I"
+                   | "J"
+                   | "K"
+                   | "L"
+                   | "M"
+                   | "N"
+                   | "O"
+                   | "P"
+                   | "Q"
+                   | "R"
+                   | "S"
+                   | "T"
+                   | "U"
+                   | "V"
+                   | "W"
+                   | "X"
+                   | "Y"
+                   | "Z"
+                   | "["
+                   | "\\"
+                   | "]"
+                   | "^"
+                   | "_"
+                   | "`"
+                   | "a"
+                   | "b"
+                   | "c"
+                   | "d"
+                   | "e"
+                   | "f"
+                   | "g"
+                   | "h"
+                   | "i"
+                   | "j"
+                   | "k"
+                   | "l"
+                   | "m"
+                   | "n"
+                   | "o"
+                   | "p"
+                   | "q"
+                   | "r"
+                   | "s"
+                   | "t"
+                   | "u"
+                   | "v"
+                   | "w"
+                   | "x"
+                   | "y"
+                   | "z"
+                   | "{"
+                   | "|"
+                   | "}"
+                   | "~"
+                   | "\x7f"
+<__tmp_rule_503> ::= ""
+                   | <__tmp_rule_504> <__tmp_rule_503>
+<__tmp_rule_505> ::= <__tmp_rule_503>
+<__tmp_rule_508> ::= "</"
+<__tmp_rule_511> ::= ""
+                   | "style"
+<__tmp_rule_514> ::= ">"
+<Whitespace> ::= <__tmp_rule_532>
+<__tmp_rule_531> ::= "\t"
+                   | "\n"
+                   | "\r"
+                   | " "
+<__tmp_rule_530> ::= <__tmp_rule_531>
+                   | <__tmp_rule_531> <__tmp_rule_530>
+<__tmp_rule_532> ::= <__tmp_rule_530>
+<AttributeStart> ::= "#["
+<Abstract> ::= "abstract"
+<Array> ::= "array"
+<As> ::= "as"
+<BinaryCast> ::= "binary"
+<BoolType> ::= "bool"
+             | "boolean"
+<BooleanConstant> ::= "false"
+                    | "true"
+<Break> ::= "break"
+<Callable> ::= "callable"
+<Case> ::= "case"
+<Catch> ::= "catch"
+<Class> ::= "class"
+<Clone> ::= "clone"
+<Const> ::= "const"
+<Continue> ::= "continue"
+<Declare> ::= "declare"
+<Default> ::= "default"
+<Do> ::= "do"
+<DoubleCast> ::= "real"
+<DoubleType> ::= "double"
+<Echo> ::= "echo"
+<Else> ::= "else"
+<ElseIf> ::= "elseif"
+<Empty> ::= "empty"
+<Enum_> ::= "enum"
+<EndDeclare> ::= "enddeclare"
+<EndFor> ::= "endfor"
+<EndForeach> ::= "endforeach"
+<EndIf> ::= "endif"
+<EndSwitch> ::= "endswitch"
+<EndWhile> ::= "endwhile"
+<Eval> ::= "eval"
+<Exit> ::= "die"
+<Extends> ::= "extends"
+<Final> ::= "final"
+<Finally> ::= "finally"
+<FloatCast> ::= "float"
+<For> ::= "for"
+<Foreach> ::= "foreach"
+<Function_> ::= "function"
+<Global> ::= "global"
+<Goto> ::= "goto"
+<If> ::= "if"
+<Implements> ::= "implements"
+<Import> ::= "import"
+<Include> ::= "include"
+<IncludeOnce> ::= "include_once"
+<InstanceOf> ::= "instanceof"
+<InsteadOf> ::= "insteadof"
+<Int8Cast> ::= "int8"
+<Int16Cast> ::= "int16"
+<Int64Type> ::= "int64"
+<IntType> ::= "int"
+            | "integer"
+<Interface> ::= "interface"
+<IsSet> ::= "isset"
+<List> ::= "list"
+<LogicalAnd> ::= "and"
+<LogicalOr> ::= "or"
+<LogicalXor> ::= "xor"
+<Match_> ::= "match"
+<Namespace> ::= "namespace"
+<New> ::= "new"
+<Null> ::= "null"
+<ObjectType> ::= "object"
+<Parent_> ::= "parent"
+<Partial> ::= "partial"
+<Print> ::= "print"
+<Private> ::= "private"
+<Protected> ::= "protected"
+<Public> ::= "public"
+<Readonly> ::= "readonly"
+<Require> ::= "require"
+<RequireOnce> ::= "require_once"
+<Resource> ::= "resource"
+<Return> ::= "return"
+<Static> ::= "static"
+<StringType> ::= "string"
+<Switch> ::= "switch"
+<Throw> ::= "throw"
+<Trait> ::= "trait"
+<Try> ::= "try"
+<Typeof> ::= "clrtypeof"
+<UintCast> ::= "uint"
+             | "uint16"
+             | "uint64"
+             | "uint8"
+<UnicodeCast> ::= "unicode"
+<Unset> ::= "unset"
+<Use> ::= "use"
+<Var> ::= "var"
+<While> ::= "while"
+<Yield> ::= "yield"
+<From> ::= "from"
+<LambdaFn> ::= "fn"
+<Ticks> ::= "ticks"
+<Encoding> ::= "encoding"
+<StrictTypes> ::= "strict_types"
+<Get> ::= "__get"
+<Set> ::= "__set"
+<Call> ::= "__call"
+<CallStatic> ::= "__callstatic"
+<Constructor> ::= "__construct"
+<Destruct> ::= "__destruct"
+<Wakeup> ::= "__wakeup"
+<Sleep> ::= "__sleep"
+<Autoload> ::= "__autoload"
+<IsSet__> ::= "__isset"
+<Unset__> ::= "__unset"
+<ToString__> ::= "__tostring"
+<Invoke> ::= "__invoke"
+<SetState> ::= "__set_state"
+<Clone__> ::= "__clone"
+<DebugInfo> ::= "__debuginfo"
+<Namespace__> ::= "__namespace__"
+<Class__> ::= "__class__"
+<Traic__> ::= "__trait__"
+<Function__> ::= "__function__"
+<Method__> ::= "__method__"
+<Line__> ::= "__line__"
+<File__> ::= "__file__"
+<Dir__> ::= "__dir__"
+<IsNotEq> ::= "!="
+            | "<>"
+<Less> ::= "<"
+<Greater> ::= ">"
+<Divide> ::= "/"
+<Dollar> ::= "$"
+<QuestionMark> ::= "?"
+<OpenCurlyBracket> ::= "{"
+<CloseCurlyBracket> ::= "}"
+<Colon> ::= ":"
+<SemiColon> ::= ";"
+<Eq> ::= "="
+<VarName> ::= <__tmp_rule_1117> <__tmp_rule_1120>
+<__tmp_rule_1117> ::= "$"
+<__tmp_rule_1119> ::= <NameString>
+<__tmp_rule_1118> ::= <__tmp_rule_1119>
+<__tmp_rule_1120> ::= <__tmp_rule_1118>
+<Label> ::= <__tmp_rule_1123> <__tmp_rule_1126>
+<__tmp_rule_1123> ::= "_"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+<__tmp_rule_1125> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "_"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+<__tmp_rule_1124> ::= ""
+                    | <__tmp_rule_1125> <__tmp_rule_1124>
+<__tmp_rule_1126> ::= <__tmp_rule_1124>
+<Octal> ::= <__tmp_rule_1129> <__tmp_rule_1132> <__tmp_rule_1135> <__tmp_rule_1144>
+<__tmp_rule_1129> ::= "0"
+<__tmp_rule_1132> ::= ""
+                    | "o"
+<__tmp_rule_1134> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+<__tmp_rule_1133> ::= <__tmp_rule_1134>
+                    | <__tmp_rule_1134> <__tmp_rule_1133>
+<__tmp_rule_1135> ::= <__tmp_rule_1133>
+<__tmp_rule_1139> ::= "_"
+<__tmp_rule_1141> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+<__tmp_rule_1140> ::= <__tmp_rule_1141>
+                    | <__tmp_rule_1141> <__tmp_rule_1140>
+<__tmp_rule_1142> ::= <__tmp_rule_1140>
+<__tmp_rule_1143> ::= <__tmp_rule_1139> <__tmp_rule_1142>
+<__tmp_rule_1136> ::= ""
+                    | <__tmp_rule_1143> <__tmp_rule_1136>
+<__tmp_rule_1144> ::= <__tmp_rule_1136>
+<Decimal> ::= <__tmp_rule_1147>
+            | <__tmp_rule_1150> <__tmp_rule_1153> <__tmp_rule_1162>
+<__tmp_rule_1147> ::= "0"
+<__tmp_rule_1150> ::= "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1152> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1151> ::= ""
+                    | <__tmp_rule_1152> <__tmp_rule_1151>
+<__tmp_rule_1153> ::= <__tmp_rule_1151>
+<__tmp_rule_1157> ::= "_"
+<__tmp_rule_1159> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1158> ::= <__tmp_rule_1159>
+                    | <__tmp_rule_1159> <__tmp_rule_1158>
+<__tmp_rule_1160> ::= <__tmp_rule_1158>
+<__tmp_rule_1161> ::= <__tmp_rule_1157> <__tmp_rule_1160>
+<__tmp_rule_1154> ::= ""
+                    | <__tmp_rule_1161> <__tmp_rule_1154>
+<__tmp_rule_1162> ::= <__tmp_rule_1154>
+<Real> ::= <__tmp_rule_1183> <__tmp_rule_1186>
+         | <__tmp_rule_1189> <__tmp_rule_1192>
+<__tmp_rule_1165> ::= <LNum>
+<__tmp_rule_1164> ::= <__tmp_rule_1165>
+<__tmp_rule_1166> ::= <__tmp_rule_1164>
+<__tmp_rule_1169> ::= "."
+<__tmp_rule_1171> ::= <LNum>
+<__tmp_rule_1170> ::= ""
+                    | <__tmp_rule_1171>
+<__tmp_rule_1172> ::= <__tmp_rule_1170>
+<__tmp_rule_1174> ::= <LNum>
+<__tmp_rule_1173> ::= ""
+                    | <__tmp_rule_1174>
+<__tmp_rule_1175> ::= <__tmp_rule_1173>
+<__tmp_rule_1178> ::= "."
+<__tmp_rule_1180> ::= <LNum>
+<__tmp_rule_1179> ::= <__tmp_rule_1180>
+<__tmp_rule_1181> ::= <__tmp_rule_1179>
+<__tmp_rule_1182> ::= <__tmp_rule_1166> <__tmp_rule_1169> <__tmp_rule_1172>
+                    | <__tmp_rule_1175> <__tmp_rule_1178> <__tmp_rule_1181>
+<__tmp_rule_1163> ::= <__tmp_rule_1182>
+<__tmp_rule_1183> ::= <__tmp_rule_1163>
+<__tmp_rule_1185> ::= <ExponentPart>
+<__tmp_rule_1184> ::= ""
+                    | <__tmp_rule_1185>
+<__tmp_rule_1186> ::= <__tmp_rule_1184>
+<__tmp_rule_1188> ::= <LNum>
+<__tmp_rule_1187> ::= <__tmp_rule_1188>
+                    | <__tmp_rule_1188> <__tmp_rule_1187>
+<__tmp_rule_1189> ::= <__tmp_rule_1187>
+<__tmp_rule_1191> ::= <ExponentPart>
+<__tmp_rule_1190> ::= <__tmp_rule_1191>
+<__tmp_rule_1192> ::= <__tmp_rule_1190>
+<Hex> ::= <__tmp_rule_1195> <__tmp_rule_1198> <__tmp_rule_1207>
+<__tmp_rule_1195> ::= "0x"
+<__tmp_rule_1197> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+<__tmp_rule_1196> ::= <__tmp_rule_1197>
+                    | <__tmp_rule_1197> <__tmp_rule_1196>
+<__tmp_rule_1198> ::= <__tmp_rule_1196>
+<__tmp_rule_1202> ::= "_"
+<__tmp_rule_1204> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+<__tmp_rule_1203> ::= <__tmp_rule_1204>
+                    | <__tmp_rule_1204> <__tmp_rule_1203>
+<__tmp_rule_1205> ::= <__tmp_rule_1203>
+<__tmp_rule_1206> ::= <__tmp_rule_1202> <__tmp_rule_1205>
+<__tmp_rule_1199> ::= ""
+                    | <__tmp_rule_1206> <__tmp_rule_1199>
+<__tmp_rule_1207> ::= <__tmp_rule_1199>
+<Binary> ::= <__tmp_rule_1210> <__tmp_rule_1213> <__tmp_rule_1222>
+<__tmp_rule_1210> ::= "0b"
+<__tmp_rule_1212> ::= "0"
+                    | "1"
+<__tmp_rule_1211> ::= <__tmp_rule_1212>
+                    | <__tmp_rule_1212> <__tmp_rule_1211>
+<__tmp_rule_1213> ::= <__tmp_rule_1211>
+<__tmp_rule_1217> ::= "_"
+<__tmp_rule_1219> ::= "0"
+                    | "1"
+<__tmp_rule_1218> ::= <__tmp_rule_1219>
+                    | <__tmp_rule_1219> <__tmp_rule_1218>
+<__tmp_rule_1220> ::= <__tmp_rule_1218>
+<__tmp_rule_1221> ::= <__tmp_rule_1217> <__tmp_rule_1220>
+<__tmp_rule_1214> ::= ""
+                    | <__tmp_rule_1221> <__tmp_rule_1214>
+<__tmp_rule_1222> ::= <__tmp_rule_1214>
+<BackQuoteString> ::= <__tmp_rule_1225> <__tmp_rule_1228> <__tmp_rule_1231>
+<__tmp_rule_1225> ::= "`"
+<__tmp_rule_1227> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "'"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\"
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1226> ::= ""
+                    | <__tmp_rule_1227> <__tmp_rule_1226>
+<__tmp_rule_1228> ::= <__tmp_rule_1226>
+<__tmp_rule_1231> ::= "`"
+<SingleQuoteString> ::= <__tmp_rule_1234> <__tmp_rule_1246> <__tmp_rule_1249>
+<__tmp_rule_1234> ::= "'"
+<__tmp_rule_1245> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\\x00"
+                    | "\\\x01"
+                    | "\\\x02"
+                    | "\\\x03"
+                    | "\\\x04"
+                    | "\\\x05"
+                    | "\\\x06"
+                    | "\\\x07"
+                    | "\\\x08"
+                    | "\\\t"
+                    | "\\\n"
+                    | "\\\x0b"
+                    | "\\\x0c"
+                    | "\\\r"
+                    | "\\\x0e"
+                    | "\\\x0f"
+                    | "\\\x10"
+                    | "\\\x11"
+                    | "\\\x12"
+                    | "\\\x13"
+                    | "\\\x14"
+                    | "\\\x15"
+                    | "\\\x16"
+                    | "\\\x17"
+                    | "\\\x18"
+                    | "\\\x19"
+                    | "\\\x1a"
+                    | "\\\x1b"
+                    | "\\\x1c"
+                    | "\\\x1d"
+                    | "\\\x1e"
+                    | "\\\x1f"
+                    | "\\ "
+                    | "\\!"
+                    | "\\\""
+                    | "\\#"
+                    | "\\$"
+                    | "\\%"
+                    | "\\&"
+                    | "\\'"
+                    | "\\("
+                    | "\\)"
+                    | "\\*"
+                    | "\\+"
+                    | "\\,"
+                    | "\\-"
+                    | "\\."
+                    | "\\/"
+                    | "\\0"
+                    | "\\1"
+                    | "\\2"
+                    | "\\3"
+                    | "\\4"
+                    | "\\5"
+                    | "\\6"
+                    | "\\7"
+                    | "\\8"
+                    | "\\9"
+                    | "\\:"
+                    | "\\;"
+                    | "\\<"
+                    | "\\="
+                    | "\\>"
+                    | "\\?"
+                    | "\\@"
+                    | "\\A"
+                    | "\\B"
+                    | "\\C"
+                    | "\\D"
+                    | "\\E"
+                    | "\\F"
+                    | "\\G"
+                    | "\\H"
+                    | "\\I"
+                    | "\\J"
+                    | "\\K"
+                    | "\\L"
+                    | "\\M"
+                    | "\\N"
+                    | "\\O"
+                    | "\\P"
+                    | "\\Q"
+                    | "\\R"
+                    | "\\S"
+                    | "\\T"
+                    | "\\U"
+                    | "\\V"
+                    | "\\W"
+                    | "\\X"
+                    | "\\Y"
+                    | "\\Z"
+                    | "\\["
+                    | "\\\\"
+                    | "\\]"
+                    | "\\^"
+                    | "\\_"
+                    | "\\`"
+                    | "\\a"
+                    | "\\b"
+                    | "\\c"
+                    | "\\d"
+                    | "\\e"
+                    | "\\f"
+                    | "\\g"
+                    | "\\h"
+                    | "\\i"
+                    | "\\j"
+                    | "\\k"
+                    | "\\l"
+                    | "\\m"
+                    | "\\n"
+                    | "\\o"
+                    | "\\p"
+                    | "\\q"
+                    | "\\r"
+                    | "\\s"
+                    | "\\t"
+                    | "\\u"
+                    | "\\v"
+                    | "\\w"
+                    | "\\x"
+                    | "\\y"
+                    | "\\z"
+                    | "\\{"
+                    | "\\|"
+                    | "\\}"
+                    | "\\~"
+                    | "\\\x7f"
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "`"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1235> ::= ""
+                    | <__tmp_rule_1245> <__tmp_rule_1235>
+<__tmp_rule_1246> ::= <__tmp_rule_1235>
+<__tmp_rule_1249> ::= "'"
+<DoubleQuote> ::= "\""
+<StartNowDoc> ::= <__tmp_rule_1255> <__tmp_rule_1258> <__tmp_rule_1261> <__tmp_rule_1264> <__tmp_rule_1267>
+<__tmp_rule_1255> ::= "<<<"
+<__tmp_rule_1257> ::= "\t"
+                    | " "
+<__tmp_rule_1256> ::= ""
+                    | <__tmp_rule_1257> <__tmp_rule_1256>
+<__tmp_rule_1258> ::= <__tmp_rule_1256>
+<__tmp_rule_1261> ::= "'"
+<__tmp_rule_1263> ::= <NameString>
+<__tmp_rule_1262> ::= <__tmp_rule_1263>
+<__tmp_rule_1264> ::= <__tmp_rule_1262>
+<__tmp_rule_1267> ::= "'"
+<StartHereDoc> ::= <__tmp_rule_1270> <__tmp_rule_1273> <__tmp_rule_1276>
+<__tmp_rule_1270> ::= "<<<"
+<__tmp_rule_1272> ::= "\t"
+                    | " "
+<__tmp_rule_1271> ::= ""
+                    | <__tmp_rule_1272> <__tmp_rule_1271>
+<__tmp_rule_1273> ::= <__tmp_rule_1271>
+<__tmp_rule_1275> ::= <NameString>
+<__tmp_rule_1274> ::= <__tmp_rule_1275>
+<__tmp_rule_1276> ::= <__tmp_rule_1274>
+<UnicodeEscape> ::= <__tmp_rule_1306> <__tmp_rule_1309> <__tmp_rule_1312> <__tmp_rule_1315>
+<__tmp_rule_1306> ::= "\\u{"
+<__tmp_rule_1309> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+<__tmp_rule_1311> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+<__tmp_rule_1310> ::= <__tmp_rule_1311>
+                    | <__tmp_rule_1311> <__tmp_rule_1310>
+<__tmp_rule_1312> ::= <__tmp_rule_1310>
+<__tmp_rule_1315> ::= "}"
+<StringPart> ::= <__tmp_rule_1318>
+<__tmp_rule_1317> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "#"
+                    | "%"
+                    | "&"
+                    | "'"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "`"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1316> ::= <__tmp_rule_1317>
+                    | <__tmp_rule_1317> <__tmp_rule_1316>
+<__tmp_rule_1318> ::= <__tmp_rule_1316>
+<HereDocText> ::= <__tmp_rule_1336> <__tmp_rule_1348>
+<__tmp_rule_1335> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "'"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\"
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "`"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1334> ::= ""
+                    | <__tmp_rule_1335> <__tmp_rule_1334>
+<__tmp_rule_1336> ::= <__tmp_rule_1334>
+<__tmp_rule_1348> ::= "\n"
+                    | "\r"
+                    | "\r\n"
+<NameString> ::= <__tmp_rule_1384> <__tmp_rule_1387>
+<__tmp_rule_1384> ::= "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "_"
+<__tmp_rule_1386> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "_"
+<__tmp_rule_1385> ::= ""
+                    | <__tmp_rule_1386> <__tmp_rule_1385>
+<__tmp_rule_1387> ::= <__tmp_rule_1385>
+<LNum> ::= <__tmp_rule_1432> <__tmp_rule_1441>
+<__tmp_rule_1431> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1430> ::= <__tmp_rule_1431>
+                    | <__tmp_rule_1431> <__tmp_rule_1430>
+<__tmp_rule_1432> ::= <__tmp_rule_1430>
+<__tmp_rule_1436> ::= "_"
+<__tmp_rule_1438> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1437> ::= <__tmp_rule_1438>
+                    | <__tmp_rule_1438> <__tmp_rule_1437>
+<__tmp_rule_1439> ::= <__tmp_rule_1437>
+<__tmp_rule_1440> ::= <__tmp_rule_1436> <__tmp_rule_1439>
+<__tmp_rule_1433> ::= ""
+                    | <__tmp_rule_1440> <__tmp_rule_1433>
+<__tmp_rule_1441> ::= <__tmp_rule_1433>
+<ExponentPart> ::= <__tmp_rule_1444> <__tmp_rule_1447> <__tmp_rule_1450>
+<__tmp_rule_1444> ::= "e"
+<__tmp_rule_1447> ::= ""
+<__tmp_rule_1449> ::= <LNum>
+<__tmp_rule_1448> ::= <__tmp_rule_1449>
+<__tmp_rule_1450> ::= <__tmp_rule_1448>
+<EOF> ::= ""
+<__white_space01_1463> ::= <Whitespace>

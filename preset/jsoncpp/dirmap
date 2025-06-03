@@ -1,0 +1,2 @@
+project_dir = jsoncpp
+entry_file = jsoncpp/src/test_lib_json/fuzz.cpp

@@ -1,0 +1,29 @@
+diff --git a/evaluation/fixreverter b/evaluation/fixreverter
+index 8f41edf..0ca7e56 160000
+--- a/evaluation/fixreverter
++++ b/evaluation/fixreverter
+@@ -1 +1 @@
+-Subproject commit 8f41edf29264db617887f73973b983f834183800
++Subproject commit 0ca7e5696064bb220189a3027ff659d96a4d1dc0-dirty
+diff --git a/genvariants_parallel.py b/genvariants_parallel.py
+index 3798ea2..7a39403 100644
+--- a/genvariants_parallel.py
++++ b/genvariants_parallel.py
+@@ -147,6 +147,7 @@ def generate_variant(i, generators, model, filename, args):
+         prompt = infilling_prompt(prefix, suffix) # type: ignore
+         stop = []
+     elif generator == 'lmsplice':
++        assert False, 'Splice forbidden'
+         other_files = [f for f in args.files if f != filename]
+         if other_files:
+             filename2 = random.choice(other_files)
+@@ -329,7 +330,8 @@ def main():
+     if not args.no_fim:
+         generators += ['infilled']
+     if not args.no_splice:
+-        generators += ['lmsplice']
++        # generators += ['lmsplice']
++        pass
+     # generators += ['continue']
+ 
+     # Print the number of variants we'll generate so that the next

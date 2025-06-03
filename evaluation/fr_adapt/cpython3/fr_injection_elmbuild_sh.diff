@@ -1,0 +1,5 @@
+3c3,4
+< ./configure --prefix=$OUT --disable-test-modules
+---
+> ./configure --prefix=$OUT --disable-test-modules --disable-shared
+> Modules/makesetup -s Modules -l Modules Modules/Setup

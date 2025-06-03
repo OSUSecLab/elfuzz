@@ -1,0 +1,2 @@
+project_dir = libxml2
+entry_file = libxml2/fuzz/xml.c

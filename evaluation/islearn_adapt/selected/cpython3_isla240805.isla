@@ -1,0 +1,8 @@
+(exists int num:
+   forall <block> elem in start:
+     ((>= (str.to.int num) 1) and
+     count(elem, "<__tmp_rule_439>", num)) and
+forall <__tmp_rule_205> container in start:
+  exists <__tmp_rule_971> elem in container:
+    (nth("1", elem, container) and
+    (= elem " ")))

@@ -1,0 +1,2 @@
+project_dir = sqlite3
+entry_file = sqlite3/test/ossfuzz.c

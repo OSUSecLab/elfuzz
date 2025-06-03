@@ -1,0 +1,2 @@
+AFL_MAP_SIZE=2097152
+LD_LIBRARY_PATH=%ROOT%/evaluation/workdir/cvc5

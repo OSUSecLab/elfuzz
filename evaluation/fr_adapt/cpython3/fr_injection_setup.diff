@@ -1,0 +1,150 @@
+129c129
+< #*shared*
+---
+> *static*
+133,161c133,161
+< #_asyncio _asynciomodule.c
+< #_bisect _bisectmodule.c
+< #_contextvars _contextvarsmodule.c
+< #_csv _csv.c
+< #_datetime _datetimemodule.c
+< #_decimal _decimal/_decimal.c
+< #_heapq _heapqmodule.c
+< #_interpchannels _interpchannelsmodule.c
+< #_interpqueues _interpqueuesmodule.c
+< #_interpreters _interpretersmodule.c
+< #_json _json.c
+< #_lsprof _lsprof.c rotatingtree.c
+< #_multiprocessing -I$(srcdir)/Modules/_multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
+< #_opcode _opcode.c
+< #_pickle _pickle.c
+< #_queue _queuemodule.c
+< #_random _randommodule.c
+< #_socket socketmodule.c
+< #_statistics _statisticsmodule.c
+< #_struct _struct.c
+< #_typing _typingmodule.c
+< #_zoneinfo _zoneinfo.c
+< #array arraymodule.c
+< #binascii binascii.c
+< #cmath cmathmodule.c
+< #math mathmodule.c
+< #mmap mmapmodule.c
+< #select selectmodule.c
+< #_sysconfig _sysconfig.c
+---
+> _asyncio _asynciomodule.c
+> _bisect _bisectmodule.c
+> _contextvars _contextvarsmodule.c
+> _csv _csv.c
+> _datetime _datetimemodule.c
+> _decimal _decimal/_decimal.c
+> _heapq _heapqmodule.c
+> _interpchannels _interpchannelsmodule.c
+> _interpqueues _interpqueuesmodule.c
+> _interpreters _interpretersmodule.c
+> _json _json.c
+> _lsprof _lsprof.c rotatingtree.c
+> _multiprocessing -I$(srcdir)/Modules/_multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
+> _opcode _opcode.c
+> _pickle _pickle.c
+> _queue _queuemodule.c
+> _random _randommodule.c
+> _socket socketmodule.c
+> _statistics _statisticsmodule.c
+> _struct _struct.c
+> _typing _typingmodule.c
+> _zoneinfo _zoneinfo.c
+> array arraymodule.c
+> binascii binascii.c
+> cmath cmathmodule.c
+> math mathmodule.c
+> mmap mmapmodule.c
+> select selectmodule.c
+> _sysconfig _sysconfig.c
+164,165c164,165
+< #_elementtree _elementtree.c
+< #pyexpat pyexpat.c
+---
+> _elementtree _elementtree.c
+> pyexpat pyexpat.c
+168,172c168,172
+< #_blake2 _blake2/blake2module.c _blake2/blake2b_impl.c _blake2/blake2s_impl.c
+< #_md5 md5module.c -I$(srcdir)/Modules/_hacl/include _hacl/Hacl_Hash_MD5.c -D_BSD_SOURCE -D_DEFAULT_SOURCE
+< #_sha1 sha1module.c -I$(srcdir)/Modules/_hacl/include _hacl/Hacl_Hash_SHA1.c -D_BSD_SOURCE -D_DEFAULT_SOURCE
+< #_sha2 sha2module.c -I$(srcdir)/Modules/_hacl/include Modules/_hacl/libHacl_Hash_SHA2.a
+< #_sha3 sha3module.c -I$(srcdir)/Modules/_hacl/include _hacl/Hacl_Hash_SHA3.c -D_BSD_SOURCE -D_DEFAULT_SOURCE
+---
+> _blake2 _blake2/blake2module.c _blake2/blake2b_impl.c _blake2/blake2s_impl.c
+> _md5 md5module.c -I$(srcdir)/Modules/_hacl/include _hacl/Hacl_Hash_MD5.c -D_BSD_SOURCE -D_DEFAULT_SOURCE
+> _sha1 sha1module.c -I$(srcdir)/Modules/_hacl/include _hacl/Hacl_Hash_SHA1.c -D_BSD_SOURCE -D_DEFAULT_SOURCE
+> _sha2 sha2module.c -I$(srcdir)/Modules/_hacl/include Modules/_hacl/libHacl_Hash_SHA2.a
+> _sha3 sha3module.c -I$(srcdir)/Modules/_hacl/include _hacl/Hacl_Hash_SHA3.c -D_BSD_SOURCE -D_DEFAULT_SOURCE
+175,182c175,182
+< #_codecs_cn cjkcodecs/_codecs_cn.c
+< #_codecs_hk cjkcodecs/_codecs_hk.c
+< #_codecs_iso2022 cjkcodecs/_codecs_iso2022.c
+< #_codecs_jp cjkcodecs/_codecs_jp.c
+< #_codecs_kr cjkcodecs/_codecs_kr.c
+< #_codecs_tw cjkcodecs/_codecs_tw.c
+< #_multibytecodec cjkcodecs/multibytecodec.c
+< #unicodedata unicodedata.c
+---
+> _codecs_cn cjkcodecs/_codecs_cn.c
+> _codecs_hk cjkcodecs/_codecs_hk.c
+> _codecs_iso2022 cjkcodecs/_codecs_iso2022.c
+> _codecs_jp cjkcodecs/_codecs_jp.c
+> _codecs_kr cjkcodecs/_codecs_kr.c
+> _codecs_tw cjkcodecs/_codecs_tw.c
+> _multibytecodec cjkcodecs/multibytecodec.c
+> unicodedata unicodedata.c
+186,192c186,192
+< #_posixsubprocess _posixsubprocess.c
+< #_posixshmem -I$(srcdir)/Modules/_multiprocessing _multiprocessing/posixshmem.c -lrt
+< #fcntl fcntlmodule.c
+< #grp grpmodule.c
+< #resource resource.c
+< #syslog syslogmodule.c
+< #termios termios.c
+---
+> _posixsubprocess _posixsubprocess.c
+> _posixshmem -I$(srcdir)/Modules/_multiprocessing _multiprocessing/posixshmem.c -lrt
+> fcntl fcntlmodule.c
+> grp grpmodule.c
+> resource resource.c
+> syslog syslogmodule.c
+> termios termios.c
+196,203c196,203
+< #_bz2 _bz2module.c -lbz2
+< #_ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/stgdict.c _ctypes/cfield.c -ldl -lffi -DHAVE_FFI_PREP_CIF_VAR -DHAVE_FFI_PREP_CLOSURE_LOC -DHAVE_FFI_CLOSURE_ALLOC
+< # The _dbm module supports NDBM, GDBM with compat module, and Berkeley DB.
+< #_dbm _dbmmodule.c -lgdbm_compat -DUSE_GDBM_COMPAT
+< #_gdbm _gdbmmodule.c -lgdbm
+< #_lzma _lzmamodule.c -llzma
+< #_uuid _uuidmodule.c -luuid
+< #zlib  zlibmodule.c -lz
+---
+> #H/_bz2 _bz2module.c -lbz2
+> _ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/stgdict.c _ctypes/cfield.c -ldl -lffi -DHAVE_FFI_PREP_CIF_VAR -DHAVE_FFI_PREP_CLOSURE_LOC -DHAVE_FFI_CLOSURE_ALLOC
+> #H/ The _dbm module supports NDBM, GDBM with compat module, and Berkeley DB.
+> #H/_dbm _dbmmodule.c -lgdbm_compat -DUSE_GDBM_COMPAT
+> #H/_gdbm _gdbmmodule.c -lgdbm
+> #H/_lzma _lzmamodule.c -llzma
+> #H/_uuid _uuidmodule.c -luuid
+> #H/zlib  zlibmodule.c -lz
+207c207
+< #readline readline.c -lreadline -ltermcap
+---
+> readline readline.c -lreadline -ltermcap
+214,218c214,218
+< # _ssl _ssl.c $(OPENSSL_INCLUDES) $(OPENSSL_LDFLAGS) \
+< #     -l:libssl.a -Wl,--exclude-libs,libssl.a \
+< #     -l:libcrypto.a -Wl,--exclude-libs,libcrypto.a
+< # _hashlib _hashopenssl.c $(OPENSSL_INCLUDES) $(OPENSSL_LDFLAGS) \
+< #     -l:libcrypto.a -Wl,--exclude-libs,libcrypto.a
+---
+>  _ssl _ssl.c $(OPENSSL_INCLUDES) $(OPENSSL_LDFLAGS) \
+>      -l:libssl.a -Wl,--exclude-libs,libssl.a \
+>      -l:libcrypto.a -Wl,--exclude-libs,libcrypto.a
+>  _hashlib _hashopenssl.c $(OPENSSL_INCLUDES) $(OPENSSL_LDFLAGS) \
+>      -l:libcrypto.a -Wl,--exclude-libs,libcrypto.a

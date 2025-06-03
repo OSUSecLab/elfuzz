@@ -1,0 +1,6 @@
+0a1,5
+> #ifdef FRCOV
+> #define FIXREVERTER_SIZE 4815
+> short FIXREVERTER[FIXREVERTER_SIZE];
+> #endif
+> #include <stdio.h>

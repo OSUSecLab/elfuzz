@@ -1,0 +1,9 @@
+[evaluation]
+methods = ['zest']
+benchmarks = [
+    'cvc5',
+]
+mode = 'normal'
+
+[evaluation.zest]
+exclude = []

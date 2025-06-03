@@ -1,0 +1,118 @@
+diff --git a/fuzz/xml.c b/fuzz/xml.c
+index 31ab2102..8f2f0352 100644
+--- a/fuzz/xml.c
++++ b/fuzz/xml.c
+@@ -28,94 +28,28 @@ LLVMFuzzerInitialize(int *argc ATTRIBUTE_UNUSED,
+ 
+ int
+ LLVMFuzzerTestOneInput(const char *data, size_t size) {
+-    xmlParserCtxtPtr ctxt;
+-    xmlDocPtr doc;
+-    const char *docBuffer, *docUrl;
+-    size_t maxAlloc, docSize;
+-    int opts;
++    xmlParserCtxtPtr ctxt; /* the parser context */
++    xmlDocPtr doc; /* the resulting document tree */
+ 
+-    xmlFuzzDataInit(data, size);
+-    opts = (int) xmlFuzzReadInt(4);
+-    /*
+-     * Disable options that are known to cause timeouts
+-     */
+-    opts &= ~XML_PARSE_XINCLUDE &
+-            ~XML_PARSE_DTDVALID &
+-            ~XML_PARSE_SAX1;
+-    maxAlloc = xmlFuzzReadInt(4) % (size + 100);
+-
+-    xmlFuzzReadEntities();
+-    docBuffer = xmlFuzzMainEntity(&docSize);
+-    docUrl = xmlFuzzMainUrl();
+-    if (docBuffer == NULL)
+-        goto exit;
+-
+-    /* Pull parser */
+-
+-    xmlFuzzMemSetLimit(maxAlloc);
++    /* create a parser context */
+     ctxt = xmlNewParserCtxt();
+-    if (ctxt != NULL) {
+-        doc = xmlCtxtReadMemory(ctxt, docBuffer, docSize, docUrl, NULL, opts);
+-        xmlFuzzCheckMallocFailure("xmlCtxtReadMemory",
+-                                  doc == NULL &&
+-                                  ctxt->errNo == XML_ERR_NO_MEMORY);
+-
+-        if (doc != NULL) {
+-#ifdef LIBXML_OUTPUT_ENABLED
+-            xmlBufferPtr buffer;
+-            xmlSaveCtxtPtr save;
+-
+-            /* Also test the serializer. */
+-            buffer = xmlBufferCreate();
+-            save = xmlSaveToBuffer(buffer, NULL, 0);
+-            if (save != NULL) {
+-                int errNo;
+-
+-                xmlSaveDoc(save, doc);
+-                errNo = xmlSaveFinish(save);
+-                xmlFuzzCheckMallocFailure("xmlSaveDoc",
+-                                          errNo == XML_ERR_NO_MEMORY);
+-            }
+-            xmlBufferFree(buffer);
+-#endif
+-            xmlFreeDoc(doc);
+-        }
+-
+-        xmlFreeParserCtxt(ctxt);
++    if (ctxt == NULL) {
++        fprintf(stderr, "Failed to allocate parser context\n");
++	return -3;
+     }
+-
+-    /* Push parser */
+-
+-#ifdef LIBXML_PUSH_ENABLED
+-    {
+-        static const size_t maxChunkSize = 128;
+-        size_t consumed, chunkSize;
+-
+-        xmlFuzzMemSetLimit(maxAlloc);
+-        ctxt = xmlCreatePushParserCtxt(NULL, NULL, NULL, 0, docUrl);
+-        if (ctxt != NULL) {
+-            xmlCtxtUseOptions(ctxt, opts);
+-
+-            for (consumed = 0; consumed < docSize; consumed += chunkSize) {
+-                chunkSize = docSize - consumed;
+-                if (chunkSize > maxChunkSize)
+-                    chunkSize = maxChunkSize;
+-                xmlParseChunk(ctxt, docBuffer + consumed, chunkSize, 0);
+-            }
+-
+-            xmlParseChunk(ctxt, NULL, 0, 1);
+-            xmlFuzzCheckMallocFailure("xmlParseChunk",
+-                                      ctxt->errNo == XML_ERR_NO_MEMORY);
+-            xmlFreeDoc(ctxt->myDoc);
+-            xmlFreeParserCtxt(ctxt);
+-        }
++    /* parse the file, activating the DTD validation option */
++    doc = xmlCtxtReadMemory(ctxt, data, size, NULL, NULL, 0);
++    /* check if parsing succeeded */
++    if (doc == NULL) {
++	return -1;
++    } else {
++	/* check if validation succeeded */
++        if (ctxt->valid == 0)
++	    return -2;
++	/* free up the resulting document */
++	xmlFreeDoc(doc);
+     }
+-#endif
+-
+-exit:
+-    xmlFuzzMemSetLimit(0);
+-    xmlFuzzDataCleanup();
+-    xmlResetLastError();
+-    return(0);
++    /* free up the parser context */
++    xmlFreeParserCtxt(ctxt); return 0;
+ }
+ 

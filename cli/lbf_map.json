@@ -1,0 +1,6 @@
+[
+    {
+        "from_glob": "*",
+        "to": "evaluation/binary"
+    }
+]

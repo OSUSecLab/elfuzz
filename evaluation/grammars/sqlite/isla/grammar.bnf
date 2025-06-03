@@ -1,0 +1,2110 @@
+<start> ::= <parse>
+<parse> ::= <__tmp_rule_1> <__white_space01_1244> <EOF>
+<__tmp_rule_0> ::= <sql_stmt_list>
+<__tmp_rule_1> ::= ""
+                 | <__tmp_rule_0> <__tmp_rule_1>
+<sql_stmt_list> ::= <__tmp_rule_2> <__white_space01_1244> <sql_stmt> <__white_space01_1244> <__tmp_rule_5> <__tmp_rule_6>
+<__tmp_rule_2> ::= ""
+                 | <SCOL> <__white_space01_1244> <__tmp_rule_2>
+<__tmp_rule_4> ::= <SCOL>
+                 | <SCOL> <__white_space01_1244> <__tmp_rule_4>
+<__tmp_rule_3> ::= <__tmp_rule_4> <__white_space01_1244> <sql_stmt>
+<__tmp_rule_5> ::= ""
+                 | <__tmp_rule_3> <__tmp_rule_5>
+<__tmp_rule_6> ::= ""
+                 | <SCOL> <__white_space01_1244> <__tmp_rule_6>
+<sql_stmt> ::= <__tmp_rule_10> <__tmp_rule_12>
+<__tmp_rule_8> ::= <QUERY_> <__white_space01_1244> <PLAN_>
+<__tmp_rule_9> ::= ""
+                 | <__tmp_rule_8>
+<__tmp_rule_7> ::= <EXPLAIN_> <__white_space01_1244> <__tmp_rule_9>
+<__tmp_rule_10> ::= ""
+                  | <__tmp_rule_7>
+<__tmp_rule_11> ::= <alter_table_stmt>
+                  | <analyze_stmt>
+                  | <attach_stmt>
+                  | <begin_stmt>
+                  | <commit_stmt>
+                  | <create_index_stmt>
+                  | <create_table_stmt>
+                  | <create_trigger_stmt>
+                  | <create_view_stmt>
+                  | <create_virtual_table_stmt>
+                  | <delete_stmt>
+                  | <delete_stmt_limited>
+                  | <detach_stmt>
+                  | <drop_stmt>
+                  | <insert_stmt>
+                  | <pragma_stmt>
+                  | <reindex_stmt>
+                  | <release_stmt>
+                  | <rollback_stmt>
+                  | <savepoint_stmt>
+                  | <select_stmt>
+                  | <update_stmt>
+                  | <update_stmt_limited>
+                  | <vacuum_stmt>
+<__tmp_rule_12> ::= <__tmp_rule_11>
+<alter_table_stmt> ::= <ALTER_> <__white_space01_1244> <TABLE_> <__white_space01_1244> <__tmp_rule_14> <__white_space01_1244> <table_name> <__white_space01_1244> <__tmp_rule_21>
+<__tmp_rule_13> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_14> ::= ""
+                  | <__tmp_rule_13>
+<__tmp_rule_17> ::= ""
+                  | <COLUMN_>
+<__tmp_rule_16> ::= <TO_> <__white_space01_1244> <table_name>
+                  | <__tmp_rule_17> <__white_space01_1244> <column_name> <__white_space01_1244> <TO_> <__white_space01_1244> <column_name>
+<__tmp_rule_18> ::= <__tmp_rule_16>
+<__tmp_rule_19> ::= ""
+                  | <COLUMN_>
+<__tmp_rule_20> ::= ""
+                  | <COLUMN_>
+<__tmp_rule_15> ::= <RENAME_> <__white_space01_1244> <__tmp_rule_18>
+                  | <ADD_> <__white_space01_1244> <__tmp_rule_19> <__white_space01_1244> <column_def>
+                  | <DROP_> <__white_space01_1244> <__tmp_rule_20> <__white_space01_1244> <column_name>
+<__tmp_rule_21> ::= <__tmp_rule_15>
+<analyze_stmt> ::= <ANALYZE_> <__white_space01_1244> <__tmp_rule_25>
+<__tmp_rule_23> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_24> ::= ""
+                  | <__tmp_rule_23>
+<__tmp_rule_22> ::= <schema_name>
+                  | <__tmp_rule_24> <__white_space01_1244> <table_or_index_name>
+<__tmp_rule_25> ::= ""
+                  | <__tmp_rule_22>
+<attach_stmt> ::= <ATTACH_> <__white_space01_1244> <__tmp_rule_26> <__white_space01_1244> <expr> <__white_space01_1244> <AS_> <__white_space01_1244> <schema_name>
+<__tmp_rule_26> ::= ""
+                  | <DATABASE_>
+<begin_stmt> ::= <BEGIN_> <__white_space01_1244> <__tmp_rule_28> <__tmp_rule_31>
+<__tmp_rule_27> ::= <DEFERRED_>
+                  | <IMMEDIATE_>
+                  | <EXCLUSIVE_>
+<__tmp_rule_28> ::= ""
+                  | <__tmp_rule_27>
+<__tmp_rule_30> ::= ""
+                  | <transaction_name>
+<__tmp_rule_29> ::= <TRANSACTION_> <__white_space01_1244> <__tmp_rule_30>
+<__tmp_rule_31> ::= ""
+                  | <__tmp_rule_29>
+<commit_stmt> ::= <__tmp_rule_33> <__tmp_rule_34>
+<__tmp_rule_32> ::= <COMMIT_>
+                  | <END_>
+<__tmp_rule_33> ::= <__tmp_rule_32>
+<__tmp_rule_34> ::= ""
+                  | <TRANSACTION_>
+<rollback_stmt> ::= <ROLLBACK_> <__white_space01_1244> <__tmp_rule_35> <__tmp_rule_38>
+<__tmp_rule_35> ::= ""
+                  | <TRANSACTION_>
+<__tmp_rule_37> ::= ""
+                  | <SAVEPOINT_>
+<__tmp_rule_36> ::= <TO_> <__white_space01_1244> <__tmp_rule_37> <__white_space01_1244> <savepoint_name>
+<__tmp_rule_38> ::= ""
+                  | <__tmp_rule_36>
+<savepoint_stmt> ::= <SAVEPOINT_> <__white_space01_1244> <savepoint_name>
+<release_stmt> ::= <RELEASE_> <__white_space01_1244> <__tmp_rule_39> <__white_space01_1244> <savepoint_name>
+<__tmp_rule_39> ::= ""
+                  | <SAVEPOINT_>
+<create_index_stmt> ::= <CREATE_> <__white_space01_1244> <__tmp_rule_40> <__white_space01_1244> <INDEX_> <__white_space01_1244> <__tmp_rule_42> <__tmp_rule_44> <__white_space01_1244> <index_name> <__white_space01_1244> <ON_> <__white_space01_1244> <table_name> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <indexed_column> <__white_space01_1244> <__tmp_rule_46> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_48>
+<__tmp_rule_40> ::= ""
+                  | <UNIQUE_>
+<__tmp_rule_41> ::= <IF_> <__white_space01_1244> <NOT_> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_42> ::= ""
+                  | <__tmp_rule_41>
+<__tmp_rule_43> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_44> ::= ""
+                  | <__tmp_rule_43>
+<__tmp_rule_45> ::= <COMMA> <__white_space01_1244> <indexed_column>
+<__tmp_rule_46> ::= ""
+                  | <__tmp_rule_45> <__tmp_rule_46>
+<__tmp_rule_47> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_48> ::= ""
+                  | <__tmp_rule_47>
+<indexed_column> ::= <__tmp_rule_50> <__tmp_rule_52> <__tmp_rule_53>
+<__tmp_rule_49> ::= <column_name>
+                  | <expr>
+<__tmp_rule_50> ::= <__tmp_rule_49>
+<__tmp_rule_51> ::= <COLLATE_> <__white_space01_1244> <collation_name>
+<__tmp_rule_52> ::= ""
+                  | <__tmp_rule_51>
+<__tmp_rule_53> ::= ""
+                  | <asc_desc>
+<create_table_stmt> ::= <CREATE_> <__white_space01_1244> <__tmp_rule_55> <__white_space01_1244> <TABLE_> <__white_space01_1244> <__tmp_rule_57> <__tmp_rule_59> <__white_space01_1244> <table_name> <__white_space01_1244> <__tmp_rule_67>
+<__tmp_rule_54> ::= <TEMP_>
+                  | <TEMPORARY_>
+<__tmp_rule_55> ::= ""
+                  | <__tmp_rule_54>
+<__tmp_rule_56> ::= <IF_> <__white_space01_1244> <NOT_> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_57> ::= ""
+                  | <__tmp_rule_56>
+<__tmp_rule_58> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_59> ::= ""
+                  | <__tmp_rule_58>
+<__tmp_rule_61> ::= <COMMA> <__white_space01_1244> <column_def>
+<__tmp_rule_62> ::= ""
+                  | <__tmp_rule_61> <__tmp_rule_62>
+<__tmp_rule_63> ::= <COMMA> <__white_space01_1244> <table_constraint>
+<__tmp_rule_64> ::= ""
+                  | <__tmp_rule_63> <__tmp_rule_64>
+<__tmp_rule_65> ::= <WITHOUT_> <__white_space01_1244> <IDENTIFIER>
+<__tmp_rule_66> ::= ""
+                  | <__tmp_rule_65>
+<__tmp_rule_60> ::= <OPEN_PAR> <__white_space01_1244> <column_def> <__white_space01_1244> <__tmp_rule_62> <__tmp_rule_64> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_66>
+                  | <AS_> <__white_space01_1244> <select_stmt>
+<__tmp_rule_67> ::= <__tmp_rule_60>
+<column_def> ::= <column_name> <__white_space01_1244> <__tmp_rule_68> <__tmp_rule_69>
+<__tmp_rule_68> ::= ""
+                  | <type_name>
+<__tmp_rule_69> ::= ""
+                  | <column_constraint> <__white_space01_1244> <__tmp_rule_69>
+<type_name> ::= <__tmp_rule_70> <__tmp_rule_72>
+<__tmp_rule_70> ::= <name>
+                  | <name> <__white_space01_1244> <__tmp_rule_70>
+<__tmp_rule_71> ::= <OPEN_PAR> <__white_space01_1244> <signed_number> <__white_space01_1244> <CLOSE_PAR>
+                  | <OPEN_PAR> <__white_space01_1244> <signed_number> <__white_space01_1244> <COMMA> <__white_space01_1244> <signed_number> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_72> ::= ""
+                  | <__tmp_rule_71>
+<column_constraint> ::= <__tmp_rule_74> <__tmp_rule_91>
+<__tmp_rule_73> ::= <CONSTRAINT_> <__white_space01_1244> <name>
+<__tmp_rule_74> ::= ""
+                  | <__tmp_rule_73>
+<__tmp_rule_77> ::= ""
+                  | <asc_desc>
+<__tmp_rule_78> ::= ""
+                  | <conflict_clause>
+<__tmp_rule_79> ::= ""
+                  | <AUTOINCREMENT_>
+<__tmp_rule_76> ::= <PRIMARY_> <__white_space01_1244> <KEY_> <__white_space01_1244> <__tmp_rule_77> <__tmp_rule_78> <__tmp_rule_79>
+<__tmp_rule_80> ::= <__tmp_rule_76>
+<__tmp_rule_82> ::= ""
+                  | <NOT_>
+<__tmp_rule_81> ::= <__tmp_rule_82> <__white_space01_1244> <NULL_>
+                  | <UNIQUE_>
+<__tmp_rule_83> ::= <__tmp_rule_81>
+<__tmp_rule_84> ::= ""
+                  | <conflict_clause>
+<__tmp_rule_85> ::= <signed_number>
+                  | <literal_value>
+                  | <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_86> ::= <__tmp_rule_85>
+<__tmp_rule_87> ::= <GENERATED_> <__white_space01_1244> <ALWAYS_>
+<__tmp_rule_88> ::= ""
+                  | <__tmp_rule_87>
+<__tmp_rule_89> ::= <STORED_>
+                  | <VIRTUAL_>
+<__tmp_rule_90> ::= ""
+                  | <__tmp_rule_89>
+<__tmp_rule_75> ::= <__tmp_rule_80>
+                  | <__tmp_rule_83> <__tmp_rule_84>
+                  | <CHECK_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <CLOSE_PAR>
+                  | <DEFAULT_> <__white_space01_1244> <__tmp_rule_86>
+                  | <COLLATE_> <__white_space01_1244> <collation_name>
+                  | <foreign_key_clause>
+                  | <__tmp_rule_88> <__white_space01_1244> <AS_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_90>
+<__tmp_rule_91> ::= <__tmp_rule_75>
+<signed_number> ::= <__tmp_rule_93> <__white_space01_1244> <NUMERIC_LITERAL>
+<__tmp_rule_92> ::= <PLUS>
+                  | <MINUS>
+<__tmp_rule_93> ::= ""
+                  | <__tmp_rule_92>
+<table_constraint> ::= <__tmp_rule_95> <__tmp_rule_104>
+<__tmp_rule_94> ::= <CONSTRAINT_> <__white_space01_1244> <name>
+<__tmp_rule_95> ::= ""
+                  | <__tmp_rule_94>
+<__tmp_rule_97> ::= <PRIMARY_> <__white_space01_1244> <KEY_>
+                  | <UNIQUE_>
+<__tmp_rule_98> ::= <__tmp_rule_97>
+<__tmp_rule_99> ::= <COMMA> <__white_space01_1244> <indexed_column>
+<__tmp_rule_100> ::= ""
+                   | <__tmp_rule_99> <__tmp_rule_100>
+<__tmp_rule_101> ::= ""
+                   | <conflict_clause>
+<__tmp_rule_102> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_103> ::= ""
+                   | <__tmp_rule_102> <__tmp_rule_103>
+<__tmp_rule_96> ::= <__tmp_rule_98> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <indexed_column> <__white_space01_1244> <__tmp_rule_100> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_101>
+                  | <CHECK_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <CLOSE_PAR>
+                  | <FOREIGN_> <__white_space01_1244> <KEY_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_103> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <foreign_key_clause>
+<__tmp_rule_104> ::= <__tmp_rule_96>
+<foreign_key_clause> ::= <REFERENCES_> <__white_space01_1244> <foreign_table> <__white_space01_1244> <__tmp_rule_108> <__tmp_rule_116> <__tmp_rule_123>
+<__tmp_rule_106> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_107> ::= ""
+                   | <__tmp_rule_106> <__tmp_rule_107>
+<__tmp_rule_105> ::= <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_107> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_108> ::= ""
+                   | <__tmp_rule_105>
+<__tmp_rule_110> ::= <DELETE_>
+                   | <UPDATE_>
+<__tmp_rule_111> ::= <__tmp_rule_110>
+<__tmp_rule_113> ::= <NULL_>
+                   | <DEFAULT_>
+<__tmp_rule_114> ::= <__tmp_rule_113>
+<__tmp_rule_112> ::= <SET_> <__white_space01_1244> <__tmp_rule_114>
+                   | <CASCADE_>
+                   | <RESTRICT_>
+                   | <NO_> <__white_space01_1244> <ACTION_>
+<__tmp_rule_115> ::= <__tmp_rule_112>
+<__tmp_rule_109> ::= <ON_> <__white_space01_1244> <__tmp_rule_111> <__tmp_rule_115>
+                   | <MATCH_> <__white_space01_1244> <name>
+<__tmp_rule_116> ::= ""
+                   | <__tmp_rule_109> <__tmp_rule_116>
+<__tmp_rule_118> ::= ""
+                   | <NOT_>
+<__tmp_rule_120> ::= <DEFERRED_>
+                   | <IMMEDIATE_>
+<__tmp_rule_121> ::= <__tmp_rule_120>
+<__tmp_rule_119> ::= <INITIALLY_> <__white_space01_1244> <__tmp_rule_121>
+<__tmp_rule_122> ::= ""
+                   | <__tmp_rule_119>
+<__tmp_rule_117> ::= <__tmp_rule_118> <__white_space01_1244> <DEFERRABLE_> <__white_space01_1244> <__tmp_rule_122>
+<__tmp_rule_123> ::= ""
+                   | <__tmp_rule_117>
+<conflict_clause> ::= <ON_> <__white_space01_1244> <CONFLICT_> <__white_space01_1244> <__tmp_rule_125>
+<__tmp_rule_124> ::= <ROLLBACK_>
+                   | <ABORT_>
+                   | <FAIL_>
+                   | <IGNORE_>
+                   | <REPLACE_>
+<__tmp_rule_125> ::= <__tmp_rule_124>
+<create_trigger_stmt> ::= <CREATE_> <__white_space01_1244> <__tmp_rule_127> <__white_space01_1244> <TRIGGER_> <__white_space01_1244> <__tmp_rule_129> <__tmp_rule_131> <__white_space01_1244> <trigger_name> <__white_space01_1244> <__tmp_rule_133> <__tmp_rule_139> <__white_space01_1244> <ON_> <__white_space01_1244> <table_name> <__white_space01_1244> <__tmp_rule_141> <__tmp_rule_143> <__white_space01_1244> <BEGIN_> <__white_space01_1244> <__tmp_rule_147> <__white_space01_1244> <END_>
+<__tmp_rule_126> ::= <TEMP_>
+                   | <TEMPORARY_>
+<__tmp_rule_127> ::= ""
+                   | <__tmp_rule_126>
+<__tmp_rule_128> ::= <IF_> <__white_space01_1244> <NOT_> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_129> ::= ""
+                   | <__tmp_rule_128>
+<__tmp_rule_130> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_131> ::= ""
+                   | <__tmp_rule_130>
+<__tmp_rule_132> ::= <BEFORE_>
+                   | <AFTER_>
+                   | <INSTEAD_> <__white_space01_1244> <OF_>
+<__tmp_rule_133> ::= ""
+                   | <__tmp_rule_132>
+<__tmp_rule_136> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_137> ::= ""
+                   | <__tmp_rule_136> <__tmp_rule_137>
+<__tmp_rule_135> ::= <OF_> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_137>
+<__tmp_rule_138> ::= ""
+                   | <__tmp_rule_135>
+<__tmp_rule_134> ::= <DELETE_>
+                   | <INSERT_>
+                   | <UPDATE_> <__white_space01_1244> <__tmp_rule_138>
+<__tmp_rule_139> ::= <__tmp_rule_134>
+<__tmp_rule_140> ::= <FOR_> <__white_space01_1244> <EACH_> <__white_space01_1244> <ROW_>
+<__tmp_rule_141> ::= ""
+                   | <__tmp_rule_140>
+<__tmp_rule_142> ::= <WHEN_> <__white_space01_1244> <expr>
+<__tmp_rule_143> ::= ""
+                   | <__tmp_rule_142>
+<__tmp_rule_145> ::= <update_stmt>
+                   | <insert_stmt>
+                   | <delete_stmt>
+                   | <select_stmt>
+<__tmp_rule_146> ::= <__tmp_rule_145>
+<__tmp_rule_144> ::= <__tmp_rule_146> <__white_space01_1244> <SCOL>
+<__tmp_rule_147> ::= <__tmp_rule_144>
+                   | <__tmp_rule_144> <__tmp_rule_147>
+<create_view_stmt> ::= <CREATE_> <__white_space01_1244> <__tmp_rule_149> <__white_space01_1244> <VIEW_> <__white_space01_1244> <__tmp_rule_151> <__tmp_rule_153> <__white_space01_1244> <view_name> <__white_space01_1244> <__tmp_rule_157> <__white_space01_1244> <AS_> <__white_space01_1244> <select_stmt>
+<__tmp_rule_148> ::= <TEMP_>
+                   | <TEMPORARY_>
+<__tmp_rule_149> ::= ""
+                   | <__tmp_rule_148>
+<__tmp_rule_150> ::= <IF_> <__white_space01_1244> <NOT_> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_151> ::= ""
+                   | <__tmp_rule_150>
+<__tmp_rule_152> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_153> ::= ""
+                   | <__tmp_rule_152>
+<__tmp_rule_155> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_156> ::= ""
+                   | <__tmp_rule_155> <__tmp_rule_156>
+<__tmp_rule_154> ::= <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_156> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_157> ::= ""
+                   | <__tmp_rule_154>
+<create_virtual_table_stmt> ::= <CREATE_> <__white_space01_1244> <VIRTUAL_> <__white_space01_1244> <TABLE_> <__white_space01_1244> <__tmp_rule_159> <__tmp_rule_161> <__white_space01_1244> <table_name> <__white_space01_1244> <USING_> <__white_space01_1244> <module_name> <__white_space01_1244> <__tmp_rule_165>
+<__tmp_rule_158> ::= <IF_> <__white_space01_1244> <NOT_> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_159> ::= ""
+                   | <__tmp_rule_158>
+<__tmp_rule_160> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_161> ::= ""
+                   | <__tmp_rule_160>
+<__tmp_rule_163> ::= <COMMA> <__white_space01_1244> <module_argument>
+<__tmp_rule_164> ::= ""
+                   | <__tmp_rule_163> <__tmp_rule_164>
+<__tmp_rule_162> ::= <OPEN_PAR> <__white_space01_1244> <module_argument> <__white_space01_1244> <__tmp_rule_164> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_165> ::= ""
+                   | <__tmp_rule_162>
+<with_clause> ::= <WITH_> <__white_space01_1244> <__tmp_rule_166> <__white_space01_1244> <cte_table_name> <__white_space01_1244> <AS_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <select_stmt> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_168>
+<__tmp_rule_166> ::= ""
+                   | <RECURSIVE_>
+<__tmp_rule_167> ::= <COMMA> <__white_space01_1244> <cte_table_name> <__white_space01_1244> <AS_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <select_stmt> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_168> ::= ""
+                   | <__tmp_rule_167> <__tmp_rule_168>
+<cte_table_name> ::= <table_name> <__white_space01_1244> <__tmp_rule_172>
+<__tmp_rule_170> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_171> ::= ""
+                   | <__tmp_rule_170> <__tmp_rule_171>
+<__tmp_rule_169> ::= <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_171> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_172> ::= ""
+                   | <__tmp_rule_169>
+<common_table_expression> ::= <table_name> <__white_space01_1244> <__tmp_rule_177> <__white_space01_1244> <AS_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <select_stmt> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_175> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_176> ::= ""
+                   | <__tmp_rule_175> <__tmp_rule_176>
+<__tmp_rule_174> ::= <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_176> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_177> ::= ""
+                   | <__tmp_rule_174>
+<delete_stmt> ::= <__tmp_rule_178> <__white_space01_1244> <DELETE_> <__white_space01_1244> <FROM_> <__white_space01_1244> <qualified_table_name> <__white_space01_1244> <__tmp_rule_180> <__tmp_rule_181>
+<__tmp_rule_178> ::= ""
+                   | <with_clause>
+<__tmp_rule_179> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_180> ::= ""
+                   | <__tmp_rule_179>
+<__tmp_rule_181> ::= ""
+                   | <returning_clause>
+<delete_stmt_limited> ::= <__tmp_rule_182> <__white_space01_1244> <DELETE_> <__white_space01_1244> <FROM_> <__white_space01_1244> <qualified_table_name> <__white_space01_1244> <__tmp_rule_184> <__tmp_rule_185> <__tmp_rule_188>
+<__tmp_rule_182> ::= ""
+                   | <with_clause>
+<__tmp_rule_183> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_184> ::= ""
+                   | <__tmp_rule_183>
+<__tmp_rule_185> ::= ""
+                   | <returning_clause>
+<__tmp_rule_187> ::= ""
+                   | <order_by_stmt>
+<__tmp_rule_186> ::= <__tmp_rule_187> <__white_space01_1244> <limit_stmt>
+<__tmp_rule_188> ::= ""
+                   | <__tmp_rule_186>
+<detach_stmt> ::= <DETACH_> <__white_space01_1244> <__tmp_rule_189> <__white_space01_1244> <schema_name>
+<__tmp_rule_189> ::= ""
+                   | <DATABASE_>
+<drop_stmt> ::= <DROP_> <__white_space01_1244> <__tmp_rule_190> <__tmp_rule_192> <__tmp_rule_194> <__white_space01_1244> <any_name>
+<__tmp_rule_190> ::= <INDEX_>
+                   | <TABLE_>
+                   | <TRIGGER_>
+                   | <VIEW_>
+<__tmp_rule_191> ::= <IF_> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_192> ::= ""
+                   | <__tmp_rule_191>
+<__tmp_rule_193> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_194> ::= ""
+                   | <__tmp_rule_193>
+<expr> ::= <literal_value>
+         | <BIND_PARAMETER>
+         | <__tmp_rule_198> <__white_space01_1244> <column_name>
+         | <unary_operator> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <PIPE2> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_200> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_202> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_204> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_206> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_209> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <AND_> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <OR_> <__white_space01_1244> <expr>
+         | <function_name> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <__tmp_rule_216> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_217> <__tmp_rule_218>
+         | <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_220> <__white_space01_1244> <CLOSE_PAR>
+         | <CAST_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <AS_> <__white_space01_1244> <type_name> <__white_space01_1244> <CLOSE_PAR>
+         | <expr> <__white_space01_1244> <COLLATE_> <__white_space01_1244> <collation_name>
+         | <expr> <__white_space01_1244> <__tmp_rule_221> <__tmp_rule_223> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_225>
+         | <expr> <__white_space01_1244> <__tmp_rule_227>
+         | <expr> <__white_space01_1244> <IS_> <__white_space01_1244> <__tmp_rule_228> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_229> <__white_space01_1244> <BETWEEN_> <__white_space01_1244> <expr> <__white_space01_1244> <AND_> <__white_space01_1244> <expr>
+         | <expr> <__white_space01_1244> <__tmp_rule_230> <__white_space01_1244> <IN_> <__white_space01_1244> <__tmp_rule_244>
+         | <__tmp_rule_248> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <select_stmt> <__white_space01_1244> <CLOSE_PAR>
+         | <CASE_> <__white_space01_1244> <__tmp_rule_249> <__tmp_rule_251> <__tmp_rule_253> <__white_space01_1244> <END_>
+         | <raise_function>
+<__tmp_rule_196> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_197> ::= ""
+                   | <__tmp_rule_196>
+<__tmp_rule_195> ::= <__tmp_rule_197> <__white_space01_1244> <table_name> <__white_space01_1244> <DOT>
+<__tmp_rule_198> ::= ""
+                   | <__tmp_rule_195>
+<__tmp_rule_199> ::= <STAR>
+                   | <DIV>
+                   | <MOD>
+<__tmp_rule_200> ::= <__tmp_rule_199>
+<__tmp_rule_201> ::= <PLUS>
+                   | <MINUS>
+<__tmp_rule_202> ::= <__tmp_rule_201>
+<__tmp_rule_203> ::= <LT2>
+                   | <GT2>
+                   | <AMP>
+                   | <PIPE>
+<__tmp_rule_204> ::= <__tmp_rule_203>
+<__tmp_rule_205> ::= <LT>
+                   | <LT_EQ>
+                   | <GT>
+                   | <GT_EQ>
+<__tmp_rule_206> ::= <__tmp_rule_205>
+<__tmp_rule_208> ::= ""
+                   | <NOT_>
+<__tmp_rule_207> ::= <ASSIGN>
+                   | <EQ>
+                   | <NOT_EQ1>
+                   | <NOT_EQ2>
+                   | <IS_>
+                   | <IS_> <__white_space01_1244> <NOT_>
+                   | <IS_> <__white_space01_1244> <__tmp_rule_208> <__white_space01_1244> <DISTINCT_> <__white_space01_1244> <FROM_>
+                   | <IN_>
+                   | <LIKE_>
+                   | <GLOB_>
+                   | <MATCH_>
+                   | <REGEXP_>
+<__tmp_rule_209> ::= <__tmp_rule_207>
+<__tmp_rule_212> ::= ""
+                   | <DISTINCT_>
+<__tmp_rule_213> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_214> ::= ""
+                   | <__tmp_rule_213> <__tmp_rule_214>
+<__tmp_rule_211> ::= <__tmp_rule_212> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_214>
+<__tmp_rule_215> ::= <__tmp_rule_211>
+<__tmp_rule_210> ::= <__tmp_rule_215>
+                   | <STAR>
+<__tmp_rule_216> ::= ""
+                   | <__tmp_rule_210>
+<__tmp_rule_217> ::= ""
+                   | <filter_clause>
+<__tmp_rule_218> ::= ""
+                   | <over_clause>
+<__tmp_rule_219> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_220> ::= ""
+                   | <__tmp_rule_219> <__tmp_rule_220>
+<__tmp_rule_221> ::= ""
+                   | <NOT_>
+<__tmp_rule_222> ::= <LIKE_>
+                   | <GLOB_>
+                   | <REGEXP_>
+                   | <MATCH_>
+<__tmp_rule_223> ::= <__tmp_rule_222>
+<__tmp_rule_224> ::= <ESCAPE_> <__white_space01_1244> <expr>
+<__tmp_rule_225> ::= ""
+                   | <__tmp_rule_224>
+<__tmp_rule_226> ::= <ISNULL_>
+                   | <NOTNULL_>
+                   | <NOT_> <__white_space01_1244> <NULL_>
+<__tmp_rule_227> ::= <__tmp_rule_226>
+<__tmp_rule_228> ::= ""
+                   | <NOT_>
+<__tmp_rule_229> ::= ""
+                   | <NOT_>
+<__tmp_rule_230> ::= ""
+                   | <NOT_>
+<__tmp_rule_233> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_234> ::= ""
+                   | <__tmp_rule_233> <__tmp_rule_234>
+<__tmp_rule_232> ::= <select_stmt>
+                   | <expr> <__white_space01_1244> <__tmp_rule_234>
+<__tmp_rule_235> ::= ""
+                   | <__tmp_rule_232>
+<__tmp_rule_236> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_237> ::= ""
+                   | <__tmp_rule_236>
+<__tmp_rule_238> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_239> ::= ""
+                   | <__tmp_rule_238>
+<__tmp_rule_241> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_242> ::= ""
+                   | <__tmp_rule_241> <__tmp_rule_242>
+<__tmp_rule_240> ::= <expr> <__white_space01_1244> <__tmp_rule_242>
+<__tmp_rule_243> ::= ""
+                   | <__tmp_rule_240>
+<__tmp_rule_231> ::= <OPEN_PAR> <__white_space01_1244> <__tmp_rule_235> <__white_space01_1244> <CLOSE_PAR>
+                   | <__tmp_rule_237> <__white_space01_1244> <table_name>
+                   | <__tmp_rule_239> <__white_space01_1244> <table_function_name> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <__tmp_rule_243> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_244> ::= <__tmp_rule_231>
+<__tmp_rule_246> ::= <NOT_>
+<__tmp_rule_247> ::= ""
+                   | <__tmp_rule_246>
+<__tmp_rule_245> ::= <__tmp_rule_247> <__white_space01_1244> <EXISTS_>
+<__tmp_rule_248> ::= ""
+                   | <__tmp_rule_245>
+<__tmp_rule_249> ::= ""
+                   | <expr>
+<__tmp_rule_250> ::= <WHEN_> <__white_space01_1244> <expr> <__white_space01_1244> <THEN_> <__white_space01_1244> <expr>
+<__tmp_rule_251> ::= <__tmp_rule_250>
+                   | <__tmp_rule_250> <__tmp_rule_251>
+<__tmp_rule_252> ::= <ELSE_> <__white_space01_1244> <expr>
+<__tmp_rule_253> ::= ""
+                   | <__tmp_rule_252>
+<raise_function> ::= <RAISE_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <__tmp_rule_257> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_255> ::= <ROLLBACK_>
+                   | <ABORT_>
+                   | <FAIL_>
+<__tmp_rule_256> ::= <__tmp_rule_255>
+<__tmp_rule_254> ::= <IGNORE_>
+                   | <__tmp_rule_256> <__white_space01_1244> <COMMA> <__white_space01_1244> <error_message>
+<__tmp_rule_257> ::= <__tmp_rule_254>
+<literal_value> ::= <NUMERIC_LITERAL>
+                  | <STRING_LITERAL>
+                  | <BLOB_LITERAL>
+                  | <NULL_>
+                  | <TRUE_>
+                  | <FALSE_>
+                  | <CURRENT_TIME_>
+                  | <CURRENT_DATE_>
+                  | <CURRENT_TIMESTAMP_>
+<value_row> ::= <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_259> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_258> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_259> ::= ""
+                   | <__tmp_rule_258> <__tmp_rule_259>
+<values_clause> ::= <VALUES_> <__white_space01_1244> <value_row> <__white_space01_1244> <__tmp_rule_261>
+<__tmp_rule_260> ::= <COMMA> <__white_space01_1244> <value_row>
+<__tmp_rule_261> ::= ""
+                   | <__tmp_rule_260> <__tmp_rule_261>
+<insert_stmt> ::= <__tmp_rule_262> <__tmp_rule_266> <__white_space01_1244> <INTO_> <__white_space01_1244> <__tmp_rule_268> <__white_space01_1244> <table_name> <__white_space01_1244> <__tmp_rule_270> <__tmp_rule_274> <__tmp_rule_281> <__tmp_rule_282>
+<__tmp_rule_262> ::= ""
+                   | <with_clause>
+<__tmp_rule_264> ::= <REPLACE_>
+                   | <ROLLBACK_>
+                   | <ABORT_>
+                   | <FAIL_>
+                   | <IGNORE_>
+<__tmp_rule_265> ::= <__tmp_rule_264>
+<__tmp_rule_263> ::= <INSERT_>
+                   | <REPLACE_>
+                   | <INSERT_> <__white_space01_1244> <OR_> <__white_space01_1244> <__tmp_rule_265>
+<__tmp_rule_266> ::= <__tmp_rule_263>
+<__tmp_rule_267> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_268> ::= ""
+                   | <__tmp_rule_267>
+<__tmp_rule_269> ::= <AS_> <__white_space01_1244> <table_alias>
+<__tmp_rule_270> ::= ""
+                   | <__tmp_rule_269>
+<__tmp_rule_272> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_273> ::= ""
+                   | <__tmp_rule_272> <__tmp_rule_273>
+<__tmp_rule_271> ::= <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_273> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_274> ::= ""
+                   | <__tmp_rule_271>
+<__tmp_rule_277> ::= <values_clause>
+                   | <select_stmt>
+<__tmp_rule_278> ::= <__tmp_rule_277>
+<__tmp_rule_279> ::= ""
+                   | <upsert_clause>
+<__tmp_rule_276> ::= <__tmp_rule_278> <__tmp_rule_279>
+<__tmp_rule_280> ::= <__tmp_rule_276>
+<__tmp_rule_275> ::= <__tmp_rule_280>
+                   | <DEFAULT_> <__white_space01_1244> <VALUES_>
+<__tmp_rule_281> ::= <__tmp_rule_275>
+<__tmp_rule_282> ::= ""
+                   | <returning_clause>
+<returning_clause> ::= <RETURNING_> <__white_space01_1244> <result_column> <__white_space01_1244> <__tmp_rule_284>
+<__tmp_rule_283> ::= <COMMA> <__white_space01_1244> <result_column>
+<__tmp_rule_284> ::= ""
+                   | <__tmp_rule_283> <__tmp_rule_284>
+<upsert_clause> ::= <ON_> <__white_space01_1244> <CONFLICT_> <__white_space01_1244> <__tmp_rule_290> <__white_space01_1244> <DO_> <__white_space01_1244> <__tmp_rule_302>
+<__tmp_rule_286> ::= <COMMA> <__white_space01_1244> <indexed_column>
+<__tmp_rule_287> ::= ""
+                   | <__tmp_rule_286> <__tmp_rule_287>
+<__tmp_rule_288> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_289> ::= ""
+                   | <__tmp_rule_288>
+<__tmp_rule_285> ::= <OPEN_PAR> <__white_space01_1244> <indexed_column> <__white_space01_1244> <__tmp_rule_287> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_289>
+<__tmp_rule_290> ::= ""
+                   | <__tmp_rule_285>
+<__tmp_rule_293> ::= <column_name>
+                   | <column_name_list>
+<__tmp_rule_294> ::= <__tmp_rule_293>
+<__tmp_rule_296> ::= <column_name>
+                   | <column_name_list>
+<__tmp_rule_297> ::= <__tmp_rule_296>
+<__tmp_rule_295> ::= <COMMA> <__white_space01_1244> <__tmp_rule_297> <__white_space01_1244> <ASSIGN> <__white_space01_1244> <expr>
+<__tmp_rule_298> ::= ""
+                   | <__tmp_rule_295> <__tmp_rule_298>
+<__tmp_rule_299> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_300> ::= ""
+                   | <__tmp_rule_299>
+<__tmp_rule_292> ::= <__tmp_rule_294> <__white_space01_1244> <ASSIGN> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_298> <__tmp_rule_300>
+<__tmp_rule_301> ::= <__tmp_rule_292>
+<__tmp_rule_291> ::= <NOTHING_>
+                   | <UPDATE_> <__white_space01_1244> <SET_> <__white_space01_1244> <__tmp_rule_301>
+<__tmp_rule_302> ::= <__tmp_rule_291>
+<pragma_stmt> ::= <PRAGMA_> <__white_space01_1244> <__tmp_rule_304> <__white_space01_1244> <pragma_name> <__white_space01_1244> <__tmp_rule_306>
+<__tmp_rule_303> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_304> ::= ""
+                   | <__tmp_rule_303>
+<__tmp_rule_305> ::= <ASSIGN> <__white_space01_1244> <pragma_value>
+                   | <OPEN_PAR> <__white_space01_1244> <pragma_value> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_306> ::= ""
+                   | <__tmp_rule_305>
+<pragma_value> ::= <signed_number>
+                 | <name>
+                 | <STRING_LITERAL>
+<reindex_stmt> ::= <REINDEX_> <__white_space01_1244> <__tmp_rule_312>
+<__tmp_rule_308> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_309> ::= ""
+                   | <__tmp_rule_308>
+<__tmp_rule_310> ::= <table_name>
+                   | <index_name>
+<__tmp_rule_311> ::= <__tmp_rule_310>
+<__tmp_rule_307> ::= <collation_name>
+                   | <__tmp_rule_309> <__tmp_rule_311>
+<__tmp_rule_312> ::= ""
+                   | <__tmp_rule_307>
+<select_stmt> ::= <__tmp_rule_313> <__white_space01_1244> <select_core> <__white_space01_1244> <__tmp_rule_315> <__tmp_rule_316> <__tmp_rule_317>
+<__tmp_rule_313> ::= ""
+                   | <common_table_stmt>
+<__tmp_rule_314> ::= <compound_operator> <__white_space01_1244> <select_core>
+<__tmp_rule_315> ::= ""
+                   | <__tmp_rule_314> <__tmp_rule_315>
+<__tmp_rule_316> ::= ""
+                   | <order_by_stmt>
+<__tmp_rule_317> ::= ""
+                   | <limit_stmt>
+<join_clause> ::= <table_or_subquery> <__white_space01_1244> <__tmp_rule_320>
+<__tmp_rule_319> ::= ""
+                   | <join_constraint>
+<__tmp_rule_318> ::= <join_operator> <__white_space01_1244> <table_or_subquery> <__white_space01_1244> <__tmp_rule_319>
+<__tmp_rule_320> ::= ""
+                   | <__tmp_rule_318> <__tmp_rule_320>
+<select_core> ::= <__tmp_rule_344>
+                | <values_clause>
+<__tmp_rule_322> ::= <DISTINCT_>
+                   | <ALL_>
+<__tmp_rule_323> ::= ""
+                   | <__tmp_rule_322>
+<__tmp_rule_324> ::= <COMMA> <__white_space01_1244> <result_column>
+<__tmp_rule_325> ::= ""
+                   | <__tmp_rule_324> <__tmp_rule_325>
+<__tmp_rule_328> ::= <COMMA> <__white_space01_1244> <table_or_subquery>
+<__tmp_rule_329> ::= ""
+                   | <__tmp_rule_328> <__tmp_rule_329>
+<__tmp_rule_327> ::= <table_or_subquery> <__white_space01_1244> <__tmp_rule_329>
+                   | <join_clause>
+<__tmp_rule_330> ::= <__tmp_rule_327>
+<__tmp_rule_326> ::= <FROM_> <__white_space01_1244> <__tmp_rule_330>
+<__tmp_rule_331> ::= ""
+                   | <__tmp_rule_326>
+<__tmp_rule_332> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_333> ::= ""
+                   | <__tmp_rule_332>
+<__tmp_rule_335> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_336> ::= ""
+                   | <__tmp_rule_335> <__tmp_rule_336>
+<__tmp_rule_337> ::= <HAVING_> <__white_space01_1244> <expr>
+<__tmp_rule_338> ::= ""
+                   | <__tmp_rule_337>
+<__tmp_rule_334> ::= <GROUP_> <__white_space01_1244> <BY_> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_336> <__tmp_rule_338>
+<__tmp_rule_339> ::= ""
+                   | <__tmp_rule_334>
+<__tmp_rule_341> ::= <COMMA> <__white_space01_1244> <window_name> <__white_space01_1244> <AS_> <__white_space01_1244> <window_defn>
+<__tmp_rule_342> ::= ""
+                   | <__tmp_rule_341> <__tmp_rule_342>
+<__tmp_rule_340> ::= <WINDOW_> <__white_space01_1244> <window_name> <__white_space01_1244> <AS_> <__white_space01_1244> <window_defn> <__white_space01_1244> <__tmp_rule_342>
+<__tmp_rule_343> ::= ""
+                   | <__tmp_rule_340>
+<__tmp_rule_321> ::= <SELECT_> <__white_space01_1244> <__tmp_rule_323> <__white_space01_1244> <result_column> <__white_space01_1244> <__tmp_rule_325> <__tmp_rule_331> <__tmp_rule_333> <__tmp_rule_339> <__tmp_rule_343>
+<__tmp_rule_344> ::= <__tmp_rule_321>
+<table_or_subquery> ::= <__tmp_rule_364>
+                      | <__tmp_rule_366> <__white_space01_1244> <table_function_name> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_368> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_371>
+                      | <OPEN_PAR> <__white_space01_1244> <__tmp_rule_375> <__white_space01_1244> <CLOSE_PAR>
+                      | <OPEN_PAR> <__white_space01_1244> <select_stmt> <__white_space01_1244> <CLOSE_PAR> <__white_space01_1244> <__tmp_rule_378>
+<__tmp_rule_357> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_358> ::= ""
+                   | <__tmp_rule_357>
+<__tmp_rule_360> ::= ""
+                   | <AS_>
+<__tmp_rule_359> ::= <__tmp_rule_360> <__white_space01_1244> <table_alias>
+<__tmp_rule_361> ::= ""
+                   | <__tmp_rule_359>
+<__tmp_rule_362> ::= <INDEXED_> <__white_space01_1244> <BY_> <__white_space01_1244> <index_name>
+                   | <NOT_> <__white_space01_1244> <INDEXED_>
+<__tmp_rule_363> ::= ""
+                   | <__tmp_rule_362>
+<__tmp_rule_356> ::= <__tmp_rule_358> <__white_space01_1244> <table_name> <__white_space01_1244> <__tmp_rule_361> <__tmp_rule_363>
+<__tmp_rule_364> ::= <__tmp_rule_356>
+<__tmp_rule_365> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_366> ::= ""
+                   | <__tmp_rule_365>
+<__tmp_rule_367> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_368> ::= ""
+                   | <__tmp_rule_367> <__tmp_rule_368>
+<__tmp_rule_370> ::= ""
+                   | <AS_>
+<__tmp_rule_369> ::= <__tmp_rule_370> <__white_space01_1244> <table_alias>
+<__tmp_rule_371> ::= ""
+                   | <__tmp_rule_369>
+<__tmp_rule_373> ::= <COMMA> <__white_space01_1244> <table_or_subquery>
+<__tmp_rule_374> ::= ""
+                   | <__tmp_rule_373> <__tmp_rule_374>
+<__tmp_rule_372> ::= <table_or_subquery> <__white_space01_1244> <__tmp_rule_374>
+                   | <join_clause>
+<__tmp_rule_375> ::= <__tmp_rule_372>
+<__tmp_rule_377> ::= ""
+                   | <AS_>
+<__tmp_rule_376> ::= <__tmp_rule_377> <__white_space01_1244> <table_alias>
+<__tmp_rule_378> ::= ""
+                   | <__tmp_rule_376>
+<result_column> ::= <STAR>
+                  | <table_name> <__white_space01_1244> <DOT> <__white_space01_1244> <STAR>
+                  | <expr> <__white_space01_1244> <__tmp_rule_381>
+<__tmp_rule_380> ::= ""
+                   | <AS_>
+<__tmp_rule_379> ::= <__tmp_rule_380> <__white_space01_1244> <column_alias>
+<__tmp_rule_381> ::= ""
+                   | <__tmp_rule_379>
+<join_operator> ::= <COMMA>
+                  | <__tmp_rule_382> <__tmp_rule_387> <__white_space01_1244> <JOIN_>
+<__tmp_rule_382> ::= ""
+                   | <NATURAL_>
+<__tmp_rule_384> ::= <LEFT_>
+                   | <RIGHT_>
+                   | <FULL_>
+<__tmp_rule_385> ::= <__tmp_rule_384>
+<__tmp_rule_386> ::= ""
+                   | <OUTER_>
+<__tmp_rule_383> ::= <__tmp_rule_385> <__tmp_rule_386>
+                   | <INNER_>
+                   | <CROSS_>
+<__tmp_rule_387> ::= ""
+                   | <__tmp_rule_383>
+<join_constraint> ::= <ON_> <__white_space01_1244> <expr>
+                    | <USING_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_389> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_388> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_389> ::= ""
+                   | <__tmp_rule_388> <__tmp_rule_389>
+<compound_operator> ::= <UNION_> <__white_space01_1244> <__tmp_rule_390>
+                      | <INTERSECT_>
+                      | <EXCEPT_>
+<__tmp_rule_390> ::= ""
+                   | <ALL_>
+<update_stmt> ::= <__tmp_rule_391> <__white_space01_1244> <UPDATE_> <__white_space01_1244> <__tmp_rule_395> <__white_space01_1244> <qualified_table_name> <__white_space01_1244> <SET_> <__white_space01_1244> <__tmp_rule_397> <__white_space01_1244> <ASSIGN> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_401> <__tmp_rule_407> <__tmp_rule_409> <__tmp_rule_410>
+<__tmp_rule_391> ::= ""
+                   | <with_clause>
+<__tmp_rule_393> ::= <ROLLBACK_>
+                   | <ABORT_>
+                   | <REPLACE_>
+                   | <FAIL_>
+                   | <IGNORE_>
+<__tmp_rule_394> ::= <__tmp_rule_393>
+<__tmp_rule_392> ::= <OR_> <__white_space01_1244> <__tmp_rule_394>
+<__tmp_rule_395> ::= ""
+                   | <__tmp_rule_392>
+<__tmp_rule_396> ::= <column_name>
+                   | <column_name_list>
+<__tmp_rule_397> ::= <__tmp_rule_396>
+<__tmp_rule_399> ::= <column_name>
+                   | <column_name_list>
+<__tmp_rule_400> ::= <__tmp_rule_399>
+<__tmp_rule_398> ::= <COMMA> <__white_space01_1244> <__tmp_rule_400> <__white_space01_1244> <ASSIGN> <__white_space01_1244> <expr>
+<__tmp_rule_401> ::= ""
+                   | <__tmp_rule_398> <__tmp_rule_401>
+<__tmp_rule_404> ::= <COMMA> <__white_space01_1244> <table_or_subquery>
+<__tmp_rule_405> ::= ""
+                   | <__tmp_rule_404> <__tmp_rule_405>
+<__tmp_rule_403> ::= <table_or_subquery> <__white_space01_1244> <__tmp_rule_405>
+                   | <join_clause>
+<__tmp_rule_406> ::= <__tmp_rule_403>
+<__tmp_rule_402> ::= <FROM_> <__white_space01_1244> <__tmp_rule_406>
+<__tmp_rule_407> ::= ""
+                   | <__tmp_rule_402>
+<__tmp_rule_408> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_409> ::= ""
+                   | <__tmp_rule_408>
+<__tmp_rule_410> ::= ""
+                   | <returning_clause>
+<column_name_list> ::= <OPEN_PAR> <__white_space01_1244> <column_name> <__white_space01_1244> <__tmp_rule_412> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_411> ::= <COMMA> <__white_space01_1244> <column_name>
+<__tmp_rule_412> ::= ""
+                   | <__tmp_rule_411> <__tmp_rule_412>
+<update_stmt_limited> ::= <__tmp_rule_413> <__white_space01_1244> <UPDATE_> <__white_space01_1244> <__tmp_rule_417> <__white_space01_1244> <qualified_table_name> <__white_space01_1244> <SET_> <__white_space01_1244> <__tmp_rule_419> <__white_space01_1244> <ASSIGN> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_423> <__tmp_rule_425> <__tmp_rule_426> <__tmp_rule_429>
+<__tmp_rule_413> ::= ""
+                   | <with_clause>
+<__tmp_rule_415> ::= <ROLLBACK_>
+                   | <ABORT_>
+                   | <REPLACE_>
+                   | <FAIL_>
+                   | <IGNORE_>
+<__tmp_rule_416> ::= <__tmp_rule_415>
+<__tmp_rule_414> ::= <OR_> <__white_space01_1244> <__tmp_rule_416>
+<__tmp_rule_417> ::= ""
+                   | <__tmp_rule_414>
+<__tmp_rule_418> ::= <column_name>
+                   | <column_name_list>
+<__tmp_rule_419> ::= <__tmp_rule_418>
+<__tmp_rule_421> ::= <column_name>
+                   | <column_name_list>
+<__tmp_rule_422> ::= <__tmp_rule_421>
+<__tmp_rule_420> ::= <COMMA> <__white_space01_1244> <__tmp_rule_422> <__white_space01_1244> <ASSIGN> <__white_space01_1244> <expr>
+<__tmp_rule_423> ::= ""
+                   | <__tmp_rule_420> <__tmp_rule_423>
+<__tmp_rule_424> ::= <WHERE_> <__white_space01_1244> <expr>
+<__tmp_rule_425> ::= ""
+                   | <__tmp_rule_424>
+<__tmp_rule_426> ::= ""
+                   | <returning_clause>
+<__tmp_rule_428> ::= ""
+                   | <order_by_stmt>
+<__tmp_rule_427> ::= <__tmp_rule_428> <__white_space01_1244> <limit_stmt>
+<__tmp_rule_429> ::= ""
+                   | <__tmp_rule_427>
+<qualified_table_name> ::= <__tmp_rule_431> <__white_space01_1244> <table_name> <__white_space01_1244> <__tmp_rule_433> <__tmp_rule_435>
+<__tmp_rule_430> ::= <schema_name> <__white_space01_1244> <DOT>
+<__tmp_rule_431> ::= ""
+                   | <__tmp_rule_430>
+<__tmp_rule_432> ::= <AS_> <__white_space01_1244> <alias>
+<__tmp_rule_433> ::= ""
+                   | <__tmp_rule_432>
+<__tmp_rule_434> ::= <INDEXED_> <__white_space01_1244> <BY_> <__white_space01_1244> <index_name>
+                   | <NOT_> <__white_space01_1244> <INDEXED_>
+<__tmp_rule_435> ::= ""
+                   | <__tmp_rule_434>
+<vacuum_stmt> ::= <VACUUM_> <__white_space01_1244> <__tmp_rule_436> <__tmp_rule_438>
+<__tmp_rule_436> ::= ""
+                   | <schema_name>
+<__tmp_rule_437> ::= <INTO_> <__white_space01_1244> <filename>
+<__tmp_rule_438> ::= ""
+                   | <__tmp_rule_437>
+<filter_clause> ::= <FILTER_> <__white_space01_1244> <OPEN_PAR> <__white_space01_1244> <WHERE_> <__white_space01_1244> <expr> <__white_space01_1244> <CLOSE_PAR>
+<window_defn> ::= <OPEN_PAR> <__white_space01_1244> <__tmp_rule_439> <__tmp_rule_443> <__tmp_rule_447> <__tmp_rule_448> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_439> ::= ""
+                   | <base_window_name>
+<__tmp_rule_441> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_442> ::= ""
+                   | <__tmp_rule_441> <__tmp_rule_442>
+<__tmp_rule_440> ::= <PARTITION_> <__white_space01_1244> <BY_> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_442>
+<__tmp_rule_443> ::= ""
+                   | <__tmp_rule_440>
+<__tmp_rule_445> ::= <COMMA> <__white_space01_1244> <ordering_term>
+<__tmp_rule_446> ::= ""
+                   | <__tmp_rule_445> <__tmp_rule_446>
+<__tmp_rule_444> ::= <ORDER_> <__white_space01_1244> <BY_> <__white_space01_1244> <ordering_term> <__white_space01_1244> <__tmp_rule_446>
+<__tmp_rule_447> ::= <__tmp_rule_444>
+<__tmp_rule_448> ::= ""
+                   | <frame_spec>
+<over_clause> ::= <OVER_> <__white_space01_1244> <__tmp_rule_460>
+<__tmp_rule_450> ::= ""
+                   | <base_window_name>
+<__tmp_rule_452> ::= <COMMA> <__white_space01_1244> <expr>
+<__tmp_rule_453> ::= ""
+                   | <__tmp_rule_452> <__tmp_rule_453>
+<__tmp_rule_451> ::= <PARTITION_> <__white_space01_1244> <BY_> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_453>
+<__tmp_rule_454> ::= ""
+                   | <__tmp_rule_451>
+<__tmp_rule_456> ::= <COMMA> <__white_space01_1244> <ordering_term>
+<__tmp_rule_457> ::= ""
+                   | <__tmp_rule_456> <__tmp_rule_457>
+<__tmp_rule_455> ::= <ORDER_> <__white_space01_1244> <BY_> <__white_space01_1244> <ordering_term> <__white_space01_1244> <__tmp_rule_457>
+<__tmp_rule_458> ::= ""
+                   | <__tmp_rule_455>
+<__tmp_rule_459> ::= ""
+                   | <frame_spec>
+<__tmp_rule_449> ::= <window_name>
+                   | <OPEN_PAR> <__white_space01_1244> <__tmp_rule_450> <__tmp_rule_454> <__tmp_rule_458> <__tmp_rule_459> <__white_space01_1244> <CLOSE_PAR>
+<__tmp_rule_460> ::= <__tmp_rule_449>
+<frame_spec> ::= <frame_clause> <__white_space01_1244> <__tmp_rule_464>
+<__tmp_rule_462> ::= <NO_> <__white_space01_1244> <OTHERS_>
+                   | <CURRENT_> <__white_space01_1244> <ROW_>
+                   | <GROUP_>
+                   | <TIES_>
+<__tmp_rule_463> ::= <__tmp_rule_462>
+<__tmp_rule_461> ::= <EXCLUDE_> <__white_space01_1244> <__tmp_rule_463>
+<__tmp_rule_464> ::= ""
+                   | <__tmp_rule_461>
+<frame_clause> ::= <__tmp_rule_466> <__tmp_rule_468>
+<__tmp_rule_465> ::= <RANGE_>
+                   | <ROWS_>
+                   | <GROUPS_>
+<__tmp_rule_466> ::= <__tmp_rule_465>
+<__tmp_rule_467> ::= <frame_single>
+                   | <BETWEEN_> <__white_space01_1244> <frame_left> <__white_space01_1244> <AND_> <__white_space01_1244> <frame_right>
+<__tmp_rule_468> ::= <__tmp_rule_467>
+<common_table_stmt> ::= <WITH_> <__white_space01_1244> <__tmp_rule_486> <__white_space01_1244> <common_table_expression> <__white_space01_1244> <__tmp_rule_488>
+<__tmp_rule_486> ::= ""
+                   | <RECURSIVE_>
+<__tmp_rule_487> ::= <COMMA> <__white_space01_1244> <common_table_expression>
+<__tmp_rule_488> ::= ""
+                   | <__tmp_rule_487> <__tmp_rule_488>
+<order_by_stmt> ::= <ORDER_> <__white_space01_1244> <BY_> <__white_space01_1244> <ordering_term> <__white_space01_1244> <__tmp_rule_490>
+<__tmp_rule_489> ::= <COMMA> <__white_space01_1244> <ordering_term>
+<__tmp_rule_490> ::= ""
+                   | <__tmp_rule_489> <__tmp_rule_490>
+<limit_stmt> ::= <LIMIT_> <__white_space01_1244> <expr> <__white_space01_1244> <__tmp_rule_494>
+<__tmp_rule_492> ::= <OFFSET_>
+                   | <COMMA>
+<__tmp_rule_493> ::= <__tmp_rule_492>
+<__tmp_rule_491> ::= <__tmp_rule_493> <__white_space01_1244> <expr>
+<__tmp_rule_494> ::= ""
+                   | <__tmp_rule_491>
+<ordering_term> ::= <expr> <__white_space01_1244> <__tmp_rule_496> <__tmp_rule_497> <__tmp_rule_501>
+<__tmp_rule_495> ::= <COLLATE_> <__white_space01_1244> <collation_name>
+<__tmp_rule_496> ::= ""
+                   | <__tmp_rule_495>
+<__tmp_rule_497> ::= ""
+                   | <asc_desc>
+<__tmp_rule_499> ::= <FIRST_>
+                   | <LAST_>
+<__tmp_rule_500> ::= <__tmp_rule_499>
+<__tmp_rule_498> ::= <NULLS_> <__white_space01_1244> <__tmp_rule_500>
+<__tmp_rule_501> ::= ""
+                   | <__tmp_rule_498>
+<asc_desc> ::= <ASC_>
+             | <DESC_>
+<frame_left> ::= <expr> <__white_space01_1244> <PRECEDING_>
+               | <expr> <__white_space01_1244> <FOLLOWING_>
+               | <CURRENT_> <__white_space01_1244> <ROW_>
+               | <UNBOUNDED_> <__white_space01_1244> <PRECEDING_>
+<frame_right> ::= <expr> <__white_space01_1244> <PRECEDING_>
+                | <expr> <__white_space01_1244> <FOLLOWING_>
+                | <CURRENT_> <__white_space01_1244> <ROW_>
+                | <UNBOUNDED_> <__white_space01_1244> <FOLLOWING_>
+<frame_single> ::= <expr> <__white_space01_1244> <PRECEDING_>
+                 | <UNBOUNDED_> <__white_space01_1244> <PRECEDING_>
+                 | <CURRENT_> <__white_space01_1244> <ROW_>
+<unary_operator> ::= <MINUS>
+                   | <PLUS>
+                   | <TILDE>
+                   | <NOT_>
+<error_message> ::= <STRING_LITERAL>
+<module_argument> ::= <expr>
+                    | <column_def>
+<column_alias> ::= <IDENTIFIER>
+                 | <STRING_LITERAL>
+<keyword> ::= <ABORT_>
+            | <ACTION_>
+            | <ADD_>
+            | <AFTER_>
+            | <ALL_>
+            | <ALTER_>
+            | <ANALYZE_>
+            | <AND_>
+            | <AS_>
+            | <ASC_>
+            | <ATTACH_>
+            | <AUTOINCREMENT_>
+            | <BEFORE_>
+            | <BEGIN_>
+            | <BETWEEN_>
+            | <BY_>
+            | <CASCADE_>
+            | <CASE_>
+            | <CAST_>
+            | <CHECK_>
+            | <COLLATE_>
+            | <COLUMN_>
+            | <COMMIT_>
+            | <CONFLICT_>
+            | <CONSTRAINT_>
+            | <CREATE_>
+            | <CROSS_>
+            | <CURRENT_DATE_>
+            | <CURRENT_TIME_>
+            | <CURRENT_TIMESTAMP_>
+            | <DATABASE_>
+            | <DEFAULT_>
+            | <DEFERRABLE_>
+            | <DEFERRED_>
+            | <DELETE_>
+            | <DESC_>
+            | <DETACH_>
+            | <DISTINCT_>
+            | <DROP_>
+            | <EACH_>
+            | <ELSE_>
+            | <END_>
+            | <ESCAPE_>
+            | <EXCEPT_>
+            | <EXCLUSIVE_>
+            | <EXISTS_>
+            | <EXPLAIN_>
+            | <FAIL_>
+            | <FOR_>
+            | <FOREIGN_>
+            | <FROM_>
+            | <FULL_>
+            | <GLOB_>
+            | <GROUP_>
+            | <HAVING_>
+            | <IF_>
+            | <IGNORE_>
+            | <IMMEDIATE_>
+            | <IN_>
+            | <INDEX_>
+            | <INDEXED_>
+            | <INITIALLY_>
+            | <INNER_>
+            | <INSERT_>
+            | <INSTEAD_>
+            | <INTERSECT_>
+            | <INTO_>
+            | <IS_>
+            | <ISNULL_>
+            | <JOIN_>
+            | <KEY_>
+            | <LEFT_>
+            | <LIKE_>
+            | <LIMIT_>
+            | <MATCH_>
+            | <NATURAL_>
+            | <NO_>
+            | <NOT_>
+            | <NOTNULL_>
+            | <NULL_>
+            | <OF_>
+            | <OFFSET_>
+            | <ON_>
+            | <OR_>
+            | <ORDER_>
+            | <OUTER_>
+            | <PLAN_>
+            | <PRAGMA_>
+            | <PRIMARY_>
+            | <QUERY_>
+            | <RAISE_>
+            | <RECURSIVE_>
+            | <REFERENCES_>
+            | <REGEXP_>
+            | <REINDEX_>
+            | <RELEASE_>
+            | <RENAME_>
+            | <REPLACE_>
+            | <RESTRICT_>
+            | <RIGHT_>
+            | <ROLLBACK_>
+            | <ROW_>
+            | <ROWS_>
+            | <SAVEPOINT_>
+            | <SELECT_>
+            | <SET_>
+            | <TABLE_>
+            | <TEMP_>
+            | <TEMPORARY_>
+            | <THEN_>
+            | <TO_>
+            | <TRANSACTION_>
+            | <TRIGGER_>
+            | <UNION_>
+            | <UNIQUE_>
+            | <UPDATE_>
+            | <USING_>
+            | <VACUUM_>
+            | <VALUES_>
+            | <VIEW_>
+            | <VIRTUAL_>
+            | <WHEN_>
+            | <WHERE_>
+            | <WITH_>
+            | <WITHOUT_>
+            | <FIRST_VALUE_>
+            | <OVER_>
+            | <PARTITION_>
+            | <RANGE_>
+            | <PRECEDING_>
+            | <UNBOUNDED_>
+            | <CURRENT_>
+            | <FOLLOWING_>
+            | <CUME_DIST_>
+            | <DENSE_RANK_>
+            | <LAG_>
+            | <LAST_VALUE_>
+            | <LEAD_>
+            | <NTH_VALUE_>
+            | <NTILE_>
+            | <PERCENT_RANK_>
+            | <RANK_>
+            | <ROW_NUMBER_>
+            | <GENERATED_>
+            | <ALWAYS_>
+            | <STORED_>
+            | <TRUE_>
+            | <FALSE_>
+            | <WINDOW_>
+            | <NULLS_>
+            | <FIRST_>
+            | <LAST_>
+            | <FILTER_>
+            | <GROUPS_>
+            | <EXCLUDE_>
+<name> ::= <any_name>
+<function_name> ::= <any_name>
+<schema_name> ::= <any_name>
+<table_name> ::= <any_name>
+<table_or_index_name> ::= <any_name>
+<column_name> ::= <any_name>
+<collation_name> ::= <any_name>
+<foreign_table> ::= <any_name>
+<index_name> ::= <any_name>
+<trigger_name> ::= <any_name>
+<view_name> ::= <any_name>
+<module_name> ::= <any_name>
+<pragma_name> ::= <any_name>
+<savepoint_name> ::= <any_name>
+<table_alias> ::= <any_name>
+<transaction_name> ::= <any_name>
+<window_name> ::= <any_name>
+<alias> ::= <any_name>
+<filename> ::= <any_name>
+<base_window_name> ::= <any_name>
+<table_function_name> ::= <any_name>
+<any_name> ::= <IDENTIFIER>
+             | <keyword>
+             | <STRING_LITERAL>
+             | <OPEN_PAR> <__white_space01_1244> <any_name> <__white_space01_1244> <CLOSE_PAR>
+<SCOL> ::= ";"
+<DOT> ::= "."
+<OPEN_PAR> ::= "("
+<CLOSE_PAR> ::= ")"
+<COMMA> ::= ","
+<ASSIGN> ::= "="
+<STAR> ::= "*"
+<PLUS> ::= "+"
+<MINUS> ::= "-"
+<TILDE> ::= "~"
+<PIPE2> ::= "||"
+<DIV> ::= "/"
+<MOD> ::= "%"
+<LT2> ::= "<<"
+<GT2> ::= ">>"
+<AMP> ::= "&"
+<PIPE> ::= "|"
+<LT> ::= "<"
+<LT_EQ> ::= "<="
+<GT> ::= ">"
+<GT_EQ> ::= ">="
+<EQ> ::= "=="
+<NOT_EQ1> ::= "!="
+<NOT_EQ2> ::= "<>"
+<ABORT_> ::= "ABORT"
+<ACTION_> ::= "ACTION"
+<ADD_> ::= "ADD"
+<AFTER_> ::= "AFTER"
+<ALL_> ::= "ALL"
+<ALTER_> ::= "ALTER"
+<ANALYZE_> ::= "ANALYZE"
+<AND_> ::= "AND"
+<AS_> ::= "AS"
+<ASC_> ::= "ASC"
+<ATTACH_> ::= "ATTACH"
+<AUTOINCREMENT_> ::= "AUTOINCREMENT"
+<BEFORE_> ::= "BEFORE"
+<BEGIN_> ::= "BEGIN"
+<BETWEEN_> ::= "BETWEEN"
+<BY_> ::= "BY"
+<CASCADE_> ::= "CASCADE"
+<CASE_> ::= "CASE"
+<CAST_> ::= "CAST"
+<CHECK_> ::= "CHECK"
+<COLLATE_> ::= "COLLATE"
+<COLUMN_> ::= "COLUMN"
+<COMMIT_> ::= "COMMIT"
+<CONFLICT_> ::= "CONFLICT"
+<CONSTRAINT_> ::= "CONSTRAINT"
+<CREATE_> ::= "CREATE"
+<CROSS_> ::= "CROSS"
+<CURRENT_DATE_> ::= "CURRENT_DATE"
+<CURRENT_TIME_> ::= "CURRENT_TIME"
+<CURRENT_TIMESTAMP_> ::= "CURRENT_TIMESTAMP"
+<DATABASE_> ::= "DATABASE"
+<DEFAULT_> ::= "DEFAULT"
+<DEFERRABLE_> ::= "DEFERRABLE"
+<DEFERRED_> ::= "DEFERRED"
+<DELETE_> ::= "DELETE"
+<DESC_> ::= "DESC"
+<DETACH_> ::= "DETACH"
+<DISTINCT_> ::= "DISTINCT"
+<DROP_> ::= "DROP"
+<EACH_> ::= "EACH"
+<ELSE_> ::= "ELSE"
+<END_> ::= "END"
+<ESCAPE_> ::= "ESCAPE"
+<EXCEPT_> ::= "EXCEPT"
+<EXCLUSIVE_> ::= "EXCLUSIVE"
+<EXISTS_> ::= "EXISTS"
+<EXPLAIN_> ::= "EXPLAIN"
+<FAIL_> ::= "FAIL"
+<FOR_> ::= "FOR"
+<FOREIGN_> ::= "FOREIGN"
+<FROM_> ::= "FROM"
+<FULL_> ::= "FULL"
+<GLOB_> ::= "GLOB"
+<GROUP_> ::= "GROUP"
+<HAVING_> ::= "HAVING"
+<IF_> ::= "IF"
+<IGNORE_> ::= "IGNORE"
+<IMMEDIATE_> ::= "IMMEDIATE"
+<IN_> ::= "IN"
+<INDEX_> ::= "INDEX"
+<INDEXED_> ::= "INDEXED"
+<INITIALLY_> ::= "INITIALLY"
+<INNER_> ::= "INNER"
+<INSERT_> ::= "INSERT"
+<INSTEAD_> ::= "INSTEAD"
+<INTERSECT_> ::= "INTERSECT"
+<INTO_> ::= "INTO"
+<IS_> ::= "IS"
+<ISNULL_> ::= "ISNULL"
+<JOIN_> ::= "JOIN"
+<KEY_> ::= "KEY"
+<LEFT_> ::= "LEFT"
+<LIKE_> ::= "LIKE"
+<LIMIT_> ::= "LIMIT"
+<MATCH_> ::= "MATCH"
+<NATURAL_> ::= "NATURAL"
+<NO_> ::= "NO"
+<NOT_> ::= "NOT"
+<NOTNULL_> ::= "NOTNULL"
+<NULL_> ::= "NULL"
+<OF_> ::= "OF"
+<OFFSET_> ::= "OFFSET"
+<ON_> ::= "ON"
+<OR_> ::= "OR"
+<ORDER_> ::= "ORDER"
+<OUTER_> ::= "OUTER"
+<PLAN_> ::= "PLAN"
+<PRAGMA_> ::= "PRAGMA"
+<PRIMARY_> ::= "PRIMARY"
+<QUERY_> ::= "QUERY"
+<RAISE_> ::= "RAISE"
+<RECURSIVE_> ::= "RECURSIVE"
+<REFERENCES_> ::= "REFERENCES"
+<REGEXP_> ::= "REGEXP"
+<REINDEX_> ::= "REINDEX"
+<RELEASE_> ::= "RELEASE"
+<RENAME_> ::= "RENAME"
+<REPLACE_> ::= "REPLACE"
+<RESTRICT_> ::= "RESTRICT"
+<RETURNING_> ::= "RETURNING"
+<RIGHT_> ::= "RIGHT"
+<ROLLBACK_> ::= "ROLLBACK"
+<ROW_> ::= "ROW"
+<ROWS_> ::= "ROWS"
+<SAVEPOINT_> ::= "SAVEPOINT"
+<SELECT_> ::= "SELECT"
+<SET_> ::= "SET"
+<TABLE_> ::= "TABLE"
+<TEMP_> ::= "TEMP"
+<TEMPORARY_> ::= "TEMPORARY"
+<THEN_> ::= "THEN"
+<TO_> ::= "TO"
+<TRANSACTION_> ::= "TRANSACTION"
+<TRIGGER_> ::= "TRIGGER"
+<UNION_> ::= "UNION"
+<UNIQUE_> ::= "UNIQUE"
+<UPDATE_> ::= "UPDATE"
+<USING_> ::= "USING"
+<VACUUM_> ::= "VACUUM"
+<VALUES_> ::= "VALUES"
+<VIEW_> ::= "VIEW"
+<VIRTUAL_> ::= "VIRTUAL"
+<WHEN_> ::= "WHEN"
+<WHERE_> ::= "WHERE"
+<WITH_> ::= "WITH"
+<WITHOUT_> ::= "WITHOUT"
+<FIRST_VALUE_> ::= "FIRST_VALUE"
+<OVER_> ::= "OVER"
+<PARTITION_> ::= "PARTITION"
+<RANGE_> ::= "RANGE"
+<PRECEDING_> ::= "PRECEDING"
+<UNBOUNDED_> ::= "UNBOUNDED"
+<CURRENT_> ::= "CURRENT"
+<FOLLOWING_> ::= "FOLLOWING"
+<CUME_DIST_> ::= "CUME_DIST"
+<DENSE_RANK_> ::= "DENSE_RANK"
+<LAG_> ::= "LAG"
+<LAST_VALUE_> ::= "LAST_VALUE"
+<LEAD_> ::= "LEAD"
+<NTH_VALUE_> ::= "NTH_VALUE"
+<NTILE_> ::= "NTILE"
+<PERCENT_RANK_> ::= "PERCENT_RANK"
+<RANK_> ::= "RANK"
+<ROW_NUMBER_> ::= "ROW_NUMBER"
+<GENERATED_> ::= "GENERATED"
+<ALWAYS_> ::= "ALWAYS"
+<STORED_> ::= "STORED"
+<TRUE_> ::= "TRUE"
+<FALSE_> ::= "FALSE"
+<WINDOW_> ::= "WINDOW"
+<NULLS_> ::= "NULLS"
+<FIRST_> ::= "FIRST"
+<LAST_> ::= "LAST"
+<FILTER_> ::= "FILTER"
+<GROUPS_> ::= "GROUPS"
+<EXCLUDE_> ::= "EXCLUDE"
+<TIES_> ::= "TIES"
+<OTHERS_> ::= "OTHERS"
+<DO_> ::= "DO"
+<NOTHING_> ::= "NOTHING"
+<IDENTIFIER> ::= <__tmp_rule_1081> <__tmp_rule_1090> <__tmp_rule_1093>
+               | <__tmp_rule_1096> <__tmp_rule_1105> <__tmp_rule_1108>
+               | <__tmp_rule_1111> <__tmp_rule_1114> <__tmp_rule_1117>
+               | <__tmp_rule_1120> <__tmp_rule_1123>
+<__tmp_rule_1081> ::= "\""
+<__tmp_rule_1089> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\"\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "'"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\"
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "`"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1082> ::= ""
+                    | <__tmp_rule_1089> <__tmp_rule_1082>
+<__tmp_rule_1090> ::= <__tmp_rule_1082>
+<__tmp_rule_1093> ::= "\""
+<__tmp_rule_1096> ::= "`"
+<__tmp_rule_1104> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "'"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\"
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "``"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1097> ::= ""
+                    | <__tmp_rule_1104> <__tmp_rule_1097>
+<__tmp_rule_1105> ::= <__tmp_rule_1097>
+<__tmp_rule_1108> ::= "`"
+<__tmp_rule_1111> ::= "["
+<__tmp_rule_1113> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "'"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\"
+                    | "^"
+                    | "_"
+                    | "`"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1112> ::= ""
+                    | <__tmp_rule_1113> <__tmp_rule_1112>
+<__tmp_rule_1114> ::= <__tmp_rule_1112>
+<__tmp_rule_1117> ::= "]"
+<__tmp_rule_1120> ::= "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "_"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+<__tmp_rule_1122> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "_"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+<__tmp_rule_1121> ::= ""
+                    | <__tmp_rule_1122> <__tmp_rule_1121>
+<__tmp_rule_1123> ::= <__tmp_rule_1121>
+<NUMERIC_LITERAL> ::= <__tmp_rule_1150> <__tmp_rule_1162>
+                    | <__tmp_rule_1165> <__tmp_rule_1168>
+<__tmp_rule_1127> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1126> ::= <__tmp_rule_1127>
+                    | <__tmp_rule_1127> <__tmp_rule_1126>
+<__tmp_rule_1128> ::= <__tmp_rule_1126>
+<__tmp_rule_1132> ::= "."
+<__tmp_rule_1134> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1133> ::= ""
+                    | <__tmp_rule_1134> <__tmp_rule_1133>
+<__tmp_rule_1135> ::= <__tmp_rule_1133>
+<__tmp_rule_1136> ::= <__tmp_rule_1132> <__tmp_rule_1135>
+<__tmp_rule_1129> ::= ""
+                    | <__tmp_rule_1136>
+<__tmp_rule_1137> ::= <__tmp_rule_1129>
+<__tmp_rule_1138> ::= <__tmp_rule_1128> <__tmp_rule_1137>
+<__tmp_rule_1125> ::= <__tmp_rule_1138>
+<__tmp_rule_1139> ::= <__tmp_rule_1125>
+<__tmp_rule_1143> ::= "."
+<__tmp_rule_1145> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1144> ::= <__tmp_rule_1145>
+                    | <__tmp_rule_1145> <__tmp_rule_1144>
+<__tmp_rule_1146> ::= <__tmp_rule_1144>
+<__tmp_rule_1147> ::= <__tmp_rule_1143> <__tmp_rule_1146>
+<__tmp_rule_1140> ::= <__tmp_rule_1147>
+<__tmp_rule_1148> ::= <__tmp_rule_1140>
+<__tmp_rule_1149> ::= <__tmp_rule_1139>
+                    | <__tmp_rule_1148>
+<__tmp_rule_1124> ::= <__tmp_rule_1149>
+<__tmp_rule_1150> ::= <__tmp_rule_1124>
+<__tmp_rule_1154> ::= "E"
+<__tmp_rule_1157> ::= ""
+                    | "+"
+                    | "-"
+<__tmp_rule_1159> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1158> ::= <__tmp_rule_1159>
+                    | <__tmp_rule_1159> <__tmp_rule_1158>
+<__tmp_rule_1160> ::= <__tmp_rule_1158>
+<__tmp_rule_1161> ::= <__tmp_rule_1154> <__tmp_rule_1157> <__tmp_rule_1160>
+<__tmp_rule_1151> ::= ""
+                    | <__tmp_rule_1161>
+<__tmp_rule_1162> ::= <__tmp_rule_1151>
+<__tmp_rule_1165> ::= "0x"
+<__tmp_rule_1167> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+<__tmp_rule_1166> ::= <__tmp_rule_1167>
+                    | <__tmp_rule_1167> <__tmp_rule_1166>
+<__tmp_rule_1168> ::= <__tmp_rule_1166>
+<BIND_PARAMETER> ::= <__tmp_rule_1171> <__tmp_rule_1174>
+                   | <__tmp_rule_1177> <__tmp_rule_1180>
+<__tmp_rule_1171> ::= "?"
+<__tmp_rule_1173> ::= "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+<__tmp_rule_1172> ::= ""
+                    | <__tmp_rule_1173> <__tmp_rule_1172>
+<__tmp_rule_1174> ::= <__tmp_rule_1172>
+<__tmp_rule_1177> ::= "$"
+                    | ":"
+                    | "@"
+<__tmp_rule_1179> ::= <IDENTIFIER>
+<__tmp_rule_1178> ::= <__tmp_rule_1179>
+<__tmp_rule_1180> ::= <__tmp_rule_1178>
+<STRING_LITERAL> ::= <__tmp_rule_1183> <__tmp_rule_1192> <__tmp_rule_1195>
+<__tmp_rule_1183> ::= "'"
+<__tmp_rule_1191> ::= "\x00"
+                    | "\x01"
+                    | "\x02"
+                    | "\x03"
+                    | "\x04"
+                    | "\x05"
+                    | "\x06"
+                    | "\x07"
+                    | "\x08"
+                    | "\t"
+                    | "\n"
+                    | "\x0b"
+                    | "\x0c"
+                    | "\r"
+                    | "\x0e"
+                    | "\x0f"
+                    | "\x10"
+                    | "\x11"
+                    | "\x12"
+                    | "\x13"
+                    | "\x14"
+                    | "\x15"
+                    | "\x16"
+                    | "\x17"
+                    | "\x18"
+                    | "\x19"
+                    | "\x1a"
+                    | "\x1b"
+                    | "\x1c"
+                    | "\x1d"
+                    | "\x1e"
+                    | "\x1f"
+                    | " "
+                    | "!"
+                    | "\""
+                    | "#"
+                    | "$"
+                    | "%"
+                    | "&"
+                    | "''"
+                    | "("
+                    | ")"
+                    | "*"
+                    | "+"
+                    | ","
+                    | "-"
+                    | "."
+                    | "/"
+                    | "0"
+                    | "1"
+                    | "2"
+                    | "3"
+                    | "4"
+                    | "5"
+                    | "6"
+                    | "7"
+                    | "8"
+                    | "9"
+                    | ":"
+                    | ";"
+                    | "<"
+                    | "="
+                    | ">"
+                    | "?"
+                    | "@"
+                    | "A"
+                    | "B"
+                    | "C"
+                    | "D"
+                    | "E"
+                    | "F"
+                    | "G"
+                    | "H"
+                    | "I"
+                    | "J"
+                    | "K"
+                    | "L"
+                    | "M"
+                    | "N"
+                    | "O"
+                    | "P"
+                    | "Q"
+                    | "R"
+                    | "S"
+                    | "T"
+                    | "U"
+                    | "V"
+                    | "W"
+                    | "X"
+                    | "Y"
+                    | "Z"
+                    | "["
+                    | "\\"
+                    | "]"
+                    | "^"
+                    | "_"
+                    | "`"
+                    | "a"
+                    | "b"
+                    | "c"
+                    | "d"
+                    | "e"
+                    | "f"
+                    | "g"
+                    | "h"
+                    | "i"
+                    | "j"
+                    | "k"
+                    | "l"
+                    | "m"
+                    | "n"
+                    | "o"
+                    | "p"
+                    | "q"
+                    | "r"
+                    | "s"
+                    | "t"
+                    | "u"
+                    | "v"
+                    | "w"
+                    | "x"
+                    | "y"
+                    | "z"
+                    | "{"
+                    | "|"
+                    | "}"
+                    | "~"
+                    | "\x7f"
+<__tmp_rule_1184> ::= ""
+                    | <__tmp_rule_1191> <__tmp_rule_1184>
+<__tmp_rule_1192> ::= <__tmp_rule_1184>
+<__tmp_rule_1195> ::= "'"
+<BLOB_LITERAL> ::= <__tmp_rule_1198> <__tmp_rule_1201>
+<__tmp_rule_1198> ::= "X"
+<__tmp_rule_1200> ::= <STRING_LITERAL>
+<__tmp_rule_1199> ::= <__tmp_rule_1200>
+<__tmp_rule_1201> ::= <__tmp_rule_1199>
+<EOF> ::= ""
+<__white_space01_1244> ::= "\t"
+                         | "\n"
+                         | "\r"
+                         | " "

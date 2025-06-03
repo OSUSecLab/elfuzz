@@ -1,0 +1,32 @@
+{
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportOptionalMemberAccess": "warning",
+        "reportOptionalOperand": "warning",
+        "reportArgumentType": "warning",
+        "reportAttributeAccessIssue": "warning",
+        "reportOperatorIssue": "warning",
+        "reportAssignmentType": "warning",
+        "reportCallIssue": "warning",
+        "reportOptionalIterable": "warning"
+    },
+    "python.analysis.extraPaths": [
+        "/home/appuser/fuzzbench"
+    ],
+    "files.exclude": {
+        "**/*.vo": true,
+        "**/*.vok": true,
+        "**/*.vos": true,
+        "**/*.aux": true,
+        "**/*.glob": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
+}

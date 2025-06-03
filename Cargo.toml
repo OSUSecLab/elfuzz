@@ -1,0 +1,3 @@
+[workspace]
+resolver = "2"
+members = ["evaluation/glade/sqlite3_parser"]

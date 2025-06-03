@@ -1,0 +1,7 @@
+(forall <document> container in start:
+   exists <Name> elem in container:
+     (= elem "svg") and
+forall <prolog> container_0 in start:
+  exists <__tmp_rule_137> elem_0 in container_0:
+    (nth("2", elem_0, container_0) and
+    (= elem_0 "ncoding")))

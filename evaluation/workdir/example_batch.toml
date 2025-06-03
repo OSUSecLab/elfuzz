@@ -1,0 +1,36 @@
+[evaluation]
+methods = ['elm', 'grmr', 'isla', 'islearn', 'elmalt', 'elmnospl', 'elmnoinf', 'elmnocomp']
+benchmarks = [
+    'jsoncpp',
+    're2',
+    'sqlite3',
+    'cpython3',
+    'cvc5',
+    'librsvg',
+    'libxml2',
+]
+mode = 'normal'
+
+[evaluation.elm]
+exclude = []
+
+[evaluation.grmr]
+exclude = []
+
+[evaluation.isla]
+exclude = []
+
+[evaluation.islearn]
+exclude = ['jsoncpp', 're2']
+
+[evaluation.elmalt]
+exclude = []
+
+[evaluation.elmnospl]
+exclude = []
+
+[evaluation.elmnoinf]
+exclude = []
+
+[evaluation.elmnocomp]
+exclude = []

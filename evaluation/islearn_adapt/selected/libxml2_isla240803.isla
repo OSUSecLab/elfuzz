@@ -1,0 +1,13 @@
+(forall <attribute> attribute="<Name>={<STRING> prefix_use}" in start:
+   ((= prefix_use "''") or
+   exists <__tmp_rule_11> outer_tag="{<__tmp_rule_11> cont_attribute}" in start:
+     (inside(attribute, outer_tag) and
+     exists <attribute> def_attribute="{<Name> ns_prefix}={<STRING> prefix_def}" in cont_attribute:
+       ((= ns_prefix "1") and
+       (= prefix_use prefix_def)))) and
+forall <document> attribute_0="<__tmp_rule_0>{<__tmp_rule_1> prefix_use_0}<__white_space01_192><element><__white_space01_192><__tmp_rule_2><__white_space01_192><EOF>" in start:
+  ((= prefix_use_0 "<!---->\r") or
+  exists <document> outer_tag_0="<__tmp_rule_0><__tmp_rule_1><__white_space01_192><element><__white_space01_192>{<__tmp_rule_2> cont_attribute_0}<__white_space01_192><EOF>" in start:
+    (inside(attribute_0, outer_tag_0) and
+    exists <__tmp_rule_15> def_attribute_0="{<__tmp_rule_15> prefix_def_0}" in cont_attribute_0:
+      (= prefix_use_0 prefix_def_0))))

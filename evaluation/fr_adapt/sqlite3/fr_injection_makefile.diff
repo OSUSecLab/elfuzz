@@ -1,0 +1,6 @@
+758,762d757
+< sqlite3.c:	.target_source $(TOP)/tool/mksqlite3c.tcl
+< 	$(TCLSH_CMD) $(TOP)/tool/mksqlite3c.tcl
+< 	cp tsrc/sqlite3ext.h .
+< 	cp $(TOP)/ext/session/sqlite3session.h .
+< 

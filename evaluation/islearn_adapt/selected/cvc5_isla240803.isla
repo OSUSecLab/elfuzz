@@ -1,0 +1,4 @@
+exists int num:
+  forall <start_> elem in start:
+      ((>= (str.to.int num) 1) and
+          count(elem, "<command>", num))

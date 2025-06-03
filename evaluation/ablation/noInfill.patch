@@ -1,0 +1,22 @@
+diff --git a/genvariants_parallel.py b/genvariants_parallel.py
+index 3798ea2..395b7e7 100644
+--- a/genvariants_parallel.py
++++ b/genvariants_parallel.py
+@@ -143,6 +143,7 @@ def generate_variant(i, generators, model, filename, args):
+     # Pick a random generator
+     generator = random.choice(generators)
+     if generator == 'infilled':
++        assert False, 'Infilling forbidden'
+         prefix, suffix, orig = random_fim(open(filename).read(), args.start_line)
+         prompt = infilling_prompt(prefix, suffix) # type: ignore
+         stop = []
+@@ -327,7 +328,8 @@ def main():
+     if not args.no_completion:
+         generators += ['complete']
+     if not args.no_fim:
+-        generators += ['infilled']
++        # generators += ['infilled']
++        pass
+     if not args.no_splice:
+         generators += ['lmsplice']
+     # generators += ['continue']
