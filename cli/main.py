@@ -61,9 +61,9 @@ def setup():
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
 
-@cli.command(name="synthesize", help="Synthesize input generators.")
-def synthesize():
-    ...
+# @cli.command(name="synthesize", help="Synthesize input generators.")
+# def synthesize():
+#     click.echo("Synthesis not automated yet in this version.")
 
 @cli.command(name="cluster_synth", help="Get instructions about synthesizing input generators on a GPU cluster.")
 def synthesize_on_cluster():
