@@ -1,6 +1,6 @@
 # ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space
 
-This Figshare repository contains the replication package for the paper *ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*.
+This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
 The files are organized as follows:
 

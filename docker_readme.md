@@ -16,7 +16,7 @@ elfuzz setup
 
 You'll need to restart this container manually after the command finishes to make the changes take effect.
 
-Then, you need to download the large binary files from Zenodo into the local repository. Run the following command to do so:
+Then, you need to download the large binary files from Figshare into the local repository. Run the following command to do so:
 
 ```bash
 elfuzz download

@@ -1,6 +1,6 @@
 # ELFuzz
 
-This repository contains the code and experiment data of the paper *ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*.
+This repository contains the code and experiment data of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
 ## Experiment Data
 
