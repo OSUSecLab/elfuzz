@@ -76,6 +76,7 @@ def synthesize_on_cluster():
 @cli.command(name="download", help="Download large binary files stored on Zenodo.")
 def download():
     click.echo("Downloading...")
+    FIGSHARE_URL = "https://doi.org/10.6084/m9.figshare.29177162"
     ...
     
 if __name__ == "__main__":
