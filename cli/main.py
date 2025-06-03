@@ -74,9 +74,11 @@ def synthesize_on_cluster():
     click.echo(instructions)
 
 @cli.command(name="download", help="Download large binary files stored on Zenodo.")
-def download():
+@click.option("--local-copy", "-l", is_flag=True, default=False,)
+def download(local_copy: bool):
     click.echo("Downloading...")
     FIGSHARE_URL = "https://doi.org/10.6084/m9.figshare.29177162"
+    LOCAL_DIR = "/tmp/elfuzz_data_cache"
     ...
 
 if __name__ == "__main__":
