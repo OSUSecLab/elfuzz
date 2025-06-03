@@ -26,8 +26,4 @@ This may take a while, and after it finishes, you will get all you need to run t
 
 ## Experiments
 
-### Synthesizing Input Generators
-
-After enabling sibling containers and restarting the container, you can start synthesizing input generators by following the instructions below.
-
-### Preparing Baselines
+Currently, the experiments haven't been automated yet. Though, we have include all code and data needed in this replication package. The experiments have to be run manually for now.
