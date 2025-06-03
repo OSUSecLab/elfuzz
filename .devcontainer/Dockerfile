@@ -74,8 +74,11 @@ RUN sudo apt-get install -y afl++
 WORKDIR /home/appuser
 RUN python3 -m pip install "pipx==1.7.1"
 RUN python3 -m pipx ensurepath
-# RUN pipx ensurepath --global # optional to allow pipx actions with --global argument
-RUN if [ $(uname -m) != "aarch64" ]; then pipx install "xonsh==0.19.3" "https://github.com/cychen2021/isla/archive/refs/tags/240804.zip" "grammarinator==23.7"; else pipx install "xonsh==0.19.3" "grammarinator==23.7"; fi
+
+ADD tmp/elfuzz_baselines.tar.zst /tmp/
+RUN pipx install /tmp/isla /tmp/islearn
+
+RUN if [ $(uname -m) != "aarch64" ]; then pipx install "xonsh==0.19.3" "grammarinator==23.7"; else pipx install "xonsh==0.19.3" "grammarinator==23.7"; fi
 RUN pipx inject xonsh "click==8.1.8"
 
 # It seems that the isla-solver is not compilable on aarch64
@@ -107,7 +110,6 @@ RUN sudo update-alternatives --install /home/appuser/miniconda3/envs/py310/lib/l
 RUN sudo update-alternatives --install /usr/bin/cc cc /usr/bin/$(uname -m)-linux-gnu-gcc-13 99
 RUN sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/$(uname -m)-linux-gnu-g++-13 99
 RUN sudo apt-get install -y zlib1g-dev pkg-config meson unzip zip
-RUN pip install https://github.com/cychen2021/islearn/archive/refs/tags/240801-fix7.zip
 RUN sudo apt-get install -y jq bc
 RUN pip install https://github.com/cychen2021/idontwannadoresearch/archive/refs/tags/v0.0.50.zip
 RUN pip install "colorama==0.4.6" "bc==0.0.1"
@@ -118,23 +120,7 @@ ENV FIXREVERTER=off
 
 FROM dev AS publish
 
-ARG REPO_URL
-ARG GITHUB_TOKEN=""
-
-RUN if [ -n "$REPO_URL" ]; then \
-    (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
-	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
-        && out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-        && cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-	&& sudo apt update \
-	&& sudo apt install gh -y \
-    fi
-
-RUN if [ -n "$GITHUB_TOKEN" ]; then gh auth --with-token $GITHUB_TOKEN; fi
-
-RUN cd /home/appuser && git clone $REPO_URL /home/appuser/elmfuzz
+COPY . /home/appuser/elmfuzz
 
 WORKDIR /home/appuser/elmfuzz
 RUN git submodule init
@@ -145,5 +131,8 @@ RUN sudo ln -s /home/appuser/elmfuzz/docs /elfuzz/docs
 RUN sudo ln -s /home/appuser/elmfuzz/cli/elfuzz /elfuzz/elfuzz
 RUN sudo ln -s /home/appuser/elmfuzz/docker_readme.md /elfuzz/README.md
 WORKDIR /elfuzz
+RUN mv /tmp/glade /home/appuser/glade
+RUN mv /tmp/isla /home/appuser/elfuzz/tmp/isla
+RUN mv /tmp/islearn /home/appuser/elfuzz/tmp/islearn
 
 ENTRYPOINT ["/usr/bin/bash"]

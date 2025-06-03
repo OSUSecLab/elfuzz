@@ -15,8 +15,10 @@ SHELL ["conda", "run", "-n", "py310", "/bin/bash", "-c"]
 # Upgrade pip and install wheel within the virtual environment
 RUN pip install --upgrade pip wheel
 RUN pip install click
-RUN pip install https://github.com/cychen2021/isla/archive/refs/tags/240804.zip
-RUN pip install https://github.com/cychen2021/islearn/archive/refs/tags/240801-fix7.zip
+COPY tmp/isla /tmp/isla
+COPY tmp/islearn /tmp/islearn
+RUN pip install /tmp/isla
+RUN pip install /tmp/islearn
 
 COPY evaluation/islearn_adapt/oracles/__PROJECT_DIR/patch.py $SRC
 RUN python $SRC/patch.py
