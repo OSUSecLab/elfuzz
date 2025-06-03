@@ -33,6 +33,8 @@ The Docker image has only been tested on X86-64 machines.
 
 ## How the Docker Image in the Replication Package is Built
 
+Before building the Docker image, you should `cd` to the root of the ELFuzz source code and put `elfuzz_baselines.tar.zst` into `tmp/`.
+
 The Docker image is built by the following command:
 
 ```bash
