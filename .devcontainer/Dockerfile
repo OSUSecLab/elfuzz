@@ -76,8 +76,7 @@ RUN python3 -m pip install "pipx==1.7.1"
 RUN python3 -m pipx ensurepath
 
 ADD tmp/elfuzz_baselines.tar.zst /tmp/
-RUN pipx install isla --spec /tmp/isla 
-RUN pipx install islearn --spec /tmp/islearn
+RUN pipx install /tmp/isla
 
 RUN if [ $(uname -m) != "aarch64" ]; then pipx install "xonsh==0.19.3" "grammarinator==23.7"; else pipx install "xonsh==0.19.3" "grammarinator==23.7"; fi
 RUN pipx inject xonsh "click==8.1.8"
@@ -122,6 +121,7 @@ ENV FIXREVERTER=off
 FROM dev AS publish
 
 COPY . /home/appuser/elmfuzz
+RUN sudo chown -R appuser:appuser /home/appuser/elmfuzz
 
 WORKDIR /home/appuser/elmfuzz
 RUN git submodule init
@@ -133,7 +133,7 @@ RUN sudo ln -s /home/appuser/elmfuzz/cli/elfuzz /elfuzz/elfuzz
 RUN sudo ln -s /home/appuser/elmfuzz/docker_readme.md /elfuzz/README.md
 WORKDIR /elfuzz
 RUN mv /tmp/glade /home/appuser/glade
-RUN mv /tmp/isla /home/appuser/elfuzz/tmp/isla
-RUN mv /tmp/islearn /home/appuser/elfuzz/tmp/islearn
+RUN mv /tmp/isla /home/appuser/elmfuzz/tmp/isla
+RUN mv /tmp/islearn /home/appuser/elmfuzz/tmp/islearn
 
 ENTRYPOINT ["/usr/bin/bash"]
