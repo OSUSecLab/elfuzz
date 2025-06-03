@@ -49,7 +49,7 @@ def cli():
 def setup():
     y = click.confirm(trim_indent("""
                   |This command will run a script to enable sibling containers.
-                  |You have to restart the container manually after this command to make the changes take effect. 
+                  |You have to restart the container manually after this command to make the changes take effect.
                   |Make sure you didn't launch the container with the `--rm` option.
                   """, delimiter="\n"))
     if not y:
@@ -60,11 +60,11 @@ def setup():
     ]
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
-    
+
 @cli.command(name="synthesize", help="Synthesize input generators.")
 def synthesize():
     ...
-    
+
 @cli.command(name="cluster_synth", help="Get instructions about synthesizing input generators on a GPU cluster.")
 def synthesize_on_cluster():
     instructions = trim_indent("""
@@ -78,7 +78,7 @@ def download():
     click.echo("Downloading...")
     FIGSHARE_URL = "https://doi.org/10.6084/m9.figshare.29177162"
     ...
-    
+
 if __name__ == "__main__":
     sys.argv[0] = "elfuzz"
     cli(max_content_width=get_terminal_width())
