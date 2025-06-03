@@ -4,7 +4,7 @@ This repository contains the code and experiment data of the paper *ELFuzz: Effi
 
 ## Experiment Data
 
-The experiment data is published on [Zenodo](https://doi.org/10.5281/zenodo.15368475).
+The experiment data is published on [Figshare](https://doi.org/10.5281/zenodo.15368475).
 
 ## Replication Package
 
@@ -14,7 +14,7 @@ The code and environment to replicate the experiments is published as a Docker i
 docker pull ghcr.io/cychen2021/elfuzz:25.05.0
 ```
 
-Instead, if you download the Docker image as a tarball from Zenodo, you can import it using the following commands:
+Instead, if you download the Docker image as a tarball from Figshare, you can import it using the following commands:
 
 ```bash
 zstd -d "elfuzz_docker_<timetag>.tar.zst"
