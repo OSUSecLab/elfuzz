@@ -1,4 +1,7 @@
 tmp/
+!tmp/elfuzz_baselines.tar.zst
+!tmp/isla/
+!tmp/islearn/
 /evaluation/binary/
 /evaluation/workdir/
 gen*/
