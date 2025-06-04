@@ -1,6 +1,14 @@
 [
     {
-        "from_glob": "*",
-        "to": "evaluation/binary"
+        "from": "synthesized_fuzzers/elfuzz_noCompletion",
+        "to": "evaluation/nocomp_fuzzers"
+    },
+    {
+        "from": "synthesized_fuzzers/elfuzz_noInfilling",
+        "to": "evaluation/noinf_fuzzers"
+    },
+    {
+        "from": "synthesized_fuzzers/elfuzz_noSplicing",
+        "to": "evaluation/nospl_fuzzers"
     }
 ]
