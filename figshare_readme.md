@@ -2,7 +2,7 @@
 
 [![Static Badge](https://img.shields.io/badge/GitHub-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz)
 
-This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
+This Figshare repository contains the replication package for the paper *ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*.
 
 The files are organized as follows:
 
