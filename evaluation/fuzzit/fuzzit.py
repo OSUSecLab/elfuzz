@@ -1,5 +1,5 @@
 import logging
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 import click as clk
 import subprocess
 import os.path
@@ -8,7 +8,7 @@ import sys
 from concurrent.futures import ProcessPoolExecutor, as_completed, Future
 
 logger = logging.getLogger(__file__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com', chained_logger=logger)
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
 FILE_D = os.path.dirname(__file__)
 CVC5_D = os.path.join(FILE_D, os.pardir, 'workdir', 'cvc5')
 DICT_D = os.path.join(FILE_D, os.pardir, 'afl_dict', 'cvc5')

@@ -4,10 +4,10 @@ import os
 import os.path
 import sys
 from datetime import datetime
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 import click as clk
 
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chen.13875@osy.edu')
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml")
 
 CMD = [
     'python',

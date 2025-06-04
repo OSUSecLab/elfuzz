@@ -31,9 +31,9 @@ import subprocess
 import sys
 from datetime import datetime
 
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 
-mailogger = GMailLogger(identifier=__file__, sender_email='chen.13875.osu@gmail.com', receiver_email='chuyangchen2018@outlook.com')
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml")
 
 @clk.command()
 @clk.argument('config_file', type=clk.File('rb'))

@@ -6,7 +6,7 @@ from tqdm import tqdm
 import subprocess
 import sys
 import logging
-from idontwannadoresearch import GMailLogger
+from idontwannadoresearch import MailLogger
 import click as clk
 import dill
 from concurrent.futures import ProcessPoolExecutor
@@ -48,7 +48,7 @@ class Lattice[T]:
         return a in self.predecessors[b]
 
 logger = logging.getLogger(__file__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com', logger)
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", logger)
 
 CWD = os.path.dirname(__file__)
 WORKDIR_ROOT = os.path.join(CWD, 'workdir')

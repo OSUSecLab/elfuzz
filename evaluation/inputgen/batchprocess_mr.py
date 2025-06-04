@@ -3,7 +3,7 @@ from typing import Callable
 import os
 import os.path
 import random
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 import click as clk
 from tqdm import tqdm
 import sys
@@ -83,7 +83,7 @@ def __process_batch_libxml2(gen_seed: str):
 import logging
 
 logger = logging.getLogger(__file__)
-mailoger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com', chained_logger=logger)
+mailoger = MailLogger.load_from_config(__file__, "config.toml", chained_logger=logger)
 
 def process_one(benchmark, input_dir, output_dir):
     files = [os.path.join(input_dir, f) for f in os.listdir(input_dir)]

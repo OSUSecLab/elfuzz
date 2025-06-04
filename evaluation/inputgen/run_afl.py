@@ -8,10 +8,10 @@ import os
 import os.path
 import click as clk
 import concurrent.futures
-from idontwannadoresearch import GMailLogger, diagnose
+from idontwannadoresearch import MailLogger, diagnose
 
 logger = logging.getLogger(__name__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com')
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml")
 
 def watch_dog(total_time: int, 
               savepoint_interval: int,

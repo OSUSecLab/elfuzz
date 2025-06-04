@@ -3,13 +3,13 @@ import os
 import subprocess
 import sys
 import click as clk
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 import logging
 from concurrent.futures import ProcessPoolExecutor, as_completed, Future
 from datetime import datetime
 
 logger = logging.getLogger(__file__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com', logger)
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", logger)
 
 CWD = os.path.dirname(__file__)
 BINARY_ROOT = os.path.join(CWD, '..', 'binary')

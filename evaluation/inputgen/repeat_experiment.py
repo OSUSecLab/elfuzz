@@ -6,13 +6,12 @@ import sys
 import smtplib
 from email.message import EmailMessage
 from datetime import datetime
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 import click as clk
 import logging
 
 logger = logging.getLogger(__file__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chen.13875@osy.edu',
-                        chained_logger=logger)
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", logger)
 
 CMD = [
     'python',

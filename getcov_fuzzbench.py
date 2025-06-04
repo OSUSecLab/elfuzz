@@ -5,10 +5,10 @@ import sys
 import os.path
 from util import *
 import logging
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 
 logger = logging.getLogger(__file__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com', chained_logger=logger)
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
 
 def on_nsf_access() -> dict[str, str] | None:
     if not 'ACCESS_INFO' in os.environ:

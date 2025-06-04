@@ -1,9 +1,9 @@
-from idontwannadoresearch import GMailLogger, watch
+from idontwannadoresearch import MailLogger, watch
 from idontwannadoresearch.mapreduce import project, segment, mapping, accumulate
 import logging
 
 logger = logging.getLogger(__file__)
-mailogger = GMailLogger(__file__, 'chen.13875.osu@gmail.com', 'chuyangchen2018@outlook.com', chained_logger=logger)
+mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
 
 
 BENCHMARKS = [
