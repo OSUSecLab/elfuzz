@@ -24,6 +24,8 @@ elfuzz download
 
 This may take a while, and after it finishes, you will get all you need to run the experiments.
 
+You can use `elfuzz config` to configure settings such as email notifications.
+
 ## Experiments
 
 Currently, the experiments haven't been automated yet. Though, we have include all code and data needed in this replication package. The experiments have to be run manually for now.
