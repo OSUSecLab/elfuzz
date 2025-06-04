@@ -1,6 +1,5 @@
 __pycache__/
 /evaluation/**/tmp/*
-tmp/*
 !tmp/fastdata/.gitkeep
 /preset/**/initial/
 /preset/**/gen*/
