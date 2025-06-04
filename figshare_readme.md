@@ -1,4 +1,4 @@
-# ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space
+# Replication Package of ELFuzz
 
 [![Static Badge](https://img.shields.io/badge/GitHub-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz)
 
