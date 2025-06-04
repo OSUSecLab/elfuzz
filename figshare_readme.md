@@ -9,6 +9,7 @@ The files are organized as follows:
 - `elfuzz_docker_<timetag>.tar.zst.part<suffix>`: The Docker image to replicate the experiments.
 - `elfuzz_baselines.tar.zst`: The source code of the baselines used in the experiments.
 - `metadata.json`: Metadata information about the experiment data tarball.
+- `docker_metadata.json`: Metadata information about the Docker image tarball.
 
 You can download the data or Docker image and run the following command to combine the parts into a complete tarball:
 
