@@ -1,5 +1,7 @@
 # ELFuzz
 
+![Static Badge](https://img.shields.io/badge/Artifact_DOI-10.6084%2Fm9.figshare.29177162-green)
+
 This repository contains the code and experiment data of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
 ## Experiment Data
