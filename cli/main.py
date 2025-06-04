@@ -4,6 +4,8 @@ import subprocess
 import os
 import sys
 import tqdm
+import toml
+import tomllib
 
 PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
@@ -65,6 +67,64 @@ def setup():
 # def synthesize():
 #     click.echo("Synthesis not automated yet in this version.")
 
+@cli.command(name="config", help="Manage configuration.")
+@click.option("list_", "--list", "-l", is_flag=True, help="List all configuration options.")
+@click.option("--set", "-s", type=(str, str), help="Set a configuration option.", default=None)
+@click.option("--get", "-g", type=str, help="Get a configuration option.", default=None)
+def config(list_: bool, set: tuple[str, str], get: str):
+    assert ((list_ is True and set is None and get is None) or
+            (list_ is False and set is not None and get is None) or
+            (list_ is False and set is None and get is not None)), \
+        "You can only use one of --list, --set, or --get."
+    if list_:
+        click.echo("logging.enable_email (default: False): Enable email notifications for logging.")
+        click.echo("logging.email_send (default: dummy@gmail.com): Email address to send notifications.")
+        click.echo("logging.email_receive (default: dummy@gmail.com): Email address to receive notifications.")
+        click.echo("logging.email_smtp_server (default: smtp.gmail.com): SMTP server for sending emails.")
+        click.echo("logging.email_smtp_port (default: 587): SMTP port for sending emails.")
+        click.echo("logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.")
+    elif set is not None:
+        with open(os.path.join(CLI_DIR, "config.toml"), "rb") as f:
+            config = tomllib.load(f)
+        key, value = set
+        match key:
+            case "logging.enable_email":
+                config["logging"]["enable_email"] = tomllib.load(value)
+            case "logging.email_send":
+                config["logging"]["email_send"] = value
+            case "logging.email_receive":
+                config["logging"]["email_receive"] = value
+            case "logging.email_smtp_server":
+                config["logging"]["email_smtp_server"] = value
+            case "logging.email_smtp_port":
+                config["logging"]["email_smtp_port"] = int(value)
+            case "logging.email_smtp_password":
+                config["logging"]["email_smtp_password"] = value
+            case _:
+                click.echo(f"Unknown configuration option: {key}")
+        with open(os.path.join(CLI_DIR, "config.toml"), "w") as f:
+            toml.dump(config, f)
+        click.echo(f"Set {key} to {value}.")
+    elif get is not None:
+        with open(os.path.join(CLI_DIR, "config.toml"), "rb") as f:
+            config = tomllib.load(f)
+        match get:
+            case "logging.enable_email":
+                value = config["logging"]["enable_email"]
+            case "logging.email_send":
+                value = config["logging"]["email_send"]
+            case "logging.email_receive":
+                value = config["logging"]["email_receive"]
+            case "logging.email_smtp_server":
+                value = config["logging"]["email_smtp_server"]
+            case "logging.email_smtp_port":
+                value = config["logging"]["email_smtp_port"]
+            case "logging.email_smtp_password":
+                value = config["logging"]["email_smtp_password"]
+            case _:
+                click.echo(f"Unknown configuration option: {get}")
+                return
+        click.echo(f"{get} = {value}")
 @cli.command(name="cluster_synth", help="Get instructions about synthesizing input generators on a GPU cluster.")
 def synthesize_on_cluster():
     instructions = trim_indent("""

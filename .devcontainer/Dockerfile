@@ -112,7 +112,7 @@ RUN sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/$(uname -m)-lin
 RUN sudo apt-get install -y zlib1g-dev pkg-config meson unzip zip
 RUN sudo apt-get install -y jq bc
 RUN pip install https://github.com/cychen2021/idontwannadoresearch/archive/refs/tags/v0.0.51.zip
-RUN pip install "colorama==0.4.6" "bc==0.0.1"
+RUN pip install "colorama==0.4.6" "bc==0.0.1" "toml==0.10.2"
 # RUN sudo apt-get install -y postgresql-common
 # RUN sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
 # RUN sudo apt-get update -y && sudo apt-get install -y postgresql-16

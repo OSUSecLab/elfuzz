@@ -1,0 +1,7 @@
+[logging]
+enable_email = false
+email_send =  "dummy@gmail.com"
+email_receive = "dummy@gmail.com"
+email_smtp_server = "smtp.gmail.com"
+email_smtp_port = 587
+email_smtp_password = "dummypassword"
