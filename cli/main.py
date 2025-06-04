@@ -133,10 +133,12 @@ def synthesize_on_cluster():
                                """, delimiter="\n")
     click.echo(instructions)
 
-@cli.command(name="download", help="Download large binary files stored on Zenodo.")
+@cli.command(name="download", help="Download large binary files stored on Figshare.")
 @click.option("--local-copy", "-l", is_flag=True, default=False,)
 def download(local_copy: bool):
-    click.echo("Downloading...")
+    click.echo("This command should download the binaries and other data from Figshare and put them into the right places in the ELFuzz project directory.")
+    click.echo("However, this command has not been implemented yet. You should do it manually.")
+    click.echo("You may need to check the error message when running an experiment script to figure out what files to put where.")
     FIGSHARE_URL = "https://doi.org/10.6084/m9.figshare.29177162"
     LOCAL_DIR = "/tmp/elfuzz_data_cache"
     ...
