@@ -24,7 +24,7 @@ BENCHMARKS = [('jsoncpp', 'jsoncpp', 1e2),
 
 FUZZERS = [('elm', 'ELFuzz', '#5A5BA0', '#A9C4EB', 's'), ('grmr', 'Grmr', '#009473', '#D5E8D4', 'o'), 
            ('isla', 'ISLa', '#F776DA', '#F7C3EB', 'v'), ('islearn', 'ISLearn', '#D95070', '#F8CECC', 'D'),
-           ('glade', 'GLADE', '#FCAC51', '#FEE69D', 'x')]
+           ('glade', 'GLADE', '#EC9C42', '#FEE69D', '^')]
 
 EXCLUDE = [('re2', 'islearn'), ('jsoncpp', 'islearn')]
 
@@ -79,7 +79,8 @@ if __name__ == '__main__':
                     if np.isnan(cov):
                         continue
                     data[fuzzer][2].append(cov)
-        for fuzzer, label, color, fill_color, marker in reversed(FUZZERS):
+
+        for (fuzzer, label, color, fill_color, marker), ls in zip(reversed(FUZZERS), ['-.', '-', '--', ':', '-']):
             if (benchmark, fuzzer) in EXCLUDE:
                 continue
             mean = data[fuzzer][1]
@@ -88,17 +89,35 @@ if __name__ == '__main__':
             standard_deviation = data[fuzzer][2]
             upper_error = [mean[i] + standard_deviation[i] for i in range(len(mean))]
             lower_error = [mean[i] - standard_deviation[i] for i in range(len(mean))]
-            axs[benchmark].plot(data[fuzzer][0], mean, label=label, color=color, marker=marker, markersize=3,
-                                markevery=[0, 3, 6, 9, 12, 15, 18, 21, 24])
+            match fuzzer:
+                case 'islearn':
+                    linewidth = 1.8
+                    zorder = 10
+                case 'isla':
+                    linewidth = 1.4
+                    zorder = 11
+                case 'grmr':
+                    linewidth = 1
+                    zorder = 12
+                case 'glade':
+                    linewidth = 1.6
+                    zorder = 10.5
+                case 'elm':
+                    linewidth = 1
+                    zorder = 13
+            axs[benchmark].plot(data[fuzzer][0], mean, label=label, color=color, marker= "v" if fuzzer=='elm' else None, markersize=2,
+                                markevery=[0, 3, 6, 9, 12, 15, 18, 21, 24], linewidth=linewidth, ls=ls, zorder=zorder,
+                                alpha=0.8 if fuzzer == 'elm' and benchmark in ['jsoncpp', 're2'] else 1)
             axs[benchmark].fill_between(data[fuzzer][0],
                                         lower_error, 
                                         upper_error, 
-                                        alpha=1, 
+                                        alpha=0.7,
+                                        zorder=zorder-10,
                                         color=fill_color,
                                         edgecolor='face')
-        axs[benchmark].set_title(name, y=1.1)
         
         max_y = max(mean + std for mean, std in zip(data['elm'][1], data['elm'][2]))
+        # min_y = min(min(mean - std for mean, std in zip(data[fuzzer][1], data[fuzzer][2])) for fuzzer, _, _, _, _ in FUZZERS if (benchmark, fuzzer) not in EXCLUDE)
         max_y_i = max_y // exp_scale
         interval = max_y_i / 4
         all_ticks = []
@@ -117,6 +136,7 @@ if __name__ == '__main__':
         
         axs[benchmark].yaxis.set_ticks(major_ticks)
         axs[benchmark].yaxis.set_ticks(minor_ticks, minor=True)
+        # axs[benchmark].set_ylim(bottom=min_y)
         # axs[benchmark].grid(axis='y', linestyle='-', linewidth=0.5, zorder=0, which='both')
         
         yfmt = ScalarFormatterForceFormat()
@@ -137,8 +157,15 @@ if __name__ == '__main__':
         axs[benchmark].set_position([box.x0, box.y0 + box.height * 0.2,
                  box.width, box.height * 0.8])
     lines, labels = axs['libxml2'].get_legend_handles_labels()
+    # for line in lines:
+    #     line.set_linewidth(1)
+    from copy import deepcopy
+    copied_lines = deepcopy(lines)
+    for line in copied_lines:
+        line.set_alpha(1)
+        line.set_linewidth(1) # type: ignore
     ax = fig.get_axes()[0]
     box = ax.get_position()
-    fig.legend(list(reversed(lines)), list(reversed(labels)), loc='upper center', ncol=1, bbox_to_anchor=(0.825, 0.5))
+    fig.legend(list(reversed(copied_lines)), list(reversed(labels)), loc='upper center', ncol=1, bbox_to_anchor=(0.825, 0.5))
     fig.tight_layout()
     fig.savefig(os.path.join(PLOT_DIR, 'fig', 'cov_trends_during.pdf'), bbox_inches='tight')
