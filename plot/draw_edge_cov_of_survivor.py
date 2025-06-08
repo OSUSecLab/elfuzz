@@ -65,27 +65,27 @@ if __name__ == '__main__':
                 df = pd.read_excel(xls, benchmark, index_col=0, header=0)
                 for i in range(1, 51):
                     data[fuzzer][1].append(df[fuzzer][i])
-        for (fuzzer, label, color, _, marker), ls in zip(reversed(FUZZERS), ['-', '--', ':', '-.', '-']):
+        for (fuzzer, label, color, _, marker), ls in zip(reversed(FUZZERS), ['-', '--', (0, (1, 1)), '-.', '-']):
             if (benchmark, fuzzer) in EXCLUDE:
                 continue
             match fuzzer:
                 case 'noinf':
-                    linewidth = 1.8
+                    linewidth = 2.4
                     zorder = 10
                 case 'nocomp':
-                    linewidth = 1.4
+                    linewidth = 1.6
                     zorder = 11
                 case 'nospl':
-                    linewidth = 1
+                    linewidth = 1.3
                     zorder = 12
                 case 'alt':
-                    linewidth = 1.6
+                    linewidth = 2
                     zorder = 10.5
                 case 'elm':
-                    linewidth = 1
+                    linewidth = 1.3
                     zorder = 13
             mean = [0] + data[fuzzer][1]
-            axs[benchmark].plot(list(range(0, 51)), mean, label=label, color=color, markersize=2, 
+            axs[benchmark].plot(list(range(0, 51)), mean, label=label, color=color, markersize=2.6, 
                                 marker='v' if fuzzer=='elm' else None, markevery=5, ls=ls, zorder=zorder, 
                                 linewidth=linewidth, alpha=0.8 if fuzzer=='elm' else 1)
         axs[benchmark].set_title(name, y=1.1)
@@ -133,7 +133,7 @@ if __name__ == '__main__':
     copied_lines = deepcopy(lines)
     for line in copied_lines:
         line.set_alpha(1)
-        line.set_linewidth(1)
+        line.set_linewidth(1.3)
     box = ax.get_position()
     fig.legend(list(reversed(copied_lines)), list(reversed(labels)), loc='upper center', ncol=1, bbox_to_anchor=(0.82, 0.5))
     fig.tight_layout()

@@ -52,7 +52,7 @@ if __name__ == '__main__':
             
             std = pd.read_excel(os.path.join(PWD, f"data", f"rq2_std.xlsx"), sheet_name=benchmark, header=0, index_col=0).loc[:, fuzzer]
             data[fuzzer][2].extend(std)
-        for (fuzzer, label, color, fill_color, marker), ls in zip(reversed(FUZZERS), ['-.', '-', '--', ':', '-']):
+        for (fuzzer, label, color, fill_color, marker), ls in zip(reversed(FUZZERS), ['-.', '-', '--', (0, (1, 1)), '-']):
             if (benchmark, fuzzer) in EXCLUDE:
                 continue
             mean = data[fuzzer][1]
@@ -60,22 +60,22 @@ if __name__ == '__main__':
             lower_error = [mean[i] - data[fuzzer][2][i] for i in range(len(mean))]
             match fuzzer:
                 case 'islearn':
-                    linewidth = 1.8
+                    linewidth = 2.4
                     zorder = 10
                 case 'isla':
-                    linewidth = 1.4
+                    linewidth = 1.6
                     zorder = 11
                 case 'grmr':
-                    linewidth = 1
+                    linewidth = 1.3
                     zorder = 12
                 case 'glade':
-                    linewidth = 1.6
+                    linewidth = 2
                     zorder = 10.5
                 case 'elm':
-                    linewidth = 1
+                    linewidth = 1.3
                     zorder = 13
             axs[benchmark].plot(data[fuzzer][0], mean, label=label, color=color, marker='v' if fuzzer=='elm' else None, linewidth=linewidth, 
-                                zorder=zorder, markersize=2, markevery=3,#alpha=0.8 if fuzzer=='elm' and benchmark=='libxml2' else 1,
+                                zorder=zorder, markersize=2.6, markevery=3,#alpha=0.8 if fuzzer=='elm' and benchmark=='libxml2' else 1,
                                 ls=ls)
             axs[benchmark].fill_between(data[fuzzer][0],
                                         lower_error,
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     copied_lines = deepcopy(lines)
     for line in copied_lines:
         line.set_alpha(1)
-        line.set_linewidth(1)
+        line.set_linewidth(1.3)
     ax = fig.get_axes()[0]
     box = ax.get_position()
     fig.legend(reversed(copied_lines), reversed(labels), loc='upper center', ncol=1, bbox_to_anchor=(0.82, 0.9))

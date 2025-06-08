@@ -80,7 +80,7 @@ if __name__ == '__main__':
                         continue
                     data[fuzzer][2].append(cov)
 
-        for (fuzzer, label, color, fill_color, marker), ls in zip(reversed(FUZZERS), ['-.', '-', '--', ':', '-']):
+        for (fuzzer, label, color, fill_color, marker), ls in zip(reversed(FUZZERS), ['-.', '-', '--', (0, (1, 1)), '-']):
             if (benchmark, fuzzer) in EXCLUDE:
                 continue
             mean = data[fuzzer][1]
@@ -91,21 +91,21 @@ if __name__ == '__main__':
             lower_error = [mean[i] - standard_deviation[i] for i in range(len(mean))]
             match fuzzer:
                 case 'islearn':
-                    linewidth = 1.8
+                    linewidth = 2.4
                     zorder = 10
                 case 'isla':
-                    linewidth = 1.4
+                    linewidth = 1.6
                     zorder = 11
                 case 'grmr':
-                    linewidth = 1
+                    linewidth = 1.3
                     zorder = 12
                 case 'glade':
-                    linewidth = 1.6
+                    linewidth = 2
                     zorder = 10.5
                 case 'elm':
-                    linewidth = 1
+                    linewidth = 1.3
                     zorder = 13
-            axs[benchmark].plot(data[fuzzer][0], mean, label=label, color=color, marker= "v" if fuzzer=='elm' else None, markersize=2,
+            axs[benchmark].plot(data[fuzzer][0], mean, label=label, color=color, marker= "v" if fuzzer=='elm' else None, markersize=2.6,
                                 markevery=[0, 3, 6, 9, 12, 15, 18, 21, 24], linewidth=linewidth, ls=ls, zorder=zorder,
                                 alpha=0.8 if fuzzer == 'elm' and benchmark in ['jsoncpp', 're2'] else 1)
             axs[benchmark].fill_between(data[fuzzer][0],
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     copied_lines = deepcopy(lines)
     for line in copied_lines:
         line.set_alpha(1)
-        line.set_linewidth(1) # type: ignore
+        line.set_linewidth(1.3) # type: ignore
     ax = fig.get_axes()[0]
     box = ax.get_position()
     fig.legend(list(reversed(copied_lines)), list(reversed(labels)), loc='upper center', ncol=1, bbox_to_anchor=(0.825, 0.5))
