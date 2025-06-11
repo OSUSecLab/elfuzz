@@ -5,6 +5,8 @@ import matplotlib.ticker as ticker
 import numpy as np
 import pandas as pd
 import os
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
 
 class ScalarFormatterForceFormat(ticker.ScalarFormatter):
     def _set_format(self):  # Override function that finds format to use.

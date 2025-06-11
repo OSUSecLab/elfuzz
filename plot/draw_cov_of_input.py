@@ -6,6 +6,8 @@ import pandas as pd
 import matplotlib.ticker as ticker
 import os
 import matplotlib.font_manager as fm
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
 
 PLOT_DIR = os.path.dirname(os.path.abspath(__file__))
 

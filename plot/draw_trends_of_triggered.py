@@ -4,6 +4,8 @@ import matplotlib
 import numpy as np
 import pandas as pd
 import os
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
 
 PWD = os.path.dirname(os.path.abspath(__file__))
 
