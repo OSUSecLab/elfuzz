@@ -2,6 +2,8 @@
 
 [![Static Badge](https://img.shields.io/badge/GitHub-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz)
 
+## Overview
+
 This Figshare repository contains the replication package for the paper *ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*.
 
 The files are organized as follows:
@@ -21,4 +23,20 @@ cat "elffuzz_(data|docker)_<timetag>.tar.zst.part*" > "elffuzz_(data|docker)_<ti
 
 The source code tarball contains a `README.md` file that describes how to replicate the experiments.
 
-Note that you need to install `zstd` to decompress the tarballs.
+Note that you need to install `zstd` to decompress the tarballs. On Ubuntu, use the following command to install it:
+
+```bash
+sudo apt install zstd
+```
+
+Then, decompress the tarballs using the following command:
+
+```bash
+zstd -d "elfuzz_(src|data|docker)_<timetag>.tar.zst"
+```
+
+## Contents of the experiment data
+
+## Contents of the implementation
+
+## Contents of the baseline tarball
