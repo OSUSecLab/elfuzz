@@ -73,6 +73,8 @@ There is also a binary `experiment_binaries/sqlite3_cov.tar.zst` which is used i
 
 ### RQ2 results
 
+The `misc/fr_injected` directory contains the fuzz targets used in RQ2 with bugs injected by FixReverter, each for the three benchmarks `CPython` (the `cpython3` directory), `libxml2`, and `SQLite` (the `sqlite3` directory).
+
 `rq2/results` contains the results for RQ2. `afl_bug_exp.tar.zst` contains the raw results of the bug-injection experiments. `triage.tar.zst` contains the triage results for the crashes found by the experiments. `rq2_count_bug_<rep_n>.xlsx` are the number of bugs found in each repetition of the bug-injection experiments. `rq2_count_bug.xlsx` is the mean number of bugs found across all repetitions. `rq2_std.xlsx` is the standard deviation of the number of bugs found across all repetitions. `rq2_bug_count_10_min_<rep_n>` are the data for Table 6 in each repetition, and `rq2_time_to_trigger` contains the mean values, which is the final results presented in Table 6. `unique_<benchmark>_<fuzzer>.txt` contains the IDs of the unique bugs found by each fuzzer in each benchmark (presented in Figure 10). `failure_<benchmark>.txt` contains the failure cases on each benchmark. `real_world.tar.zst` contains the results of the real-world experiment on `cvc5`, wherein `cvc5/fuzz` contains the AFL++ output directories of the 30 fuzzing processes. There some by-products in the tarball caused by file-writing SMT-LIB2 commands. The triage of the real-world experiment is done manually, so there is no triage data for it. The bugs found by the real-world experiment are in the `cvc5_bugs` directory.
 
 ### RQ3 results
