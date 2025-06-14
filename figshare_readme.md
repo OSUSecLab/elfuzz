@@ -37,9 +37,15 @@ zstd -d "elfuzz_(src|data|docker)_<timetag>.tar.zst"
 
 In the following sections, we will list the important contents of each tarball.
 
+## Contents of the Docker image tarball
+
+This tarball contains a Docker image to replicate all the experiments and figures and tables in the paper.
+
 ## Contents of the ELFuzz source code tarball
 
 ## Contents of the baseline tarball
+
+This tarball contains the source code of the three baselines (Grammarinator, GLADE, and ISLa/ISLearn) we used and the FixReverter bug-injection tool. We slightly modified the source code of GLADE and ISLa/ISLearn to add some CLI options and fix several bugs. The commit hashes that the forked versions are based on are inluded in README files in the corresponding directories. Users should be able to inspect the modifications by diff tools. We also adapted the code of FixReverter to the benchmarks that we used in the experiments.
 
 ## Contents of the experiment data tarball
 
