@@ -43,6 +43,19 @@ This tarball contains a Docker image to replicate all the experiments and figure
 
 ## Contents of the ELFuzz source code tarball
 
+This tarball contains the implementation of ELFuzz:
+
+- `genvariants_parallel.py` implements the LLM-driven mutation.
+- `getcov.py`, `getcov_fuzzbench.py`, and `select_seeds.py` implements the fuzzer space exploration and max-cover selection. `getcov.py` and `getcov_fuzzbench.py` approximate the cover set of a fuzzer candidate, and `select_seeds.py` constructs the cover space and selects the max-cover survivors.
+
+Other files and directories are supportive components for the experiments. Some important ones are:
+
+- `preset/` and `fuzzbench/` contains the configurations of the seven benchmarks.
+- `start_tgi_servers.sh` launch a Hugging Face text-generation-inference (TGI) server to serve the LLMs used in the experiments.
+- `all_gen.sh` is the entry point of the whole evolution process.
+- `plot/` contains scripts to generate the figures and tables in the paper.
+- `cli/` provides a command-line interface for the users of the Docker image in the replication package.
+
 ## Contents of the baseline tarball
 
 This tarball contains the source code of the three baselines (Grammarinator, GLADE, and ISLa/ISLearn) we used and the FixReverter bug-injection tool. We slightly modified the source code of GLADE and ISLa/ISLearn to add some CLI options and fix several bugs. The commit hashes that the forked versions are based on are inluded in README files in the corresponding directories. Users should be able to inspect the modifications by diff tools. We also adapted the code of FixReverter to the benchmarks that we used in the experiments.
