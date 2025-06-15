@@ -32,7 +32,7 @@ sudo apt install zstd
 Then, decompress the tarballs using the following command:
 
 ```bash
-zstd -d "elfuzz_(src|data|docker)_<timetag>.tar.zst"
+tar --zstd -xvf "elfuzz_(src|data|docker)_<timetag>.tar.zst"
 ```
 
 In the following sections, we will list the important contents of each tarball.
