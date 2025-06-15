@@ -1,14 +1,22 @@
 [
     {
-        "from": "synthesized_fuzzers/elfuzz_noCompletion",
-        "to": "evaluation/nocomp_fuzzers"
+        "from": "synthesized_fuzzers/elfuzz_noCompletion/",
+        "to": "evaluation/nocomp_fuzzers/"
     },
     {
-        "from": "synthesized_fuzzers/elfuzz_noInfilling",
-        "to": "evaluation/noinf_fuzzers"
+        "from": "synthesized_fuzzers/elfuzz_noInfilling/",
+        "to": "evaluation/noinf_fuzzers/"
     },
     {
-        "from": "synthesized_fuzzers/elfuzz_noSplicing",
-        "to": "evaluation/nospl_fuzzers"
+        "from": "synthesized_fuzzers/elfuzz_noSplicing/",
+        "to": "evaluation/nospl_fuzzers/"
+    },
+    {
+        "from": "synthesized_fuzzers/elfuzz_noFS/",
+        "to": "evaluation/alt_elmfuzzers/"
+    },
+    {
+        "from": "synthesized_fuzzers/elfuzz/",
+        "to": "evaluation/elmfuzzers/"
     }
 ]
