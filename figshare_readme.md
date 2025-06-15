@@ -78,7 +78,7 @@ There is also a binary `experiment_binaries/sqlite3_cov.tar.zst` which is used i
 
 **Oracle binaries used by GLADE.** `misc/glade_oracle.tar.zst` contains the oracle binaries (that decides whether a test case is grammatically correct) used by GLADE to mine the grammars.
 
-**Fuzzers synthesized by ELFuzz and its variants.** The `synthesized_fuzzers` directory contains the fuzzers synthesized by ELFuzz and its four variants (viz., ELFuzz-noFS, ELFuzz-noSP, ELFuzz-noCP, and ELFuzz-noIN.)
+**Fuzzers synthesized by ELFuzz and its variants.** The `synthesized_fuzzers` directory contains the fuzzers synthesized by ELFuzz and its four variants, viz., ELFuzz-noFS, ELFuzz-noSP, ELFuzz-noCP, and ELFuzz-noIN.
 
 **Time cost of synthesis.** The `timecost` directory contains the manually recorded (using the `time` command) time cost for ELFuzz, ISLearn, and GLADE to synthesize the fuzzers/semantic constraints/grammars.
 
