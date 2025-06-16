@@ -1,5 +1,6 @@
 import os
 import subprocess
+import shutil
 
 ROOT = os.path.realpath(os.path.dirname(__file__))
 
@@ -12,3 +13,6 @@ subprocess.run(cmd, check=True)
 os.remove(tarball_path)
 tarball_path = f"{tarball_path}.zst"
 print(f"Archive '{tarball_path}' created successfully.")
+
+shutil.copy(os.path.join(ROOT, "figshare_readme.md"), os.path.join(ROOT, "tmp", "README.md"))
+print("Figshare README copied to tmp directory.")
