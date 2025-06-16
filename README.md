@@ -4,11 +4,11 @@
 
 This repository contains the code and experiment data of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
-## Experiment Data
+## Experiment data
 
 The experiment data is published on [Figshare](https://doi.org/10.6084/m9.figshare.29177162).
 
-## Replication Package
+## Replication package
 
 The code and environment to replicate the experiments are published as a Docker image. Run the following command to pull it:
 
@@ -33,7 +33,7 @@ This will enter a shell into the container. Then, following the instructions in 
 
 The Docker image has only been tested on X86-64 machines.
 
-## How to Build the Docker Image
+## How to build the Docker image
 
 Before building the Docker image, you should `cd` to the root of the ELFuzz source code and put `elfuzz_baselines.tar.zst` into `tmp/`.
 
@@ -43,6 +43,10 @@ The Docker image is built by the following command:
 docker build --build-arg -t ghcr.io/cychen2021/elfuzz:25.05.1 -f .devcontainer/Dockerfile --target publish .
 ```
 
-## Maintenance Statement
+## Source code layout
+
+TODO
+
+## Maintenance statement
 
 I tried my best to preserve the environment in the Docker image, keeping the replication package usable for as long as possible. However, there may be some aspects that I have not considered. If you encounter any issues that prevent you from using the package, please open an issue or launch a pull request.
