@@ -40,7 +40,7 @@ Before building the Docker image, you should `cd` to the root of the ELFuzz sour
 The Docker image is built by the following command:
 
 ```bash
-docker build --build-arg -t ghcr.io/cychen2021/elfuzz:25.06.0 -f .devcontainer/Dockerfile --target publish .
+docker build -t ghcr.io/cychen2021/elfuzz:25.06.0 -f .devcontainer/Dockerfile --target publish .
 ```
 
 ## Source code layout
