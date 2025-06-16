@@ -9,7 +9,9 @@ import importlib
 PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
-download_mod = importlib.import_module(os.path.join(CLI_DIR, "download.py"))
+sys.path.insert(0, CLI_DIR)
+from . import download as download_mod
+
 
 def trim_indent(s: str, *, delimiter: str = " ") -> str:
     ended_with_newline = s.endswith("\n")

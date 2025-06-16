@@ -83,7 +83,7 @@ RUN pipx inject xonsh "click==8.1.8"
 
 # It seems that the isla-solver is not compilable on aarch64
 RUN if [ $(uname -m) != "aarch64" ]; then pipx inject isla-solver setuptools; fi
-ENV PATH=/home/elmfuzz/cli:/home/appuser/.local/bin:$PATH
+ENV PATH=/home/appuser/elmfuzz/cli:/home/appuser/.local/bin:$PATH
 RUN pip install "python-lsp-server[all]==1.12.2" "click==8.1.8" "numpy==1.26.4" "requests==2.32.4"
 RUN case $(uname -m) in \
     aarch64) sudo curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-aarch64 -o /usr/local/bin/docker-compose;; \
