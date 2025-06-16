@@ -3,12 +3,13 @@ import re
 import subprocess
 import os
 import sys
-import tqdm
 import toml
-import tomllib
+import importlib
 
 PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
+
+download_mod = importlib.import_module(os.path.join(CLI_DIR, "download.py"))
 
 def trim_indent(s: str, *, delimiter: str = " ") -> str:
     ended_with_newline = s.endswith("\n")
@@ -84,12 +85,11 @@ def config(list_: bool, set: tuple[str, str], get: str):
         click.echo("logging.email_smtp_port (default: 587): SMTP port for sending emails.")
         click.echo("logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.")
     elif set is not None:
-        with open(os.path.join(CLI_DIR, "config.toml"), "rb") as f:
-            config = tomllib.load(f)
+        config = toml.load(os.path.join(CLI_DIR, "config.toml"))
         key, value = set
         match key:
             case "logging.enable_email":
-                config["logging"]["enable_email"] = tomllib.load(value)
+                config["logging"]["enable_email"] = str(value)
             case "logging.email_send":
                 config["logging"]["email_send"] = value
             case "logging.email_receive":
@@ -102,12 +102,10 @@ def config(list_: bool, set: tuple[str, str], get: str):
                 config["logging"]["email_smtp_password"] = value
             case _:
                 click.echo(f"Unknown configuration option: {key}")
-        with open(os.path.join(CLI_DIR, "config.toml"), "w") as f:
-            toml.dump(config, f)
+        toml.dump(config, os.path.join(CLI_DIR, "config.toml"))
         click.echo(f"Set {key} to {value}.")
     elif get is not None:
-        with open(os.path.join(CLI_DIR, "config.toml"), "rb") as f:
-            config = tomllib.load(f)
+        config = toml.load(os.path.join(CLI_DIR, "config.toml"))
         match get:
             case "logging.enable_email":
                 value = config["logging"]["enable_email"]
@@ -134,13 +132,11 @@ def synthesize_on_cluster():
     click.echo(instructions)
 
 @cli.command(name="download", help="Download large binary files stored on Figshare.")
-@click.option("--local-copy", "-l", is_flag=True, default=False,)
-def download(local_copy: bool):
+@click.option("--ignore-cache", is_flag=True, default=False,)
+def download(ignore_cache: bool):
     click.echo("This command should download the binaries and other data from Figshare and put them into the right places in the ELFuzz project directory.")
     click.echo("However, this command has not been implemented yet. You should do it manually.")
     click.echo("You may need to check the error message when running an experiment script to figure out what files to put where.")
-    FIGSHARE_URL = "https://doi.org/10.6084/m9.figshare.29177162"
-    LOCAL_DIR = "/tmp/elfuzz_data_cache"
     ...
 
 if __name__ == "__main__":
