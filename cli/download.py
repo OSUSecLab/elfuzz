@@ -119,6 +119,8 @@ def download_data(ignore_cache: bool):
                 click.echo(f"File {info.name} already exists and is valid. Skipping download.")
                 download_files.append(download_to)
                 continue
+            else:
+                click.echo(f"MD5 mismatch: {md5}!={info.md5}. Re-downloading...")
         with open(download_to, "wb") as f, tqdm(total=info.size, unit='B', unit_scale=True, desc=info.name) as pbar:
             response = requests.get(info.download_url, stream=True)
             for chunk in response.iter_content(chunk_size=BLOCK_SIZE):
@@ -135,7 +137,7 @@ def download_data(ignore_cache: bool):
     click.echo(f"Concatenating {len(download_files)} part files into {concat_to}...")
     concat_file(concat_to, download_files, delete_cache=True)
 
-    unzip_dir = os.path.realpath(os.path.join(PROJECT_ROOT, "data"))
+    unzip_dir = os.path.realpath(os.path.join(TMP_UNZIP_DIR, "data"))
     if not os.path.exists(unzip_dir):
         os.makedirs(unzip_dir)
     click.echo(f"Extracting {concat_to} to {unzip_dir}...")
