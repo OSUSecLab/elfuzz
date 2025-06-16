@@ -67,7 +67,7 @@ def concat_file(file_path: str, part_files: list[str], *, delete_cache: bool = F
 
 def extract_tarball(tarball_path: str, extract_to: str) -> None:
     """Extract a tarball to a specified directory."""
-    subprocess.run(["tar", "--zstd", "-xv", tarball_path, "-C", extract_to], check=True)
+    subprocess.run(["tar", "--zstd", "-xvf", tarball_path, "-C", extract_to], check=True)
     os.remove(tarball_path)
 
 
