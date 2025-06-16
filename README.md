@@ -13,7 +13,7 @@ The experiment data is published on [Figshare](https://doi.org/10.6084/m9.figsha
 The code and environment to replicate the experiments are published as a Docker image. Run the following command to pull it:
 
 ```bash
-docker pull ghcr.io/cychen2021/elfuzz:25.05.1
+docker pull ghcr.io/cychen2021/elfuzz:25.06.0   
 ```
 
 Instead, if you download the Docker image as a tarball from Figshare, you can import it using the following commands:
@@ -26,7 +26,7 @@ docker load --input "elfuzz_docker_<timetag>.tar"
 After pulling/importing the image, run the following command to start the container:
 
 ```bash
-docker run -it ghcr.io/cychen2021/elfuzz:25.05.1
+docker run -it ghcr.io/cychen2021/elfuzz:25.06.0
 ```
 
 This will enter a shell into the container. Then, following the instructions in `/elfuzz/README.md` (which is a symlink to [docker_readme.md](docker_readme.md) in this repository) to replicate the experiments.
@@ -40,7 +40,7 @@ Before building the Docker image, you should `cd` to the root of the ELFuzz sour
 The Docker image is built by the following command:
 
 ```bash
-docker build --build-arg -t ghcr.io/cychen2021/elfuzz:25.05.1 -f .devcontainer/Dockerfile --target publish .
+docker build --build-arg -t ghcr.io/cychen2021/elfuzz:25.06.0 -f .devcontainer/Dockerfile --target publish .
 ```
 
 ## Source code layout
