@@ -28,4 +28,20 @@ You can use `elfuzz config` to configure settings such as email notifications.
 
 ## Experiments
 
-Currently, the experiments haven't been automated yet. Though, we have include all code and data needed in this replication package. The experiments have to be run manually for now.
+### Synthesizing fuzzers by ELFuzz and its four variants
+
+### Mining grammars by GLADE
+
+### Mining semantic constraints by ISLearn
+
+### Producing and minimizing seed test cases
+
+### Conducting RQ1 experiments
+
+### Conducting RQ2 experiments
+
+### Conducting RQ3 experiments
+
+### Conducting RQ4 experiments
+
+## Result analysis and visualization
