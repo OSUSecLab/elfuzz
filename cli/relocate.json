@@ -18,5 +18,10 @@
     {
         "from": "synthesized_fuzzers/elfuzz/",
         "to": "evaluation/elmfuzzers/"
+    },
+    {
+        "from": "misc/antlr4_isla_grammars.tar.zst",
+        "to": "evaluation/",
+        "is_tarball": true
     }
 ]
