@@ -136,9 +136,7 @@ def synthesize_on_cluster():
 @cli.command(name="download", help="Download large binary files stored on Figshare.")
 @click.option("--ignore-cache", is_flag=True, default=False,)
 def download(ignore_cache: bool):
-    click.echo("This command should download the binaries and other data from Figshare and put them into the right places in the ELFuzz project directory.")
-    click.echo("However, this command has not been implemented yet. You should do it manually.")
-    click.echo("You may need to check the error message when running an experiment script to figure out what files to put where.")
+    click.echo("Downloading data files needed by the experiments...")
     download_mod.download_data(ignore_cache=ignore_cache)
 
 if __name__ == "__main__":
