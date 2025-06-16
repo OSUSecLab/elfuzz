@@ -135,7 +135,7 @@ def download_data(ignore_cache: bool):
         os.makedirs(TMP_UNZIP_DIR)
     concat_to = os.path.realpath(os.path.join(TMP_UNZIP_DIR, "data.tar.zst"))
     click.echo(f"Concatenating {len(download_files)} part files into {concat_to}...")
-    concat_file(concat_to, download_files, delete_cache=True)
+    concat_file(concat_to, download_files)
 
     unzip_dir = os.path.realpath(os.path.join(TMP_UNZIP_DIR, "data"))
     if not os.path.exists(unzip_dir):
