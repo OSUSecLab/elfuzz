@@ -143,3 +143,4 @@ def download_data(ignore_cache: bool):
     click.echo("Download and extraction completed.")
     click.echo("Relocating files...")
     relocate(unzip_dir)
+    click.echo("Done!")
