@@ -191,5 +191,6 @@ def info():
     click.echo(f"Project root in the container: {PROJECT_ROOT}")
 
 if __name__ == "__main__":
+    os.chdir(PROJECT_ROOT)
     sys.argv[0] = "elfuzz"
     cli(max_content_width=get_terminal_width())
