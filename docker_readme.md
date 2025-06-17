@@ -1,5 +1,7 @@
 # How to Use This ELFuzz Docker Image
 
+This Docker image contains source code, data, and utilities to reproduce the experiments presented in the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
+
 ## Source location
 
 In the following instructions, you will work in the directory `/elfuzz/`. However, the actual source location is `/home/appuser/elmfuzz/`.
@@ -27,6 +29,8 @@ This may take a while, and after it finishes, you will get all you need to run t
 You can use `elfuzz config` to configure settings such as email notifications.
 
 ## Experiments
+
+The following sections describe how to reproduce the experiments presented in the paper. Note that we include all intermediate results acquired in our previous experiments, so you can skip any steps that you don't have time or resources to run.
 
 ### Synthesizing fuzzers by ELFuzz and its four variants
 
