@@ -129,7 +129,7 @@ def config(list_: bool, set: tuple[str, str], get: str):
                     os.makedirs(token_path, exist_ok=True)
                 with open(os.path.join(token_path, "token"), "w") as f:
                     f.write(value)
-                click.echo(f"{key} := {value}.")
+                click.echo(f"{key} := {value}")
                 return
             case _:
                 click.echo(f"Unknown configuration option: {key}")
