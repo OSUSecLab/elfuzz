@@ -49,11 +49,11 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
             assert tgi_p.stdout is not None, "TGI server stdout is None."
             line = tgi_p.stdout.readline().decode("utf-8").strip()
             if line:
-                print(line)
+                print(line, flush=True)
             assert tgi_p.stderr is not None, "TGI server stderr is None."
             line = tgi_p.stderr.readline().decode("utf-8").strip()
             if line:
-                print(line, file=sys.stderr)
+                print(line, file=sys.stderr, flush=True)
         click.echo("Text-generation-inference server started.")
     except Exception as e:
         if debug:
