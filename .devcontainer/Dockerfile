@@ -65,7 +65,7 @@ RUN cd fuzzbench && git checkout 6228338e8cfb654bb44b71402e05860a93d60ab1
 # I don't know why but the install-dependencies fails on aarch64
 RUN if [ $(uname -m) != "aarch64" ]; then make install-dependencies -C fuzzbench; fi
 
-RUN curl -fsSL https://get.docker.com | sudo sh
+RUN curl -fsSL https://get.docker.com | sudo sh -s -- --version 28.2.2
 
 # The ID of the docker group should be set the same as the host machine at runtime
 RUN sudo groupdel docker 

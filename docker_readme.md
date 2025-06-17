@@ -38,12 +38,6 @@ elfuzz download
 
 This may take a while, and after it finishes, you will get all you need to run the experiments.
 
-You can use `elfuzz config` to configure settings such as email notifications.
-
-## Experiments
-
-The following sections describe how to reproduce the experiments presented in the paper. Note that we include all intermediate results acquired in our previous experiments, so you can skip any steps that you don't have time or resources to run.
-
 ## Configuring Hugging Face token
 
 The experiments require pulling models from Hugging Face. You need to set up your [Hugging Face token](https://huggingface.co/docs/hub/en/security-tokens) via the following command:
@@ -51,6 +45,12 @@ The experiments require pulling models from Hugging Face. You need to set up you
 ```bash
 elfuzz config --set tgi.huggingface_token "<your_token>"
 ```
+
+Besides, you can optionally use `elfuzz config` to configure settings such as email notifications.
+
+## Experiments
+
+The following sections describe how to reproduce the experiments presented in the paper. Note that we include all intermediate results acquired in our previous experiments, so you can skip any steps that you don't have time or resources to run.
 
 ### Synthesizing fuzzers by ELFuzz and its four variants
 
