@@ -39,7 +39,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
     click.echo(f"Starting the text-gneration-inference server. This may take a while as it has to download the model...")
 
     try:
-        tgi_p = subprocess.Popen(cmd_tgi, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, user=USER)
+        tgi_p = subprocess.Popen(cmd_tgi, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)
         start = datetime.now()
         while True:
             if tgi_p.poll() is not None:
