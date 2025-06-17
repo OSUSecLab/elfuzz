@@ -84,14 +84,15 @@ precise status of the server at runtime.  The default value (600s) should \
 be proper if you are in an area with a typical network condition (i.e., outside mainland China) and start the server for the first time. \
 If you have already started the server before, the cached model files can significantly shorten the waiting time. You may provide a smaller \
 value for the estimation.")
-def synthesize(target, benchmark, tgi_waiting):
+@click.option("--debug", is_flag=True, default=False, hidden=True)
+def synthesize(target, benchmark, tgi_waiting, debug):
     match target, benchmark:
         case ("semantic.islearn", "jsoncpp"):
             click.echo("The JSON format doesn't need semantic constraints, so no synthesis will be conducted.")
             return
     match target:
         case "fuzzer.elfuzz" | "fuzzer.elfuzz_nofs" | "fuzzer.elfuzz_nocp" | "fuzzer.elfuzz_noin" | "fuzzer.elfuzz_nosp":
-            synthesize_fuzzer(target.split(".")[1], benchmark, tgi_waiting=tgi_waiting)
+            synthesize_fuzzer(target.split(".")[1], benchmark, tgi_waiting=tgi_waiting, debug=debug)
             return
         case _:
             click.echo(f"Target {target} for `synth` hasn't been implemented yet.")
