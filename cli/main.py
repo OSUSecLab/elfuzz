@@ -193,4 +193,5 @@ def info():
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)
     sys.argv[0] = "elfuzz"
+    os.environ["PYTHONPATH"] = PROJECT_ROOT
     cli(max_content_width=get_terminal_width())
