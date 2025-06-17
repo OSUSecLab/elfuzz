@@ -22,9 +22,16 @@ class RelocateTo:
     to: str
     is_dir: bool
 
+def is_dir(path: str) -> bool:
+    return os.path.isdir(path)
+
+def is_tarball(file_path: str) -> bool:
+    """Check if the file is a tarball (ends with .tar, .tar.gz, or .tar.zst)."""
+    return file_path.endswith(('.tar', '.tar.gz', '.tar.zst'))
+
 def load_relocate_info() -> list[RelocateTo]:
     with open(os.path.join(CLI_DIR, "relocate.json")) as f:
-        return [RelocateTo(from_=item["from"], to=item["to"], is_dir=item["from"].endswith("/")) for item in json.load(f)]
+        return [RelocateTo(from_=item["from"], to=item["to"], is_dir=is_dir(item["from"])) for item in json.load(f)]
 
 def relocate(data_dir: str):
     relocate_info = load_relocate_info()
@@ -46,7 +53,20 @@ def relocate(data_dir: str):
             for file in files:
                 shutil.move(os.path.join(src, file), os.path.join(dst, file))
         else:
-            shutil.move(src, dst)
+            target_is_dir = is_dir(dst)
+            if not is_tarball(src):
+                if target_is_dir:
+                    if not os.path.exists(dst):
+                        os.makedirs(dst)
+                    shutil.move(src, os.path.join(dst, os.path.basename(src)))
+                else:
+                    shutil.move(src, dst)
+            else:
+                assert target_is_dir, "Target directory must be a directory for tarball relocation"
+                if not os.path.exists(dst):
+                    os.makedirs(dst)
+                cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
+                subprocess.run(cmd, check=True)
 
 def file_md5(file_path: str) -> str:
     """Calculate the MD5 checksum of a file."""
