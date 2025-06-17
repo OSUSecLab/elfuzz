@@ -77,14 +77,20 @@ def setup():
 @click.argument("benchmark", required=True, type=click.Choice(
     ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
 ))
-def synthesize(target, benchmark):
+@click.option("--tgi-waiting", "-w", type=int, default=600,
+              help="Estimated time in seconds to wait for the text-generation-inference server to be ready. Default is 600 seconds. \
+We need the user to provide the estimation as it is hard to know the precise status of the server at runtime.  The default value (600s) should \
+be proper if you are in an area with a typical network condition (i.e., outside mainland China) and start the server for the first time. \
+If you have already started the server before, the cached model files can significantly shorten the waiting time. You may provide a smaller \
+value for the estimation.")
+def synthesize(target, benchmark, tgi_waiting):
     match target, benchmark:
         case ("semantic.islearn", "jsoncpp"):
             click.echo("The JSON format doesn't need semantic constraints, so no synthesis will be conducted.")
             return
     match target:
         case "fuzzer.elfuzz" | "fuzzer.elfuzz_nofs" | "fuzzer.elfuzz_nocp" | "fuzzer.elfuzz_noin" | "fuzzer.elfuzz_nosp":
-            synthesize_fuzzer(target.split(".")[1], benchmark)
+            synthesize_fuzzer(target.split(".")[1], benchmark, tgi_waiting=tgi_waiting)
             return
         case _:
             click.echo(f"Target {target} for `synth` hasn't been implemented yet.")
