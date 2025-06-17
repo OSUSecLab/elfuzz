@@ -109,13 +109,15 @@ def config(list_: bool, set: tuple[str, str], get: str):
             (list_ is False and set is None and get is not None)), \
         "You can only use one of --list, --set, or --get."
     if list_:
-        click.echo("logging.enable_email (default: False): Enable email notifications for logging.")
-        click.echo("logging.email_send (default: dummy@gmail.com): Email address to send notifications.")
-        click.echo("logging.email_receive (default: dummy@gmail.com): Email address to receive notifications.")
-        click.echo("logging.email_smtp_server (default: smtp.gmail.com): SMTP server for sending emails.")
-        click.echo("logging.email_smtp_port (default: 587): SMTP port for sending emails.")
-        click.echo("logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.")
-        click.echo("tgi.huggingface_token (default: None): Hugging Face token for accessing private models.")
+        click.echo(trim_indent("""
+            |logging.enable_email (default: False): Enable email notifications for logging.
+            |logging.email_send (default: dummy@gmail.com): Email address to send notifications.
+            |logging.email_receive (default: dummy@gmail.com): Email address to receive notifications.
+            |logging.email_smtp_server (default: smtp.gmail.com): SMTP server for sending emails.
+            |logging.email_smtp_port (default: 587): SMTP port for sending emails.
+            |logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.
+            |tgi.huggingface_token (default: None): Hugging Face token for accessing private models.
+        """, delimiter="\n"), nl=False)
     elif set is not None:
         config = toml.load(os.path.join(MAIN_CLI_DIR, "config.toml"))
         key, value = set
