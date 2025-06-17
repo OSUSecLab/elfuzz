@@ -4,4 +4,4 @@ tmp/
 !tmp/islearn/
 /evaluation/binary/
 /evaluation/workdir/
-gen*/
+/preset/**/gen*/
