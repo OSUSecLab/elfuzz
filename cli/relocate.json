@@ -25,7 +25,7 @@
         "is_tarball": true
     },
     {
-        "from": "misc/glade_grammars_and_ground_truth.tar.zst",
+        "from": "misc/glade_grammars_and_ground_truths.tar.zst",
         "to": "evaluation/",
         "is_tarball": true
     },
