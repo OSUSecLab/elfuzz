@@ -131,6 +131,9 @@ RUN sudo mkdir -p /elfuzz && sudo chown -R appuser:appuser /elfuzz
 RUN sudo ln -s /home/appuser/elmfuzz/docs /elfuzz/docs
 RUN sudo ln -s /home/appuser/elmfuzz/cli/elfuzz /elfuzz/elfuzz
 RUN sudo ln -s /home/appuser/elmfuzz/docker_readme.md /elfuzz/README.md
+RUN mkdir /elfuzz/plot
+RUN sudo ln -s /home/appuser/elmfuzz/plot/fig /elfuzz/plot/figure
+RUN sudo ln -s /home/appuser/elmfuzz/plot/table /elfuzz/plot/table
 WORKDIR /elfuzz
 RUN mv /tmp/glade /home/appuser/glade
 RUN mv /tmp/isla /home/appuser/elmfuzz/tmp/isla
