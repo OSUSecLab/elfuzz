@@ -34,6 +34,14 @@ You can use `elfuzz config` to configure settings such as email notifications.
 
 The following sections describe how to reproduce the experiments presented in the paper. Note that we include all intermediate results acquired in our previous experiments, so you can skip any steps that you don't have time or resources to run.
 
+## Configuring Hugging Face token
+
+The experiments require pulling models from Hugging Face. You need to set up your [Hugging Face token](https://huggingface.co/docs/hub/en/security-tokens) via the following command:
+
+```bash
+elfuzz config --set tgi.huggingface_token "<your_token>"
+```
+
 ### Synthesizing fuzzers by ELFuzz and its four variants
 
 ### Mining grammars by GLADE

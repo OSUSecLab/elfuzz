@@ -106,6 +106,7 @@ def config(list_: bool, set: tuple[str, str], get: str):
         click.echo("logging.email_smtp_server (default: smtp.gmail.com): SMTP server for sending emails.")
         click.echo("logging.email_smtp_port (default: 587): SMTP port for sending emails.")
         click.echo("logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.")
+        click.echo("tgi.huggingface_token (default: None): Hugging Face token for accessing private models.")
     elif set is not None:
         config = toml.load(os.path.join(MAIN_CLI_DIR, "config.toml"))
         key, value = set
@@ -122,10 +123,18 @@ def config(list_: bool, set: tuple[str, str], get: str):
                 config["logging"]["email_smtp_port"] = int(value)
             case "logging.email_smtp_password":
                 config["logging"]["email_smtp_password"] = value
+            case "tgi.huggingface_token":
+                token_path = "/root/.config/huggingface"
+                if not os.path.exists(token_path):
+                    os.makedirs(token_path, exist_ok=True)
+                with open(os.path.join(token_path, "token"), "w") as f:
+                    f.write(value)
+                click.echo(f"{key} := {value}.")
+                return
             case _:
                 click.echo(f"Unknown configuration option: {key}")
         toml.dump(config, os.path.join(MAIN_CLI_DIR, "config.toml"))
-        click.echo(f"Set {key} to {value}.")
+        click.echo(f"{key} := {value}.")
     elif get is not None:
         config = toml.load(os.path.join(MAIN_CLI_DIR, "config.toml"))
         match get:
@@ -141,10 +150,16 @@ def config(list_: bool, set: tuple[str, str], get: str):
                 value = config["logging"]["email_smtp_port"]
             case "logging.email_smtp_password":
                 value = config["logging"]["email_smtp_password"]
+            case "tgi.huggingface_token":
+                token_path = "/root/.config/huggingface/token"
+                if not os.path.exists(token_path):
+                    click.echo("None")
+                with open(token_path, "r") as f:
+                    value = f.read().strip()
             case _:
                 click.echo(f"Unknown configuration option: {get}")
                 return
-        click.echo(f"{get} = {value}")
+        click.echo(f"{get} == {value}")
 @cli.command(name="cluster_synth", help="Get instructions about synthesizing input generators on a GPU cluster.")
 def synthesize_on_cluster():
     instructions = trim_indent("""
