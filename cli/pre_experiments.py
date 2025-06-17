@@ -15,7 +15,7 @@ def synthesize_grammar(benchmark):
 
     match benchmark:
         case "xml":
-            oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, "xml")} {{/}}"
+            oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, 'xml')} {{/}}"
         case "re2":
             oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, 're2_fuzzer')} {{/}}"
         case "sqlite3":
