@@ -1,7 +1,7 @@
 import os
 import subprocess
+from datetime import datetime
 import sys
-import time
 import click
 from common import PROJECT_ROOT, CLI_DIR
 
@@ -39,11 +39,22 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
     click.echo(f"Starting the text-gneration-inference server. This may take a while as it has to download the model...")
 
     try:
-        tgi_p = subprocess.Popen(cmd_tgi, stdout=sys.stdout, stderr=sys.stderr, env=env)
-        time.sleep(tgi_waiting) # It is hard to know whether the TGI server is ready, so we require the user to provide an estimation.
+        tgi_p = subprocess.Popen(cmd_tgi, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)
+        start = datetime.now()
+        while True:
+            if tgi_p.poll() is not None:
+                raise RuntimeError("TGI server failed to start.")
+            if (datetime.now() - start).total_seconds() > tgi_waiting:
+                break
+            assert tgi_p.stdout is not None, "TGI server stdout is None."
+            line = tgi_p.stdout.readline().decode("utf-8").strip()
+            if line:
+                print(line)
+            assert tgi_p.stderr is not None, "TGI server stderr is None."
+            line = tgi_p.stderr.readline().decode("utf-8").strip()
+            if line:
+                print(line, file=sys.stderr)
         click.echo("Text-generation-inference server started.")
-        tgi_p.stdout = None
-        tgi_p.stderr = None
     except Exception as e:
         if debug:
             click.echo(f"Error starting TGI server: {e}")
