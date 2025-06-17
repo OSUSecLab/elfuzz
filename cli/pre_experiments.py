@@ -58,6 +58,6 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
         else:
             raise e
 
-    rundir = os.path.join(PROJECT_ROOT, "preset", benchmark)
-    cmd = [os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
-    subprocess.run(" ".join(cmd), check=True, env=env, shell=True)
+    rundir = os.path.join("preset", benchmark)
+    cmd = ["/usr/bin/bash", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+    subprocess.run(cmd, check=True, env=env, shell=True)

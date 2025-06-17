@@ -21,6 +21,7 @@ def get_dirmap() -> DirMap:
 
 def make_build_dir(fuzzbench_dir: str, patch_info: tuple[str, str, str] | None = None, oss_fuzz: bool = False) -> str:
     global ELMFUZZ_RUNDIR
+    print(f"{os.getcwd=}, {ELMFUZZ_RUNDIR=}")
     if oss_fuzz:
         fuzzbench_project = get_config('oss_fuzz_project')
     else:
