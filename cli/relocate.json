@@ -23,5 +23,15 @@
         "from": "misc/antlr4_isla_grammars.tar.zst",
         "to": "evaluation/",
         "is_tarball": true
+    },
+    {
+        "from": "misc/glade_grammars_and_ground_truth.tar.zst",
+        "to": "evaluation/",
+        "is_tarball": true
+    },
+    {
+        "from": "misc/glade_oracle.tar.zst",
+        "to": "evaluation/",
+        "is_tarball": true
     }
 ]
