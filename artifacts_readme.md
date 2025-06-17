@@ -37,6 +37,10 @@ tar --zstd -xvf "elfuzz_(src|data|docker)_<timetag>.tar.zst"
 
 In the following sections, we will list the important contents of each tarball.
 
+## Replicating the experiments
+
+To replicate the experiments, please follow the instructions in the `README.md` file in the source code tarball.
+
 ## Contents of the Docker image tarball
 
 This tarball contains a Docker image to replicate all the experiments and figures and tables in the paper.

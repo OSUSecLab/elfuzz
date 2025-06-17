@@ -18,7 +18,17 @@ The experiments require [sibling containers](https://stackoverflow.com/questions
 elfuzz setup
 ```
 
-You'll need to restart this container manually after the command finishes to make the changes take effect.
+You'll need to restart this container manually after the command finishes to make the changes take effect. First, inside the container, run the following command to exit:
+
+```bash
+exit
+```
+
+Then, run the following command to restart the container (suppose that you followed the instructions in the `README.md` file in the source code tarball and named the container `elfuzz`):
+
+```bash
+docker start -ai elfuzz
+```
 
 Then, you need to download the large binary files from Figshare into the local repository. Run the following command to do so:
 
