@@ -31,7 +31,12 @@ if [ "$prev_gen" == "initial" ]; then
     cp "$ELMFUZZ_RUNDIR"/initial/seeds/*.py "$ELMFUZZ_RUNDIR"/${next_gen}/seeds/
 else
     # Selection
-    selection_strategy=$(./elmconfig.py get run.selection_strategy)
+    # Check if SELECTION_STRATEGY environment variable is set, otherwise use config
+    if [ -n "${SELECTION_STRATEGY:-}" ]; then
+        selection_strategy="$SELECTION_STRATEGY"
+    else
+        selection_strategy=$(./elmconfig.py get run.selection_strategy)
+    fi
     # If strategy is elites, select best coverage across all generations
     # If it's best_of_generation, select best coverage from the previous generation
     # Hopefully eventually we will also have MAP-Elites

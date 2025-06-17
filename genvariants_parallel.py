@@ -323,12 +323,15 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
     os.makedirs(args.log_dir, exist_ok=True)
 
+    forbidden = os.environ.get('ELFUZZ_FORBIDDEN_MUTATORS', '').split(',')
+    forbidden = [f.strip() for f in forbidden if f.strip()]
+
     generators = []
-    if not args.no_completion:
+    if not args.no_completion or 'complete' not in forbidden:
         generators += ['complete']
-    if not args.no_fim:
+    if not args.no_fim or 'infilled' not in forbidden:
         generators += ['infilled']
-    if not args.no_splice:
+    if not args.no_splice or 'lmsplice' not in forbidden:
         generators += ['lmsplice']
     # generators += ['continue']
 
