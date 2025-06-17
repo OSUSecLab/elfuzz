@@ -13,7 +13,7 @@ CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
 FIGSHARE_API_BASE = "https://api.figshare.com/v2"
 ARTICLE_ID = "29177162"
-CACHE_DIR = "/tmp/elfuzz_data_cache"
+CACHE_DIR = "/tmp/cache"
 TMP_UNZIP_DIR = "/tmp/unzip"
 
 @dataclass
