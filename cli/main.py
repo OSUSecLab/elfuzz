@@ -11,8 +11,6 @@ sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
 from common import PROJECT_ROOT
 
-sys.path.insert(0, PROJECT_ROOT)
-
 from pre_experiments import synthesize_fuzzer
 
 
