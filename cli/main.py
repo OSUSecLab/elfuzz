@@ -70,6 +70,8 @@ def setup():
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
 
+DEFAULT_TGI_WAITING = 1200
+
 @cli.command(name="synth", help="Synthesize input generators by ELFuzz and its four variants, mine grammars by GLADE, or learn semantic constraints by ISLearn.")
 @click.option("--target", "-T", required=True, type=click.Choice(
     ["fuzzer.elfuzz", "fuzzer.elfuzz_nofs", "fuzzer.elfuzz_nocp", "fuzzer.elfuzz_noin", "fuzzer.elfuzz_nosp",
@@ -78,10 +80,10 @@ def setup():
 @click.argument("benchmark", required=True, type=click.Choice(
     ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
 ))
-@click.option("--tgi-waiting", "-w", type=int, default=600,
+@click.option("--tgi-waiting", "-w", type=int, default=DEFAULT_TGI_WAITING, show_default=True,
               help="Estimated time in seconds to wait for the text-generation-inference server to be ready (after downloading the model files and \
-starting the service ). Default is 600 seconds. We need the user to provide the estimation as it is hard to know the \
-precise status of the server at runtime.  The default value (600s) should \
+starting the service ). We need the user to provide the estimation as it is hard to know the \
+precise status of the server at runtime.  The default value should \
 be proper if you are in an area with a typical network condition (i.e., outside mainland China) and start the server for the first time. \
 If you have already started the server before, the cached model files can significantly shorten the waiting time. You may provide a smaller \
 value for the estimation.")
