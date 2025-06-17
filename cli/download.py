@@ -8,8 +8,7 @@ import click
 import subprocess
 import shutil
 
-PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
-CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
+from common import PROJECT_ROOT, CLI_DIR
 
 FIGSHARE_API_BASE = "https://api.figshare.com/v2"
 ARTICLE_ID = "29177162"

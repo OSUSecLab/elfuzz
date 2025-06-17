@@ -6,11 +6,11 @@ import sys
 import toml
 import importlib
 
-PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
-CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
+MAIN_CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
-sys.path.insert(0, CLI_DIR)
+sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
+from pre_experiments import synthesize_fuzzer
 
 
 def trim_indent(s: str, *, delimiter: str = " ") -> str:
@@ -69,9 +69,26 @@ def setup():
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
 
-# @cli.command(name="synthesize", help="Synthesize input generators.")
-# def synthesize():
-#     click.echo("Synthesis not automated yet in this version.")
+@cli.command(name="synth", help="Synthesize input generators or mine grammars and semantic constraints.")
+@click.option("--target", "-T", required=True, type=click.Choice(
+    ["fuzzer.elfuzz", "fuzzer.elfuzz_nofs", "fuzzer.elfuzz_nocp", "fuzzer.elfuzz_noin", "fuzzer.elfuzz_nosp", 
+     "grammar.glade", "semantic.islearn"]
+))
+@click.argument("benchmark", required=True, type=click.Choice(
+    ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
+))
+def synthesize(target, benchmark):
+    match target, benchmark:
+        case ("semantic.islearn", "jsoncpp"):
+            click.echo("The JSON format doesn't need semantic constraints, so no synthesis will be conducted.")
+            return
+    match target:
+        case "fuzzer.elfuzz" | "fuzzer.elfuzz_nofs" | "fuzzer.elfuzz_nocp" | "fuzzer.elfuzz_noin" | "fuzzer.elfuzz_nosp":
+            synthesize_fuzzer(target.split(".")[1], benchmark)
+            return
+        case _:
+            click.echo(f"Target {target} for `synth` hasn't been implemented yet.")
+            return
 
 @cli.command(name="config", help="Manage configuration.")
 @click.option("list_", "--list", "-l", is_flag=True, help="List all configuration options.")
@@ -90,7 +107,7 @@ def config(list_: bool, set: tuple[str, str], get: str):
         click.echo("logging.email_smtp_port (default: 587): SMTP port for sending emails.")
         click.echo("logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.")
     elif set is not None:
-        config = toml.load(os.path.join(CLI_DIR, "config.toml"))
+        config = toml.load(os.path.join(MAIN_CLI_DIR, "config.toml"))
         key, value = set
         match key:
             case "logging.enable_email":
@@ -107,10 +124,10 @@ def config(list_: bool, set: tuple[str, str], get: str):
                 config["logging"]["email_smtp_password"] = value
             case _:
                 click.echo(f"Unknown configuration option: {key}")
-        toml.dump(config, os.path.join(CLI_DIR, "config.toml"))
+        toml.dump(config, os.path.join(MAIN_CLI_DIR, "config.toml"))
         click.echo(f"Set {key} to {value}.")
     elif get is not None:
-        config = toml.load(os.path.join(CLI_DIR, "config.toml"))
+        config = toml.load(os.path.join(MAIN_CLI_DIR, "config.toml"))
         match get:
             case "logging.enable_email":
                 value = config["logging"]["enable_email"]
