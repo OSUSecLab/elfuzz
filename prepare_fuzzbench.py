@@ -175,5 +175,5 @@ def main(fuzzbench_dir: str, preset_type: str, glade: bool):
             build_image(ELMFUZZ_RUNDIR)
 
 if __name__ == '__main__':
-    ELMFUZZ_RUNDIR = os.environ.get('ELMFUZZ_RUNDIR', 'preset/gengif')
+    ELMFUZZ_RUNDIR = os.environ.get('ELMFUZZ_RUNDIR', 'preset/jsoncpp')
     main()

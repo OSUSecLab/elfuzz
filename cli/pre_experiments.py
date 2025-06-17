@@ -50,10 +50,6 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
             line = tgi_p.stdout.readline().decode("utf-8").strip()
             if line:
                 print(line, flush=True)
-            # assert tgi_p.stderr is not None, "TGI server stderr is None."
-            # line = tgi_p.stderr.readline().decode("utf-8").strip()
-            # if line:
-            #     print(line, file=sys.stderr, flush=True)
         click.echo("Text-generation-inference server started.")
     except Exception as e:
         if debug:
@@ -63,5 +59,5 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
             raise e
 
     rundir = os.path.join(PROJECT_ROOT, "preset", benchmark)
-    cmd = ["/usr/bin/bash", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
-    subprocess.run(cmd, check=True, env=env, user=USER)
+    cmd = [os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+    subprocess.run(" ".join(cmd), check=True, env=env, shell=True)
