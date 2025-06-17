@@ -11,7 +11,7 @@ sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
 from common import PROJECT_ROOT
 
-from pre_experiments import synthesize_fuzzer
+from pre_experiments import synthesize_fuzzer, synthesize_grammar
 
 
 def trim_indent(s: str, *, delimiter: str = " ") -> str:
@@ -81,7 +81,7 @@ DEFAULT_TGI_WAITING = 1200
     ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
 ))
 @click.option("--tgi-waiting", "-w", type=int, default=DEFAULT_TGI_WAITING, show_default=True,
-              help="Estimated time in seconds to wait for the text-generation-inference server to be ready (after downloading the model files and \
+              help="This option only works for targets <fuzzer.*>. It provides the estimated time in seconds to wait for the text-generation-inference server to be ready (after downloading the model files and \
 starting the service ). We need the user to provide the estimation as it is hard to know the \
 precise status of the server at runtime.  The default value should \
 be proper if you are in an area with a typical network condition (i.e., outside mainland China) and start the server for the first time. \
@@ -96,6 +96,9 @@ def synthesize(target, benchmark, tgi_waiting, debug):
     match target:
         case "fuzzer.elfuzz" | "fuzzer.elfuzz_nofs" | "fuzzer.elfuzz_nocp" | "fuzzer.elfuzz_noin" | "fuzzer.elfuzz_nosp":
             synthesize_fuzzer(target.split(".")[1], benchmark, tgi_waiting=tgi_waiting, debug=debug)
+            return
+        case "grammar.glade":
+            synthesize_grammar(benchmark)
             return
         case _:
             click.echo(f"Target {target} for `synth` hasn't been implemented yet.")
