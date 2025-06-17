@@ -69,7 +69,7 @@ def setup():
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
 
-@cli.command(name="synth", help="Synthesize input generators by ELFuzz and its four variants, mine grammars by GLADE, or learn semantic constraints by IS-Learn.")
+@cli.command(name="synth", help="Synthesize input generators by ELFuzz and its four variants, mine grammars by GLADE, or learn semantic constraints by ISLearn.")
 @click.option("--target", "-T", required=True, type=click.Choice(
     ["fuzzer.elfuzz", "fuzzer.elfuzz_nofs", "fuzzer.elfuzz_nocp", "fuzzer.elfuzz_noin", "fuzzer.elfuzz_nosp",
      "grammar.glade", "semantic.islearn"]
