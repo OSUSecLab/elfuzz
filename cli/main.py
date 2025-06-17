@@ -10,6 +10,9 @@ MAIN_CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
 from common import PROJECT_ROOT
+
+sys.path.insert(0, PROJECT_ROOT)
+
 from pre_experiments import synthesize_fuzzer
 
 
@@ -193,5 +196,4 @@ def info():
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)
     sys.argv[0] = "elfuzz"
-    os.environ["PYTHONPATH"] = PROJECT_ROOT
     cli(max_content_width=get_terminal_width())
