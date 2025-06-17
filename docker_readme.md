@@ -54,6 +54,22 @@ The following sections describe how to reproduce the experiments presented in th
 
 ### Synthesizing fuzzers by ELFuzz and its four variants
 
+Run the following command to synthesize fuzzers using ELFuzz or one of its variants:
+
+```bash
+elfuzz synth -T "fuzzer.(elfuzz|elfuzz_nofs|elfuzz_nocp|elfuzz_noin|elfuzz_nosp)" "<benchmark>"
+```
+
+where `<benchmark>` can be chosen from the seven benchmarks used in the paper, viz.,
+
+- `jsoncpp`
+- `libxml2`
+- `re2`
+- `cpython3` (CPython in the paper)
+- `sqlite3` (SQLite in the paper)
+- `cvc5`
+- `librsvg`
+
 ### Mining grammars by GLADE
 
 ### Mining semantic constraints by ISLearn
