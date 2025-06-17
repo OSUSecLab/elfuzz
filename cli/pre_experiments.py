@@ -5,6 +5,9 @@ import sys
 import click
 from common import PROJECT_ROOT, CLI_DIR, USER
 
+def synthesize_grammar(benchmark):
+    pass
+
 def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
     match target:
         case "elfuzz":
