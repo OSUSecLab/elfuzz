@@ -38,7 +38,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600):
     cmd_tgi = ["/usr/bin/bash", os.path.join(PROJECT_ROOT, "start_tgi_servers.sh")]
     click.echo(f"Starting the text-gneration-inference server. This may take a while as it has to download the model...")
     tgi_p = subprocess.Popen(cmd_tgi, stdout=sys.stdout, stderr=sys.stderr, env=env)
-    time.sleep(tgi_pull_tgi) # It is hard to know whether the TGI server is ready, so we require the user to provide an estimation.
+    time.sleep(tgi_waiting) # It is hard to know whether the TGI server is ready, so we require the user to provide an estimation.
     click.echo("Text-generation-inference server started.")
     tgi_p.stdout = None
     tgi_p.stderr = None
