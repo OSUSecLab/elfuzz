@@ -4,12 +4,12 @@ import subprocess
 import os
 import sys
 import toml
-import importlib
 
 MAIN_CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
 sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
+from common import PROJECT_ROOT
 from pre_experiments import synthesize_fuzzer
 
 
@@ -158,6 +158,14 @@ def synthesize_on_cluster():
 def download(ignore_cache: bool):
     click.echo("Downloading data files needed by the experiments...")
     download_mod.download_data(ignore_cache=ignore_cache)
+
+@cli.command(name="info", help="Show information about the Docker image.")
+def info():
+    cmd = ["git", "rev-parse", "--short", "HEAD"]
+    result = subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=PROJECT_ROOT)
+    commit_hash = result.stdout.strip()
+    click.echo(f"Docker image built from the ELFuzz project at revision {commit_hash}")
+    click.echo(f"Project root in the container: {PROJECT_ROOT}")
 
 if __name__ == "__main__":
     sys.argv[0] = "elfuzz"
