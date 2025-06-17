@@ -1,6 +1,6 @@
 # Replication Package of ELFuzz
 
-[![Static Badge](https://img.shields.io/badge/GitHub-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz)
+[![GitHub repository](https://img.shields.io/badge/GitHub_Repository-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz) [![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
 
 ## Overview
 

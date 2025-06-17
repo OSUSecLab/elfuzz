@@ -14,5 +14,5 @@ os.remove(tarball_path)
 tarball_path = f"{tarball_path}.zst"
 print(f"Archive '{tarball_path}' created successfully.")
 
-shutil.copy(os.path.join(ROOT, "figshare_readme.md"), os.path.join(ROOT, "tmp", "README.md"))
-print("Figshare README copied to tmp directory.")
+shutil.copy(os.path.join(ROOT, "artifacts_readme.md"), os.path.join(ROOT, "tmp", "README.md"))
+print("Artifacts README copied to tmp directory.")
