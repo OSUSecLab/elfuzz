@@ -43,9 +43,5 @@
         "to": "extradata/",
         "is_tarball": true,
         "hook": "unpack_islearn_constraints"
-    },
-    {
-        "from": "misc/jsoncpp_islearn.json",
-        "to": "extradata/islearn_constraints/"
     }
 ]
