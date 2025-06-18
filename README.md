@@ -55,6 +55,8 @@ docker build -t ghcr.io/cychen2021/elfuzz:25.06.0 -f .devcontainer/Dockerfile --
 
 ## Source code layout
 
+First, I'm sorry that the codebase is messy. It is hard to keep it clean while rushing towards the paper deadline.
+
 TODO
 
 ## Miscellaneous
