@@ -30,7 +30,7 @@ def synthesize_semantics(benchmark):
         os.makedirs(stored_dir)
     with tempfile.TemporaryDirectory() as tmpdir:
         cmd_mine = ["docker", "run", "--rm", "-v", f"{tmpdir}:/tmp/semantics/", f"elmfuzz/{benchmark}_islearn",
-                    "/home/appuser/miniconda3/bin/python", "infer_semantics.py", "-o", f"/tmp/semantics/{benchmark}.json"]
+                    "conda", "run", "-n", "py310", "/bin/bash", "-c", f"python infer_semantics.py -o /tmp/semantics/{benchmark}.json"]
         subprocess.run(cmd_mine, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
         existing = [os.path.join(stored_dir, f) for f in os.listdir(stored_dir) if f.endswith(".json") and benchmark in f]
         assert len(existing) <= 1, f"Expected at most one existing semantic constraints file for {benchmark}, found {len(existing)}"
