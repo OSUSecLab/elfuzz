@@ -82,7 +82,7 @@ DEFAULT_TGI_WAITING = 1200
 @cli.command(name="synth", help="Synthesize input generators by ELFuzz and its four variants, mine grammars by GLADE, or learn semantic constraints by ISLearn.")
 @click.option("--target", "-T", required=True, type=click.Choice(
     ["fuzzer.elfuzz", "fuzzer.elfuzz_nofs", "fuzzer.elfuzz_nocp", "fuzzer.elfuzz_noin", "fuzzer.elfuzz_nosp",
-     "grammar.glade", "semantic.islearn"]
+     "grammar.glade", "semantics.islearn"]
 ))
 @click.argument("benchmark", required=True, type=click.Choice(
     ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]

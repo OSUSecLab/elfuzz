@@ -92,7 +92,23 @@ The evolution iterations will be in the following tarballs:
 
 ### Mining grammars by GLADE
 
+Run the following command to mine grammars using GLADE:
+
+```bash
+elfuzz synth -T grammar.glade "<benchmark>"
+```
+
+The grammar will be put in `evaluation/gramgen/<benchmark>/<timestamp>.gram`.
+
 ### Mining semantic constraints by ISLearn
+
+Run the following command to mine semantic constraints using ISLearn:
+
+```bash
+elfuzz synth -T semantics.islearn "<benchmark>"
+```
+
+The semantic constraints will be put in `extradata/islearn_constraints/<benchmark>.json`.
 
 ### Producing and minimizing seed test cases
 
