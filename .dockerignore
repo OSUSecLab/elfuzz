@@ -4,5 +4,8 @@ tmp/
 !tmp/islearn/
 /evaluation/binary/
 /evaluation/workdir/
+!/evaluation/workdir/*.py
+!/evaluation/workdir/*.toml
+!/evaluation/workdir/*.xsh
 /preset/**/gen*/
 /extradata/
