@@ -115,7 +115,7 @@ The semantic constraints will be put in `extradata/islearn_constraints/<benchmar
 #### WARNINGS
 
 - This step will produce enormous amounts of test cases, especially when using ELFuzz or its variants. There will be data of more than 50 GiB consisting of small files, so even deleting them will take a long time.
-- The generation process typically takes a long time to finish. We produce the test cases in batches and use the total time of the batches as the generation time. For example, if we generate three batches, which take 10 min, 15 min, and 20 min respectively, the generation time is 45 min. Between batches, we use `afl-showmap` to incrementally compute the coverage of the test cases, and that is why the overall time (typically 1 day for ELFuzz) is much longer than the generation time.
+- The generation process typically takes a long time to finish. We produce the test cases in batches and use the total time of the batches as the generation time. For example, if we generate three batches, which take 10 min, 15 min, and 20 min respectively, the generation time is 45 min. Between batches, we use `afl-showmap` to incrementally compute the coverage of the test cases, and that is why the overall time (typically one day for ELFuzz) is much longer than the generation time.
 - Due to the above reasons, I suggest you to just skip this step and start the experiments from seed test cases we produced before if you don't have enough time or resources to run it.
 
 #### Producing test cases
