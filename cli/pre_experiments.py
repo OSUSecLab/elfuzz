@@ -33,7 +33,8 @@ def synthesize_grammar(benchmark):
 
     learn_cmd = ["./gradlew", "run", "--args", f"learn -rd 100 -l 0-100 '{oracle_cmd}'"]
     click.echo(f"Running GLADE to mine grammar for {benchmark} (may needs several hours)...")
-    subprocess.run(learn_cmd, check=True, env=os.environ.copy(), cwd=GLADE_DIR, user=USER, shell=True)
+    subprocess.run(learn_cmd, check=True, env=os.environ.copy() | {"JAVA_HOME": "/home/appuser/.sdkman/candidates/java/current/"},
+                   cwd=GLADE_DIR, user=USER, shell=True)
 
 def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
     match target:
