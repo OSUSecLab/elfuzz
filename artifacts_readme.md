@@ -4,7 +4,7 @@
 
 ## Overview
 
-This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*." While this Figshare repository is self-contained with all docs, code and data required to replicate the experiments, the original source code is hosted on [GitHub](https://github.com/cychen2021/elfuzz), where you may get a better reading experience of the docs.
+This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*." While this Figshare repository is self-contained with all docs, code and data required to replicate the experiments, the original source code is hosted on [GitHub](https://github.com/cychen2021/elfuzz), where you may get a better reading experience for the docs.
 
 The files are organized as follows:
 
