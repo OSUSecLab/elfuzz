@@ -273,8 +273,10 @@ def produce(fuzzer, benchmark, *, debug=False):
         case "islearn":
             fuzzer_name = "islearn"
             dir_suffix = "_islearn"
-    with tempfile.TemporaryDirectory(delete=not debug) as tmpdir:
+    with tempfile.TemporaryDirectory() as tmpdir:
         config_str = CONFIG_TEMPLATE.format(fuzzer_name, benchmark)
+        if debug:
+            print(f"{config_str=}")
         with open(os.path.join(tmpdir, "config.toml"), "w") as f:
             f.write(config_str)
         WORKDIR = os.path.join(PROJECT_ROOT, "evaluation", "workdir")
