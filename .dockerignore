@@ -5,3 +5,4 @@ tmp/
 /evaluation/binary/
 /evaluation/workdir/
 /preset/**/gen*/
+/extradata/

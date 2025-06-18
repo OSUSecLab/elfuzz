@@ -44,3 +44,5 @@ plot/fig/*
 
 plot/table/*
 !plot/table/.gitkeep
+/extradata/*
+!/extradata/.gitkeep
