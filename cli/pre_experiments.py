@@ -38,7 +38,7 @@ def synthesize_grammar(benchmark):
         case _:
             raise ValueError(f"Unknown benchmark: {benchmark}")
 
-    learn_cmd = ["./gradlew", "run", f"--args=\"learn -rd 100 -l 0-100 '{oracle_cmd}'\""]
+    learn_cmd = ["./gradlew", "run", f"--args=\"learn -l 0-100 '{oracle_cmd}'\""]
     click.echo(f"Running GLADE to mine grammar for {benchmark} (may needs several hours)...")
     click.echo(f"Command: {' '.join(learn_cmd)}")
     subprocess.run(" ".join(learn_cmd), check=True, env=os.environ.copy() | {"JAVA_HOME": "/home/appuser/.sdkman/candidates/java/current/"},
