@@ -108,7 +108,7 @@ Run the following command to mine semantic constraints using ISLearn:
 elfuzz synth -T semantics.islearn "<benchmark>"
 ```
 
-The semantic constraints will be put in `extradata/islearn_constraints/<benchmark>.json`.
+The semantic constraints will be put in `extradata/islearn_constraints/<benchmark>.json`. By default, the command will randomly choose one semantic constraint from ones with the best recall and precision if there are multiple candidates and put it into the corresponding `*.isla` file in `evaluation/islearn_adapt/selected/<benchmark>_*.isla` file to be used by ISLa and ISLearn in later experiments. You can use the `--no-select` flag to disable this. If so, you will need to manually select one semantic constraint and put it into that file.
 
 ### Producing and minimizing seed test cases
 
