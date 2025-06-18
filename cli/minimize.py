@@ -139,7 +139,8 @@ def cmin(fuzzers, benchmarks, tmpdir):
             ]
             subprocess.run(cmd_tar, check=True)
             collect.append(output_file)
-    click.echo(f"Finish processing. Results collected in {'\n'.join(collect)}")
+    NL = "\n"
+    click.echo(f"Finish processing. Results collected in {NL.join(collect)}")
 
 def minimize_command(
     all: bool = False,
