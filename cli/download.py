@@ -81,6 +81,9 @@ def relocate(data_dir: str):
             else:
                 for file in files:
                     shutil.move(os.path.join(src, file), os.path.join(dst, file))
+                if item.hook is not None:
+                    item.hook(dst)
+                click.echo(f"Relocated {item.from_} to {item.to}.")
         else:
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
@@ -101,9 +104,9 @@ def relocate(data_dir: str):
                     cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
                     subprocess.run(cmd, check=True)
                     os.remove(src)
-        if item.hook is not None:
-            item.hook(dst)
-        click.echo(f"Relocated {item.from_} to {item.to}.")
+                if item.hook is not None:
+                    item.hook(dst)
+                click.echo(f"Relocated {item.from_} to {item.to}.")
 
 def file_md5(file_path: str) -> str:
     """Calculate the MD5 checksum of a file."""
