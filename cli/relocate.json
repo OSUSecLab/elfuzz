@@ -46,13 +46,13 @@
     },
     {
         "from": "misc/islearn_ground_truth.tar.zst",
-        "to": "evaluate/islearn_adapt/",
+        "to": "evaluation/islearn_adapt/",
         "is_tarball": true,
         "hook": "rename_islearn_ground_truth"
     },
     {
         "from": "misc/islearn_oracles.tar.zst",
-        "to": "evaluate/islearn_adapt/",
+        "to": "evaluation/islearn_adapt/",
         "is_tarball": true
     }
 ]
