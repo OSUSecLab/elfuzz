@@ -56,6 +56,9 @@ def unpack_islearn_constraints(relocated_path: str):
         subprocess.run(cmd, check=True)
         os.remove(file)
 
+def rename_islearn_ground_truth(relocated_path: str):
+    shutil.move(os.path.join(relocated_path, "fr_ground_truth"), os.path.join(relocated_path, "oracles"))
+
 def relocate(data_dir: str):
     relocate_info = load_relocate_info()
     count = 1
