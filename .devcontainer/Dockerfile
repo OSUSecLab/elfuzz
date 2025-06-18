@@ -146,5 +146,6 @@ RUN mv /tmp/isla /home/appuser/elmfuzz/tmp/isla
 RUN mv /tmp/islearn /home/appuser/elmfuzz/tmp/islearn
 
 ENV ELFUZZ_PROJECT_ROOT=/home/appuser/elmfuzz
+ENV ENTRY_ROOT=/elfuzz
 
 ENTRYPOINT ["/usr/bin/bash"]
