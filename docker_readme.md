@@ -126,7 +126,17 @@ After synthesizing all the fuzzers/grammars/semantic constraints, you can produc
 elfuzz produce -T "(elfuzz|elfuzz_nofs|elfuzz_nocp|elfuzz_noin|elfuzz_nosp|glade|isla|islearn|grmr)" "<benchmark>"
 ```
 
-TODO
+The test cases will be stored in subdirectories of `extradata/seeds/raw/<benchmark>/`:
+
+- `elm/` for ELFuzz
+- `elmalt/` for ELFuzz-noFS
+- `elmnocomp/`: for ELFuzz-noCP
+- `elmnoinf/`: for ELFuzz-noIN
+- `elmnospl/`: for ELFuzz-noSP
+- `grmr/` for Grmr
+- `isla/` for ISLa
+- `islearn/` for ISLearn
+- `glade/` for GLADE
 
 #### Minimizing test cases
 
