@@ -122,7 +122,7 @@ def config(list_: bool, set: tuple[str, str], get: str):
             |logging.email_smtp_port (default: 587): SMTP port for sending emails.
             |logging.email_smtp_password (default: dummypassword): SMTP password for sending emails.
             |tgi.huggingface_token (default: None): Hugging Face token for accessing private models.
-        """, delimiter="\n"), nl=False)
+        """, delimiter="\n"))
     elif set is not None:
         config = toml.load(os.path.join(MAIN_CLI_DIR, "config.toml"))
         key, value = set
