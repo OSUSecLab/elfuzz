@@ -8,7 +8,7 @@ This Docker image contains source code, data, and utilities to reproduce the exp
 
 In the following instructions, you will work in the directory `/elfuzz/`. However, the actual source location is `/home/appuser/elmfuzz/`. In this document, all relative paths are relative to `/home/appuser/elmfuzz/`.
 
-This file is a symlink to `/home/appuser/elmfuzz/docker_readme.md`. `docs/` is a symlink to `/home/appuser/elmfuzz/docs/`. Files and directories created in the later experiments are mostly symlinks to files or directories in the actual source location. You can use `realpath` to check where they point to.
+This file is a symlink to `/home/appuser/elmfuzz/docker_readme.md`. `docs/` is a symlink to `/home/appuser/elmfuzz/docs/`. Later experiments will create some files and directories in `/elfuzz/` and they are also symlinks to the actual source location. You can use `realpath` to check where they point to.
 
 ## Launching and setting up the container
 
