@@ -81,8 +81,13 @@ precise status of the server at runtime.  The default value should \
 be proper if you are in an area with a typical network condition (i.e., outside mainland China) and start the server for the first time. \
 If you have already started the server before, the cached model files can significantly shorten the waiting time. You may provide a smaller \
 value for the estimation.")
+@click.option("--no-select-semantic-constraints", "--no-select", is_flag=True, default=False,
+              help="This option only works for semantics.islearn. If this option is set, the user should manually \
+select one semantic constraint from the mined semantic constraints \
+and put it into evaluation/islearn_adapt/selected/<benchmark>_isla<timetag>.isla. If this option is not set, \
+a random one from the constraints with the best recall and precision will be selected from the mined constraints and put into the file.")
 @click.option("--debug", is_flag=True, default=False, hidden=True)
-def synthesize(target, benchmark, tgi_waiting, debug):
+def synthesize(target, benchmark, tgi_waiting, debug, no_select_semantic_constraints):
     match target, benchmark:
         case ("semantic.islearn", "jsoncpp"):
             click.echo("The JSON format doesn't need semantic constraints, so no synthesis will be conducted.")
@@ -95,7 +100,7 @@ def synthesize(target, benchmark, tgi_waiting, debug):
             synthesize_grammar(benchmark)
             return
         case "semantic.islearn":
-            synthesize_semantics(benchmark)
+            synthesize_semantics(benchmark, no_select=no_select_semantic_constraints)
             return
         case _:
             click.echo(f"Target {target} for `synth` hasn't been implemented yet.")
@@ -217,6 +222,19 @@ def produce_command(fuzzer: str, benchmark: str, debug: bool):
             produce(fuzzer, benchmark, debug=debug)
         case _:
             click.echo(f"Unknown fuzzer: {fuzzer}. Supported fuzzers are: elfuzz, elfuzz_nofs, elfuzz_nocp, elfuzz_noin, elfuzz_nosp, isla, islearn, grmr, glade.")
+
+@cli.command(name="minimize", help="Minimize test cases and (optionally) prepend random control bytes.")
+@click.option("--fuzzer", "-T", required=True, type=click.Choice(
+    ["elfuzz", "isla", "islearn", "grmr", "glade"]
+))
+@click.argument("benchmark", required=True, type=click.Choice(
+    ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
+))
+def minimize(fuzzer, benchmark):
+    match fuzzer, benchmark:
+        case ("islearn", "jsoncpp") | ("islearn", "re2"):
+            click.echo(f"Fuzzer {fuzzer} is not supported for benchmark {benchmark}.")
+            return
     ...
 
 if __name__ == "__main__":
