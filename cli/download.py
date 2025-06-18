@@ -47,6 +47,12 @@ def load_relocate_info() -> list[RelocateTo]:
             result.append(RelocateTo(from_=from_, to=to, is_dir=is_dir, hook=hook))
         return result
 
+def truncate_prefix(relocated_path: str):
+    dirs = os.listdir(relocated_path)
+    assert len(dirs) == 1, "There should be exactly one directory in the relocated path"
+    subdir = dirs[0]
+    for item in os.listdir(os.path.join(relocated_path, subdir)):
+        shutil.move(os.path.join(relocated_path, subdir, item), os.path.join(relocated_path, item))
 
 def unpack_islearn_constraints(relocated_path: str):
     constraints_dir = os.path.join(relocated_path, "islearn_constraints")

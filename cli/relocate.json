@@ -1,23 +1,28 @@
 [
     {
         "from": "synthesized_fuzzers/elfuzz_noCompletion/",
-        "to": "evaluation/nocomp_fuzzers/"
+        "to": "evaluation/nocomp_fuzzers/",
+        "hook": "truncate_prefix"
     },
     {
         "from": "synthesized_fuzzers/elfuzz_noInfilling/",
-        "to": "evaluation/noinf_fuzzers/"
+        "to": "evaluation/noinf_fuzzers/",
+        "hook": "truncate_prefix"
     },
     {
         "from": "synthesized_fuzzers/elfuzz_noSplicing/",
-        "to": "evaluation/nospl_fuzzers/"
+        "to": "evaluation/nospl_fuzzers/",
+        "hook": "truncate_prefix"
     },
     {
         "from": "synthesized_fuzzers/elfuzz_noFS/",
-        "to": "evaluation/alt_elmfuzzers/"
+        "to": "evaluation/alt_elmfuzzers/",
+        "hook": "truncate_prefix"
     },
     {
         "from": "synthesized_fuzzers/elfuzz/",
-        "to": "evaluation/elmfuzzers/"
+        "to": "evaluation/elmfuzzers/",
+        "hook": "truncate_prefix"
     },
     {
         "from": "misc/antlr4_isla_grammars.tar.zst",
