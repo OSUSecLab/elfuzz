@@ -18,7 +18,8 @@ def synthesize_semantics(benchmark):
             cmd_prepare_base += ["-d", "/home/appuser/oss-fuzz", "-t", "oss-fuzz"]
         case "cvc5":
             cmd_prepare_base += ["-t", "docker"]
-    subprocess.run(cmd_prepare_base, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+    subprocess.run(cmd_prepare_base, check=True, env=os.environ.copy() | {"ELMFUZZ_RUNDIR": os.path.join(PROJECT_ROOT, "preset", benchmark)},
+                   cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
     cmd_prepare = ["python", os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "prepare_islearn.py"), benchmark]
     subprocess.run(cmd_prepare, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
     click.echo(f"Mining semantic constraints...")
