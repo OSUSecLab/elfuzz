@@ -49,23 +49,31 @@ def relocate(data_dir: str):
 
         if item.is_dir:
             files = os.listdir(src)
-            for file in files:
-                shutil.move(os.path.join(src, file), os.path.join(dst, file))
+            if not os.path.exists(src):
+                click.echo(f"WARNING: Path {src} does not exist. Skipping.")
+            else:
+                for file in files:
+                    shutil.move(os.path.join(src, file), os.path.join(dst, file))
         else:
-            target_is_dir = is_dir(dst)
-            if not is_tarball(src):
-                if target_is_dir:
+            if not os.path.exists(src):
+                click.echo(f"WARNING: Path {src} does not exist. Skipping.")
+            else:
+                target_is_dir = is_dir(dst)
+                if not is_tarball(src):
+                    if target_is_dir:
+                        if not os.path.exists(dst):
+                            os.makedirs(dst)
+                        
+                        shutil.move(src, os.path.join(dst, os.path.basename(src)))
+                    else:
+                        shutil.move(src, dst)
+                else:
+                    assert target_is_dir, "Target directory must be a directory for tarball relocation"
                     if not os.path.exists(dst):
                         os.makedirs(dst)
-                    shutil.move(src, os.path.join(dst, os.path.basename(src)))
-                else:
-                    shutil.move(src, dst)
-            else:
-                assert target_is_dir, "Target directory must be a directory for tarball relocation"
-                if not os.path.exists(dst):
-                    os.makedirs(dst)
-                cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
-                subprocess.run(cmd, check=True)
+                    cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
+                    subprocess.run(cmd, check=True)
+                    os.remove(src)
 
 def file_md5(file_path: str) -> str:
     """Calculate the MD5 checksum of a file."""
