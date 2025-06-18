@@ -6,7 +6,7 @@ This repository contains the code and experiment data of the paper "ELFuzz: Effi
 
 ## Experiment data
 
-The experiment data is published on [Figshare](https://doi.org/10.6084/m9.figshare.29177162).
+The experiment data are published on [Figshare](https://doi.org/10.6084/m9.figshare.29177162).
 
 ## Replication package
 
