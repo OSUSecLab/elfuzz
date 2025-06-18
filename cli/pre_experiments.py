@@ -10,7 +10,7 @@ import tempfile
 
 def synthesize_semantics(benchmark):
     click.echo(f"Preparing environments...")
-    cmd_prepare_base = ["python", os.path.join(PROJECT_ROOT, "prepare_fuzzbench.py")]
+    cmd_prepare_base = ["sudo", "python", os.path.join(PROJECT_ROOT, "prepare_fuzzbench.py")]
     match benchmark:
         case "jsoncpp" | "libxml2" | "re2" | "sqlite3":
             pass
@@ -20,7 +20,7 @@ def synthesize_semantics(benchmark):
             cmd_prepare_base += ["-t", "docker"]
     subprocess.run(cmd_prepare_base, check=True, env=os.environ.copy() | {"ELMFUZZ_RUNDIR": os.path.join(PROJECT_ROOT, "preset", benchmark)},
                    cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr, user=USER)
-    cmd_prepare = ["python", os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "prepare_islearn.py"), benchmark]
+    cmd_prepare = ["sudo", "python", os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "prepare_islearn.py"), benchmark]
     subprocess.run(cmd_prepare, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr, user=USER)
     click.echo(f"Mining semantic constraints...")
     stored_dir = os.path.join(PROJECT_ROOT, "extradata", "islearn_constraints")
