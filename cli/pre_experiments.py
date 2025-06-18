@@ -4,7 +4,7 @@ from datetime import datetime
 import sys
 import shutil
 import click
-from common import PROJECT_ROOT, CLI_DIR, USER, trim_indent
+from common import PROJECT_ROOT, CLI_DIR, USER, trim_indent, UID
 from datetime import datetime
 import tempfile
 
@@ -279,7 +279,7 @@ def produce(fuzzer, benchmark, *, debug=False):
             print(f"{config_str=}")
         with open(os.path.join(tmpdir, "config.toml"), "w") as f:
             f.write(config_str)
-        os.chown(tmpdir, os.getuid(), os.getgid())
+        os.chown(tmpdir, UID, UID)
         WORKDIR = os.path.join(PROJECT_ROOT, "evaluation", "workdir")
         if os.path.exists(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}")):
             shutil.rmtree(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}"))
