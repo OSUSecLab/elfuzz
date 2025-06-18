@@ -54,5 +54,10 @@
         "from": "misc/islearn_oracles.tar.zst",
         "to": "evaluation/islearn_adapt/",
         "is_tarball": true
+    },
+    {
+        "from": "misc/antlr4_isla_grammars.tar.zst",
+        "to": "evaluation/",
+        "is_tarball": true
     }
 ]
