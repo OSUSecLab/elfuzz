@@ -194,7 +194,7 @@ def synthesize_on_cluster():
 @cli.command(name="download", help="Download large binary files stored on Figshare.")
 @click.option("--ignore-cache", is_flag=True, default=False,)
 @click.option("--only-relocate", is_flag=True, default=False,
-              help="Only relocate the files from the cache directory to the data directory without downloading them again.")
+              help="Only relocate the files from the cache directory to the data directory without downloading and unziping them again.")
 def download(ignore_cache: bool, only_relocate: bool):
     click.echo("Downloading data files needed by the experiments...")
     download_mod.download_data(ignore_cache=ignore_cache, only_relocate=only_relocate)
