@@ -14,7 +14,7 @@ SHELL ["conda", "run", "-n", "py310", "/bin/bash", "-c"]
 
 # Upgrade pip and install wheel within the virtual environment
 RUN pip install --upgrade pip wheel
-RUN pip install click
+RUN pip install "click==8.1.8"
 COPY tmp/isla /tmp/isla
 COPY tmp/islearn /tmp/islearn
 RUN pip install /tmp/isla
