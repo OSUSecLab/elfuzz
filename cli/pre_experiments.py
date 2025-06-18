@@ -284,7 +284,7 @@ def produce(fuzzer, benchmark, *, debug=False):
             shutil.rmtree(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}"))
         cmd = ["python", os.path.join(WORKDIR, "batchrun.py"), os.path.join(tmpdir, "config.toml")]
         subprocess.run(" ".join(cmd), check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout,
-                       shell=True, stderr=sys.stderr)
+                       shell=True, stderr=sys.stderr, user=USER)
     result_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw", benchmark, fuzzer_name)
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
