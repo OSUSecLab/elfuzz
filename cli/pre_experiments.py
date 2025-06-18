@@ -20,7 +20,7 @@ def synthesize_grammar(benchmark):
             oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, 're2_fuzzer')} {{/}}"
         case "sqlite3":
             oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, 'sqlite3_parser')} {{/}}"
-        case "json":
+        case "jsoncpp":
             oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, 'jsoncpp_fuzzer')} {{/}}"
         case "cpython3":
             oracle_cmd = f"python {os.path.join(GLADE_ORACLE_DIR, 'pyparser.py')} {{/}}"
@@ -28,6 +28,8 @@ def synthesize_grammar(benchmark):
             oracle_cmd = f"{os.path.join(GLADE_ORACLE_DIR, 'render_document')}"
         case "cvc5":
             oracle_cmd = f"python {os.path.join(GLADE_ORACLE_DIR, 'cvc5_parser.py')} {{/}}"
+        case _:
+            raise ValueError(f"Unknown benchmark: {benchmark}")
 
     learn_cmd = ["./gradlew", "run", "--args", f"learn -rd 100 -l 0-100 '{oracle_cmd}'"]
     click.echo(f"Running GLADE to mine grammar for {benchmark} (may needs several hours)...")
