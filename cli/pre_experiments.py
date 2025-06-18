@@ -19,9 +19,9 @@ def synthesize_semantics(benchmark):
         case "cvc5":
             cmd_prepare_base += ["-t", "docker"]
     subprocess.run(cmd_prepare_base, check=True, env=os.environ.copy() | {"ELMFUZZ_RUNDIR": os.path.join(PROJECT_ROOT, "preset", benchmark)},
-                   cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+                   cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr, user=USER)
     cmd_prepare = ["python", os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "prepare_islearn.py"), benchmark]
-    subprocess.run(cmd_prepare, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+    subprocess.run(cmd_prepare, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr, user=USER)
     click.echo(f"Mining semantic constraints...")
     stored_dir = os.path.join(PROJECT_ROOT, "extradata", "islearn_constraints")
     if not os.path.exists(stored_dir):
