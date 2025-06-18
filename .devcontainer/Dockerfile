@@ -99,6 +99,7 @@ RUN pip install "antlr4-tools==0.2.2" "antlr4-python3-runtime==4.13.2" "networkx
 RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | bash -s -- -y
 RUN /home/appuser/.cargo/bin/cargo install cargo-afl@0.15.10
 RUN conda init
+RUN conda config --set changeps1 false
 RUN echo "conda activate py310" >> /home/appuser/.bashrc
 RUN echo "conda config --set changeps1 false" >> /home/appuser/.bashrc
 ENV LD_LIBRARY_PATH=/home/appuser/miniconda3/envs/py310/lib:$LD_LIBRARY_PATH
