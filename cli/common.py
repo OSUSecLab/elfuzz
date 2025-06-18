@@ -1,4 +1,5 @@
 import os
+import re
 
 PROJECT_ROOT = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
