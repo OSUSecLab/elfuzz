@@ -8,6 +8,10 @@ from common import PROJECT_ROOT, CLI_DIR, USER
 
 def synthesize_grammar(benchmark):
     inputs_dir = os.path.join(PROJECT_ROOT, "evaluation", "gramgen", benchmark, "inputs")
+
+    if os.path.exists(inputs_dir):
+        shutil.rmtree(inputs_dir)
+
     GLADE_DIR = os.path.join("/", "home", USER, "glade")
     target_dir = os.path.join(GLADE_DIR, "inputs")
     shutil.copytree(inputs_dir, target_dir, dirs_exist_ok=True)
