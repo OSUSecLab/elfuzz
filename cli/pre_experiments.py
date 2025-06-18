@@ -7,8 +7,10 @@ import click
 from common import PROJECT_ROOT, CLI_DIR, USER, trim_indent, UID
 from datetime import datetime
 import tempfile
+import json
+from typing import Dict
 
-def synthesize_semantics(benchmark):
+def synthesize_semantics(benchmark, no_select: bool):
     click.echo(f"Preparing environments...")
     cmd_prepare_base = ["sudo", f"ELMFUZZ_RUNDIR=preset/{benchmark}", "python", os.path.join(PROJECT_ROOT, "prepare_fuzzbench.py")]
     match benchmark:
@@ -38,6 +40,19 @@ def synthesize_semantics(benchmark):
             os.remove(existing[0])
             click.echo(f"Storing semantic constraints for {benchmark}...")
         shutil.copy(os.path.join(tmpdir, f"{benchmark}.json"), os.path.join(stored_dir, f"{benchmark}.json"))
+    if not no_select:
+        with open(os.path.join(stored_dir, f"{benchmark}.json"), "r") as f:
+            constraints: Dict[str, Dict] = json.load(f)
+        if not constraints:
+            click.echo(f"WARNING: No semantic constraints successfully mined for {benchmark}.")
+        else:
+            best_constraint = max(constraints.values(), key=lambda x: (x.get("recall", 0), x.get("precision", 0)))
+            selected_dir = os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "selected")
+            files = [os.path.join(selected_dir, f) for f in os.listdir(selected_dir) if f.endswith(".json") and benchmark in f]
+            assert len(files) == 1, f"Expected exactly one selected semantic constraints file for {benchmark}, found {len(files)}"
+            with open(files[0], "w") as f:
+                f.write(best_constraint["rule"])
+            click.echo("A random best constraint selected")
     click.echo(f"Semantic constraints for {benchmark} synthesized successfully: {os.path.join(stored_dir, f'{benchmark}.json')}")
 
 def synthesize_grammar(benchmark):
