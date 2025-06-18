@@ -134,6 +134,22 @@
     },
     {
         "from": "rq1/results/",
-        "to": "results/rq1/"
+        "to": "analysis/rq1/results/"
+    },
+    {
+        "from": "rq1/merge_seed.py",
+        "to": "analysis/rq1/"
+    },
+    {
+        "from": "rq1/std.py",
+        "to": "analysis/rq1/"
+    },
+    {
+        "from": "rq1/sum_rep.py",
+        "to": "analysis/rq1/"
+    },
+    {
+        "from": "rq1/sum.py",
+        "to": "analysis/rq1/"
     }
 ]

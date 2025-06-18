@@ -135,7 +135,7 @@ RUN sudo ln -s /home/appuser/elmfuzz/docker_readme.md /elfuzz/README.md
 RUN mkdir /elfuzz/plot
 RUN sudo ln -s /home/appuser/elmfuzz/plot/fig /elfuzz/plot/figure
 RUN sudo ln -s /home/appuser/elmfuzz/plot/table /elfuzz/plot/table
-RUN sudo ln -s /home/appuser/elmfuzz/results /elfuzz/results
+RUN sudo ln -s /home/appuser/elmfuzz/analysis /elfuzz/analysis
 RUN sudo update-alternatives --install /usr/bin/python3 python3 /home/appuser/miniconda3/envs/py310/bin/python3 100
 RUN sudo update-alternatives --install /usr/bin/python python /home/appuser/miniconda3/envs/py310/bin/python 100
 
