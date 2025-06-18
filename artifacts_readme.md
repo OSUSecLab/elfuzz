@@ -1,6 +1,6 @@
 # Replication Package of ELFuzz
 
-[![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.6084%2Fm9.figshare.29177162-green)](https://doi.org/10.6084/m9.figshare.29177162) [![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
+[![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
 
 ## Overview
 
