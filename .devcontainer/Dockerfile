@@ -150,5 +150,7 @@ RUN mv /tmp/islearn /home/appuser/elmfuzz/tmp/islearn
 ENV ELFUZZ_PROJECT_ROOT=/home/appuser/elmfuzz
 ENV ENTRY_ROOT=/elfuzz
 ENV PATH=/home/appuser/.local/bin:$PATH
+RUN pipx install "pyexcel-cli==0.0.3"
+RUN pipx inject pyexcel-cli "pyexcel-xlsx==0.6.1"
 
 ENTRYPOINT ["/usr/bin/bash"]

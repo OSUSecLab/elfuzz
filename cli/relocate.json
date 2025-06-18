@@ -133,6 +133,34 @@
         "to": "extradata/seeds/raw/sqlite3/alt/250618.tar.zst"
     },
     {
+        "from": "rq3/seeds/cmined_with_control_bytes/cpython3_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/cpython3/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/cmined_with_control_bytes/cvc5_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/cvc5/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/cmined_with_control_bytes/jsoncpp_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/jsoncpp/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/cmined_with_control_bytes/librsvg_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/librsvg/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/cmined_with_control_bytes/libxml2_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/libxml2/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/cmined_with_control_bytes/re2_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/re2/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/cmined_with_control_bytes/sqlite3_nofs.tar.zst",
+        "to": "extradata/seeds/cmined_with_control_bytes/sqlite3/alt/250618.tar.zst"
+    },
+    {
         "from": "rq1/results/",
         "to": "analysis/rq1/results/"
     },

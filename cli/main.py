@@ -19,6 +19,7 @@ from pre_experiments import (
     produce_glade
 )
 from minimize import minimize_command
+from rq1 import rq1_seed_cov_cmd
 
 
 def get_terminal_width():
@@ -243,6 +244,28 @@ def minimize(all, fuzzer, benchmark):
             return
     minimize_command(all=all, fuzzer=fuzzer, benchmark=benchmark)
 
+@cli.group(name="run", help="Run ELFuzz experiments.")
+def run():
+    pass
+
+@run.command(name="rq1.seed_cov", help=trim_indent("""
+    |Compute the seed coverage presented in RQ1.
+    |Note that if you use the original data we provid on Figshare,
+    |the command will use `afl-showmap` to get the information.
+    |As in our original experiments we didn't keep the seed coverage collected during generation.
+    |Otherwise, it will directly use the seed coverage collected during generation.
+"""))
+@click.option("--fuzzer", "-T", required=True, type=click.Choice(
+    ["elm", "grmr", "glade", "isla", "islearn"]
+))
+@click.argument("benchmark", required=True, type=click.Choice(
+    ["jsoncpp", "re2", "sqlite3", "cpython3", "libxml2", "librsvg", "cvc5"]
+))
+def rq1_seed_cov(fuzzer, benchmark):
+    if fuzzer == "islearn" and benchmark in ["jsoncpp", "re2"]:
+        click.echo(f"Fuzzer {fuzzer} is not supported for benchmark {benchmark}.")
+        return
+    rq1_seed_cov_cmd(fuzzer, benchmark)
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)
     sys.argv[0] = "elfuzz"
