@@ -4,7 +4,7 @@ from datetime import datetime
 import sys
 import shutil
 import click
-from common import PROJECT_ROOT, CLI_DIR, USER
+from common import PROJECT_ROOT, CLI_DIR, USER, trim_indent
 from datetime import datetime
 import tempfile
 
@@ -274,7 +274,7 @@ def produce(fuzzer, benchmark, *, debug=False):
             fuzzer_name = "islearn"
             dir_suffix = "_islearn"
     with tempfile.TemporaryDirectory() as tmpdir:
-        config_str = CONFIG_TEMPLATE.format(fuzzer_name, benchmark)
+        config_str = trim_indent(CONFIG_TEMPLATE.format(fuzzer_name, benchmark))
         if debug:
             print(f"{config_str=}")
         with open(os.path.join(tmpdir, "config.toml"), "w") as f:

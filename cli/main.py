@@ -9,7 +9,7 @@ MAIN_CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
 sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
-from common import PROJECT_ROOT, USER
+from common import PROJECT_ROOT, USER, trim_indent
 
 from pre_experiments import (
     synthesize_fuzzer,
@@ -19,25 +19,6 @@ from pre_experiments import (
     produce_glade
 )
 
-
-def trim_indent(s: str, *, delimiter: str = " ") -> str:
-    ended_with_newline = s.endswith("\n")
-    lines = s.removesuffix("\n").split("\n")
-    new_lines = []
-    for l in lines:
-        m = re.match(r"^(\s*|).*$", l)
-        if m:
-            to_trim = len(m.group(1))
-            new_lines.append(l[to_trim+1:])
-        else:
-            new_lines.append(l)
-    if len(new_lines) > 0:
-        if not new_lines[0].strip():
-            new_lines.pop(0)
-    if len(new_lines) > 1:
-        if not new_lines[-1].strip():
-            new_lines.pop(-1)
-    return delimiter.join(new_lines) + ("\n" if ended_with_newline else "")
 
 def get_terminal_width():
     """
