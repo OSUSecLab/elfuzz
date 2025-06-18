@@ -163,7 +163,7 @@ def main(config_file, log_level):
         run_cmd += ['-j', '28', '-t', TIME_LIMIT, '-z', method, '-c', CHECKPOINT ,  benchmark]
         if in_race:
             run_cmd += ['--race-mode']
-        subprocess.run(" ".join(run_cmd), check=True, stderr=sys.stderr, stdout=sys.stdout, shell=True)
+        subprocess.run(run_cmd, check=True, stderr=sys.stderr, stdout=sys.stdout)
         end_time = datetime.now()
         logger.info(f'Finish {benchmark}_{method} [{i}/{len(combinations)}] at {end_time}')
 
