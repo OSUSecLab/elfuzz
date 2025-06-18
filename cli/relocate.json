@@ -59,5 +59,40 @@
         "from": "misc/antlr4_isla_grammars.tar.zst",
         "to": "evaluation/",
         "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/cpython3.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/cvc5.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/jsoncpp.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/librsvg.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/libxml2.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/re2.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
+    },
+    {
+        "from": "experiment_binaries/sqlite3.tar.zst",
+        "to": "evaluation/binary/",
+        "is_tarball": true
     }
 ]
