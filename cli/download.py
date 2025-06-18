@@ -7,6 +7,7 @@ from tqdm import tqdm
 import click
 import subprocess
 import shutil
+from typing import Callable
 
 from common import PROJECT_ROOT, CLI_DIR
 
@@ -15,11 +16,14 @@ ARTICLE_ID = "29177162"
 CACHE_DIR = "/tmp/cache"
 TMP_UNZIP_DIR = "/tmp/unzip"
 
+RELOCATE_HOOK = Callable[[str], None]
+
 @dataclass
 class RelocateTo:
     from_: str
     to: str
     is_dir: bool
+    hook: RELOCATE_HOOK | None
 
 def is_dir(path: str) -> bool:
     return os.path.isdir(path)
@@ -30,7 +34,27 @@ def is_tarball(file_path: str) -> bool:
 
 def load_relocate_info() -> list[RelocateTo]:
     with open(os.path.join(CLI_DIR, "relocate.json")) as f:
-        return [RelocateTo(from_=item["from"], to=item["to"], is_dir=is_dir(item["from"])) for item in json.load(f)]
+        hook = None
+        result = []
+        for item in json.load(f):
+            from_ = item["from"]
+            to = item["to"]
+            is_dir = item.get("is_dir", False)
+            hook = None
+            if "hook" in item:
+                hook = globals().get(item["hook"], None)
+                assert hook is not None, f"Hook {item['hook']} not found"
+            result.append(RelocateTo(from_=from_, to=to, is_dir=is_dir, hook=hook))
+        return result
+
+
+def unpack_islearn_constraints(relocated_path: str):
+    constraints_dir = os.path.join(relocated_path, "islearn_constraints")
+    files = [os.path.join(constraints_dir, f) for f in os.listdir(constraints_dir) if f.endswith(".json.tar.xz")]
+    for file in files:
+        cmd = ["tar", "-xJf", file, "-C", constraints_dir]
+        subprocess.run(cmd, check=True)
+        os.remove(file)
 
 def relocate(data_dir: str):
     relocate_info = load_relocate_info()
@@ -74,6 +98,9 @@ def relocate(data_dir: str):
                     cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
                     subprocess.run(cmd, check=True)
                     os.remove(src)
+        if item.hook is not None:
+            item.hook(dst)
+        click.echo(f"Relocated {item.from_} to {item.to}.")
 
 def file_md5(file_path: str) -> str:
     """Calculate the MD5 checksum of a file."""

@@ -8,6 +8,26 @@ from common import PROJECT_ROOT, CLI_DIR, USER
 from datetime import datetime
 import tempfile
 
+def synthesize_semantics(benchmark):
+    cmd_prepare = ["python", os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "prepare_islearn.py"), benchmark]
+    click.echo(f"Preparing environments...")
+    subprocess.run(cmd_prepare, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+    click.echo(f"Mining semantic constraints...")
+    stored_dir = os.path.join(PROJECT_ROOT, "extradata", "islearn_constraints")
+    if not os.path.exists(stored_dir):
+        os.makedirs(stored_dir)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        cmd_mine = ["docker", "run", "--rm", "-v", f"{tmpdir}:/tmp/semantics/", f"elmfuzz/{benchmark}_islearn",
+                    "python", "infer_semantics.py", "-o", f"/tmp/semantics/{benchmark}.json"]
+        subprocess.run(cmd_mine, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+        existing = [os.path.join(stored_dir, f) for f in os.listdir(stored_dir) if f.endswith(".json") and benchmark in f]
+        assert len(existing) <= 1, f"Expected at most one existing semantic constraints file for {benchmark}, found {len(existing)}"
+        if existing:
+            os.remove(existing[0])
+            click.echo(f"Storing semantic constraints for {benchmark}...")
+        shutil.copy(os.path.join(tmpdir, f"{benchmark}.json"), os.path.join(stored_dir, f"{benchmark}.json"))
+    click.echo(f"Semantic constraints for {benchmark} synthesized successfully: {os.path.join(stored_dir, f'{benchmark}.json')}")
+
 def synthesize_grammar(benchmark):
     inputs_dir = os.path.join(PROJECT_ROOT, "evaluation", "gramgen", benchmark, "inputs")
 
