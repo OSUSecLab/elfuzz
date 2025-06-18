@@ -131,5 +131,9 @@
     {
         "from": "rq3/seeds/raw/sqlite3_nofs.tar.zst",
         "to": "extradata/seeds/raw/sqlite3/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq1/results/",
+        "to": "results/rq1/"
     }
 ]
