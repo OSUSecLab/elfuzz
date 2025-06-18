@@ -279,6 +279,7 @@ def produce(fuzzer, benchmark, *, debug=False):
             print(f"{config_str=}")
         with open(os.path.join(tmpdir, "config.toml"), "w") as f:
             f.write(config_str)
+        os.chown(tmpdir, os.getuid(), os.getgid())
         WORKDIR = os.path.join(PROJECT_ROOT, "evaluation", "workdir")
         if os.path.exists(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}")):
             shutil.rmtree(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}"))
