@@ -9,7 +9,7 @@ MAIN_CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
 sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
-from common import PROJECT_ROOT
+from common import PROJECT_ROOT, USER
 
 from pre_experiments import synthesize_fuzzer, synthesize_grammar
 
@@ -69,6 +69,13 @@ def setup():
     ]
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
+
+@cli.command(name="sync_repo", hidden=True)
+def sync_repo():
+    cmd_stash = ["git", "stash", "--all"]
+    subprocess.run(cmd_stash, check=True, cwd=PROJECT_ROOT, user=USER)
+    cmd_pull = ["git", "pull", "--rebase"]
+    subprocess.run(cmd_pull, check=True, cwd=PROJECT_ROOT, user=USER)
 
 DEFAULT_TGI_WAITING = 1200
 
