@@ -102,7 +102,7 @@ from datetime import datetime
 
 from idontwannadoresearch import MailLogger, watch
 
-mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml")
+mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml")
 
 @clk.command()
 @clk.argument('config_file', type=clk.File('rb'))

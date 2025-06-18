@@ -13,7 +13,7 @@ import shutil
 from tqdm import tqdm
 
 logger = logging.getLogger(__file__)
-mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
+mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
 
 
 BENCHMAKRS = [

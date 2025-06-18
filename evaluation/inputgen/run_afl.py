@@ -11,7 +11,7 @@ import concurrent.futures
 from idontwannadoresearch import MailLogger, diagnose
 
 logger = logging.getLogger(__name__)
-mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml")
+mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml")
 
 def watch_dog(total_time: int, 
               savepoint_interval: int,

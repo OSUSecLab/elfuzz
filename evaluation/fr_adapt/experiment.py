@@ -9,7 +9,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed, Future
 import shutil
 from datetime import datetime
 logger = logging.getLogger(__file__)
-mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", logger)
+mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml", logger)
 
 CWD = os.path.dirname(__file__)
 WORKDIR_ROOT = os.path.join(CWD, 'workdir')

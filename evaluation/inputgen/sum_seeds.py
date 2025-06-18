@@ -3,7 +3,7 @@ from idontwannadoresearch.mapreduce import project, segment, mapping, accumulate
 import logging
 
 logger = logging.getLogger(__file__)
-mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
+mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
 
 
 BENCHMARKS = [

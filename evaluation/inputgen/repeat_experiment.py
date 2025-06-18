@@ -11,7 +11,7 @@ import click as clk
 import logging
 
 logger = logging.getLogger(__file__)
-mailogger = MailLogger.load_from_config(__file__, "home/appuser/elmfuzz/cli/config.toml", logger)
+mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml", logger)
 
 CMD = [
     'python',
