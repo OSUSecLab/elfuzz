@@ -1,10 +1,10 @@
 # Replication Package of ELFuzz
 
-[![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.6084%2Fm9.figshare.29177162-green)](https://doi.org/10.6084/m9.figshare.29177162) [![GitHub repository](https://img.shields.io/badge/GitHub_Repository-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz) [![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
+[![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.6084%2Fm9.figshare.29177162-green)](https://doi.org/10.6084/m9.figshare.29177162) [![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
 
 ## Overview
 
-This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*."
+This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*." The original source code is hosted on [GitHub](https://github.com/cychen2021/elfuzz).
 
 The files are organized as follows:
 
