@@ -247,7 +247,7 @@ CONFIG_TEMPLATE = r"""
 |exclude = []
 """
 
-def produce(fuzzer, benchmark):
+def produce(fuzzer, benchmark, *, debug=False):
     match fuzzer:
         case "elfuzz":
             fuzzer_name = "elm"
@@ -273,7 +273,7 @@ def produce(fuzzer, benchmark):
         case "islearn":
             fuzzer_name = "islearn"
             dir_suffix = "_islearn"
-    with tempfile.TemporaryDirectory() as tmpdir:
+    with tempfile.TemporaryDirectory(delete=not debug) as tmpdir:
         config_str = CONFIG_TEMPLATE.format(fuzzer_name, benchmark)
         with open(os.path.join(tmpdir, "config.toml"), "w") as f:
             f.write(config_str)
