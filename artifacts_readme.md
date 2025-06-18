@@ -1,10 +1,10 @@
 # Replication Package of ELFuzz
 
-[![GitHub repository](https://img.shields.io/badge/GitHub_Repository-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz) [![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
+[![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.6084%2Fm9.figshare.29177162-green)](https://doi.org/10.6084/m9.figshare.29177162) [![GitHub repository](https://img.shields.io/badge/GitHub_Repository-cychen2021%2Felfuzz-orange)](https://github.com/cychen2021/elfuzz) [![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
 
 ## Overview
 
-This Figshare repository contains the replication package for the paper *ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*.
+This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space*."
 
 The files are organized as follows:
 
@@ -55,14 +55,14 @@ This tarball contains the implementation of ELFuzz:
 Other files and directories are supportive components for the experiments. Some important ones are:
 
 - `preset/` and `fuzzbench/` contains the configurations of the seven benchmarks.
-- `start_tgi_servers.sh` launch a Hugging Face text-generation-inference (TGI) server to serve the LLMs used in the experiments.
+- `start_tgi_servers.sh` launch a Hugging Face text-generation-inference (TGI) server to serve the LLM used in the experiments.
 - `all_gen.sh` is the entry point of the whole evolution process.
 - `plot/` contains scripts to generate the figures and tables in the paper.
 - `cli/` provides a command-line interface for the users of the Docker image in the replication package.
 
 ## Contents of the baseline tarball
 
-This tarball contains the source code of the three baselines (Grammarinator, GLADE, and ISLa/ISLearn) we used and the FixReverter bug-injection tool. We slightly modified the source code of GLADE and ISLa/ISLearn to add some CLI options and fix several bugs. The commit hashes that the forked versions are based on are inluded in README files in the corresponding directories. Users should be able to inspect the modifications by diff tools. We also adapted the code of FixReverter to the benchmarks that we used in the experiments.
+This tarball contains the source code of the three baselines (Grammarinator, GLADE, and ISLa/ISLearn) we used and the FixReverter bug-injection tool. We slightly modified the source code of GLADE and ISLa/ISLearn to add some CLI options and fix bugs. The commit hashes that the forked versions are based on are included in README files in the corresponding directories. Users should be able to inspect the modifications by diff tools. We also adapted the code of FixReverter to the benchmarks that we used in the experiments.
 
 ## Contents of the experiment data tarball
 
