@@ -74,9 +74,21 @@ The evolution iterations will be recorded in folders named `preset/<benchmark>/g
 
 NOTE: You should manually record the start and end time of each synthesis run to calculate the time cost.
 
-#### TODOs
+The evolved fuzzers will be in the following tarballs:
 
-- [ ] Currently, the results of multiple runs of the synthesis (no matter whether you run ELFuzz or its variants) will overwrite each other. We have to fix this.
+- `evaluation/elmfuzz/<benchmark>_<timetag>.tar.xz` for ELFuzz
+- `evaluation/alt_elmfuzz/<benchmark>_<timetag>.tar.xz` for ELFuzz-noFS
+- `evaluation/nocomp_fuzzers/<benchmark>_<timetag>.tar.xz` for ELFuzz-noCP
+- `evaluation/noinf_fuzzers/<benchmark>_<timetag>.tar.xz` for ELFuzz-noIN
+- `evaluation/nospl_fuzzers/<benchmark>_<timetag>.tar.xz` for ELFuzz-noSP
+
+The evolution iterations will be in the following tarballs:
+
+- `extradata/evolution_record/elfuzz` for ELFuzz
+- `extradata/evolution_record/elfuzz_noFS` for ELFuzz-noFS
+- `extradata/evolution_record/elfuzz_noCompletion` for ELFuzz-noCP
+- `extradata/evolution_record/elfuzz_noInfilling` for ELFuzz-noIN
+- `extradata/evolution_record/elfuzz_noSpl` for ELFuzz-noSP
 
 ### Mining grammars by GLADE
 
