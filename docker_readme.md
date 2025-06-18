@@ -180,7 +180,7 @@ pyexcel view --sheet-name "<benchmark>" /elfuzz/analysis/rq1/results/seed_cov.xl
 
 ## Copying out the results
 
-After all the above processes, running the following command to copy out all the results from the container:
+After all the above processes, running the following command in the host to copy out all the results from the container:
 
 ```bash
 docker cp -L "elfuzz:/elfuzz/*" "<dest>"
