@@ -263,10 +263,12 @@ CONFIG_TEMPLATE = r"""
 """
 
 def produce(fuzzer, benchmark, *, debug=False):
+    info_tarball_suffix = ""
     match fuzzer:
         case "elfuzz":
             fuzzer_name = "elm"
             dir_suffix = ""
+            info_tarball_suffix = "_elm"
         case "elfuzz_nofs":
             fuzzer_name = "elmalt"
             dir_suffix = "_alt"
@@ -288,6 +290,8 @@ def produce(fuzzer, benchmark, *, debug=False):
         case "islearn":
             fuzzer_name = "islearn"
             dir_suffix = "_islearn"
+    if not info_tarball_suffix:
+        info_tarball_suffix = dir_suffix
     with tempfile.TemporaryDirectory() as tmpdir:
         config_str = trim_indent(CONFIG_TEMPLATE.format(fuzzer_name, benchmark), delimiter="\n")
         if debug:
@@ -301,10 +305,30 @@ def produce(fuzzer, benchmark, *, debug=False):
         cmd = ["python", os.path.join(WORKDIR, "batchrun.py"), os.path.join(tmpdir, "config.toml")]
         subprocess.run(" ".join(cmd), check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout,
                        shell=True, stderr=sys.stderr, user=USER)
-    result_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw", benchmark, fuzzer_name)
-    if not os.path.exists(result_dir):
-        os.makedirs(result_dir)
-    datetag = datetime.now().strftime("%y%m%d")
-    cmd_tar = ["tar", "--zstd", "-cf", os.path.join(result_dir, datetag + ".tar.zst"), f"{benchmark}{dir_suffix}"]
-    subprocess.run(cmd_tar, check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout, stderr=sys.stderr)
-    click.echo(f"Produced seeds for {benchmark} with {fuzzer} fuzzer: {os.path.join(result_dir, datetag + '.tar.zst')}")
+    if not (fuzzer.startswith("elfuzz") and fuzzer != "elfuzz"):
+        click.echo("Generation done. Now we have to collect all the test cases to one place. This may take a while...")
+        SEED_DIR = os.path.join(WORKDIR, f"{benchmark}{dir_suffix}", "out")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            collect_dir = os.path.join(tmpdir, f"{benchmark}_{fuzzer}")
+            os.makedirs(collect_dir, exist_ok=True)
+            for dir in os.listdir(SEED_DIR):
+                p = os.path.join(SEED_DIR, dir)
+                if not os.path.isdir(p):
+                    continue
+                for file in os.listdir(p):
+                    file_p = os.path.join(p, file)
+                    target_file = os.path.join(collect_dir, f"{dir}_{file}.seed")
+                    shutil.move(file_p, target_file)
+            result_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw", benchmark, fuzzer_name)
+            if not os.path.exists(result_dir):
+                os.makedirs(result_dir)
+            datetag = datetime.now().strftime("%y%m%d")
+            cmd_tar = ["tar", "--zstd", "-cf", os.path.join(result_dir, datetag + ".tar.zst"), f"{benchmark}_{fuzzer}"]
+            subprocess.run(cmd_tar, check=True, env=os.environ.copy(), cwd=tmpdir, stdout=sys.stdout, stderr=sys.stderr)
+            click.echo(f"Produced seeds for {benchmark} with {fuzzer} fuzzer collected in {os.path.join(result_dir, datetag + '.tar.zst')}")
+    produce_info_dir = os.path.join(PROJECT_ROOT, "extradata", "produce_info")
+    if not os.path.exists(produce_info_dir):
+        os.makedirs(produce_info_dir)
+    cmd_tar_raw = ["tar", "--zstd", "-cf", os.path.join(produce_info_dir, f"{benchmark}_{info_tarball_suffix}.tar.zst")]
+    subprocess.run(cmd_tar_raw, check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout, stderr=sys.stderr,)
+    click.echo(f"Info during seed test case generation in: {os.path.join(produce_info_dir, f'{benchmark}_{info_tarball_suffix}.tar.zst')}")
