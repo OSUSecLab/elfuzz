@@ -159,7 +159,8 @@ def main(config_file, log_level):
         start_time = datetime.now()
         logger.info(f'Starting {benchmark}_{method} [{i}/{len(combinations)}] at {start_time}')
         run_cmd = ['xonsh', os.path.join(CWD, 'run.xsh')] + PRESETS[method][benchmark]
-        run_cmd += ['-j', '60', '-t', TIME_LIMIT, '-z', method, '-c', CHECKPOINT ,  benchmark]
+        # run_cmd += ['-j', '60', '-t', TIME_LIMIT, '-z', method, '-c', CHECKPOINT ,  benchmark]
+        run_cmd += ['-j', '28', '-t', TIME_LIMIT, '-z', method, '-c', CHECKPOINT ,  benchmark]
         if in_race:
             run_cmd += ['--race-mode']
         subprocess.run(run_cmd, check=True, stderr=sys.stderr, stdout=sys.stdout)
