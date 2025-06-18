@@ -11,7 +11,13 @@ sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
 from common import PROJECT_ROOT, USER
 
-from pre_experiments import synthesize_fuzzer, synthesize_grammar, synthesize_semantics
+from pre_experiments import (
+    synthesize_fuzzer,
+    synthesize_grammar,
+    synthesize_semantics,
+    produce,
+    produce_glade
+)
 
 
 def trim_indent(s: str, *, delimiter: str = " ") -> str:
@@ -209,6 +215,27 @@ def info():
     commit_hash = result.stdout.strip()
     click.echo(f"Docker image built from the ELFuzz project at revision {commit_hash}")
     click.echo(f"Project root in the container: {PROJECT_ROOT}")
+
+@cli.command(name="produce", help="Generate seed test cases")
+@click.option("--fuzzer", "-T", required=True, type=click.Choice(
+    ["elfuzz", "elfuzz_nofs", "elfuzz_nocp", "elfuzz_noin", "elfuzz_nosp", "isla", "islearn", "grmr", "glade"]
+))
+@click.argument("benchmark", required=True, type=click.Choice(
+    ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
+))
+def produce_command(fuzzer: str, benchmark: str):
+    match fuzzer, benchmark:
+        case ("islearn", "jsoncpp") | ("islearn", "re2"):
+            click.echo(f"Fuzzer {fuzzer} is not supported for benchmark {benchmark}.")
+            return
+    match fuzzer:
+        case "glade":
+            produce_glade(benchmark)
+        case "elfuzz" | "elfuzz_nofs" | "elfuzz_nocp" | "elfuzz_noin" | "elfuzz_nosp" | "isla" | "islearn" | "grmr":
+            produce(fuzzer, benchmark)
+        case _:
+            click.echo(f"Unknown fuzzer: {fuzzer}. Supported fuzzers are: elfuzz, elfuzz_nofs, elfuzz_nocp, elfuzz_noin, elfuzz_nosp, isla, islearn, grmr, glade.")
+    ...
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)

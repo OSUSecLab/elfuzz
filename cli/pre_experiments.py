@@ -185,3 +185,43 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
         subprocess.run(tar_result_cmd, check=True, cwd=PROJECT_ROOT)
 
     click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
+
+def produce_glade(benchmark):
+    ...
+
+
+CONFIG_TEMPLATE = r"""
+|[evaluation]
+|methods = ['{}']
+|benchmarks = [
+|    '{}',
+|]
+|mode = 'normal'
+|
+|[evaluation.elm]
+|exclude = []
+|
+|[evaluation.grmr]
+|exclude = []
+|
+|[evaluation.isla]
+|exclude = []
+|
+|[evaluation.islearn]
+|exclude = ['jsoncpp', 're2']
+|
+|[evaluation.elmalt]
+|exclude = []
+|
+|[evaluation.elmnospl]
+|exclude = []
+|
+|[evaluation.elmnoinf]
+|exclude = []
+|
+|[evaluation.elmnocomp]
+|exclude = []
+"""
+
+def produce(fuzzer, benchmark):
+    ...
