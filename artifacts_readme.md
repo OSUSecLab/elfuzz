@@ -35,7 +35,7 @@ Then, decompress the tarballs using the following command:
 tar --zstd -xvf "elfuzz_(src|data|docker)_<timetag>.tar.zst"
 ```
 
-In the following sections, we will list the important contents of each tarball.
+In later sections, we will list the important contents of each tarball.
 
 ## Replicating the experiments
 
