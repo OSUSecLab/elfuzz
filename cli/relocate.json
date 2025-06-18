@@ -33,5 +33,9 @@
         "from": "misc/glade_oracle.tar.zst",
         "to": "evaluation/",
         "is_tarball": true
+    },
+    {
+        "from": "evolution_record/",
+        "to": "extradata/evolution_record/"
     }
 ]
