@@ -187,8 +187,32 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
     click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
 
 def produce_glade(benchmark):
-    ...
+    glade_gram_dir = os.path.join(PROJECT_ROOT, "evaluation", "gramgen", benchmark)
+    glade_input = os.path.join(glade_gram_dir, "inputs")
+    glade_grams = [os.path.join(glade_gram_dir, f) for f in os.listdir(glade_gram_dir) if f.endswith(".gram")]
+    assert glade_grams, f"No grammar files found in {glade_gram_dir}"
+    if len(glade_grams) > 1:
+        glade_grams = [gram for gram in glade_grams if "no-max-depth" in gram]
+        assert len(glade_grams) == 1, f"Expected exactly one grammar file with 'no-max-depth' in {glade_gram_dir}, found {len(glade_grams)}"
+    glade_gram = glade_grams[0]
+    glade_dir = "/home/appuser/glade"
+    if os.path.exists(os.path.join(glade_dir, "inputs")):
+        shutil.rmtree(os.path.join(glade_dir, "inputs"))
+    shutil.copytree(glade_input, os.path.join(glade_dir, "inputs"), dirs_exist_ok=False)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        output_dir = os.path.join(tmpdir, f"{benchmark}_glade")
+        cmd = [
+            "./gradlew", "run", f"--args=\"fuzz -i {glade_gram} -T 600 -o {output_dir}\""
+        ]
+        subprocess.run(" ".join(cmd), check=True, cwd=glade_dir, shell=True)
 
+        result_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw", benchmark, "glade")
+        if not os.path.exists(result_dir):
+            os.makedirs(result_dir)
+        datetag = datetime.now().strftime("%y%m%d")
+        cmd_tar = ["tar", "--zstd", "-cf", os.path.join(result_dir, datetag + ".tar.zst"), f"{benchmark}_glade"]
+        subprocess.run(cmd_tar, check=True, env=os.environ.copy(), cwd=tmpdir, stdout=sys.stdout, stderr=sys.stderr)
+    click.echo(f"Produced seeds for {benchmark} with GLADE: {os.path.join(result_dir, datetag + '.tar.zst')}")
 
 CONFIG_TEMPLATE = r"""
 |[evaluation]
@@ -224,4 +248,42 @@ CONFIG_TEMPLATE = r"""
 """
 
 def produce(fuzzer, benchmark):
-    ...
+    match fuzzer:
+        case "elfuzz":
+            fuzzer_name = "elm"
+            dir_suffix = ""
+        case "elfuzz_nofs":
+            fuzzer_name = "elmalt"
+            dir_suffix = "_alt"
+        case "elfuzz_nocp":
+            fuzzer_name = "elmnocomp"
+            dir_suffix = "_nocomp"
+        case "elfuzz_noin":
+            fuzzer_name = "elmnoinf"
+            dir_suffix = "_noinf"
+        case "elfuzz_nosp":
+            fuzzer_name = "elmnospl"
+            dir_suffix = "_nospl"
+        case "grmr":
+            fuzzer_name = "grmr"
+            dir_suffix = "_grammarinator"
+        case "isla":
+            fuzzer_name = "isla"
+            dir_suffix = "_isla"
+        case "islearn":
+            fuzzer_name = "islearn"
+            dir_suffix = "_islearn"
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config_str = CONFIG_TEMPLATE.format(fuzzer_name, benchmark)
+        with open(os.path.join(tmpdir, "config.toml"), "w") as f:
+            f.write(config_str)
+        WORKDIR = os.path.join(PROJECT_ROOT, "evaluation", "workdir")
+        cmd = ["python", os.path.join(WORKDIR, "batchrun.py"), os.path.join(tmpdir, "config.toml")]
+        subprocess.run(cmd, check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout, stderr=sys.stderr)
+    result_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw", benchmark, fuzzer_name)
+    if not os.path.exists(result_dir):
+        os.makedirs(result_dir)
+    datetag = datetime.now().strftime("%y%m%d")
+    cmd_tar = ["tar", "--zstd", "-cf", os.path.join(result_dir, datetag + ".tar.zst"), f"{benchmark}{dir_suffix}"]
+    subprocess.run(cmd_tar, check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout, stderr=sys.stderr)
+    click.echo(f"Produced seeds for {benchmark} with {fuzzer} fuzzer: {os.path.join(result_dir, datetag + '.tar.zst')}")
