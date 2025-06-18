@@ -274,7 +274,7 @@ def produce(fuzzer, benchmark, *, debug=False):
             fuzzer_name = "islearn"
             dir_suffix = "_islearn"
     with tempfile.TemporaryDirectory() as tmpdir:
-        config_str = trim_indent(CONFIG_TEMPLATE.format(fuzzer_name, benchmark))
+        config_str = trim_indent(CONFIG_TEMPLATE.format(fuzzer_name, benchmark), delimiter="\n")
         if debug:
             print(f"{config_str=}")
         with open(os.path.join(tmpdir, "config.toml"), "w") as f:
