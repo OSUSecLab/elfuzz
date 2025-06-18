@@ -309,7 +309,7 @@ def produce(fuzzer, benchmark, *, debug=False):
         click.echo("Generation done. Now we have to collect all the test cases to one place. This may take a while...")
         SEED_DIR = os.path.join(WORKDIR, f"{benchmark}{dir_suffix}", "out")
         with tempfile.TemporaryDirectory() as tmpdir:
-            collect_dir = os.path.join(tmpdir, f"{benchmark}_{fuzzer}")
+            collect_dir = os.path.join(tmpdir, f"{benchmark}_{fuzzer}", "seeds")
             os.makedirs(collect_dir, exist_ok=True)
             for dir in os.listdir(SEED_DIR):
                 p = os.path.join(SEED_DIR, dir)

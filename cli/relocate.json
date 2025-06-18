@@ -99,5 +99,37 @@
         "from": "experiment_binaries/sqlite3.tar.zst",
         "to": "evaluation/binary/",
         "is_tarball": true
+    },
+    {
+        "from": "rq1/seeds/",
+        "to": "extradata/seeds/"
+    },
+    {
+        "from": "rq3/seeds/raw/cpython3_nofs.tar.zst",
+        "to": "extradata/seeds/raw/cpython3/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/raw/cvc5_nofs.tar.zst",
+        "to": "extradata/seeds/raw/cvc5/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/raw/jsoncpp_nofs.tar.zst",
+        "to": "extradata/seeds/raw/jsoncpp/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/raw/librsvg_nofs.tar.zst",
+        "to": "extradata/seeds/raw/librsvg/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/raw/libxml2_nofs.tar.zst",
+        "to": "extradata/seeds/raw/libxml2/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/raw/re2_nofs.tar.zst",
+        "to": "extradata/seeds/raw/re2/alt/250618.tar.zst"
+    },
+    {
+        "from": "rq3/seeds/raw/sqlite3_nofs.tar.zst",
+        "to": "extradata/seeds/raw/sqlite3/alt/250618.tar.zst"
     }
 ]
