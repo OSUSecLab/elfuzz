@@ -123,14 +123,24 @@ import itertools
 @clk.option('--output-root', '-o', type=clk.Path(), required=True)
 @clk.option('--prepare', is_flag=True, default=False)
 @clk.option('--tarball-id', '-id', type=str, default=None)
+@clk.option('--more-excludes', type=str, default='')
 @watch(logger=mailoger, report_ok=True)
-def main(input_root, output_root, prepare, tarball_id):
+def main(input_root, output_root, prepare, tarball_id, more_excludes):
+    if more_excludes:
+        more_excludes = more_excludes.split(',')
+        for exclude in more_excludes:
+            benchmark, fuzzer = exclude.split('_')
+            EXCLUDES.append((benchmark, fuzzer))
     if prepare:
         logger.info('Prepare mode')
-        assert tarball_id is not None
+        # assert tarball_id is not None
         for benchmark, fuzzer in itertools.product(BENCHMARKS, FUZZERS):
             if (benchmark, fuzzer) in EXCLUDES:
                 continue
+            if tarball_id is None:
+                candidates = [f for f in os.listdir(os.path.join(input_root, benchmark, fuzzer)) if f.endswith(".tar.zst")]
+                candidates.sort(key=lambda f: int(f.removesuffix(".tar.zst")), reverse=True)
+                tarball_id = candidates[0].removesuffix(".tar.zst")
             input_file = os.path.join(input_root, benchmark, fuzzer, f'{tarball_id}.tar.zst')
             output_dir = output_root
             if not os.path.exists(output_dir):

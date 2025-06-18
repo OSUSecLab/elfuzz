@@ -161,9 +161,15 @@ def process(benchmark, fuzzer, batch_size, file_list, root, output, progress: tq
 @clk.option('--first-run', '-1', is_flag=True, default=False)
 @clk.option('--move-instead-of-copy', '-m', is_flag=True, default=False)
 @clk.option('--last-run', '-l', is_flag=True, default=False)
+@clk.option('--more-excludes', '-e', type=str, default="")
 @watch(mailogger, report_ok=True)
-def main(shuffle, batch_size, id, input, output, iteration, first_run, move_instead_of_copy, last_run):
+def main(shuffle, batch_size, id, input, output, iteration, first_run, move_instead_of_copy, last_run, more_excludes):
     logging.basicConfig(level=logging.INFO)
+    if more_excludes:
+        more_excludes = more_excludes.split(',')
+        for exclude in more_excludes:
+            benchmark, fuzzer = exclude.split('_')
+            EXCLUDE.append((benchmark, fuzzer))
     for benchmark, fuzzer in itertools.product(BENCHMAKRS, FUZZERS):
         if (benchmark, fuzzer) in EXCLUDE:
             continue

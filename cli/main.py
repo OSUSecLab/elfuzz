@@ -18,6 +18,7 @@ from pre_experiments import (
     produce,
     produce_glade
 )
+from minimize import minimize_command
 
 
 def get_terminal_width():
@@ -224,18 +225,23 @@ def produce_command(fuzzer: str, benchmark: str, debug: bool):
             click.echo(f"Unknown fuzzer: {fuzzer}. Supported fuzzers are: elfuzz, elfuzz_nofs, elfuzz_nocp, elfuzz_noin, elfuzz_nosp, isla, islearn, grmr, glade.")
 
 @cli.command(name="minimize", help="Minimize test cases and (optionally) prepend random control bytes.")
+@click.option("--all", "-a", is_flag=True, default=False,
+              help="Minimize all benchmark x fuzzer combinations.")
 @click.option("--fuzzer", "-T", required=True, type=click.Choice(
     ["elfuzz", "isla", "islearn", "grmr", "glade"]
 ))
-@click.argument("benchmark", required=True, type=click.Choice(
+@click.argument("benchmark", required=False, type=click.Choice(
     ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
-))
-def minimize(fuzzer, benchmark):
+), default=None)
+def minimize(all, fuzzer, benchmark):
+    if not all and benchmark is None:
+        click.echo("You must specify a benchmark if you don't use --all.")
+        return
     match fuzzer, benchmark:
         case ("islearn", "jsoncpp") | ("islearn", "re2"):
             click.echo(f"Fuzzer {fuzzer} is not supported for benchmark {benchmark}.")
             return
-    ...
+    minimize_command(all=all, fuzzer=fuzzer, benchmark=benchmark)
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)
