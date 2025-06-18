@@ -72,7 +72,7 @@ def setup():
 
 @cli.command(name="sync_repo", hidden=True)
 def sync_repo():
-    cmd_stash = ["git", "stash", "--all"]
+    cmd_stash = ["git", "stash"]
     subprocess.run(cmd_stash, check=True, cwd=PROJECT_ROOT)
     cmd_pull = ["git", "pull", "--rebase"]
     subprocess.run(cmd_pull, check=True, cwd=PROJECT_ROOT)
