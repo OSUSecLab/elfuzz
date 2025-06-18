@@ -72,6 +72,8 @@ where `<benchmark>` can be chosen from the seven benchmarks used in the paper, v
 
 The evolution iterations will be recorded in folders named `preset/<benchmark>/gen<it_n>/`, where `<it_n>` can be 0 to 50. The `*.py` files in `preset/<benchmark>/gen50/seeds/` are the final result of the evolution.
 
+NOTE: You should manually record the start and end time of each synthesis run to calculate the time cost.
+
 #### TODOs
 
 - [ ] Currently, the results of multiple runs of the synthesis (no matter whether you run ELFuzz or its variants) will overwrite each other. We have to fix this.
