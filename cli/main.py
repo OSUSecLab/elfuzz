@@ -11,7 +11,7 @@ sys.path.insert(0, MAIN_CLI_DIR)
 import download as download_mod
 from common import PROJECT_ROOT, USER
 
-from pre_experiments import synthesize_fuzzer, synthesize_grammar
+from pre_experiments import synthesize_fuzzer, synthesize_grammar, synthesize_semantics
 
 
 def trim_indent(s: str, *, delimiter: str = " ") -> str:
@@ -106,6 +106,9 @@ def synthesize(target, benchmark, tgi_waiting, debug):
             return
         case "grammar.glade":
             synthesize_grammar(benchmark)
+            return
+        case "semantic.islearn":
+            synthesize_semantics(benchmark)
             return
         case _:
             click.echo(f"Target {target} for `synth` hasn't been implemented yet.")
