@@ -112,6 +112,12 @@ The semantic constraints will be put in `extradata/islearn_constraints/<benchmar
 
 ### Producing and minimizing seed test cases
 
+After synthesizing all the fuzzers/grammars/semantic constraints, you can produce seed test cases using the following command:
+
+```bash
+elfuzz produce -T "(elfuzz|elfuzz_nofs|elfuzz_nocp|elfuzz_noin|elfuzz_nosp|glade|isla|islearn|grmr)" "<benchmark>"
+```
+
 ### Conducting RQ1 experiments
 
 ### Conducting RQ2 experiments
