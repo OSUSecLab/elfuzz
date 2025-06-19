@@ -360,10 +360,10 @@ def plot(all: bool):
     PLOT_DATA_DIR = os.path.join(PLOT_DIR, "data")
 
     time_cost_cmd = [
-        "python", os.path.join(PROJECT_ROOT, "extradata", "timecost", "time_unit_convert.py")
+        "python", os.path.join(PROJECT_ROOT, "analysis", "timecost", "time_unit_convert.py")
     ]
     subprocess.run(time_cost_cmd, check=True)
-    shutil.copy(os.path.join(PROJECT_ROOT, "extradata", "timecost", "x_record_second.csv"), os.path.join(PLOT_DATA_DIR, "x_record_second.csv"))
+    shutil.copy(os.path.join(PROJECT_ROOT, "analysis", "timecost", "x_record_second.csv"), os.path.join(PLOT_DATA_DIR, "x_record_second.csv"))
 
     shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq1", "results", "seed_cov.xlsx"), os.path.join(PLOT_DATA_DIR, "seed_cov.xlsx"))
     shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq1", "results", "rq1_sum.xlsx"), os.path.join(PLOT_DATA_DIR, "rq1_sum.xlsx"))
