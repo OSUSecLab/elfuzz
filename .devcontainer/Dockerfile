@@ -152,7 +152,7 @@ ENV ENTRY_ROOT=/elfuzz
 ENV PATH=/home/appuser/.local/bin:$PATH
 RUN pipx install "pyexcel-cli==0.0.3"
 RUN pipx inject pyexcel-cli "pyexcel-xlsx==0.6.1"
-RUN pip install "pandas==2.3.0" "openpyxl==3.1.5" "xlsxwriter==3.2.5"
+RUN pip install "pandas==2.3.0" "openpyxl==3.1.5" "xlsxwriter==3.2.5" "matplotlib==3.10.3"
 
 # Sometime running AFL++ in Docker may cause problems without the following environment variable.
 # This variable forces AFL++ to ignore missing crash files. Which could affect the replication of
