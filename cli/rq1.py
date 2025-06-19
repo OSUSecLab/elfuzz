@@ -291,8 +291,9 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int) -> list[tuple[str, str, int]]:
         input_dir = os.path.join(tmpdir, "input")
         os.makedirs(input_dir)
         for benchmark, fuzzer in included:
-            if (benchmark, fuzzer) in to_exclude:
+            if (benchmark, FUZZERS[fuzzer]) in to_exclude:
                 continue
+            click.echo(f"Preparing input for {benchmark} with fuzzer {fuzzer}...")
             match fuzzer:
                 case "elfuzz":
                     subname = "elm"
