@@ -65,7 +65,7 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
             "-i", input_dir,
             "-o", output_dir + r"/%d/",
             # "-j", "25",
-            "-r", str(repeat),
+            "-R", str(repeat),
             "-e", ",".join([f"{benchmark}_{fuzzer}" for benchmark, fuzzer in to_exclude])
         ]
         subprocess.run(cmd, check=True)
