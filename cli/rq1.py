@@ -283,14 +283,14 @@ def rq1_afl_update(entries: list[tuple[str, str, int]]) -> None:
 def rq1_afl_run(fuzzers, benchmarks, repeat: int) -> list[tuple[str, str, int]]:
     to_exclude = [("re2", "islearn"), ("jsoncpp", "islearn")]
     included = itertools.product(benchmarks, fuzzers)
-    for benchmark, fuzzer in itertools.product(BENCHMARKS, FUZZERS):
-        if (benchmark, fuzzer) not in to_exclude:
-            to_exclude.append((benchmark, fuzzer))
+    for benchmark, (fuzzer, subname) in itertools.product(BENCHMARKS, FUZZERS.items()):
+        if (benchmark, fuzzer) not in included:
+            to_exclude.append((benchmark, subname))
     retval = []
     with tempfile.TemporaryDirectory() as tmpdir:
         input_dir = os.path.join(tmpdir, "input")
         os.makedirs(input_dir)
-        for benchark, fuzzer in included:
+        for benchmark, fuzzer in included:
             if (benchmark, fuzzer) in to_exclude:
                 continue
             match fuzzer:

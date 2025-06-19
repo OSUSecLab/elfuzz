@@ -172,6 +172,14 @@ pyexcel view --sheet-name "<benchmark>" /elfuzz/analysis/rq1/results/seed_cov.xl
 
 #### Running the AFL++ fuzzing campaigns
 
+To replicate the results in Figure 8, run the following command:
+
+```bash
+elfuzz run rq1.afl --fuzzers "elfuzz,grmr,isla,islearn,glade" --repeat 10 "jsoncpp,libxml2,re2,cpython3,sqlite3,cvc5,librsvg"
+```
+
+This command will run the AFL++ fuzzing campaigns for the fuzzers and benchmarks listed 10 times. The campaigns will be run in batches each running 30 campaigns in parallel. The raw AFL++ outputs will be put in `extradata/rq1/afl_results/<benchmark>_<fuzzer>_<rep_n>.tar.zst`. The analysis results will be updated in `/elfuzz/analysis/rq1/results/rq1_(std|sum|sum_<rep_n>).xlsx`.
+
 ### Conducting RQ2 experiments
 
 ### Conducting RQ3 experiments
