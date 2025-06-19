@@ -101,6 +101,9 @@ def relocate(data_dir: str):
         else:
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
+            if path_is_directory(src):
+                assert path_is_directory(dst), f"Expected {dst} to be a directory"
+                shutil.move(src, dst)
             else:
                 target_is_dir = path_is_directory(dst)
                 if not item.is_tarball:
