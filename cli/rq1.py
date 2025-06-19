@@ -83,6 +83,7 @@ def rq1_seed_cov_showmap(fuzzer, benchmark) -> int:
     seed_tarball = os.path.join(seed_dir, candidates[0])
     cmd = []
     ...
+    return 0
 
 def rq1_seed_cov_cmd(fuzzer, benchmark):
     info_tarball = info_tarball_path(fuzzer, benchmark)
@@ -92,7 +93,7 @@ def rq1_seed_cov_cmd(fuzzer, benchmark):
         cov = rq1_seed_cov_showmap(fuzzer, benchmark)
     seed_cov_file = os.path.join(ANALYSIS_ROOT, "seed_cov.xlsx")
     df = pd.read_excel(seed_cov_file, index_col=0, header=0, sheet_name=benchmark)
-    df.loc[fuzzer, 0] = cov
+    df.loc[0, fuzzer] = cov
     with pd.ExcelWriter(seed_cov_file) as writer:
         df.to_excel(writer, sheet_name=benchmark, index=True, header=True)
     click.echo(f"Updated seed coverage for {benchmark} with fuzzer {fuzzer}: {cov} edges.")

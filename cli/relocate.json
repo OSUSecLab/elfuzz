@@ -161,7 +161,7 @@
         "to": "extradata/seeds/cmined_with_control_bytes/sqlite3/alt/250618.tar.zst"
     },
     {
-        "from": "rq1/results/",
+        "from": "rq1/results/*",
         "to": "analysis/rq1/results/"
     },
     {
