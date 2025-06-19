@@ -316,7 +316,7 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug):
 
 @run.command(name="rq2.triage", help="Triage and analyze the bug-injection fuzzing experiments of RQ2.")
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
-@click.option("--benchmarks", "-B", type=str, help="Benchmark list separated by `,`.", required=True)
+@click.argument("benchmarks", "-B", type=str, required=True)
 @click.option("--repeats", "-r", type=str, default="1",
               help="Repeat list separated by `,`", show_default=True)
 def rq2_triage(fuzzers, benchmarks, repeats):
