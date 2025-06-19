@@ -70,7 +70,7 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
         ]
         subprocess.run(cmd, check=True)
         click.echo("AFL++ campaigns completed.")
-        store_dir = os.path.join(PROJECT_ROOT, "extradata", "rq1", "afl_results")
+        store_dir = os.path.join(PROJECT_ROOT, "extradata", "rq2", "afl_results")
         collected_info = []
         for rep in range(1, 1+repeat):
             for benchmark, fuzzer in included:
