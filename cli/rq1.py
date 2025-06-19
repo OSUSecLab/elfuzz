@@ -327,7 +327,7 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
             "python", EXPERIMENT_SCRIPT,
             "-t", "86400",
             "-i", input_dir,
-            "-o", output_dir,
+            "-o", output_dir + r"/%d/",
             "-j", "25",
             "-r", str(repeat),
             "-e", ",".join([f"{benchmark}_{fuzzer}" for benchmark, fuzzer in to_exclude])
