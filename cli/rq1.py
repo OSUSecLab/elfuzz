@@ -344,5 +344,6 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int) -> list[tuple[str, str, int]]:
                 subprocess.run(cmd_tar, check=True)
                 collected_info.append(result_file)
                 retval.append((benchmark, fuzzer, rep))
-        click.echo(f"Results collected:\n{'\n'.join(collected_info)}")
+        NL = "\n"
+        click.echo(f"Results collected:{NL}{NL.join(collected_info)}")
     return retval
