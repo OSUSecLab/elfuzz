@@ -273,7 +273,7 @@
         "to": "extradata/timecost/"
     },
     {
-        "from": "timecost/time_unit_covert.py",
+        "from": "timecost/time_unit_convert.py",
         "to": "analysis/timecost/"
     }
 ]
