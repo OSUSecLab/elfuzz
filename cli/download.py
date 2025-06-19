@@ -102,7 +102,7 @@ def relocate(data_dir: str):
                 for file in os.listdir(src_dir):
                     src_file = os.path.join(src_dir, file)
                     dst_file = os.path.join(dst, file)
-                    if os.path.isdir(src_file):
+                    if not os.path.isdir(src_file):
                         shutil.copyfile(src_file, dst_file)
                     else:
                         shutil.copytree(src_file, dst_file)
