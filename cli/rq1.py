@@ -282,7 +282,7 @@ def rq1_afl_update(entries: list[tuple[str, str, int]]) -> None:
 
 def rq1_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tuple[str, str, int]]:
     to_exclude = [("re2", "islearn"), ("jsoncpp", "islearn")]
-    included = itertools.product(benchmarks, fuzzers)
+    included = list(itertools.product(benchmarks, fuzzers))
     for benchmark, (fuzzer, subname) in itertools.product(BENCHMARKS, FUZZERS.items()):
         if (benchmark, fuzzer) not in included:
             to_exclude.append((benchmark, subname))
