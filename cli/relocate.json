@@ -231,5 +231,17 @@
     {
         "from": "rq2/unique.py",
         "to": "analysis/rq2/unique.py"
+    },
+    {
+        "from": "misc/fr_injected/libxml2/xml",
+        "to": "evaluation/fr_adapt/libxml2/instrumented_bin/xml"
+    },
+    {
+        "from": "misc/fr_injected/cpython3/injected.tar.xz",
+        "to": "evaluation/fr_adapt/cpython3/instrumented_bin/injected.tar.xz"
+    },
+    {
+        "from": "misc/fr_injected/sqlite3/ossfuzz",
+        "to": "evaluation/fr_adapt/sqlite3/instrumented_bin/ossfuzz"
     }
 ]
