@@ -74,13 +74,13 @@ def rq1_seed_cov_showmap(fuzzer, benchmark) -> int:
             subname = "alt"
         case _:
             subname = fuzzer
-    seed_dir = os.path.join("extradata", "seeds", "cmined_with_control_bytes", subname)
+    seed_dir = os.path.join("extradata", "seeds", "cmined_with_control_bytes", benchmark, subname)
     candidates = [
-        f for f in os.listdir(os.path.join(seed_dir, benchmark)) if f.endswith(".tar.zst")
+        f for f in os.listdir(seed_dir) if f.endswith(".tar.zst")
     ]
     candidates.sort(key=lambda f: int(f.removesuffix(".tar.zst")), reverse=True)
     assert len(candidates) > 0, f"No seeds found for {benchmark} with fuzzer {fuzzer}"
-    seed_tarball = os.path.join(seed_dir, benchmark, candidates[0])
+    seed_tarball = os.path.join(seed_dir, candidates[0])
     cmd = []
     ...
 
