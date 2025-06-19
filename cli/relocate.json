@@ -270,7 +270,7 @@
     },
     {
         "from": "timecost/record.csv",
-        "to": "extradata/timecost/"
+        "to": "analysis/timecost/"
     },
     {
         "from": "timecost/time_unit_convert.py",
