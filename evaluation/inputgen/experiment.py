@@ -163,6 +163,7 @@ FUZZERS = [
 ]
 
 EXCLUDES = [('re2', 'islearn'), ('jsoncpp', 'islearn')]
+NL = "\n"
 
 @clk.command()
 @clk.option('--time', '-t', type=int, required=False, default=3600)
@@ -237,13 +238,13 @@ def main(time, input, output, prepare, id, seeds_mode, parallel, repeat_times, r
     if current_batch:
         batches.append(current_batch)
 
-    mailogger.log(f"Experiment started, {len(batches)=}", f'{"\n".join(str(batch) for batch in batches)}')
+    mailogger.log(f"Experiment started, {len(batches)=}", f'{NL.join(str(batch) for batch in batches)}')
 
     def callback(benchmark, fuzzer, repeat):
         message = f'{benchmark}_{fuzzer} [{repeat} / {repeat_times + repeat_start - 1}] finished'
         return lambda future: mailogger.log(message)
     with ProcessPoolExecutor(max_workers=parallel) as executor:
-        mailogger.log(f"Experiment started, {len(batches)=}", f'{"\n".join(str(batch) for batch in batches)}')
+        mailogger.log(f"Experiment started, {len(batches)=}", f'{NL.join(str(batch) for batch in batches)}')
 
         experiment_start = []
         prestart_futures: list[Future[None]] = []
