@@ -250,9 +250,9 @@ def run():
 
 @run.command(name="rq1.seed_cov", help=trim_indent("""
     |Compute the seed coverage presented in RQ1.
-    |Note that if you use the original data we provid on Figshare,
-    |the command will use `afl-showmap` to get the information.
-    |As in our original experiments we didn't keep the seed coverage collected during generation.
+    |Note that if you use the original data we provide on Figshare,
+    |the command will use `afl-showmap` to re-collect the information,
+    |as in our original experiments we didn't keep the seed coverage collected during generation.
     |Otherwise, it will directly use the seed coverage collected during generation.
 """))
 @click.option("--fuzzer", "-T", required=True, type=click.Choice(
