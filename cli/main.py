@@ -271,6 +271,7 @@ def rq1_seed_cov(fuzzer, benchmark):
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
+@click.option("--debug", is_flag=True, default=False, hidden=True,)
 @click.argument("benchmarks", type=str, required=True)
 def rq1_afl(fuzzers, benchmarks, repeat):
     fuzzer_list = [f.strip() for f in fuzzers.split(",")]
@@ -283,7 +284,7 @@ def rq1_afl(fuzzers, benchmarks, repeat):
             if benchmark not in ["jsoncpp", "re2", "sqlite3", "cpython3", "libxml2", "librsvg", "cvc5"]:
                 click.echo(f"Benchmark {benchmark} is not supported.")
                 continue
-    entries = rq1_afl_run(fuzzer_list, benchmark_list, repeat=repeat)
+    entries = rq1_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
     rq1_afl_update(entries)
 
 if __name__ == "__main__":
