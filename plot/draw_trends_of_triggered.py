@@ -117,6 +117,6 @@ if __name__ == '__main__':
         line.set_linewidth(1.3)
     ax = fig.get_axes()[0]
     box = ax.get_position()
-    fig.legend(reversed(copied_lines), reversed(labels), loc='upper center', ncol=1, bbox_to_anchor=(0.82, 0.9))
+    fig.legend(list(reversed(copied_lines)), list(reversed(labels)), loc='upper center', ncol=1, bbox_to_anchor=(0.82, 0.9))
     fig.tight_layout()
     fig.savefig(os.path.join(PWD, 'fig', 'trends_of_triggered.pdf'), bbox_inches='tight')
