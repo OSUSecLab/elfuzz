@@ -97,7 +97,7 @@ def relocate(data_dir: str):
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
             else:
-                target_is_dir = is_dir(dst)
+                target_is_dir = path_is_dir(dst)
                 if not item.is_tarball:
                     if target_is_dir:
                         if not os.path.exists(dst):
