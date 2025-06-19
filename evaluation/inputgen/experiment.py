@@ -190,7 +190,7 @@ def main(time, input, output, prepare, id, seeds_mode, parallel, repeat_times, r
         for fuzzer in FUZZERS:
             if (benchmark, fuzzer) in EXCLUDES:
                 continue
-            to_check.add(BINARIES[benchmark])
+            to_check.add(benchmark)
     for c in to_check:
         binary = BINARIES[c]
         if not os.path.exists(binary):
