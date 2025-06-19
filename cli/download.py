@@ -22,11 +22,14 @@ RELOCATE_HOOK = Callable[[str], None]
 class RelocateTo:
     from_: str
     to: str
-    is_dir: bool
+    is_contents: bool
     hook: RELOCATE_HOOK | None
     is_tarball: bool
 
-def path_is_dir(path: str) -> bool:
+def path_is_contents(path: str) -> bool:
+    return path.endswith("*")
+
+def path_is_directory(path: str) -> bool:
     return path.endswith("/")
 
 def load_relocate_info() -> list[RelocateTo]:
@@ -36,9 +39,11 @@ def load_relocate_info() -> list[RelocateTo]:
         for item in json.load(f):
             from_ = item["from"]
             to = item["to"]
-            is_dir = path_is_dir(from_)
-            if is_dir:
-                assert path_is_dir(to), f"Expected {to} to be a directory"
+            is_contents = path_is_contents(from_)
+            if is_contents:
+                assert path_is_directory(to), f"Expected {to} to be a directory"
+                from_ = from_.remove_suffix("*")
+                assert path_is_directory(from_), f"Expected the prefix before * to be a directory, but got {from_}"
             if "is_tarball" in item:
                 is_tarball = item["is_tarball"]
             else:
@@ -47,7 +52,7 @@ def load_relocate_info() -> list[RelocateTo]:
             if "hook" in item:
                 hook = globals().get(item["hook"], None)
                 assert hook is not None, f"Hook {item['hook']} not found"
-            result.append(RelocateTo(from_=from_, to=to, is_dir=is_dir, hook=hook, is_tarball=is_tarball))
+            result.append(RelocateTo(from_=from_, to=to, is_contents=is_contents, hook=hook, is_tarball=is_tarball))
         return result
 
 def truncate_prefix(relocated_path: str):
@@ -76,14 +81,14 @@ def relocate(data_dir: str):
         count += 1
         src = os.path.join(data_dir, item.from_)
         dst = os.path.join(PROJECT_ROOT, item.to)
-        if item.is_dir and not os.path.exists(dst):
+        if item.is_contents and not os.path.exists(dst):
             os.makedirs(dst)
-        elif not item.is_dir:
+        elif not item.is_contents:
             target_dir = os.path.dirname(dst)
             if not os.path.exists(target_dir):
                 os.makedirs(target_dir)
 
-        if item.is_dir:
+        if item.is_contents:
             files = os.listdir(src)
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
@@ -97,7 +102,7 @@ def relocate(data_dir: str):
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
             else:
-                target_is_dir = path_is_dir(dst)
+                target_is_dir = path_is_directory(dst)
                 if not item.is_tarball:
                     if target_is_dir:
                         if not os.path.exists(dst):

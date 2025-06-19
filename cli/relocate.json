@@ -101,7 +101,7 @@
         "is_tarball": true
     },
     {
-        "from": "rq1/seeds/",
+        "from": "rq1/seeds/*",
         "to": "extradata/seeds/"
     },
     {
