@@ -42,7 +42,7 @@ def load_relocate_info() -> list[RelocateTo]:
             is_contents = path_is_contents(from_)
             if is_contents:
                 assert path_is_directory(to), f"Expected {to} to be a directory"
-                from_ = from_.remove_suffix("*")
+                from_ = from_.removesuffix("*")
                 assert path_is_directory(from_), f"Expected the prefix before * to be a directory, but got {from_}"
             if "is_tarball" in item:
                 is_tarball = item["is_tarball"]
