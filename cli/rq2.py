@@ -221,6 +221,6 @@ def rq2_real_world_cmd(resume: bool, output: str, time: int):
             "-o", output,
             "-j", "30",
         ] + (["--resume"] if resume else [])
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True, env=os.environ)
         click.echo("AFL++ campaigns completed.")
 
