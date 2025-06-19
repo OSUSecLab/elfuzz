@@ -83,10 +83,15 @@ def relocate(data_dir: str):
         dst = os.path.join(PROJECT_ROOT, item.to)
         if item.is_contents and not os.path.exists(dst):
             os.makedirs(dst)
-        elif not item.is_contents:
+        elif not item.is_contents and not path_is_directory(item.from_):
             target_dir = os.path.dirname(dst)
             if not os.path.exists(target_dir):
                 os.makedirs(target_dir)
+        elif not item.is_contents and path_is_directory(item.from_):
+            assert path_is_directory(dst), f"Expected {dst} to be a directory"
+            parent_dir = os.sep.join(dst.split(os.sep)[:-2])
+            if not os.path.exists(parent_dir):
+                os.makedirs(parent_dir)
 
         if item.is_contents:
             files = os.listdir(src)
@@ -102,7 +107,6 @@ def relocate(data_dir: str):
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
             if path_is_directory(src):
-                assert path_is_directory(dst), f"Expected {dst} to be a directory"
                 shutil.move(src, dst)
             else:
                 target_is_dir = path_is_directory(dst)
