@@ -194,6 +194,18 @@ The output of AFL++ will be stored in tarballs in `extradata/rq2/afl_results/<be
 
 #### Triaging and analyzing the results
 
+Then, run the following command to triage and analyze the results:
+
+```bash
+elfuzz run rq2.triage
+```
+
+The outputs of the analysis will be in `/elfuzz/analysis/rq2/results/`:
+
+- `rq2_count_bug_<rep_n>.xlsx` are the data for Figure 9 per repetition. `rq2_count_bugs.xlsx` is the averaged data, and `rq2_std.xlsx` is the standard deviations.
+- `rq2_bug_count_10_min_<rep_n>.xlsx` are the data for Table 6 per repetition. `rq2_time_to_trigger.xlsx` is the averaged data presented in the table.
+- `unique_<benchmark>_<fuzzer>.txt` (ELFuzz represented as `elm`) contains the unique bugs triggered by each fuzzer on each benchmark. `unique.xlsx` is the aggregated value of each fuzzer presented in Figure 10.
+
 ### Conducting RQ3 experiments
 
 ### Conducting RQ4 experiments
