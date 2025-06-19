@@ -92,6 +92,10 @@ def relocate(data_dir: str):
             parent_dir = os.sep.join(dst.split(os.sep)[:-2])
             if not os.path.exists(parent_dir):
                 os.makedirs(parent_dir)
+        elif item.is_tarball:
+            assert target_is_dir, "Target directory must be a directory for tarball relocation"
+            if not os.path.exists(dst):
+                os.makedirs(dst)
 
         if item.is_contents:
             files = os.listdir(src)
@@ -111,18 +115,12 @@ def relocate(data_dir: str):
                 shutil.move(src, dst)
             else:
                 target_is_dir = path_is_directory(dst)
-                if not item.is_tarball:
+                if not item.is_tarball and not path_is_directory(src):
                     if target_is_dir:
-                        if not os.path.exists(dst):
-                            os.makedirs(dst)
-
                         shutil.move(src, os.path.join(dst, os.path.basename(src)))
                     else:
                         shutil.move(src, dst)
                 else:
-                    assert target_is_dir, "Target directory must be a directory for tarball relocation"
-                    if not os.path.exists(dst):
-                        os.makedirs(dst)
                     cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
                     subprocess.run(cmd, check=True)
                     os.remove(src)
