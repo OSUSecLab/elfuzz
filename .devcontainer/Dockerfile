@@ -154,4 +154,11 @@ RUN pipx install "pyexcel-cli==0.0.3"
 RUN pipx inject pyexcel-cli "pyexcel-xlsx==0.6.1"
 RUN pip install "pandas==2.3.0" "openpyxl==3.1.5" "xlsxwriter==3.2.5"
 
+# Sometime running AFL++ in Docker may cause problems without the following environment variable.
+# This variable forces AFL++ to ignore missing crash files. Which could affect the replication of
+# the results in the paper, as they didn't encounter this problem.
+# However, not Docker on every machines has this problem. My PC does, but our server does not.
+# So, without such a problem, the environment variable will take no effect.
+ENV AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1
+
 ENTRYPOINT ["/usr/bin/bash"]
