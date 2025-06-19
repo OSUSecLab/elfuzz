@@ -97,15 +97,16 @@ def relocate(data_dir: str):
             files = os.listdir(src)
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
-            else:
-                for file in files:
-                    shutil.move(os.path.join(src, file), os.path.join(dst, file))
-                if item.hook is not None:
-                    item.hook(dst)
-                click.echo(f"Relocated {item.from_} to {item.to}.")
+                return
+            for file in files:
+                shutil.move(os.path.join(src, file), os.path.join(dst, file))
+            if item.hook is not None:
+                item.hook(dst)
+            click.echo(f"Relocated {item.from_} to {item.to}.")
         else:
             if not os.path.exists(src):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
+                return
             if path_is_directory(src):
                 shutil.move(src, dst)
             else:
