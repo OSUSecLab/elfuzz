@@ -326,7 +326,7 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
         cmd = [
             "python", EXPERIMENT_SCRIPT,
             "-t", "86400",
-            "-i", input_dir,
+            "-i", os.path.join(input_dir, f"{benchmark}_{subname}"),
             "-o", output_dir + r"/%d/",
             "-j", "25",
             "-r", str(repeat),
