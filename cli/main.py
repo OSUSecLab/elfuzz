@@ -20,7 +20,7 @@ from pre_experiments import (
 )
 from minimize import minimize_command
 from rq1 import rq1_seed_cov_cmd, rq1_afl_run, rq1_afl_update
-from rq2 import rq2_afl_run
+from rq2 import rq2_afl_run, rq2_triage_command
 
 
 def get_terminal_width():
@@ -313,6 +313,17 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug):
     with open(os.path.join(PROJECT_ROOT, ".rq2_afl_updated"), "w") as f:
         for entry in entries:
             f.write(f"{entry[0]},{entry[1]},{entry[2]}\n")
+
+@run.command(name="rq2.triage", help="Triage and analyze the bug-injection fuzzing experiments of RQ2.")
+@click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
+@click.option("--benchmarks", "-B", type=str, help="Benchmark list separated by `,`.", required=True)
+@click.option("--repeats", "-r", type=str, default="1",
+              help="Repeat list separated by `,`", show_default=True)
+def rq2_triage(fuzzers, benchmarks, repeats):
+    fuzzer_list = [f.strip() for f in fuzzers.split(",")]
+    benchmark_list = [b.strip() for b in benchmarks.split(",")]
+    repeat_list = [int(r.strip()) for r in repeats.split(",")]
+    rq2_triage_command(fuzzer_list, benchmark_list, repeat_list)
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)

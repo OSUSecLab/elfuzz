@@ -7,6 +7,101 @@ import click
 import sys
 import itertools
 from rq1 import BENCHMARKS, FUZZERS
+import itertools
+
+def rq2_triage_command(fuzzers, benchmarks, repeats):
+    with tempfile.TemporaryDirectory() as tmpdir:
+        afl_result_dir = os.path.join(tmpdir, "afl_results")
+        if not os.path.exists(afl_result_dir):
+            os.makedirs(afl_result_dir)
+        triage_dir = tmpdir
+        if not os.path.exists(triage_dir):
+            os.makedirs(triage_dir)
+
+        original_afl_tarball = os.path.join(PROJECT_ROOT, "extradata", "rq2", "afl_results", "afl_bug_exp.tar.zst")
+        cmd_unpack = [
+            "tar", "--zstd", "-xf", original_afl_tarball, "-C", afl_result_dir
+        ]
+        subprocess.run(cmd_unpack, check=True)
+        afl_result_dir = os.path.join(afl_result_dir, "afl_bug_exp")
+        click.echo(f"Unpacked AFL++ results to {afl_result_dir}")
+        triage_tarball = os.path.join(PROJECT_ROOT, "extradata", "rq2", "afl_results", "triage.tar.zst")
+        cmd_unpack = [
+            "tar", "--zstd", "-xf", triage_tarball, "-C", triage_dir
+        ]
+        subprocess.run(cmd_unpack, check=True)
+        triage_dir = os.path.join(triage_dir, "triage")
+
+        for rep, benchmark, fuzzer in itertools.product(repeats, benchmarks, fuzzers):
+            if fuzzer == "islearn" and benchmark in ["re2", "jsoncpp"]:
+                continue
+            separate_afl_tarball = os.path.join(PROJECT_ROOT, "extradata", "rq2", "afl_results", f"{benchmark}_{fuzzer}_{rep}.tar.zst")
+            if os.path.exists(separate_afl_tarball):
+                cmd_unpack = [
+                    "tar", "--zstd", "-xf", separate_afl_tarball, "-C", os.path.join(afl_result_dir, str(rep))
+                ]
+                subprocess.run(cmd_unpack, check=True)
+                click.echo(f"Unpacked {separate_afl_tarball} to {afl_result_dir}")
+        prepare_workdir(triage_dir)
+        TRIAGE_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "fr_adapt", "triage_all.py")
+        cmd_triage = [
+            "python", TRIAGE_SCRIPT,
+            "--root", afl_result_dir,
+            "-o", triage_dir,
+            "-j", "25",
+        ]
+        subprocess.run(cmd_triage, check=True)
+        cmd_tar = ["tar", "--zstd", "-cf", triage_tarball, "-C", tmpdir, "triage"]
+        subprocess.run(cmd_tar, check=True)
+        click.echo(f"Triage done. Results stored in {triage_tarball}.")
+
+        COUNT_BUG_REP_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "count_bug_rep.py")
+        cmd_count_bug_rep = [
+            "python", COUNT_BUG_REP_SCRIPT, triage_dir
+        ]
+        subprocess.run(cmd_count_bug_rep, check=True)
+        
+        COUNT_BUG_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "count_bug.py")
+        cmd_count_bug = [
+            "python", COUNT_BUG_SCRIPT
+        ]
+        subprocess.run(cmd_count_bug, check=True)
+
+        STD_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "std.py")
+        cmd_std = [
+            "python", STD_SCRIPT,
+        ]
+        subprocess.run(cmd_std, check=True)
+        
+        UNIQUE_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "unique.py")
+        cmd_unique = [
+            "python", UNIQUE_SCRIPT, triage_dir
+        ]
+        subprocess.run(cmd_unique, check=True)
+        
+        SUM_UNIQUE_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "sum_unique.py")
+        cmd_sum_unique = [
+            "python", SUM_UNIQUE_SCRIPT
+        ]
+        subprocess.run(cmd_sum_unique, check=True)
+        
+        _BUG_COUNT_10_MIN_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "bug_count_10_min.py")
+        cmd_bug_count_10_min = [
+            "python", _BUG_COUNT_10_MIN_SCRIPT, triage_dir
+        ]
+        subprocess.run(cmd_bug_count_10_min, check=True)
+        
+        TIME_TO_TRIGGER_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "time_to_trigger.py")
+        cmd_time_to_trigger = [
+            "python", TIME_TO_TRIGGER_SCRIPT
+        ]
+        subprocess.run(cmd_time_to_trigger, check=True)
+        click.echo("RQ2 bug injection experiments done, triaged, and analyzed.")
+
+def prepare_workdir(workdir: str | None = None):
+    EXPERIMENT_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "fr_adapt", "experiment.py")
+    cmd_prepare = ["python", EXPERIMENT_SCRIPT, "--prepare",] + (["-w", workdir,] if workdir is not None else [])
+    subprocess.run(cmd_prepare, check=True)
 
 def rq2_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tuple[str, str, int]]:
     to_exclude = [("re2", "islearn"), ("jsoncpp", "islearn")]
@@ -42,18 +137,13 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
             candidates.sort(key=lambda f: int(f.removesuffix(".tar.zst")), reverse=True)
             assert len(candidates) > 0, f"No seeds found for {benchmark} with fuzzer {fuzzer}"
             seed_tarball = os.path.join(seed_dir, candidates[0])
-
-            # prepare(fuzzer, benchmark)
-            cmd_prepare = [
-                "python", EXPERIMENT_SCRIPT, "--prepare", "-w", TMP_WORKDIR,
-            ]
-            subprocess.run(cmd_prepare, check=True)
             if not os.path.exists(input_dir):
                 os.makedirs(input_dir)
             cmd_unpack = [
                 "tar", "--zstd", "-xf", seed_tarball, "-C", input_dir
             ]
             subprocess.run(cmd_unpack, check=True)
+            prepare_workdir(TMP_WORKDIR)
         click.echo("Starting AFL++ campaigns...")
         output_dir = os.path.join(tmpdir, "output")
         if not os.path.exists(output_dir):

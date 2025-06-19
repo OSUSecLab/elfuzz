@@ -184,6 +184,16 @@ This command will run the AFL++ fuzzing campaigns for the fuzzers and benchmarks
 
 #### Running the AFL++ fuzzing campaigns on the bug-injected benchmarks
 
+To reproduce the results in Figure 9, Figure 10, and Table 6, we need to run the AFL++ fuzzing campaigns on the bug-injected benchmarks via the following command:
+
+```bash
+elfuzz run rq2.afl --fuzzers "elfuzz,grmr,isla,islearn,glade" --repeat 10 "libxml2,cpython3,sqlite3"
+```
+
+The output of AFL++ will be stored in tarballs in `extradata/rq2/afl_results/<benchmark>_<fuzzer>_<rep_n>.tar.zst`.
+
+#### Triaging and analyzing the results
+
 ### Conducting RQ3 experiments
 
 ### Conducting RQ4 experiments

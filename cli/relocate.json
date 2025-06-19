@@ -193,6 +193,10 @@
         "to": "extradata/rq2/real_world/"
     },
     {
+        "from": "rq2/results/triage.tar.zst",
+        "to": "extradata/rq2/afl_results/"
+    },
+    {
         "from": "rq2/results/*",
         "to": "analysis/rq2/results/"
     },
