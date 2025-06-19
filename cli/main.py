@@ -267,7 +267,7 @@ def rq1_seed_cov(fuzzer, benchmark):
         return
     rq1_seed_cov_cmd(fuzzer, benchmark)
 
-@run.command(name="rq1.afl", help="Run the AFL++ fuzzing compaigns for Figure 8 in RQ1 on BENCHMARKS (represented as a list separated by ``).")
+@run.command(name="rq1.afl", help="Run the AFL++ fuzzing compaigns for Figure 8 in RQ1 on BENCHMARKS (represented as a list separated by `,`).")
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
