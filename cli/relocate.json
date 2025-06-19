@@ -105,6 +105,10 @@
         "to": "extradata/seeds/"
     },
     {
+        "from": "rq3/eval_results/*",
+        "to": "extradata/rq3/geninfo/"
+    },
+    {
         "from": "rq3/seeds/raw/cpython3_nofs.tar.zst",
         "to": "extradata/seeds/raw/cpython3/alt/250618.tar.zst"
     },
@@ -247,5 +251,17 @@
     {
         "from": "misc/fr_injected/sqlite3/ossfuzz",
         "to": "evaluation/fr_adapt/sqlite3/instrumented_bin/ossfuzz"
+    },
+    {
+        "from": "rq3/results/*",
+        "to": "analysis/rq3/results/"
+    },
+    {
+        "from": "rq3/collect_input_cov.py",
+        "to": "analysis/rq3/collect_input_cov.py"
+    },
+    {
+        "from": "rq3/collect_evolve_cov.py",
+        "to": "analysis/rq3/collect_evolve_cov.py"
     }
 ]
