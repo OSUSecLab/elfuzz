@@ -47,6 +47,7 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
             cmd_prepare = [
                 "python", EXPERIMENT_SCRIPT, "--prepare", "-w", TMP_WORKDIR,
             ]
+            subprocess.run(cmd_prepare, check=True)
             if not os.path.exists(input_dir):
                 os.makedirs(input_dir)
             cmd_unpack = [
