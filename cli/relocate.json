@@ -1,26 +1,26 @@
 [
     {
-        "from": "synthesized_fuzzers/elfuzz_noCompletion/",
+        "from": "synthesized_fuzzers/elfuzz_noCompletion/*",
         "to": "evaluation/nocomp_fuzzers/",
         "hook": "truncate_prefix"
     },
     {
-        "from": "synthesized_fuzzers/elfuzz_noInfilling/",
+        "from": "synthesized_fuzzers/elfuzz_noInfilling/*",
         "to": "evaluation/noinf_fuzzers/",
         "hook": "truncate_prefix"
     },
     {
-        "from": "synthesized_fuzzers/elfuzz_noSplicing/",
+        "from": "synthesized_fuzzers/elfuzz_noSplicing/*",
         "to": "evaluation/nospl_fuzzers/",
         "hook": "truncate_prefix"
     },
     {
-        "from": "synthesized_fuzzers/elfuzz_noFS/",
+        "from": "synthesized_fuzzers/elfuzz_noFS/*",
         "to": "evaluation/alt_elmfuzzers/",
         "hook": "truncate_prefix"
     },
     {
-        "from": "synthesized_fuzzers/elfuzz/",
+        "from": "synthesized_fuzzers/elfuzz/*",
         "to": "evaluation/elmfuzzers/",
         "hook": "truncate_prefix"
     },
@@ -40,7 +40,7 @@
         "is_tarball": true
     },
     {
-        "from": "evolution_record/",
+        "from": "evolution_record/*",
         "to": "extradata/evolution_record/"
     },
     {

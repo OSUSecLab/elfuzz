@@ -7,7 +7,7 @@ from tqdm import tqdm
 import click
 import subprocess
 import shutil
-from typing import Callable
+from typing import Callable, Literal
 
 from common import PROJECT_ROOT, CLI_DIR
 
@@ -22,9 +22,8 @@ RELOCATE_HOOK = Callable[[str], None]
 class RelocateTo:
     from_: str
     to: str
-    is_contents: bool
     hook: RELOCATE_HOOK | None
-    is_tarball: bool
+    kind: Literal["tarball", "contents", "normal"]
 
 def path_is_contents(path: str) -> bool:
     return path.endswith("*")
@@ -40,19 +39,24 @@ def load_relocate_info() -> list[RelocateTo]:
             from_ = item["from"]
             to = item["to"]
             is_contents = path_is_contents(from_)
-            if is_contents:
-                assert path_is_directory(to), f"Expected {to} to be a directory"
-                from_ = from_.removesuffix("*")
-                assert path_is_directory(from_), f"Expected the prefix before * to be a directory, but got {from_}"
             if "is_tarball" in item:
                 is_tarball = item["is_tarball"]
             else:
                 is_tarball = False
+            match is_contents, is_tarball:
+                case True, False:
+                    kind = "contents"
+                case False, True:
+                    kind = "tarball"
+                case False, False:
+                    kind = "normal"
+                case True, True:
+                    raise ValueError("A path cannot be both contents and tarball at the same time")
             hook = None
             if "hook" in item:
                 hook = globals().get(item["hook"], None)
                 assert hook is not None, f"Hook {item['hook']} not found"
-            result.append(RelocateTo(from_=from_, to=to, is_contents=is_contents, hook=hook, is_tarball=is_tarball))
+            result.append(RelocateTo(from_=from_, to=to, hook=hook, kind=kind))
         return result
 
 def truncate_prefix(relocated_path: str):
@@ -81,48 +85,38 @@ def relocate(data_dir: str):
         count += 1
         src = os.path.join(data_dir, item.from_)
         dst = os.path.join(PROJECT_ROOT, item.to)
-        if item.is_contents and not os.path.exists(dst):
-            os.makedirs(dst)
-        elif not item.is_contents and not path_is_directory(item.from_):
-            target_dir = os.path.dirname(dst)
-            if not os.path.exists(target_dir):
-                os.makedirs(target_dir)
-        elif not item.is_contents and path_is_directory(item.from_):
-            assert path_is_directory(dst), f"Expected {dst} to be a directory"
-            parent_dir = os.sep.join(dst.split(os.sep)[:-2])
-            if not os.path.exists(parent_dir):
-                os.makedirs(parent_dir)
-        elif item.is_tarball:
-            assert target_is_dir, "Target directory must be a directory for tarball relocation"
-            if not os.path.exists(dst):
-                os.makedirs(dst)
 
-        if not os.path.exists(src):
-            click.echo(f"WARNING: Path {src} does not exist. Skipping.")
+        dst_dir = os.path.dirname(dst)
+        if not os.path.exists(dst_dir):
+            os.makedirs(dst_dir)
+
+        if (item.kind != "contents" and not os.path.exists(src) or
+            item.kind == "contents" and not os.path.exists(src.removesuffix("*"))):
+            click.echo(f"WARNING: Source path {src} does not exist. Skipping.")
             continue
-        if item.is_contents:
-            files = os.listdir(src)
-            for file in files:
-                shutil.move(os.path.join(src, file), os.path.join(dst, file))
-            if item.hook is not None:
-                item.hook(dst)
-            click.echo(f"Relocated {item.from_} to {item.to}.")
-        elif path_is_directory(src):
-            shutil.move(src, dst)
-        else:
-            target_is_dir = path_is_directory(dst)
-            if not item.is_tarball and not path_is_directory(src):
-                if target_is_dir:
-                    shutil.move(src, os.path.join(dst, os.path.basename(src)))
-                else:
-                    shutil.move(src, dst)
-            else:
+
+        match item.kind:
+            case "contents":
+                assert path_is_directory(dst), f"Target {dst} must be a directory for contents relocation"
+                src_dir = src.removesuffix("*")
+                for file in os.listdir(src_dir):
+                    src_file = os.path.join(src_dir, file)
+                    dst_file = os.path.join(dst, file)
+                    shutil.move(src_file, dst_file)
+            case "tarball":
+                assert path_is_directory(dst), f"Target {dst} must be a directory for tarball relocation"
                 cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
+                dst_file = dst + "/*"
                 subprocess.run(cmd, check=True)
                 os.remove(src)
-            if item.hook is not None:
-                item.hook(dst)
-            click.echo(f"Relocated {item.from_} to {item.to}.")
+            case "normal":
+                target_is_dir = path_is_directory(dst)
+                if target_is_dir:
+                    dst_file = os.path.join(dst, os.path.basename(src.removesuffix("/")))
+                else:
+                    dst_file = dst
+                shutil.move(src, dst_file)
+        click.echo(f"Relocated {item.from_} to {dst_file}.")
 
 def file_md5(file_path: str) -> str:
     """Calculate the MD5 checksum of a file."""
