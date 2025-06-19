@@ -99,7 +99,7 @@ EXCLUDES = []
 @clk.option('--test-one', '-T', type=str, default=None)
 @clk.option('--start-batch', '-sb', type=int, default=None)
 @clk.option('--end-batch', '-eb', type=int, default=None)
-@clk.option('--more-excludes', '-me', type=str, default='')
+@clk.option('--more-excludes', '-e', type=str, default='')
 @watch(mailogger, report_ok=True)
 def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, start_batch, end_batch, more_excludes):
     for token in more_excludes.split(','):
