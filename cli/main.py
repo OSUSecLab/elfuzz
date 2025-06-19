@@ -256,7 +256,7 @@ def run():
     |Otherwise, it will directly use the seed coverage collected during generation.
 """))
 @click.option("--fuzzer", "-T", required=True, type=click.Choice(
-    ["elm", "grmr", "glade", "isla", "islearn"]
+    ["elfuzz", "grmr", "glade", "isla", "islearn"]
 ))
 @click.argument("benchmark", required=True, type=click.Choice(
     ["jsoncpp", "re2", "sqlite3", "cpython3", "libxml2", "librsvg", "cvc5"]
