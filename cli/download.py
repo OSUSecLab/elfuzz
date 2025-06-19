@@ -102,7 +102,8 @@ def relocate(data_dir: str):
                 for file in os.listdir(src_dir):
                     src_file = os.path.join(src_dir, file)
                     dst_file = os.path.join(dst, file)
-                    shutil.move(src_file, dst_file)
+                    shutil.copytree(src_file, dst_file)
+                    shutil.rmtree(src_file)
             case "tarball":
                 assert path_is_directory(dst), f"Target {dst} must be a directory for tarball relocation"
                 cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
