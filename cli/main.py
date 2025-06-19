@@ -273,7 +273,7 @@ def rq1_seed_cov(fuzzer, benchmark):
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
 @click.option("--debug", is_flag=True, default=False, hidden=True,)
 @click.argument("benchmarks", type=str, required=True)
-def rq1_afl(fuzzers, benchmarks, repeat):
+def rq1_afl(fuzzers, benchmarks, repeat, debug):
     fuzzer_list = [f.strip() for f in fuzzers.split(",")]
     benchmark_list = [b.strip() for b in benchmarks.split(",")]
     for fuzzer in fuzzer_list:
