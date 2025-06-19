@@ -244,8 +244,10 @@ def rq1_seed_cov_showmap(fuzzer, benchmark) -> int:
 def rq1_seed_cov_cmd(fuzzer, benchmark):
     info_tarball = info_tarball_path(fuzzer, benchmark)
     if os.path.exists(info_tarball):
+        click.echo(f"Using info tarball for {benchmark} with fuzzer {fuzzer}.")
         cov = rq1_seed_cov_cmd_info_tarball(fuzzer, benchmark)
     else:
+        click.echo(f"Using afl-showmap for {benchmark} with fuzzer {fuzzer}.")
         cov = rq1_seed_cov_showmap(fuzzer, benchmark)
     seed_cov_file = os.path.join(ANALYSIS_ROOT, "seed_cov.xlsx")
     df = pd.read_excel(seed_cov_file, index_col=0, header=0, sheet_name=benchmark)
