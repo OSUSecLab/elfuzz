@@ -387,6 +387,14 @@ def plot(all: bool):
     ]
 
     for script in scripts:
+        script_path = os.path.join(PLOT_DIR, script)
+        with open(script_path, "r") as f:
+            content = f.read()
+            content.replace("Times New Roman", "DejaVu Serif")
+        with open(script_path, "w") as f:
+            f.write(content)
+
+    for script in scripts:
         cmd = ["python", os.path.join(PLOT_DIR, script)]
         subprocess.run(cmd, check=True)
     click.echo("Plotting and generation completed.")
