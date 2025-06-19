@@ -285,6 +285,8 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug):
             if benchmark not in ["jsoncpp", "re2", "sqlite3", "cpython3", "libxml2", "librsvg", "cvc5"]:
                 click.echo(f"Benchmark {benchmark} is not supported.")
                 continue
+    if not fuzzer_list or not benchmark_list:
+        return
     entries = rq1_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
     rq1_afl_update(entries)
 
@@ -305,6 +307,8 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug):
             if benchmark not in ["libxml2", "cpython3", "sqlite3"]:
                 click.echo(f"Benchmark {benchmark} is not supported.")
                 continue
+    if not fuzzer_list or not benchmark_list:
+        return
     entries = rq2_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
     with open(os.path.join(PROJECT_ROOT, ".rq2_afl_updated"), "w") as f:
         for entry in entries:
