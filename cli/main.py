@@ -315,14 +315,10 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug):
             f.write(f"{entry[0]},{entry[1]},{entry[2]}\n")
 
 @run.command(name="rq2.triage", help="Triage and analyze the bug-injection fuzzing experiments of RQ2.")
-@click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
-@click.argument("benchmarks", type=str, required=True)
-@click.option("--repeats", "-r", type=str, default="1",
-              help="Repeat list separated by `,`", show_default=True)
-def rq2_triage(fuzzers, benchmarks, repeats):
-    fuzzer_list = [f.strip() for f in fuzzers.split(",")]
-    benchmark_list = [b.strip() for b in benchmarks.split(",")]
-    repeat_list = [int(r.strip()) for r in repeats.split(",")]
+def rq2_triage():
+    fuzzer_list = ["elfuzz", "grmr", "isla", "islearn", "glade"]
+    benchmark_list = ["libxml2", "cpython3", "sqlite3"]
+    repeat_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     rq2_triage_command(fuzzer_list, benchmark_list, repeat_list)
 
 if __name__ == "__main__":

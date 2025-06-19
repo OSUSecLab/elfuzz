@@ -19,13 +19,14 @@ def rq2_triage_command(fuzzers, benchmarks, repeats):
             os.makedirs(triage_dir)
 
         original_afl_tarball = os.path.join(PROJECT_ROOT, "extradata", "rq2", "afl_results", "afl_bug_exp.tar.zst")
+        click.echo(f"Unpacking old AFL++ results from {original_afl_tarball} to {afl_result_dir}")
         cmd_unpack = [
             "tar", "--zstd", "-xf", original_afl_tarball, "-C", afl_result_dir
         ]
         subprocess.run(cmd_unpack, check=True)
         afl_result_dir = os.path.join(afl_result_dir, "afl_bug_exp")
-        click.echo(f"Unpacked AFL++ results to {afl_result_dir}")
         triage_tarball = os.path.join(PROJECT_ROOT, "extradata", "rq2", "afl_results", "triage.tar.zst")
+        click.echo(f"Unpacking old triage results from {triage_tarball} to {triage_dir}")
         cmd_unpack = [
             "tar", "--zstd", "-xf", triage_tarball, "-C", triage_dir
         ]
