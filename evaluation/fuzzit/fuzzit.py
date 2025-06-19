@@ -23,7 +23,9 @@ ENV = {
 }
 
 def run(cmd, show_output=False):
-    subprocess.run(cmd, env=ENV, 
+    if "AFL_I_DONT_WANNA_DO_RESEARCH" in os.environ:
+        ENV["AFL_I_DONT_WANNA_DO_RESEARCH"] = os.environ["AFL_I_DONT_WANNA_DO_RESEARCH"]
+    subprocess.run(cmd, env=ENV,
                    stdout=subprocess.DEVNULL if not show_output else sys.stdout, 
                    stderr=subprocess.DEVNULL if not show_output else sys.stderr)
 
