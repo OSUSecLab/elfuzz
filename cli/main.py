@@ -271,7 +271,7 @@ def rq1_seed_cov(fuzzer, benchmark):
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", require=True)
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
-@click.argument("benchmarks", required=True, type=str)
+@click.argument("benchmarks", type=str)
 def rq1_afl(fuzzers, benchmarks, repeat):
     """BENCHMARKS should be a list separated by `,`"""
 
