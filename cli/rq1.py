@@ -303,7 +303,7 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
                     subname = "alt"
                 case _:
                     subname = fuzzer
-            seed_dir = os.path.join("extradata", "seeds", "cmined_with_control_bytes", benchmark, subname)
+            seed_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "cmined_with_control_bytes", benchmark, subname)
             candidates = [
                 f for f in os.listdir(seed_dir) if f.endswith(".tar.zst")
             ]
