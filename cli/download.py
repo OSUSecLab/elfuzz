@@ -27,7 +27,7 @@ class RelocateTo:
     is_tarball: bool
 
 def path_is_dir(path: str) -> bool:
-    return os.path.isdir(path)
+    return path.endswith("/")
 
 def load_relocate_info() -> list[RelocateTo]:
     with open(os.path.join(CLI_DIR, "relocate.json")) as f:
