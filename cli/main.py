@@ -269,10 +269,12 @@ def rq1_seed_cov(fuzzer, benchmark):
 
 @run.command(name="rq1.afl", help="Run the AFL++ fuzzing compaigns for Figure 8 in RQ1.")
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", require=True)
-@click.option("--repeat", "-r", type=int, default=1, show_default=True,
+@click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
-@click.argument("benchmarks", required=True, type=str, help="Benchmark list separated by `,`.")
+@click.argument("benchmarks", required=True, type=str)
 def rq1_afl(fuzzers, benchmarks, repeat):
+    """BENCHMARKS should be a list separated by `,`"""
+
     fuzzer_list = [f.strip() for f in fuzzers.split(",")]
     benchmark_list = [b.strip() for b in benchmarks.split(",")]
     for fuzzer in fuzzer_list:
