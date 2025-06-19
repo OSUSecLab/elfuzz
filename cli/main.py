@@ -22,6 +22,7 @@ from pre_experiments import (
 from minimize import minimize_command
 from rq1 import rq1_seed_cov_cmd, rq1_afl_run, rq1_afl_update
 from rq2 import rq2_afl_run, rq2_triage_command, rq2_real_world_cmd
+from rq3 import rq3_input_cov_command, rq3_evolve_trend_command
 
 
 def get_terminal_width():
@@ -341,6 +342,12 @@ def rq2_real_world(time, resume, checkpoint):
         click.echo(f"Tarball created at {tarball_path}.")
         return
     rq2_real_world_cmd(resume, dir, time)
+
+@cli.command(name="rq3", help="Collect the RQ3 data for Figures 11 and 12 from previous data.")
+def rq3():
+    rq3_input_cov_command()
+    rq3_evolve_trend_command()
+    click.echo("RQ3 data collection completed.")
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)

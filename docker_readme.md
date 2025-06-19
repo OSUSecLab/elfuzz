@@ -222,6 +222,14 @@ elfuzz run rq2.real_world --checkpoint
 
 ### Conducting RQ3 experiments
 
+Run the following command to reproduce the results in Figures 11 and 12:
+
+```bash
+elfuzz run rq3
+```
+
+The data for Figure 11 will be in `/elfuzz/analysis/rq3/rq3_ablation.xlsx`, and the data for Figure 12 will be in `/elfuzz/analysis/rq3/rq3_evolve_cov.xlsx`.
+
 ### Conducting RQ4 experiments
 
 ## Result analysis and visualization
