@@ -24,13 +24,10 @@ class RelocateTo:
     to: str
     is_dir: bool
     hook: RELOCATE_HOOK | None
+    is_tarball: bool
 
 def is_dir(path: str) -> bool:
     return os.path.isdir(path)
-
-def is_tarball(file_path: str) -> bool:
-    """Check if the file is a tarball (ends with .tar, .tar.gz, or .tar.zst)."""
-    return file_path.endswith(('.tar', '.tar.gz', '.tar.zst'))
 
 def load_relocate_info() -> list[RelocateTo]:
     with open(os.path.join(CLI_DIR, "relocate.json")) as f:
@@ -40,11 +37,15 @@ def load_relocate_info() -> list[RelocateTo]:
             from_ = item["from"]
             to = item["to"]
             is_dir = item.get("is_dir", False)
+            if "is_tarball" in item:
+                is_tarball = item["is_tarball"]
+            else:
+                is_tarball = False
             hook = None
             if "hook" in item:
                 hook = globals().get(item["hook"], None)
                 assert hook is not None, f"Hook {item['hook']} not found"
-            result.append(RelocateTo(from_=from_, to=to, is_dir=is_dir, hook=hook))
+            result.append(RelocateTo(from_=from_, to=to, is_dir=is_dir, hook=hook, is_tarball=is_tarball))
         return result
 
 def truncate_prefix(relocated_path: str):
@@ -95,7 +96,7 @@ def relocate(data_dir: str):
                 click.echo(f"WARNING: Path {src} does not exist. Skipping.")
             else:
                 target_is_dir = is_dir(dst)
-                if not is_tarball(src):
+                if not item.is_tarball:
                     if target_is_dir:
                         if not os.path.exists(dst):
                             os.makedirs(dst)
