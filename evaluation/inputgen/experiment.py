@@ -179,16 +179,23 @@ NL = "\n"
 @clk.option('--more-excludes', '-e', type=str, required=False, default='')
 @watch(mailogger, report_ok=True)
 def main(time, input, output, prepare, id, seeds_mode, parallel, repeat_times, repeat_start, start_offset, more_excludes):
-    for binary in BINARIES.values():
-        if not os.path.exists(binary):
-            mailogger.log(f'{binary} does not exist')
-            continue
     for token in more_excludes.split(','):
         if not token.strip():
             continue
         benchmark, fuzzer = token.strip().split('_')
         if (benchmark, fuzzer) not in EXCLUDES:
             EXCLUDES.append((benchmark, fuzzer))
+    to_check = set()
+    for benchmark in BENCHMARKS:
+        for fuzzer in FUZZERS:
+            if (benchmark, fuzzer) in EXCLUDES:
+                continue
+            to_check.add(BINARIES[benchmark])
+    for c in to_check:
+        binary = BINARIES[c]
+        if not os.path.exists(binary):
+            mailogger.log(f'{binary} does not exist')
+            continue
 
     if prepare:
         for fuzzer in FUZZERS:
