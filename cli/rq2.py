@@ -213,7 +213,6 @@ def rq2_real_world_cmd(resume: bool, output: str, time: int):
         if resume and (not os.path.exists(output) or not os.path.isdir(output) or not os.listdir(output)):
             click.echo(f"Resume mode set bug output directory {output} is empty or does not exist.")
             return
-        output_dir = output
         EXPERIMENT_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "fuzzit", "fuzzit.py")
         cmd = [
             "python", EXPERIMENT_SCRIPT,
@@ -224,5 +223,4 @@ def rq2_real_world_cmd(resume: bool, output: str, time: int):
         ] + (["--resume"] if resume else [])
         subprocess.run(cmd, check=True)
         click.echo("AFL++ campaigns completed.")
-    return retval
 
