@@ -4,6 +4,7 @@ import subprocess
 import os
 import sys
 import toml
+from datetime import datetime
 
 MAIN_CLI_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), "."))
 
@@ -20,7 +21,7 @@ from pre_experiments import (
 )
 from minimize import minimize_command
 from rq1 import rq1_seed_cov_cmd, rq1_afl_run, rq1_afl_update
-from rq2 import rq2_afl_run, rq2_triage_command
+from rq2 import rq2_afl_run, rq2_triage_command, rq2_real_world_cmd
 
 
 def get_terminal_width():
@@ -320,6 +321,26 @@ def rq2_triage():
     benchmark_list = ["libxml2", "cpython3", "sqlite3"]
     repeat_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     rq2_triage_command(fuzzer_list, benchmark_list, repeat_list)
+
+@run.command(name="rq2.real_world", help="Run the real-world bug-finding experiment on cvc5 in RQ2.")
+@click.option("--time", "-t", type=int, default=1209600, show_default=True, 
+              help="Time limit for the fuzzing campaign in seconds (default: 14 days).")
+@click.option("--resume", "-R", is_flag=True, default=False,
+              help="Resume a previous fuzzing campaign.")
+@click.option("--checkpoint", "-B", is_flag=True, default=False, help="Tarball the last state of the fuzzing campaign.")
+def rq2_real_world(time, resume, checkpoint):
+    dir = "/home/appuser/cvc5_realworld"
+    if checkpoint:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        tarball_dir = "/elfuzz/cvc5_realworld"
+        if not os.path.exists(tarball_dir):
+            os.makedirs(tarball_dir)
+        tarball_path = os.path.join(tarball_dir, f"cvc5_realworld_{timestamp}.tar.zst")
+        cmd = ["tar", "-I", "zstd", "-cf", tarball_path, dir]
+        subprocess.run(cmd, check=True)
+        click.echo(f"Tarball created at {tarball_path}.")
+        return
+    rq2_real_world_cmd(resume, dir, time)
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)

@@ -6,7 +6,7 @@ import pandas as pd
 import click
 import sys
 import itertools
-from rq1 import BENCHMARKS, FUZZERS
+from rq1 import BENCHMARKS, FUZZERS, prepare
 import itertools
 
 def rq2_triage_command(fuzzers, benchmarks, repeats):
@@ -179,3 +179,50 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
         NL = "\n"
         click.echo(f"Results collected:{NL}{NL.join(collected_info)}")
     return retval
+
+
+def rq2_real_world_cmd(resume: bool, output: str, time: int):
+    with tempfile.TemporaryDirectory() as tmpdir:
+        input_dir = os.path.join(tmpdir, "input")
+        os.makedirs(input_dir)
+        for benchmark, fuzzer in [("cvc5", "elfuzz")]:
+            click.echo(f"Preparing input for {benchmark} with fuzzer {fuzzer}...")
+            match fuzzer:
+                case "elfuzz":
+                    subname = "elm"
+                case "elfuzz_nofs":
+                    subname = "alt"
+                case _:
+                    subname = fuzzer
+            seed_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "cmined_with_control_bytes", benchmark, subname)
+            candidates = [
+                f for f in os.listdir(seed_dir) if f.endswith(".tar.zst")
+            ]
+            candidates.sort(key=lambda f: int(f.removesuffix(".tar.zst")), reverse=True)
+            assert len(candidates) > 0, f"No seeds found for {benchmark} with fuzzer {fuzzer}"
+            seed_tarball = os.path.join(seed_dir, candidates[0])
+
+            prepare(fuzzer, benchmark)
+            if not os.path.exists(input_dir):
+                os.makedirs(input_dir)
+            cmd_unpack = [
+                "tar", "--zstd", "-xf", seed_tarball, "-C", input_dir
+            ]
+            subprocess.run(cmd_unpack, check=True)
+        click.echo("Starting AFL++ campaigns...")
+        if resume and (not os.path.exists(output) or not os.path.isdir(output) or not os.listdir(output)):
+            click.echo(f"Resume mode set bug output directory {output} is empty or does not exist.")
+            return
+        output_dir = output
+        EXPERIMENT_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "fuzzit", "fuzzit.py")
+        cmd = [
+            "python", EXPERIMENT_SCRIPT,
+            "-t", str(time),
+            "-i", input_dir,
+            "-o", output,
+            "-j", "30",
+        ] + (["--resume"] if resume else [])
+        subprocess.run(cmd, check=True)
+        click.echo("AFL++ campaigns completed.")
+    return retval
+
