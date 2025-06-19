@@ -343,11 +343,53 @@ def rq2_real_world(time, resume, checkpoint):
         return
     rq2_real_world_cmd(resume, dir, time)
 
-@cli.command(name="rq3", help="Collect the RQ3 data for Figures 11 and 12 from previous data.")
+@run.command(name="rq3", help="Collect the RQ3 data for Figures 11 and 12 from previous data.")
 def rq3():
     rq3_input_cov_command()
     rq3_evolve_trend_command()
     click.echo("RQ3 data collection completed.")
+
+import shutil
+
+@cli.command(name="plot", help="Reproduce the figures and tables.")
+@click.option("--all", "-a", is_flag=True, default=False,
+              help="Reproduce all figures and tables.")
+def plot(all: bool):
+    PLOT_DIR = os.path.join(PROJECT_ROOT, "plot")
+    ANALYSIS_RESULT_DIR = os.path.join(PROJECT_ROOT, "analysis")
+    PLOT_DATA_DIR = os.path.join(PLOT_DIR, "data")
+
+    time_cost_cmd = [
+        "python", os.path.join(PROJECT_ROOT, "extradata", "timecost", "time_unit_convert.py")
+    ]
+    subprocess.run(time_cost_cmd, check=True)
+    shutil.copy(os.path.join(PROJECT_ROOT, "extradata", "timecost", "x_record_second.csv"), os.path.join(PLOT_DATA_DIR, "x_record_second.csv"))
+
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq1", "results", "seed_cov.xlsx"), os.path.join(PLOT_DATA_DIR, "seed_cov.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq1", "results", "rq1_sum.xlsx"), os.path.join(PLOT_DATA_DIR, "rq1_sum.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq1", "results", "rq1_std.xlsx"), os.path.join(PLOT_DATA_DIR, "rq1_std.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq2", "results", "rq2_count_bug.xlsx"), os.path.join(PLOT_DATA_DIR, "rq2_count_bug.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq2", "results", "rq2_std.xlsx"), os.path.join(PLOT_DATA_DIR, "rq2_std.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq2", "results", "rq2_time_to_trigger.xlsx"), os.path.join(PLOT_DATA_DIR, "rq2_time_to_trigger.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq2", "results", "unique.xlsx"), os.path.join(PLOT_DATA_DIR, "unique.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq3", "results", "rq3_ablation.xlsx"), os.path.join(PLOT_DATA_DIR, "rq3_ablation.xlsx"))
+    shutil.copy(os.path.join(ANALYSIS_RESULT_DIR, "rq3", "results", "rq3_evolve_cov.xlsx"), os.path.join(PLOT_DATA_DIR, "rq3_evolve_cov.xlsx"))
+
+    scripts = [
+        "draw_cov_of_input.py",
+        "draw_cov_of_input_var.py",
+        "draw_cov_trends_during.py",
+        "draw_edge_cov_of_survivor.py",
+        "draw_unique.py",
+        "draw_trends_of_triggered.py",
+        "gen_time_cost.py",
+        "gen_time_to_trigger.py"
+    ]
+
+    for script in scripts:
+        cmd = ["python", os.path.join(PLOT_DIR, script)]
+        subprocess.run(cmd, check=True)
+    click.echo("Plotting and generation completed.")
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)

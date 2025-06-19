@@ -101,6 +101,10 @@
         "is_tarball": true
     },
     {
+        "from": "experiment_binaries/sqlite3_cov.tar.zst",
+        "to": "extradata/"
+    },
+    {
         "from": "rq1/seeds/*",
         "to": "extradata/seeds/"
     },
@@ -263,5 +267,13 @@
     {
         "from": "rq3/collect_evolve_cov.py",
         "to": "analysis/rq3/collect_evolve_cov.py"
+    },
+    {
+        "from": "timecost/record.csv",
+        "to": "extradata/timecost/"
+    },
+    {
+        "from": "timecost/time_unit_covert.py",
+        "to": "analysis/timecost/"
     }
 ]
