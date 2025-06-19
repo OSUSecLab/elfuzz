@@ -336,8 +336,8 @@ def rq2_real_world(time, resume, checkpoint):
         if not os.path.exists(tarball_dir):
             os.makedirs(tarball_dir)
         tarball_path = os.path.join(tarball_dir, f"cvc5_realworld_{timestamp}.tar.zst")
-        cmd = ["tar", "-I", "zstd", "-cf", tarball_path, dir]
-        subprocess.run(cmd, check=True)
+        cmd = ["tar", "-I", "zstd", "-cf", tarball_path, "cvc5_realworld"]
+        subprocess.run(cmd, check=True, cwd="/home/appuser")
         click.echo(f"Tarball created at {tarball_path}.")
         return
     rq2_real_world_cmd(resume, dir, time)

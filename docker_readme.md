@@ -208,7 +208,17 @@ The outputs of the analysis will be in `/elfuzz/analysis/rq2/results/`:
 
 #### Running the real-world experiment on cvc5.
 
+Use the following command to run the real-world bug-finding experiment on cvc5 for 14 days:
 
+```bash
+elfuzz run rq2.real_world --time 1209600
+```
+
+AFL++ will output to `/home/appuser/cvc5_realworld`. You can checkpoint the directory into a tarball in `/elfuzz/cvc5_realworld/` by running the following command:
+
+```bash
+elfuzz run rq2.real_world --checkpoint
+```
 
 ### Conducting RQ3 experiments
 
