@@ -170,6 +170,8 @@ or this one for a specific benchmark:
 pyexcel view --sheet-name "<benchmark>" /elfuzz/analysis/rq1/results/seed_cov.xlsx
 ```
 
+#### Running the AFL++ fuzzing campaigns
+
 ### Conducting RQ2 experiments
 
 ### Conducting RQ3 experiments

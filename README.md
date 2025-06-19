@@ -66,7 +66,7 @@ TODO
 
 ## Maintenance statement
 
-I tried my best to preserve the environment in the Docker image, keeping the replication package usable for as long as possible. However, there may be some aspects that I have not considered. If you encounter any issues that prevent you from using the package, please open an issue or launch a pull request.
+**On Jun. 19, 2026.** I tried my best to preserve the environment in the Docker image, keeping the replication package usable for as long as possible. However, there may be some aspects that I have not considered. If you encounter any issues that prevent you from using the package, please open an issue or launch a pull request.
 
 ## Cite this work
 
