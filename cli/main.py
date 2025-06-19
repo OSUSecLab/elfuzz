@@ -19,7 +19,7 @@ from pre_experiments import (
     produce_glade
 )
 from minimize import minimize_command
-from rq1 import rq1_seed_cov_cmd
+from rq1 import rq1_seed_cov_cmd, rq1_afl_run, rq1_afl_update
 
 
 def get_terminal_width():
@@ -249,7 +249,7 @@ def run():
     pass
 
 @run.command(name="rq1.seed_cov", help=trim_indent("""
-    |Compute the seed coverage presented in RQ1.
+    |Collect the seed coverage presented in Figure 7 in RQ1.
     |Note that if you use the original data we provide on Figshare,
     |the command will use `afl-showmap` to re-collect the information,
     |as in our original experiments we didn't keep the seed coverage collected during generation.
@@ -266,6 +266,26 @@ def rq1_seed_cov(fuzzer, benchmark):
         click.echo(f"Fuzzer {fuzzer} is not supported for benchmark {benchmark}.")
         return
     rq1_seed_cov_cmd(fuzzer, benchmark)
+
+@run.command(name="rq1.afl", help="Run the AFL++ fuzzing compaigns for Figure 8 in RQ1.")
+@click.option("--fuzzers", type=str, help="Fuzzer list separated by `,`.", require=True)
+@click.option("--repeat", "-r", type=int, default=1, show_default=True,
+              help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
+@click.argument("benchmarks", required=True, type=str, help="Benchmark list separated by `,`.")
+def rq1_afl(fuzzers, benchmarks, repeat):
+    fuzzer_list = [f.strip() for f in fuzzers.split(",")]
+    benchmark_list = [b.strip() for b in benchmarks.split(",")]
+    for fuzzer in fuzzer_list:
+        if fuzzer not in ["elfuzz", "grmr", "glade", "isla", "islearn"]:
+            click.echo(f"Fuzzer {fuzzer} is not supported.")
+            continue
+        for benchmark in benchmark_list:
+            if benchmark not in ["jsoncpp", "re2", "sqlite3", "cpython3", "libxml2", "librsvg", "cvc5"]:
+                click.echo(f"Benchmark {benchmark} is not supported.")
+                continue
+    entries = rq1_afl_run(fuzzer_list, benchmark_list, repeat=repeat)
+    rq1_afl_update(entries)
+
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)
     sys.argv[0] = "elfuzz"

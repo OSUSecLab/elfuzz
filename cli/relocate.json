@@ -161,6 +161,10 @@
         "to": "extradata/seeds/cmined_with_control_bytes/sqlite3/alt/250618.tar.zst"
     },
     {
+        "from": "rq1/results/afl_cov_exp.tar.zst",
+        "to": "extradata/rq1/afl_results/"
+    },
+    {
         "from": "rq1/results/*",
         "to": "analysis/rq1/results/"
     },
