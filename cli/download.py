@@ -97,36 +97,32 @@ def relocate(data_dir: str):
             if not os.path.exists(dst):
                 os.makedirs(dst)
 
+        if not os.path.exists(src):
+            click.echo(f"WARNING: Path {src} does not exist. Skipping.")
+            continue
         if item.is_contents:
             files = os.listdir(src)
-            if not os.path.exists(src):
-                click.echo(f"WARNING: Path {src} does not exist. Skipping.")
-                continue
             for file in files:
                 shutil.move(os.path.join(src, file), os.path.join(dst, file))
             if item.hook is not None:
                 item.hook(dst)
             click.echo(f"Relocated {item.from_} to {item.to}.")
+        elif path_is_directory(src):
+            shutil.move(src, dst)
         else:
-            if not os.path.exists(src):
-                click.echo(f"WARNING: Path {src} does not exist. Skipping.")
-                continue
-            if path_is_directory(src):
-                shutil.move(src, dst)
-            else:
-                target_is_dir = path_is_directory(dst)
-                if not item.is_tarball and not path_is_directory(src):
-                    if target_is_dir:
-                        shutil.move(src, os.path.join(dst, os.path.basename(src)))
-                    else:
-                        shutil.move(src, dst)
+            target_is_dir = path_is_directory(dst)
+            if not item.is_tarball and not path_is_directory(src):
+                if target_is_dir:
+                    shutil.move(src, os.path.join(dst, os.path.basename(src)))
                 else:
-                    cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
-                    subprocess.run(cmd, check=True)
-                    os.remove(src)
-                if item.hook is not None:
-                    item.hook(dst)
-                click.echo(f"Relocated {item.from_} to {item.to}.")
+                    shutil.move(src, dst)
+            else:
+                cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
+                subprocess.run(cmd, check=True)
+                os.remove(src)
+            if item.hook is not None:
+                item.hook(dst)
+            click.echo(f"Relocated {item.from_} to {item.to}.")
 
 def file_md5(file_path: str) -> str:
     """Calculate the MD5 checksum of a file."""
