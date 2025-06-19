@@ -182,6 +182,8 @@ This command will run the AFL++ fuzzing campaigns for the fuzzers and benchmarks
 
 ### Conducting RQ2 experiments
 
+#### Running the AFL++ fuzzing campaigns on the bug-injected benchmarks
+
 ### Conducting RQ3 experiments
 
 ### Conducting RQ4 experiments

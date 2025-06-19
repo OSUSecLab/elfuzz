@@ -99,8 +99,16 @@ EXCLUDES = []
 @clk.option('--test-one', '-T', type=str, default=None)
 @clk.option('--start-batch', '-sb', type=int, default=None)
 @clk.option('--end-batch', '-eb', type=int, default=None)
+@clk.option('--more-excludes', '-me', type=str, multiple=True, default='')
 @watch(mailogger, report_ok=True)
-def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, start_batch, end_batch):
+def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, start_batch, end_batch, more_excludes):
+    for token in more_excludes.split(','):
+        if not token:
+            continue
+        benchmark, fuzzer = token.split('_')
+        if (benchmark, fuzzer) in EXCLUDES:
+            continue
+        EXCLUDES.append((benchmark, fuzzer))
     if prepare:
         for binary in BINARY_SOURCE.values():
             if not os.path.exists(binary):
@@ -142,11 +150,11 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         return
     
-    def callback(benchmakr, fuzzer):
+    def callback(benchmark, fuzzer):
         message = f'{benchmark}_{fuzzer} finished'
         return lambda future: mailogger.log(message)
     
-    BATCH_SIZE = 30
+    BATCH_SIZE = 25
     original_batches = []
     if test_one is not None:
         batches = [[[0,] + list(test_one.split('_'))]]
@@ -197,6 +205,8 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                     os.makedirs(output_dir)
                 binary = BINARIES[benchmark]
                 env = ENV[benchmark]
+                if 'AFL_I_DONT_CARE_ABOUT_CRASHES' not in os.environ:
+                    env['AFL_I_DONT_CARE_ABOUT_CRASHES'] = os.environ.get('AFL_I_DONT_CARE_ABOUT_CRASHES', '1')
                 env['AFL_CRASHING_SEEDS_AS_NEW_CRASH'] = '1'
 
                 filtered_bugs = list()

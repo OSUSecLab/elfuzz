@@ -183,5 +183,53 @@
     {
         "from": "rq1/sum.py",
         "to": "analysis/rq1/"
+    },
+    {
+        "from": "rq2/results/afl_bug_exp.tar.zst",
+        "to": "extradata/rq2/afl_results/"
+    },
+    {
+        "from": "rq2/results/real_world.tar.zst",
+        "to": "extradata/rq2/real_world/"
+    },
+    {
+        "from": "rq2/results/*",
+        "to": "analysis/rq2/results/"
+    },
+    {
+        "from": "rq2/bug_count_10_min.py",
+        "to": "analysis/rq2/bug_count_10_min.py"
+    },
+    {
+        "from": "rq2/count_bug.py",
+        "to": "analysis/rq2/count_bug.py"
+    },
+    {
+        "from": "rq2/count_bug_rep.py",
+        "to": "analysis/rq2/count_bug_rep.py"
+    },
+    {
+        "from": "rq2/failure_analysis.py",
+        "to": "analysis/rq2/failure_analysis.py"
+    },
+    {
+        "from": "rq2/std.py",
+        "to": "analysis/rq2/std.py"
+    },
+    {
+        "from": "rq2/sum_failure.py",
+        "to": "analysis/rq2/sum_failure.py"
+    },
+    {
+        "from": "rq2/sum_unique.py",
+        "to": "analysis/rq2/sum_unique.py"
+    },
+    {
+        "from": "rq2/time_to_trigger.py",
+        "to": "analysis/rq2/time_to_trigger.py"
+    },
+    {
+        "from": "rq2/unique.py",
+        "to": "analysis/rq2/unique.py"
     }
 ]

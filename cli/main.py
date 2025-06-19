@@ -20,6 +20,7 @@ from pre_experiments import (
 )
 from minimize import minimize_command
 from rq1 import rq1_seed_cov_cmd, rq1_afl_run, rq1_afl_update
+from rq2 import rq2_afl_run
 
 
 def get_terminal_width():
@@ -286,6 +287,28 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug):
                 continue
     entries = rq1_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
     rq1_afl_update(entries)
+
+@run.command(name="rq2.afl", help="Run the AFL++ fuzzing compaigns on the bug-injected benchmarks for RQ2.")
+@click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
+@click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
+              help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
+@click.option("--debug", is_flag=True, default=False, hidden=True,)
+@click.argument("benchmarks", type=str, required=True)
+def rq2_afl(fuzzers, benchmarks, repeat, debug):
+    fuzzer_list = [f.strip() for f in fuzzers.split(",")]
+    benchmark_list = [b.strip() for b in benchmarks.split(",")]
+    for fuzzer in fuzzer_list:
+        if fuzzer not in ["elfuzz", "grmr", "glade", "isla", "islearn"]:
+            click.echo(f"Fuzzer {fuzzer} is not supported.")
+            continue
+        for benchmark in benchmark_list:
+            if benchmark not in ["libxml2", "cpython3", "sqlite3"]:
+                click.echo(f"Benchmark {benchmark} is not supported.")
+                continue
+    entries = rq2_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
+    with open(os.path.join(PROJECT_ROOT, ".rq2_afl_updated"), "w") as f:
+        for entry in entries:
+            f.write(f"{entry[0]},{entry[1]},{entry[2]}\n")
 
 if __name__ == "__main__":
     os.chdir(PROJECT_ROOT)
