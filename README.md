@@ -2,7 +2,7 @@
 
 [![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.6084%2Fm9.figshare.29177162-green)](https://doi.org/10.6084/m9.figshare.29177162)
 
-This repository contains the code and experiment data of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
+This repository contains the source code of the replication package of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
 ## Experiment data
 
@@ -13,7 +13,7 @@ The experiment data are published on [Figshare](https://doi.org/10.6084/m9.figsh
 The code and environment to replicate the experiments are published as a Docker image. Run the following command to pull it:
 
 ```bash
-docker pull ghcr.io/cychen2021/elfuzz:25.06.0   
+docker pull ghcr.io/cychen2021/elfuzz:25.06.0
 ```
 
 Instead, if you download the Docker image as a tarball from Figshare, you can import it using the following commands:
