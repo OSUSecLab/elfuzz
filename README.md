@@ -64,7 +64,7 @@ TODO
 - The Docker version we used is 28.2.2.
 - There is a PDF (`misc/sibling_container.pdf`) in the data tarball (`elfuzz_data_<timestamp>.tar.zst`) downloaded from the Figshare repository. It is a persistent version of the Stack Overflow post referenced above, in case that the link to the post is broken in the future.
 
-## Maintenance statement
+## Maintenance statements
 
 **On Jun. 19, 2026.** I tried my best to preserve the environment in the Docker image, keeping the replication package usable for as long as possible. However, there may be some aspects that I have not considered. If you encounter any issues that prevent you from using the package, please open an issue or launch a pull request.
 
