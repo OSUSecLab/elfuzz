@@ -26,7 +26,7 @@ class RelocateTo:
     hook: RELOCATE_HOOK | None
     is_tarball: bool
 
-def is_dir(path: str) -> bool:
+def path_is_dir(path: str) -> bool:
     return os.path.isdir(path)
 
 def load_relocate_info() -> list[RelocateTo]:
@@ -36,7 +36,9 @@ def load_relocate_info() -> list[RelocateTo]:
         for item in json.load(f):
             from_ = item["from"]
             to = item["to"]
-            is_dir = item.get("is_dir", False)
+            is_dir = path_is_dir(from_)
+            if is_dir:
+                assert path_is_dir(to), f"Expected {to} to be a directory"
             if "is_tarball" in item:
                 is_tarball = item["is_tarball"]
             else:
@@ -100,7 +102,7 @@ def relocate(data_dir: str):
                     if target_is_dir:
                         if not os.path.exists(dst):
                             os.makedirs(dst)
-                        
+
                         shutil.move(src, os.path.join(dst, os.path.basename(src)))
                     else:
                         shutil.move(src, dst)
