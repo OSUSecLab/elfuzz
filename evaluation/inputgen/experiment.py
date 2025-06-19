@@ -275,6 +275,8 @@ def main(time, input, output, prepare, id, seeds_mode, parallel, repeat_times, r
             output_dir = os.path.join(output_root, f'{benchmark}_{fuzzer}')
             binary = BINARIES[benchmark]
             env = ENV[benchmark]
+            if "AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES" in os.environ:
+                env['AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES'] = os.environ['AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES']
             match benchmark:
                 case 'librsvg':
                     fuzz_func = run_afl_for_librsvg_showmap if seeds_mode else run_afl_for_librsvg
