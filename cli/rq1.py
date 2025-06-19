@@ -312,7 +312,8 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int, debug: bool=False) -> list[tup
             seed_tarball = os.path.join(seed_dir, candidates[0])
 
             prepare(fuzzer, benchmark)
-            os.mkdir(os.path.join(tmpdir, "input"))
+            if not os.path.exists(input_dir):
+                os.makedirs(input_dir)
             cmd_unpack = [
                 "tar", "--zstd", "-xf", seed_tarball, "-C", input_dir
             ]
