@@ -61,7 +61,7 @@ TODO
 
 ## Miscellaneous
 
-- The Docker version we used is 28.2.2.
+- The Docker version at the time that the image was built is 28.2.2.
 - There is a PDF (`misc/sibling_container.pdf`) in the data tarball (`elfuzz_data_<timestamp>.tar.zst`) downloaded from the Figshare repository. It is a persistent version of the Stack Overflow post referenced above, in case that the link to the post is broken in the future.
 
 ## Maintenance statements
