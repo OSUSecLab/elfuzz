@@ -261,7 +261,7 @@ Run the following command to reproduce all the figures and tables:
 elfuzz plot --all
 ```
 
-The generated figures and tables will be in `/elfuzz/fig` and `/elfuzz/table/`.
+The generated figures and tables will be in `/elfuzz/plot/figure/` and `/elfuzz/plot/table/`.
 
 ## Copying out the results
 
