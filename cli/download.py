@@ -112,7 +112,7 @@ def relocate(data_dir: str):
             case "tarball":
                 assert path_is_directory(dst), f"Target {dst} must be a directory for tarball relocation"
                 cmd = ["tar", "--zstd", "-xf", src, "-C", dst]
-                dst_file = dst + "/*"
+                dst_file = dst + "*"
                 subprocess.run(cmd, check=True)
                 os.remove(src)
             case "normal":
