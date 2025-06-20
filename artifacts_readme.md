@@ -15,10 +15,10 @@ The files are organized as follows:
 - `data_metadata.json`: Metadata information about the experiment data tarball.
 - `docker_metadata.json`: Metadata information about the Docker image tarball.
 
-You can download the data or Docker image and run the following command to combine the parts into a complete tarball:
+You can download the data, source code, and Docker image tarballs and run the following command to combine the parts into a complete tarball:
 
 ```bash
-cat "elffuzz_(data|docker)_<timetag>.tar.zst.part*" > "elffuzz_(data|docker)_<timetag>.tar.zst"
+cat "elffuzz_(data|docker)_<timetag>.tar.zst.part*" > "elffuzz_(data|docker|src)_<timetag>.tar.zst"
 ```
 
 The source code tarball contains a `README.md` file that describes how to replicate the experiments.
@@ -29,11 +29,20 @@ Note that you need to install `zstd` to decompress the tarballs. On Ubuntu, use 
 sudo apt install zstd
 ```
 
-Then, decompress the tarballs using the following command:
+Decompress the data and source code tarballs to inspect their contents via the following command:
 
 ```bash
-tar --zstd -xvf "elfuzz_(src|data|docker)_<timetag>.tar.zst"
+tar --zstd -xvf "elfuzz_(src|data)_<timetag>.tar.zst"
 ```
+
+To use the Docker image tarball, you need to decompress and load it via the following command:
+
+```bash
+zstd -d "elfuzz_docker_<timetag>.tar.zst" -o "elfuzz_docker.tar"
+docker load --input "elfuzz_docker.tar"
+```
+
+Follow the instructions in the `README.md` file in the source code tarball for later instructions to replicate the experiments using the Docker image.
 
 In later sections, we will list the important contents of each tarball.
 
