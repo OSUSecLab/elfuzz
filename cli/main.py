@@ -147,11 +147,16 @@ def config(list_: bool, set: tuple[str, str], get: str):
             case "logging.email_smtp_password":
                 config["logging"]["email_smtp_password"] = value
             case "tgi.huggingface_token":
-                token_path = "/root/.config/huggingface"
+                token_path = "/home/appuser/.config/huggingface"
                 if not os.path.exists(token_path):
                     os.makedirs(token_path, exist_ok=True)
                 with open(os.path.join(token_path, "token"), "w") as f:
                     f.write(value)
+                if not os.path.exists("/root/.config/huggingface"):
+                    cmd1 = ["sudo", "mkdir", "-p", "/root/.config/huggingface"]
+                    subprocess.run(cmd1, check=True)
+                cmd2 = ["sudo", "ln", "-s", os.path.join(token_path, "token"), "/root/.config/huggingface/token"]
+                subprocess.run(cmd2, check=True)
                 click.echo(f"{key} := {value}")
                 return
             case _:
