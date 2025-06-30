@@ -57,7 +57,7 @@ def setup():
     if not os.path.exists(fuzzdata_dir):
         os.makedirs(fuzzdata_dir)
     cmd = [
-        "/usr/bin/bash", "/home/appuser/elmfuzz/.devcontainer/setup_docker.sh"
+        "sudo", "/usr/bin/bash", "/home/appuser/elmfuzz/.devcontainer/setup_docker.sh"
     ]
     subprocess.run(cmd, check=True)
     click.echo("Done! Now please restart the container manually.")
