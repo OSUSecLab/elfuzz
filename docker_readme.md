@@ -206,7 +206,7 @@ The outputs of the analysis will be in `/elfuzz/analysis/rq2/results/`:
 - `rq2_bug_count_10_min_<rep_n>.xlsx` are the data for Table 6 per repetition. `rq2_time_to_trigger.xlsx` is the averaged data presented in the table.
 - `unique_<benchmark>_<fuzzer>.txt` (ELFuzz represented as `elm`) contains the unique bugs triggered by each fuzzer on each benchmark. `unique.xlsx` is the aggregated value of each fuzzer presented in Figure 10.
 
-#### Running the real-world experiment on cvc5.
+#### Running the real-world experiment on cvc5
 
 Use the following command to run the real-world bug-finding experiment on cvc5 for 14 days:
 
