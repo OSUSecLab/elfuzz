@@ -303,7 +303,11 @@ def produce(fuzzer, benchmark, *, debug=False, timelimit=600):
         if os.path.exists(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}")):
             shutil.rmtree(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}"))
         cmd = ["python", os.path.join(WORKDIR, "batchrun.py"), os.path.join(tmpdir, "config.toml")]
-        subprocess.run(" ".join(cmd), check=True, env=os.environ.copy() | {"TIME_LIMIT": str(timelimit)}, cwd=WORKDIR, stdout=sys.stdout,
+        if timelimit != 600:
+            env = os.environ.copy() | {"TIME_LIMIT": str(timelimit)}
+        else:
+            env = os.environ.copy()
+        subprocess.run(" ".join(cmd), check=True, env=env, cwd=WORKDIR, stdout=sys.stdout,
                        shell=True, stderr=sys.stderr, user=USER)
     if not (fuzzer.startswith("elfuzz") and fuzzer != "elfuzz"):
         click.echo("Generation done. Now we have to collect all the test cases to one place. This may take a while...")
