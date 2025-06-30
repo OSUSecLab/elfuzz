@@ -329,6 +329,6 @@ def produce(fuzzer, benchmark, *, debug=False, timelimit=600):
     produce_info_dir = os.path.join(PROJECT_ROOT, "extradata", "produce_info")
     if not os.path.exists(produce_info_dir):
         os.makedirs(produce_info_dir)
-    cmd_tar_raw = ["tar", "--zstd", "-cf", os.path.join(produce_info_dir, f"{benchmark}_{info_tarball_suffix}.tar.zst")]
+    cmd_tar_raw = ["tar", "--zstd", "-cf", os.path.join(produce_info_dir, f"{benchmark}{info_tarball_suffix}.tar.zst"), f"{benchmark}{dir_suffix}"]
     subprocess.run(cmd_tar_raw, check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout, stderr=sys.stderr,)
-    click.echo(f"Info during seed test case generation in: {os.path.join(produce_info_dir, f'{benchmark}_{info_tarball_suffix}.tar.zst')}")
+    click.echo(f"Info during seed test case generation in: {os.path.join(produce_info_dir, f'{benchmark}{info_tarball_suffix}.tar.zst')}")
