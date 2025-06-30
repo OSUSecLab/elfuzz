@@ -78,13 +78,13 @@ def cmin(fuzzers, benchmarks, tmpdir):
         for benchmark in ALL_BENCHMARKS:
             if benchmark not in benchmarks or fuzzer not in [FUZZER_MAPPING[fuzzer] for fuzzer in fuzzers]:
                 exclude.append(f"{benchmark}_{fuzzer}")
-    process_dir = os.path.join(tmpdir, "process", f"{benchmark}_{fuzzer}")
-    all_prcs_files = [f for f in os.listdir(process_dir) if f.endswith(".tar.zst")]
-    intermediate_dir = os.path.join(tmpdir, "intermediate")
-    raw_ori = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw")
     for benchmark in benchmarks:
         for fuzzer_raw in fuzzers:
             fuzzer = FUZZER_MAPPING[fuzzer_raw]
+            process_dir = os.path.join(tmpdir, "process", f"{benchmark}_{fuzzer}")
+            all_prcs_files = [f for f in os.listdir(process_dir) if f.endswith(".tar.zst")]
+            intermediate_dir = os.path.join(tmpdir, "intermediate")
+            raw_ori = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw")
             if f"{benchmark}_{fuzzer}" in ["re2_islearn", "jsoncpp_islearn"]:
                 continue
             candidates = [f for f in os.listdir(os.path.join(raw_ori, benchmark, fuzzer)) if f.endswith(".tar.zst")]
