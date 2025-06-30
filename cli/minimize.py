@@ -147,7 +147,7 @@ def cmin(fuzzers, benchmarks, tmpdir):
         "-o", cmin_out_dir,
         "--more-excludes", ",".join(exclude),
         "--move-instead-of-copy",
-        "--last"
+        "--last-run",
         "-it", str(END_AT)
     ]
     subprocess.run(cmd_last, check=True)
