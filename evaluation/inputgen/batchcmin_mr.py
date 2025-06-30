@@ -187,6 +187,8 @@ def main(shuffle, batch_size, id, input, output, iteration, first_run, move_inst
                 mailogger.log(f'Dir check error', f'{seed_dir}')
                 sys.exit(-1)
     for benchmark, binary in BINARIES.items():
+        if (benchmark, fuzzer) in EXCLUDE:
+            continue
         if not os.path.exists(binary):
             mailogger.log(f'Binary not found', f'{binary}')
             sys.exit(-1)
