@@ -90,7 +90,7 @@ RUN case $(uname -m) in \
     x86_64) sudo curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose;; \
     *) echo "Unsupported architecture" && exit 1;; \
     esac
-RUN sudo chmod 777 /usr/local/bin/docker-compose 
+RUN sudo chmod 777 /usr/local/bin/docker-compose
 RUN pip install "yamlpath==3.8.2" "ast-comments==1.2.2"
 WORKDIR /home/appuser
 RUN git clone https://github.com/google/oss-fuzz.git
