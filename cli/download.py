@@ -154,12 +154,17 @@ class PartFileInfo:
     download_url: str
     md5: str
 
-def download_data(ignore_cache: bool, only_relocate: bool=False):
+def download_data(ignore_cache: bool, only_relocate: bool=False, fix_version: int = -1):
     UNZIP_DIR = os.path.realpath(os.path.join(TMP_UNZIP_DIR, "data"))
     if not only_relocate:
-        FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/files?page_size=100"
-        response = requests.get(FILE_LIST_URL)
-        file_list = response.json()
+        if fix_version == -1:
+            FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/files?page_size=100"
+            response = requests.get(FILE_LIST_URL)
+            file_list = response.json()
+        else:
+            FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/versions/{fix_version}"
+            response = requests.get(FILE_LIST_URL)
+            file_list = response.json()["files"]
         metadata_url = None
         for file in file_list:
             if file["name"] == "data_metadata.json":
