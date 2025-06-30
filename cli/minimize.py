@@ -53,6 +53,14 @@ def process(fuzzers, benchmarks, tmpdir):
     click.echo(f"Random bytes prepended.")
 
 def cmin(fuzzers, benchmarks, tmpdir):
+    FUZZER_MAPPING = {
+        "elfuzz": "elm",
+        "glade": "glade",
+        "islearn": "islearn",
+        "isla": "isla",
+        "grmr": "grmr",
+    }
+
     exclude = []
     for fuzzer in ALL_FUZZERS:
         for benchmark in ALL_BENCHMARKS:
