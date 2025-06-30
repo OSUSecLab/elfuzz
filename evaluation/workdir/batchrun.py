@@ -111,8 +111,8 @@ mailogger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/con
 def main(config_file, log_level):
     if "TIME_LIMIT" in os.environ:
         global TIME_LIMIT, CHECKPOINT
-        TIME_LIMIT = int(os.environ["TIME_LIMIT"])
-        CHECKPOINT = TIME_LIMIT // 10
+        TIME_LIMIT = os.environ["TIME_LIMIT"]
+        CHECKPOINT = str(int(TIME_LIMIT) // 10)
     match log_level:
         case 'INFO':
             logging.basicConfig(level=logging.INFO)
