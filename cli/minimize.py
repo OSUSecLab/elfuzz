@@ -90,13 +90,13 @@ def cmin(fuzzers, benchmarks, tmpdir):
             target_dir = os.path.join(intermediate_dir, "raw_seeds", benchmark, fuzzer)
             if not os.path.exists(target_dir):
                 os.makedirs(target_dir, exist_ok=True)
-            shutil.copy(os.path.join(raw_ori, benchmark, fuzzer, candidates[0]), 
+            shutil.copy(os.path.join(raw_ori, benchmark, fuzzer, candidates[0]),
                         os.path.join(target_dir, "100121.tar.zst"))
             if f"{benchmark}_{fuzzer}" in all_prcs_files:
                 prcs_dir = os.path.join(intermediate_dir, "prcs", benchmark, fuzzer)
                 if not os.path.exists(prcs_dir):
                     os.makedirs(prcs_dir, exist_ok=True)
-                shutil.copy(os.path.join(process_dir, f"{benchmark}_{fuzzer}.tar.zst"), 
+                shutil.copy(os.path.join(process_dir, f"{benchmark}_{fuzzer}.tar.zst"),
                             os.path.join(prcs_dir, "100121.tar.zst"))
     cmin_out_dir = os.path.join(tmpdir, "cmin_out")
     BATCH_CMIN_MR = os.path.join(PROJECT_ROOT, "evaluation", "inputgen", "batchcmin_mr.py")
