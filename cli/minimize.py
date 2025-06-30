@@ -30,6 +30,7 @@ def process(fuzzers, benchmarks, tmpdir):
             if benchmark not in benchmarks or fuzzer not in fuzzers:
                 exclude.append(f"{benchmark}_{fuzzer}")
     prepare_dir = os.path.join(tmpdir, "prepare")
+    os.makedirs(prepare_dir, exist_ok=True)
     BATCH_PROCESS_MR = os.path.join(PROJECT_ROOT, "evaluation", "inputgen", "batchprocess_mr.py")
     cmd = [
         "python", BATCH_PROCESS_MR,
