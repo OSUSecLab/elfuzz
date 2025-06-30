@@ -121,16 +121,16 @@ def cmin(fuzzers, benchmarks, tmpdir):
     ]
     subprocess.run(cmd_first, check=True)
 
-    for i in range(START_FROM + 1, END_AT):
+    for i in range(START_FROM, END_AT):
         click.echo(f"Running cmin iteration {i + 1}. There will be {END_AT} iterations in total.")
         cmd_i = [
             "python", BATCH_CMIN_MR, "--shuffle",
             "-b", str(BATCH_SIZE),
-            "-i", os.path.join(cmin_out_dir, "cmin", str(i - 1)),
+            "-i", os.path.join(cmin_out_dir, "cmin", str(i)),
             "-o", cmin_out_dir,
             "--more-excludes", ",".join(exclude),
             "--move-instead-of-copy",
-            "-it", str(i)
+            "-it", str(i + 1)
         ]
         subprocess.run(cmd_i, check=True)
 
