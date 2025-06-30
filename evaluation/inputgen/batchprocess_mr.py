@@ -110,6 +110,10 @@ BENCHMARKS = [
 ]
 
 FUZZERS = [
+    'elm',
+    'isla',
+    'islearn',
+    'alt',
     'grmr',
     'glade'
 ]
