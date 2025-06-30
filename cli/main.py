@@ -217,17 +217,18 @@ def info():
 @click.argument("benchmark", required=True, type=click.Choice(
     ["jsoncpp", "libxml2", "re2", "librsvg", "cvc5", "sqlite3", "cpython3"]
 ))
+@click.option("--time", "-t", type=int, default=600, show_default=True, help="The time to run the input generator.")
 @click.option("--debug", is_flag=True, default=False, hidden=True)
-def produce_command(fuzzer: str, benchmark: str, debug: bool):
+def produce_command(fuzzer: str, benchmark: str, debug: bool, time: int):
     match fuzzer, benchmark:
         case ("islearn", "jsoncpp") | ("islearn", "re2"):
             click.echo(f"Fuzzer {fuzzer} is not supported for benchmark {benchmark}.")
             return
     match fuzzer:
         case "glade":
-            produce_glade(benchmark)
+            produce_glade(benchmark, timelimit=time)
         case "elfuzz" | "elfuzz_nofs" | "elfuzz_nocp" | "elfuzz_noin" | "elfuzz_nosp" | "isla" | "islearn" | "grmr":
-            produce(fuzzer, benchmark, debug=debug)
+            produce(fuzzer, benchmark, debug=debug, timelimit=time)
         case _:
             click.echo(f"Unknown fuzzer: {fuzzer}. Supported fuzzers are: elfuzz, elfuzz_nofs, elfuzz_nocp, elfuzz_noin, elfuzz_nosp, isla, islearn, grmr, glade.")
 

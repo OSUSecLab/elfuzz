@@ -201,7 +201,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
 
     click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
 
-def produce_glade(benchmark):
+def produce_glade(benchmark, timelimit: int=600):
     glade_gram_dir = os.path.join(PROJECT_ROOT, "evaluation", "gramgen", benchmark)
     glade_input = os.path.join(glade_gram_dir, "inputs")
     glade_grams = [os.path.join(glade_gram_dir, f) for f in os.listdir(glade_gram_dir) if f.endswith(".gram")]
@@ -217,7 +217,7 @@ def produce_glade(benchmark):
     with tempfile.TemporaryDirectory() as tmpdir:
         output_dir = os.path.join(tmpdir, f"{benchmark}_glade")
         cmd = [
-            "./gradlew", "run", f"--args=\"fuzz -i {glade_gram} -T 600 -o {output_dir}\""
+            "./gradlew", "run", f"--args=\"fuzz -i {glade_gram} -T {timelimit} -o {output_dir}\""
         ]
         subprocess.run(" ".join(cmd), check=True, cwd=glade_dir, shell=True)
 
@@ -262,7 +262,7 @@ CONFIG_TEMPLATE = r"""
 |exclude = []
 """
 
-def produce(fuzzer, benchmark, *, debug=False):
+def produce(fuzzer, benchmark, *, debug=False, timelimit=600):
     info_tarball_suffix = ""
     match fuzzer:
         case "elfuzz":
@@ -303,7 +303,7 @@ def produce(fuzzer, benchmark, *, debug=False):
         if os.path.exists(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}")):
             shutil.rmtree(os.path.join(WORKDIR, f"{benchmark}{dir_suffix}"))
         cmd = ["python", os.path.join(WORKDIR, "batchrun.py"), os.path.join(tmpdir, "config.toml")]
-        subprocess.run(" ".join(cmd), check=True, env=os.environ.copy(), cwd=WORKDIR, stdout=sys.stdout,
+        subprocess.run(" ".join(cmd), check=True, env=os.environ.copy() | {"TIME_LIMIT": str(timelimit)}, cwd=WORKDIR, stdout=sys.stdout,
                        shell=True, stderr=sys.stderr, user=USER)
     if not (fuzzer.startswith("elfuzz") and fuzzer != "elfuzz"):
         click.echo("Generation done. Now we have to collect all the test cases to one place. This may take a while...")
