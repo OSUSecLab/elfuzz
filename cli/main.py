@@ -157,6 +157,8 @@ def config(list_: bool, set: tuple[str, str], get: str):
                     subprocess.run(cmd1, check=True)
                 cmd2 = ["sudo", "ln", "-s", os.path.join(token_path, "token"), "/root/.config/huggingface/token"]
                 subprocess.run(cmd2, check=True)
+                cmd3 = ["ln", "-s", "/home/appuser/elmfuzz/cli/config.toml", "/elfuzz/config.toml"]
+                subprocess.run(cmd3, check=True)
                 click.echo(f"{key} := {value}")
                 return
             case _:
