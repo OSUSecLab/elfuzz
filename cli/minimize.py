@@ -153,13 +153,14 @@ def cmin(fuzzers, benchmarks, tmpdir):
     subprocess.run(cmd_last, check=True)
     collect = []
     for benchmark in benchmarks:
-        for fuzzer in fuzzers:
+        for fuzzer_raw in fuzzers:
+            fuzzer = FUZZER_MAPPING[fuzzer_raw]
             if f"{benchmark}_{fuzzer}" in ["re2_islearn", "jsoncpp_islearn"]:
                 continue
             output_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "cmined_with_control_bytes", benchmark, fuzzer)
             if not os.path.exists(output_dir):
                 os.makedirs(output_dir, exist_ok=True)
-            datetag = datetime.now().strftime("%Y%m%d")
+            datetag = datetime.now().strftime("%y%m%d")
             output_file = os.path.join(output_dir, f"{datetag}.tar.zst")
             cmd_tar = [
                 'tar', '--zstd', '-cf', output_file, '-C', os.path.join(cmin_out_dir, "cmin", str(END_AT)), f'{benchmark}_{fuzzer}'
