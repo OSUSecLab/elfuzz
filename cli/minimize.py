@@ -71,7 +71,8 @@ def cmin(fuzzers, benchmarks, tmpdir):
     intermediate_dir = os.path.join(tmpdir, "intermediate")
     raw_ori = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw")
     for benchmark in benchmarks:
-        for fuzzer in fuzzers:
+        for fuzzer_raw in fuzzers:
+            fuzzer = FUZZER_MAPPING[fuzzer_raw]
             if f"{benchmark}_{fuzzer}" in ["re2_islearn", "jsoncpp_islearn"]:
                 continue
             candidates = [f for f in os.listdir(os.path.join(raw_ori, benchmark, fuzzer)) if f.endswith(".tar.zst")]
