@@ -108,6 +108,8 @@ def cmin(fuzzers, benchmarks, tmpdir):
     START_FROM = 1
     END_AT = 10
     click.echo(f"Running first cmin iteration. There will be {END_AT} iterations in total.")
+    if not os.path.exists(cmin_out_dir):
+        os.makedirs(cmin_out_dir, exist_ok=True)
     cmd_first = [
         "python", BATCH_CMIN_MR, "--shuffle",
         "-b", str(BATCH_SIZE),
