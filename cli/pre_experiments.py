@@ -321,7 +321,7 @@ def produce(fuzzer, benchmark, *, debug=False, timelimit=600):
                     continue
                 for file in os.listdir(p):
                     file_p = os.path.join(p, file)
-                    target_file = os.path.join(collect_dir, f"{dir}_{file}.seed")
+                    target_file = os.path.join(collect_dir, f"{dir}_{file}")
                     shutil.move(file_p, target_file)
             result_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw", benchmark, fuzzer_name)
             if not os.path.exists(result_dir):
