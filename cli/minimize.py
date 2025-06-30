@@ -76,9 +76,9 @@ def cmin(fuzzers, benchmarks, tmpdir):
     exclude = []
     for fuzzer in ALL_FUZZERS:
         for benchmark in ALL_BENCHMARKS:
-            if benchmark not in benchmarks or fuzzer not in fuzzers:
-                exclude.append(f"{benchmark}_{fuzzer}")
-    process_dir = os.path.join(tmpdir, "process")
+            if benchmark not in benchmarks or FUZZER_MAPPING[fuzzer] not in fuzzers:
+                exclude.append(f"{benchmark}_{FUZZER_MAPPING[fuzzer]}")
+    process_dir = os.path.join(tmpdir, "process", f"{benchmark}_{fuzzer}")
     all_prcs_files = [f for f in os.listdir(process_dir) if f.endswith(".tar.zst")]
     intermediate_dir = os.path.join(tmpdir, "intermediate")
     raw_ori = os.path.join(PROJECT_ROOT, "extradata", "seeds", "raw")
@@ -105,6 +105,8 @@ def cmin(fuzzers, benchmarks, tmpdir):
     BATCH_SIZE = 3000
     # We fix the iterations to 10 because 1) the cmin process typically needs multiple runs
     #  and 2) the number of the runs is definitely less than 10 in our experiments.
+    
+    
     START_FROM = 1
     END_AT = 10
     click.echo(f"Running first cmin iteration. There will be {END_AT} iterations in total.")
