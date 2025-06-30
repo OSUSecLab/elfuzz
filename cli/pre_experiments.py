@@ -327,7 +327,7 @@ def produce(fuzzer, benchmark, *, debug=False, timelimit=600):
             if not os.path.exists(result_dir):
                 os.makedirs(result_dir)
             datetag = datetime.now().strftime("%y%m%d")
-            cmd_tar = ["tar", "--zstd", "-cf", os.path.join(result_dir, datetag + ".tar.zst"), f"{benchmark}_{fuzzer}"]
+            cmd_tar = ["tar", "--zstd", "-cf", os.path.join(result_dir, datetag + ".tar.zst"), f"{benchmark}{info_tarball_suffix}"]
             subprocess.run(cmd_tar, check=True, env=os.environ.copy(), cwd=tmpdir, stdout=sys.stdout, stderr=sys.stderr)
             click.echo(f"Produced seeds for {benchmark} with {fuzzer} fuzzer collected in {os.path.join(result_dir, datetag + '.tar.zst')}")
     produce_info_dir = os.path.join(PROJECT_ROOT, "extradata", "produce_info")
