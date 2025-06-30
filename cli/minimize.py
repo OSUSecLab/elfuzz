@@ -42,6 +42,7 @@ def process(fuzzers, benchmarks, tmpdir):
     subprocess.run(cmd, check=True)
 
     process_dir = os.path.join(tmpdir, "process")
+    os.makedirs(process_dir, exist_ok=True)
     cmd = [
         "python", BATCH_PROCESS_MR,
         "-i", prepare_dir,
