@@ -130,7 +130,7 @@ def cmin(fuzzers, benchmarks, tmpdir):
         cmd_i = [
             "python", BATCH_CMIN_MR, "--shuffle",
             "-b", str(BATCH_SIZE),
-            "-i", os.path.join(cmin_out_dir, "cmin", str(i - 1)),
+            "-i", os.path.join(cmin_out_dir, str(i - 1), "cmin"),
             "-o", cmin_out_dir,
             "--more-excludes", ",".join(exclude),
             "--move-instead-of-copy",
