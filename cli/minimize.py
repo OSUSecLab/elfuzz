@@ -76,8 +76,8 @@ def cmin(fuzzers, benchmarks, tmpdir):
     exclude = []
     for fuzzer in ALL_FUZZERS:
         for benchmark in ALL_BENCHMARKS:
-            if benchmark not in benchmarks or FUZZER_MAPPING[fuzzer] not in fuzzers:
-                exclude.append(f"{benchmark}_{FUZZER_MAPPING[fuzzer]}")
+            if benchmark not in benchmarks or fuzzer not in [FUZZER_MAPPING[fuzzer] for fuzzer in fuzzers]:
+                exclude.append(f"{benchmark}_{fuzzer}")
     process_dir = os.path.join(tmpdir, "process", f"{benchmark}_{fuzzer}")
     all_prcs_files = [f for f in os.listdir(process_dir) if f.endswith(".tar.zst")]
     intermediate_dir = os.path.join(tmpdir, "intermediate")
