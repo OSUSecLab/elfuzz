@@ -12,7 +12,8 @@ ALL_FUZZERS = [
     "isla",
     "islearn",
     'grmr',
-    'glade'
+    'glade',
+    'alt'
 ]
 
 ALL_BENCHMARKS = [
@@ -24,10 +25,19 @@ ALL_BENCHMARKS = [
 ]
 
 def process(fuzzers, benchmarks, tmpdir):
+    FUZZER_INV_MAPPING = {
+        "elm": "elfuzz",
+        "glade": "glade",
+        "islearn": "islearn",
+        "isla": "isla",
+        "grmr": "grmr",
+        "alt": "elfuzz_nofs"
+    }
+
     exclude = []
     for fuzzer in ALL_FUZZERS:
         for benchmark in ALL_BENCHMARKS:
-            if benchmark not in benchmarks or fuzzer not in fuzzers:
+            if benchmark not in benchmarks or FUZZER_INV_MAPPING[fuzzer] not in fuzzers:
                 exclude.append(f"{benchmark}_{fuzzer}")
     prepare_dir = os.path.join(tmpdir, "prepare")
     os.makedirs(prepare_dir, exist_ok=True)
