@@ -163,7 +163,7 @@ def cmin(fuzzers, benchmarks, tmpdir):
             datetag = datetime.now().strftime("%y%m%d")
             output_file = os.path.join(output_dir, f"{datetag}.tar.zst")
             cmd_tar = [
-                'tar', '--zstd', '-cf', output_file, '-C', os.path.join(cmin_out_dir, str(END_AT)), "cmin", f'{benchmark}_{fuzzer}'
+                'tar', '--zstd', '-cf', output_file, '-C', os.path.join(cmin_out_dir, str(END_AT)), "cmin", f'{benchmark}_{fuzzer}, "cmin'
             ]
             subprocess.run(cmd_tar, check=True)
             collect.append(output_file)
