@@ -21,7 +21,9 @@ ALL_BENCHMARKS = [
     "sqlite3",
     "re2",
     "cpython3",
-    "jsoncpp"
+    "jsoncpp",
+    "cvc5",
+    "librsvg",
 ]
 
 def process(fuzzers, benchmarks, tmpdir):
