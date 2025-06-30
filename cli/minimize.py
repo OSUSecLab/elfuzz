@@ -125,7 +125,7 @@ def cmin(fuzzers, benchmarks, tmpdir):
     ]
     subprocess.run(cmd_first, check=True)
 
-    for i in range(START_FROM, END_AT):
+    for i in range(START_FROM + 1, END_AT):
         click.echo(f"Running cmin iteration {i}. There will be {END_AT} iterations in total.")
         cmd_i = [
             "python", BATCH_CMIN_MR, "--shuffle",
