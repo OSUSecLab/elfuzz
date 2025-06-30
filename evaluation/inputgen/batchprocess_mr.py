@@ -83,7 +83,7 @@ def __process_batch_libxml2(gen_seed: str):
 import logging
 
 logger = logging.getLogger(__file__)
-mailoger = MailLogger.load_from_config(__file__, "config.toml", chained_logger=logger)
+mailoger = MailLogger.load_from_config(__file__, "/home/appuser/elmfuzz/cli/config.toml", chained_logger=logger)
 
 def process_one(benchmark, input_dir, output_dir):
     files = [os.path.join(input_dir, f) for f in os.listdir(input_dir)]
