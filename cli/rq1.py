@@ -64,7 +64,7 @@ def prepare(fuzzer, benchmark):
         case "elfuzz":
             act_name = "elm"
         case "elfuzz_nofs":
-            act_name = "alt"
+            act_name = "elmalt"
         case "isla":
             act_name = "isla"
         case "islearn":
@@ -73,6 +73,12 @@ def prepare(fuzzer, benchmark):
             act_name = "grmr"
         case "glade":
             act_name = "glade"
+        case "elfuzz_nocp":
+            act_name = "elmnocomp"
+        case "elfuzz_noin":
+            act_name = "elmnoinf"
+        case "elfuzz_nosp":
+            act_name = "elmnospl"
         case _:
             raise ValueError(f"Unknown fuzzer: {fuzzer}")
     PREPARE_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "workdir", "prepare.py")
