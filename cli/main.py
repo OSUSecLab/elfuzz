@@ -204,9 +204,10 @@ def synthesize_on_cluster():
               help="Only relocate the files from the cache directory to the data directory without downloading and unziping them again.")
 @click.option("--fix-version", type=int, default=-1, show_default=True,
               help="Fix the version of the data files to download. If set to -1, it will download the latest version. If set to a positive integer, it will download the specified version.")
-def download(ignore_cache: bool, only_relocate: bool, fix_version: int):
+@click.option("--debug", is_flag=True, default=False, hidden=True)
+def download(ignore_cache: bool, only_relocate: bool, fix_version: int, debug: bool):
     click.echo("Downloading data files needed by the experiments...")
-    download_mod.download_data(ignore_cache=ignore_cache, only_relocate=only_relocate, fix_version=fix_version)
+    download_mod.download_data(ignore_cache=ignore_cache, only_relocate=only_relocate, fix_version=fix_version, debug=debug)
 
 @cli.command(name="info", help="Show information about the Docker image.")
 def info():

@@ -154,65 +154,69 @@ class PartFileInfo:
     download_url: str
     md5: str
 
-def download_data(ignore_cache: bool, only_relocate: bool=False, fix_version: int = -1):
+def download_data(ignore_cache: bool, debug: bool, only_relocate: bool=False, fix_version: int = -1):
     UNZIP_DIR = os.path.realpath(os.path.join(TMP_UNZIP_DIR, "data"))
     if not only_relocate:
-        if fix_version == -1:
-            FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/files?page_size=100"
-            response = requests.get(FILE_LIST_URL)
-            file_list = response.json()
-        else:
-            FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/versions/{fix_version}"
-            response = requests.get(FILE_LIST_URL)
-            file_list = response.json()["files"]
-        metadata_url = None
-        for file in file_list:
-            if file["name"] == "data_metadata.json":
-                metadata_url = file["download_url"]
-
-        assert metadata_url is not None, "Metadata file not found"
-        response = requests.get(metadata_url)
-        metadata = response.json()
-        part_files = metadata["part_files"]
-
-        part_file_info = []
-        for part_file in part_files:
+        if not debug:
+            if fix_version == -1:
+                FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/files?page_size=100"
+                response = requests.get(FILE_LIST_URL)
+                file_list = response.json()
+            else:
+                FILE_LIST_URL = f"{FIGSHARE_API_BASE}/articles/{ARTICLE_ID}/versions/{fix_version}"
+                response = requests.get(FILE_LIST_URL)
+                file_list = response.json()["files"]
+            metadata_url = None
             for file in file_list:
-                if part_file == file["name"]:
-                    part_file_info.append(PartFileInfo(
-                        size=file["size"],
-                        name=file["name"],
-                        download_url=file["download_url"],
-                        md5=file["computed_md5"]
-                    ))
+                if file["name"] == "data_metadata.json":
+                    metadata_url = file["download_url"]
 
-        if not os.path.exists(CACHE_DIR):
-            os.makedirs(CACHE_DIR)
+            assert metadata_url is not None, "Metadata file not found"
+            response = requests.get(metadata_url)
+            metadata = response.json()
+            part_files = metadata["part_files"]
 
-        click.echo(f"Downloading {len(part_file_info)} data files...")
+            part_file_info = []
+            for part_file in part_files:
+                for file in file_list:
+                    if part_file == file["name"]:
+                        part_file_info.append(PartFileInfo(
+                            size=file["size"],
+                            name=file["name"],
+                            download_url=file["download_url"],
+                            md5=file["computed_md5"]
+                        ))
 
-        BLOCK_SIZE = 8192
-        cached_files = set(os.path.realpath(os.path.join(CACHE_DIR, f))  for f in os.listdir(CACHE_DIR))
-        download_files = []
-        for info in part_file_info:
-            download_to = os.path.realpath(os.path.join(CACHE_DIR, info.name))
-            if not ignore_cache and download_to in cached_files:
+            if not os.path.exists(CACHE_DIR):
+                os.makedirs(CACHE_DIR)
+
+            click.echo(f"Downloading {len(part_file_info)} data files...")
+
+            BLOCK_SIZE = 8192
+            cached_files = set(os.path.realpath(os.path.join(CACHE_DIR, f))  for f in os.listdir(CACHE_DIR))
+            download_files = []
+            for info in part_file_info:
+                download_to = os.path.realpath(os.path.join(CACHE_DIR, info.name))
+                if not ignore_cache and download_to in cached_files:
+                    md5 = file_md5(download_to)
+                    if md5 == info.md5:
+                        click.echo(f"File {info.name} already exists and is valid. Skipping download.")
+                        download_files.append(download_to)
+                        continue
+                    else:
+                        click.echo(f"MD5 mismatch: {md5}!={info.md5}. Re-downloading...")
+                with open(download_to, "wb") as f, tqdm(total=info.size, unit='B', unit_scale=True, desc=info.name) as pbar:
+                    response = requests.get(info.download_url, stream=True)
+                    for chunk in response.iter_content(chunk_size=BLOCK_SIZE):
+                        if chunk:
+                            f.write(chunk)
+                            pbar.update(len(chunk))
+                download_files.append(download_to)
                 md5 = file_md5(download_to)
-                if md5 == info.md5:
-                    click.echo(f"File {info.name} already exists and is valid. Skipping download.")
-                    download_files.append(download_to)
-                    continue
-                else:
-                    click.echo(f"MD5 mismatch: {md5}!={info.md5}. Re-downloading...")
-            with open(download_to, "wb") as f, tqdm(total=info.size, unit='B', unit_scale=True, desc=info.name) as pbar:
-                response = requests.get(info.download_url, stream=True)
-                for chunk in response.iter_content(chunk_size=BLOCK_SIZE):
-                    if chunk:
-                        f.write(chunk)
-                        pbar.update(len(chunk))
-            download_files.append(download_to)
-            md5 = file_md5(download_to)
-            assert md5 == info.md5, f"MD5 mismatch for {info.name}: expected {info.md5}, got {md5}"
+                assert md5 == info.md5, f"MD5 mismatch for {info.name}: expected {info.md5}, got {md5}"
+        else:
+            click.echo("Debug mode: using cached files only.")
+            download_files = [os.path.join(CACHE_DIR, f) for f in os.listdir(CACHE_DIR) if f[:-2].endswith(".tar.zst.part")]
 
         if not os.path.exists(TMP_UNZIP_DIR):
             os.makedirs(TMP_UNZIP_DIR)
