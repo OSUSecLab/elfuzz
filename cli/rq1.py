@@ -72,7 +72,7 @@ def prepare(fuzzer, benchmark):
         case "grmr":
             act_name = "grmr"
         case "glade":
-            act_name = "glade"
+            act_name = "elm"
         case "elfuzz_nocp":
             act_name = "elmnocomp"
         case "elfuzz_noin":

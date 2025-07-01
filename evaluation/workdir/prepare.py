@@ -42,13 +42,10 @@ ISLA_GRAMMAR = {
 @clk.option('--force', '-f', is_flag=True, help='Force overwrite')
 @clk.argument('target', type=clk.Choice([
     'cpython3',
-    'ninja',
     'cvc5',
-    'systemd',
     're2',
     'jsoncpp',
     'libxml2',
-    'php',
     'sqlite3',
     'librsvg',
 ]))
