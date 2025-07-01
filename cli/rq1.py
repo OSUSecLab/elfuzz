@@ -71,6 +71,8 @@ def prepare(fuzzer, benchmark):
             act_name = "islearn"
         case "grmr":
             act_name = "grmr"
+        case "glade":
+            act_name = "glade"
         case _:
             raise ValueError(f"Unknown fuzzer: {fuzzer}")
     PREPARE_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "workdir", "prepare.py")
