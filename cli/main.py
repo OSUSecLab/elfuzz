@@ -287,7 +287,7 @@ def rq1_seed_cov(fuzzer, benchmark):
 @click.option("--debug", is_flag=True, default=False, hidden=True,)
 @click.option("--time", "-t", type=int, default=86400, show_default=True,)
 @click.argument("benchmarks", type=str, required=True)
-def rq1_afl(fuzzers, benchmarks, repeat, debug):
+def rq1_afl(fuzzers, benchmarks, repeat, debug, time):
     fuzzer_list = [f.strip() for f in fuzzers.split(",")]
     benchmark_list = [b.strip() for b in benchmarks.split(",")]
     for fuzzer in fuzzer_list:
