@@ -17,7 +17,7 @@ else:
 # Create the tar.xz file
 archive_name = f"tmp/elfuzz_docker_{TIMETAG}.tar"
 
-cmd = ["docker", "save", "-o", archive_name, "ghcr.io/cychen2021/elfuzz:25.06.0"]
+cmd = ["docker", "save", "-o", archive_name, "ghcr.io/cychen2021/elfuzz:25.06.1"]
 subprocess.run(cmd)
 
 cmd = ["zstd", "-o", f"{archive_name}.zst", archive_name]

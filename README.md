@@ -13,7 +13,7 @@ The experiment data are published on [Figshare](https://doi.org/10.6084/m9.figsh
 The code and environment to replicate the experiments are published as a Docker image. Run the following command to pull it:
 
 ```bash
-docker pull ghcr.io/cychen2021/elfuzz:25.06.0
+docker pull ghcr.io/cychen2021/elfuzz:25.06.1
 ```
 
 Instead, if you download the Docker image as a tarball from Figshare, you can import it using the following commands:
@@ -26,7 +26,7 @@ docker load --input "elfuzz_docker_<timetag>.tar"
 After pulling/importing the image, run the following command to start the container:
 
 ```bash
-docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/cychen2021/elfuzz:25.06.0
+docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/cychen2021/elfuzz:25.06.1
 ```
 
 Explanation of the command is as follows:
@@ -37,7 +37,7 @@ Explanation of the command is as follows:
 - `--add-host=host.docker.internal:host-gateway`: Adds a host entry to the container so that it can access the host machine. This is needed for query the LLM served in a [sibling container](https://stackoverflow.com/questions/39151188/is-there-a-way-to-start-a-sibling-docker-container-mounting-volumes-from-the-hos).
 - `-v "/var/run/docker.sock:/var/run/docker.sock"`: Mounts the Docker socket into the container, allowing it to run sibling containers.
 - `--name elfuzz`: Names the container `elfuzz`.
-- `ghcr.io/cychen2021/elfuzz:25.06.0`: Specifies the Docker image to use.
+- `ghcr.io/cychen2021/elfuzz:25.06.1`: Specifies the Docker image to use.
 
 This will enter a shell into the container. Then, following the instructions in `/elfuzz/README.md` (which is a symlink to [docker_readme.md](docker_readme.md) in this repository) to replicate the experiments.
 
@@ -50,7 +50,7 @@ Before building the Docker image, you should `cd` to the root of the ELFuzz sour
 The Docker image is built by the following command:
 
 ```bash
-docker build -t ghcr.io/cychen2021/elfuzz:25.06.0 -f .devcontainer/Dockerfile --target publish .
+docker build -t ghcr.io/cychen2021/elfuzz:25.06.1 -f .devcontainer/Dockerfile --target publish .
 ```
 
 ## Source code layout
