@@ -351,7 +351,7 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int, time: int, debug: bool=False) 
                 result_file = os.path.join(store_dir, f"{benchmark}_{fuzzer}_{rep}.tar.zst")
                 cmd_tar = [
                     "tar", "--zstd", "-cf", result_file,
-                    "-C", os.path.join(output_dir, str(rep)), f"{benchmark}_{fuzzer}"
+                    "-C", os.path.join(output_dir, str(rep)), f"{benchmark}_{subname}"
                 ]
                 subprocess.run(cmd_tar, check=True)
                 collected_info.append(result_file)
