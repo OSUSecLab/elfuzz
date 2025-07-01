@@ -1,10 +1,10 @@
 # Replication Package of ELFuzz
 
-[![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/cychen2021/elfuzz/blob/main/artifacts_readme.md)
+[![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/OSUSecLab/elfuzz/blob/main/artifacts_readme.md)
 
 ## Overview
 
-This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space." While this Figshare repository is self-contained with all docs, code and data required to replicate the experiments, the original source code is hosted on [GitHub](https://github.com/cychen2021/elfuzz), where you may get a better reading experience for the docs.
+This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space." While this Figshare repository is self-contained with all docs, code and data required to replicate the experiments, the original source code is hosted on [GitHub](https://github.com/OSUSecLab/elfuzz), where you may get a better reading experience for the docs.
 
 The files are organized as follows:
 

@@ -194,7 +194,7 @@ def config(list_: bool, set: tuple[str, str], get: str):
 def synthesize_on_cluster():
     instructions = trim_indent("""
                                |Running the synthesis on a GPU cluster is quite cubersome and has yet to be automated.
-                               |Please see docs/synthesize_on_cluster.md or https://github.com/cychen2021/elfuzz/blob/main/docs/synthesize_on_cluster.md for instructions.
+                               |Please see docs/synthesize_on_cluster.md or https://github.com/OSUSecLab/elfuzz/blob/main/docs/synthesize_on_cluster.md for instructions.
                                """, delimiter="\n")
     click.echo(instructions)
 
