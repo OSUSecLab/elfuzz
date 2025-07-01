@@ -285,6 +285,7 @@ def rq1_seed_cov(fuzzer, benchmark):
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
 @click.option("--debug", is_flag=True, default=False, hidden=True,)
+@click.option("--time", "-t", type=int, default=86400, show_default=True,)
 @click.argument("benchmarks", type=str, required=True)
 def rq1_afl(fuzzers, benchmarks, repeat, debug):
     fuzzer_list = [f.strip() for f in fuzzers.split(",")]
@@ -299,7 +300,7 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug):
                 continue
     if not fuzzer_list or not benchmark_list:
         return
-    entries = rq1_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
+    entries = rq1_afl_run(fuzzer_list, benchmark_list, time=time, repeat=repeat, debug=debug)
     rq1_afl_update(entries)
 
 @run.command(name="rq2.afl", help="Run the AFL++ fuzzing compaigns on the bug-injected benchmarks for RQ2.")
