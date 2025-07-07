@@ -273,14 +273,14 @@ def rq1_afl_update(entries: list[tuple[str, str, int]]) -> None:
         for rep in all_reps:
             cmd_sum_rep = [
                 "python", SUM_REP_SCRIPT,
-                tmpdir,
+                tmpdir_raw,
                 "update"
             ]
             subprocess.run(cmd_sum_rep, check=True)
             click.echo(f"Summarized results for repetition {rep} updated.")
         SUM_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq1", "sum.py")
         cmd_sum = [
-            "python", SUM_SCRIPT, tmpdir, "update"
+            "python", SUM_SCRIPT, tmpdir_raw, "update"
         ]
         subprocess.run(cmd_sum, check=True)
         click.echo("Summarized results across all repetitions updated.")
