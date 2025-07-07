@@ -251,7 +251,10 @@ def rq1_seed_cov_cmd(fuzzer, benchmark):
     click.echo(f"Updated seed coverage for {benchmark} with fuzzer {fuzzer}: {cov} edges.")
 
 def rq1_afl_update(entries: list[tuple[str, str, int]]) -> None:
-    with tempfile.TemporaryDirectory() as tmpdir:
+    with tempfile.TemporaryDirectory() as tmpdir_raw:
+        tmpdir = os.path.join(tmpdir_raw, "afl_cov_exp")
+        if not os.path.exists(tmpdir):
+            os.makedirs(tmpdir)
         for benchmark, fuzzer, rep in entries:
             untar_dir = os.path.join(tmpdir, str(rep))
             if not os.path.exists(untar_dir):
