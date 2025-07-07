@@ -217,6 +217,7 @@ def download_data(ignore_cache: bool, debug: bool, only_relocate: bool=False, fi
         else:
             click.echo("Debug mode: using cached files only.")
             download_files = [os.path.join(CACHE_DIR, f) for f in os.listdir(CACHE_DIR) if f[:-2].endswith(".tar.zst.part")]
+            download_files.sort()
 
         if not os.path.exists(TMP_UNZIP_DIR):
             os.makedirs(TMP_UNZIP_DIR)
