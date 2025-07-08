@@ -34,7 +34,7 @@ print(f"Archive size: {archive_size} bytes")
 
 GB = 1024 * 1024 * 1024
 
-PART_NUM = ceil(archive_size / GB)
+PART_NUM = ceil(archive_size / (0.5 * GB))
 
 if PART_NUM == 1:
     print(f"Archive is less than 1GB, no need to split")
