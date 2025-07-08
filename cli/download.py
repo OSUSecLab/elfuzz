@@ -12,7 +12,7 @@ from typing import Callable, Literal
 from common import PROJECT_ROOT, CLI_DIR
 
 ZENODO_API_BASE = "https://zenodo.org/api"
-DEFAULT_RECORD_ID = None
+DEFAULT_RECORD_ID = "15833146"
 CACHE_DIR = "/tmp/cache"
 TMP_UNZIP_DIR = "/tmp/unzip"
 
