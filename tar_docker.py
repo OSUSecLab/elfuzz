@@ -42,7 +42,7 @@ if PART_NUM == 1:
 
 print(f"Splitting into {PART_NUM} parts")
 
-cmd = ["split", "-b", f"1G", archive_name, f"tmp/elfuzz_docker_{TIMETAG}.tar.zst.part"]
+cmd = ["split", "-b", f"0.5G", archive_name, f"tmp/elfuzz_docker_{TIMETAG}.tar.zst.part"]
 subprocess.run(cmd)
 
 print(f"Splitted")
