@@ -30,7 +30,7 @@ Then, run the following command to restart the container (suppose that you follo
 docker start -ai elfuzz
 ```
 
-Then, you need to download the large binary files from Figshare into the local repository. Run the following command to do so:
+Then, you need to download the large binary files from Zenodo into the local repository. Run the following command to do so:
 
 ```bash
 elfuzz download

@@ -198,16 +198,15 @@ def synthesize_on_cluster():
                                """, delimiter="\n")
     click.echo(instructions)
 
-@cli.command(name="download", help="Download large binary files stored on Figshare.")
+@cli.command(name="download", help="Download large binary files stored on Zenodo.")
 @click.option("--ignore-cache", is_flag=True, default=False,)
 @click.option("--only-relocate", "-s", is_flag=True, default=False,
               help="Only relocate the files from the cache directory to the data directory without downloading and unziping them again.")
-@click.option("--fix-version", type=int, default=-1, show_default=True,
-              help="Fix the version of the data files to download. If set to -1, it will download the latest version. If set to a positive integer, it will download the specified version.")
 @click.option("--debug", is_flag=True, default=False, hidden=True)
-def download(ignore_cache: bool, only_relocate: bool, fix_version: int, debug: bool):
+@click.option("--record-id", type=str, default=download_mod.DEFAULT_RECORD_ID, required=False, show_default=True,)
+def download(ignore_cache: bool, only_relocate: bool, debug: bool, record_id: str):
     click.echo("Downloading data files needed by the experiments...")
-    download_mod.download_data(ignore_cache=ignore_cache, only_relocate=only_relocate, fix_version=fix_version, debug=debug)
+    download_mod.download_data(ignore_cache=ignore_cache, only_relocate=only_relocate, debug=debug, record_id=record_id)
 
 @cli.command(name="info", help="Show information about the Docker image.")
 def info():
@@ -264,7 +263,7 @@ def run():
 
 @run.command(name="rq1.seed_cov", help=trim_indent("""
     |Collect the seed coverage presented in Figure 7 in RQ1.
-    |Note that if you use the original data we provide on Figshare,
+    |Note that if you use the original data we provide on Zenodo,
     |the command will use `afl-showmap` to re-collect the information,
     |as in our original experiments we didn't keep the seed coverage collected during generation.
     |Otherwise, it will directly use the seed coverage collected during generation.

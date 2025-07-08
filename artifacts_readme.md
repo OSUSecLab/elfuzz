@@ -4,7 +4,7 @@
 
 ## Overview
 
-This Figshare repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space." While this Figshare repository is self-contained with all docs, code and data required to replicate the experiments, the original source code is hosted on [GitHub](https://github.com/OSUSecLab/elfuzz), where you may get a better reading experience for the docs.
+This Zenodo repository contains the replication package for the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space." While this Zenodo repository is self-contained with all docs, code and data required to replicate the experiments, the original source code is hosted on [GitHub](https://github.com/OSUSecLab/elfuzz), where you may get a better reading experience for the docs.
 
 The files are organized as follows:
 

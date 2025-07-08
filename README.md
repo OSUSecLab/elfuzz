@@ -1,22 +1,22 @@
 # ELFuzz
 
-[![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.6084%2Fm9.figshare.29177162-green)](https://doi.org/10.6084/m9.figshare.29177162)
+[![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.5281%2Fzenodo.15833147-green)](https://doi.org/10.5281/zenodo.15833147)
 
 This repository contains the source code of the replication package of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
 ## Experiment data
 
-The experiment data are published on [Figshare](https://doi.org/10.6084/m9.figshare.29177162).
+The experiment data are published on [Zenodo](https://doi.org/10.5281/zenodo.15833147).
 
 ## Replication package
 
 The code and environment to replicate the experiments are published as a Docker image. Run the following command to pull it:
 
 ```bash
-docker pull ghcr.io/osuseclab/elfuzz:25.06.2
+docker pull ghcr.io/osuseclab/elfuzz:25.06.3
 ```
 
-Instead, if you download the Docker image as a tarball from Figshare, you can import it using the following commands:
+Instead, if you download the Docker image as a tarball from Zenodo, you can import it using the following commands:
 
 ```bash
 zstd -d "elfuzz_docker_<timetag>.tar.zst"
@@ -26,7 +26,7 @@ docker load --input "elfuzz_docker_<timetag>.tar"
 After pulling/importing the image, run the following command to start the container:
 
 ```bash
-docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.06.2
+docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.06.3
 ```
 
 Explanation of the command is as follows:
@@ -37,7 +37,7 @@ Explanation of the command is as follows:
 - `--add-host=host.docker.internal:host-gateway`: Adds a host entry to the container so that it can access the host machine. This is needed for query the LLM served in a [sibling container](https://stackoverflow.com/questions/39151188/is-there-a-way-to-start-a-sibling-docker-container-mounting-volumes-from-the-hos).
 - `-v "/var/run/docker.sock:/var/run/docker.sock"`: Mounts the Docker socket into the container, allowing it to run sibling containers.
 - `--name elfuzz`: Names the container `elfuzz`.
-- `ghcr.io/osuseclab/elfuzz:25.06.2`: Specifies the Docker image to use.
+- `ghcr.io/osuseclab/elfuzz:25.06.3`: Specifies the Docker image to use.
 
 This will enter a shell into the container. Then, following the instructions in `/elfuzz/README.md` (which is a symlink to [docker_readme.md](docker_readme.md) in this repository) to replicate the experiments.
 
@@ -45,12 +45,12 @@ The Docker image has only been tested on X86-64 machines.
 
 ## How to build the Docker image
 
-Before building the Docker image, you should `cd` to the root of the ELFuzz source code and put `elfuzz_baselines.tar.zst` (downloaded from Figshare) into `tmp/`.
+Before building the Docker image, you should `cd` to the root of the ELFuzz source code and put `elfuzz_baselines.tar.zst` (downloaded from Zenodo) into `tmp/`.
 
 The Docker image is built by the following command:
 
 ```bash
-docker build -t ghcr.io/osuseclab/elfuzz:25.06.2 -f .devcontainer/Dockerfile --target publish .
+docker build -t ghcr.io/osuseclab/elfuzz:25.06.3 -f .devcontainer/Dockerfile --target publish .
 ```
 
 ## Source code layout
@@ -62,7 +62,7 @@ TODO
 ## Miscellaneous
 
 - The Docker version at the time that the image was built is 28.2.2.
-- There is a PDF (`misc/sibling_container.pdf`) in the data tarball (`elfuzz_data_<timestamp>.tar.zst`) downloaded from the Figshare repository. It is a persistent version of the Stack Overflow post referenced above, in case that the link to the post is broken in the future.
+- There is a PDF (`misc/sibling_container.pdf`) in the data tarball (`elfuzz_data_<timestamp>.tar.zst`) downloaded from the Zenodo repository. It is a persistent version of the Stack Overflow post referenced above, in case that the link to the post is broken in the future.
 
 ## Maintenance statements
 
