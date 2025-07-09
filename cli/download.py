@@ -160,7 +160,7 @@ def download_data(ignore_cache: bool, debug: bool, record_id: str | None, only_r
     UNZIP_DIR = os.path.realpath(os.path.join(TMP_UNZIP_DIR, "data"))
     if not only_relocate:
         if not debug:
-            FILE_LIST_URL = f"{ZENODO_API_BASE}/record/{record_id}"
+            FILE_LIST_URL = f"{ZENODO_API_BASE}/records/{record_id}"
             response = requests.get(FILE_LIST_URL)
             file_list = response.json()["files"]
             metadata_url = None
