@@ -192,7 +192,7 @@ def download_data(ignore_cache: bool, debug: bool, record_id: str | None, only_r
             BLOCK_SIZE = 8192
             cached_files = set(os.path.realpath(os.path.join(CACHE_DIR, f))  for f in os.listdir(CACHE_DIR))
             download_files = []
-            for info in part_file_info:
+            for info in tqdm(part_file_info, desc="Downloading files", position=0):
                 download_to = os.path.realpath(os.path.join(CACHE_DIR, info.name))
                 if not ignore_cache and download_to in cached_files:
                     md5 = file_md5(download_to)
@@ -205,7 +205,7 @@ def download_data(ignore_cache: bool, debug: bool, record_id: str | None, only_r
                         continue
                     else:
                         click.echo(f"MD5 mismatch: {md5}!={info.md5}. Re-downloading...")
-                with open(download_to, "wb") as f, tqdm(total=info.size, unit='B', unit_scale=True, desc=info.name) as pbar:
+                with open(download_to, "wb") as f, tqdm(total=info.size, unit='B', unit_scale=True, desc=info.name, position=1, leave=False) as pbar:
                     response = requests.get(info.download_url, stream=True)
                     for chunk in response.iter_content(chunk_size=BLOCK_SIZE):
                         if chunk:
