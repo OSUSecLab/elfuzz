@@ -176,7 +176,7 @@ def download_data(ignore_cache: bool, debug: bool, record_id: str | None, only_r
             part_file_info = []
             for part_file in part_files:
                 for file in file_list:
-                    if part_file == file["name"]:
+                    if part_file == file["key"]:
                         part_file_info.append(PartFileInfo(
                             size=file["size"],
                             name=file["key"],
