@@ -81,7 +81,7 @@ FUZZERS = [
     # 'alt',
     'grmr',
     'isla',
-    'islearn'
+    'islearn',
     "glade",
 ]
 

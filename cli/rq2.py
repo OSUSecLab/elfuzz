@@ -152,13 +152,6 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, time: int, parallel: int, debu
         output_dir = os.path.join(tmpdir, "output")
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        FUZZER_MAPPING = {
-            "elfuzz": "elm",
-            "grmr": "grmr",
-            "glade": "glade",
-            "islearn": "islearn",
-            "isla": "isla"
-        }
         cmd = [
             "python", EXPERIMENT_SCRIPT,
             "-w", TMP_WORKDIR,
@@ -167,7 +160,7 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, time: int, parallel: int, debu
             "-o", output_dir + r"/%d/",
             "-j", str(parallel),
             "-R", str(repeat),
-            "-e", ",".join([f"{benchmark}_{FUZZER_MAPPING[fuzzer]}" for benchmark, fuzzer in to_exclude])
+            "-e", ",".join([f"{benchmark}_{fuzzer}" for benchmark, fuzzer in to_exclude])
         ]
         subprocess.run(cmd, check=True)
         click.echo("AFL++ campaigns completed.")
