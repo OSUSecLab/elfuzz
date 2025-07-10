@@ -332,6 +332,7 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug, time, parallel):
                 continue
             benchmark_list.append(benchmark)
     if not fuzzer_list or not benchmark_list:
+        click.echo("No valid fuzzers or benchmarks found.")
         return
     entries = rq2_afl_run(fuzzer_list, benchmark_list, parallel=parallel, repeat=repeat, debug=debug, time=time)
     with open(os.path.join(PROJECT_ROOT, ".rq2_afl_updated"), "w") as f:
