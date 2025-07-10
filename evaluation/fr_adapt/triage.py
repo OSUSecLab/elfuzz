@@ -446,7 +446,7 @@ NO_CACHE = set()
 @clk.option('--use-cache', '-c', is_flag=True, default=False)
 @clk.option('--force-rerun', type=str, default="")
 def main(afl_root, output, parallel, use_cache, force_rerun):
-    force_rerun = [
+    force_rerun_list = [
         token.split('_') for token in force_rerun.split(',')
     ]
     if 'NO_CACHE' in os.environ:
@@ -456,7 +456,7 @@ def main(afl_root, output, parallel, use_cache, force_rerun):
     cache_dir = os.path.join(output, 'cache')
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
-    triage(afl_root, output, cache_dir, parallel, use_cache, force_rerun=force_rerun)
+    triage(afl_root, output, cache_dir, parallel, use_cache, force_rerun=force_rerun_list)
 
 if __name__=='__main__':
     main()
