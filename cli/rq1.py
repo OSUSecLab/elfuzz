@@ -291,7 +291,7 @@ def rq1_afl_update(entries: list[tuple[str, str, int]]) -> None:
         click.echo("Standard deviation results updated.")
         click.echo("AFL++ analysis completed.")
 
-def rq1_afl_run(fuzzers, benchmarks, repeat: int, time: int, debug: bool=False) -> list[tuple[str, str, int]]:
+def rq1_afl_run(fuzzers, benchmarks, repeat: int, time: int, parallel: int, debug: bool=False) -> list[tuple[str, str, int]]:
     to_exclude = [("re2", "islearn"), ("jsoncpp", "islearn")]
     included = list(itertools.product(benchmarks, fuzzers))
     for benchmark, (fuzzer, subname) in itertools.product(BENCHMARKS, FUZZERS.items()):
@@ -339,7 +339,7 @@ def rq1_afl_run(fuzzers, benchmarks, repeat: int, time: int, debug: bool=False) 
             "-t", str(time),
             "-i", input_dir,
             "-o", output_dir + r"/%d/",
-            "-j", "25",
+            "-j", str(parallel),
             "-r", str(repeat),
             "-e", ",".join([f"{benchmark}_{fuzzer}" for benchmark, fuzzer in to_exclude])
         ]

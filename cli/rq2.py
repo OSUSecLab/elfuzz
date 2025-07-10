@@ -105,13 +105,12 @@ def prepare_workdir(workdir: str | None = None):
     cmd_prepare = ["python", EXPERIMENT_SCRIPT, "--prepare",] + (["-w", workdir,] if workdir is not None else [])
     subprocess.run(cmd_prepare, check=True)
 
-def rq2_afl_run(fuzzers, benchmarks, repeat: int, time: int, debug: bool=False) -> list[tuple[str, str, int]]:
+def rq2_afl_run(fuzzers, benchmarks, repeat: int, time: int, parallel: int, debug: bool=False) -> list[tuple[str, str, int]]:
     to_exclude = [("re2", "islearn"), ("jsoncpp", "islearn")]
     included = list(itertools.product(benchmarks, fuzzers))
     for benchmark, (fuzzer, subname) in itertools.product(BENCHMARKS, FUZZERS.items()):
         if (benchmark, fuzzer) not in included:
             to_exclude.append((benchmark, subname))
-    num = len(set(included) - set([("jsoncpp", "islearn"), ("re2", "islearn")]))
     retval = []
     if debug:
         click.echo(f"DEBUG: {to_exclude=}")
@@ -157,7 +156,7 @@ def rq2_afl_run(fuzzers, benchmarks, repeat: int, time: int, debug: bool=False) 
             "-t", str(time),
             "-i", input_dir,
             "-o", output_dir + r"/%d/",
-            "-j", str(num if num < 25 else 25),
+            "-j", str(parallel),
             "-R", str(repeat),
             "-e", ",".join([f"{benchmark}_{fuzzer}" for benchmark, fuzzer in to_exclude])
         ]
