@@ -310,8 +310,10 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug, time):
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
               help="Repeat the AFL++ fuzzing campaigns for each fuzzer and benchmark.")
 @click.option("--debug", is_flag=True, default=False, hidden=True,)
+@click.option("--time", "-t", type=int, default=86400, show_default=True,
+              help="Time limit for the fuzzing campaign in seconds (default: 1 day).")
 @click.argument("benchmarks", type=str, required=True)
-def rq2_afl(fuzzers, benchmarks, repeat, debug):
+def rq2_afl(fuzzers, benchmarks, repeat, debug, time):
     fuzzer_list = [f.strip() for f in fuzzers.split(",")]
     benchmark_list = [b.strip() for b in benchmarks.split(",")]
     for fuzzer in fuzzer_list:
@@ -324,7 +326,7 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug):
                 continue
     if not fuzzer_list or not benchmark_list:
         return
-    entries = rq2_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug)
+    entries = rq2_afl_run(fuzzer_list, benchmark_list, repeat=repeat, debug=debug, time=time)
     with open(os.path.join(PROJECT_ROOT, ".rq2_afl_updated"), "w") as f:
         for entry in entries:
             f.write(f"{entry[0]},{entry[1]},{entry[2]}\n")
