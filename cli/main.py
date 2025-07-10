@@ -317,16 +317,20 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug, time, parallel):
               help="Number of parallel process to run the fuzzing campaign.")
 @click.argument("benchmarks", type=str, required=True)
 def rq2_afl(fuzzers, benchmarks, repeat, debug, time, parallel):
-    fuzzer_list = [f.strip() for f in fuzzers.split(",")]
-    benchmark_list = [b.strip() for b in benchmarks.split(",")]
-    for fuzzer in fuzzer_list:
+    fuzzer_list_raw = [f.strip() for f in fuzzers.split(",")]
+    benchmark_list_raw = [b.strip() for b in benchmarks.split(",")]
+    fuzzer_list = []
+    benchmark_list = []
+    for fuzzer in fuzzer_list_raw:
         if fuzzer not in ["elfuzz", "grmr", "glade", "isla", "islearn"]:
             click.echo(f"Fuzzer {fuzzer} is not supported.")
             continue
+        fuzzer_list.append(fuzzer)
         for benchmark in benchmark_list:
             if benchmark not in ["libxml2", "cpython3", "sqlite3"]:
                 click.echo(f"Benchmark {benchmark} is not supported.")
                 continue
+            benchmark_list.append(benchmark)
     if not fuzzer_list or not benchmark_list:
         return
     entries = rq2_afl_run(fuzzer_list, benchmark_list, parallel=parallel, repeat=repeat, debug=debug, time=time)
