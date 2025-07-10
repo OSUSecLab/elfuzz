@@ -356,6 +356,7 @@ def rq2_real_world(time, resume, checkpoint):
         return
     rq2_real_world_cmd(resume, dir, time)
 
+# TODO: Refine the help message
 @run.command(name="rq3", help="Collect the RQ3 data for Figures 11 and 12 from previous data.")
 def rq3():
     rq3_input_cov_command()
