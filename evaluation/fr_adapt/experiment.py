@@ -199,9 +199,9 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                 for f in os.listdir(dict_dir):
                     dict_files.append(os.path.join(dict_dir, f))
 
-                logger.info(f'{fuzzer}_{benchmark} experiment started')
                 if (benchmark, fuzzer) in EXCLUDES:
                     continue
+                logger.info(f'{benchmark}_{fuzzer} experiment started')
                 input_dir = os.path.join(input, f'{benchmark}_{fuzzer}')
                 output_root = output.replace('%d', str(i))
                 output_dir = os.path.join(output_root, f'{benchmark}_{fuzzer}')
