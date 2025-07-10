@@ -305,7 +305,6 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug, time, parallel):
     entries = rq1_afl_run(fuzzer_list, benchmark_list, parallel=parallel, time=time, repeat=repeat, debug=debug)
     rq1_afl_update(entries)
 
-# TODO: Add a time option
 @run.command(name="rq2.afl", help="Run the AFL++ fuzzing compaigns on the bug-injected benchmarks for RQ2.")
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
@@ -339,6 +338,7 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug, time, parallel):
         for entry in entries:
             f.write(f"{entry[0]},{entry[1]},{entry[2]}\n")
 
+# TODO: Make it possible to completely base the triage on time-shrunk experiment results
 @run.command(name="rq2.triage", help="Triage and analyze the bug-injection fuzzing experiments of RQ2.")
 def rq2_triage():
     fuzzer_list = ["elfuzz", "grmr", "isla", "islearn", "glade"]
