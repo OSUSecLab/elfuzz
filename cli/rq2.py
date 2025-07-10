@@ -46,7 +46,7 @@ def rq2_triage_command(fuzzers, benchmarks, repeats):
                 ]
                 subprocess.run(cmd_unpack, check=True)
                 click.echo(f"Unpacked {separate_afl_tarball} to {afl_result_dir}")
-                to_rerun.append((benchmark, fuzzer, rep))
+                to_rerun.append((benchmark, FUZZERS[fuzzer], rep))
         prepare_workdir(triage_dir)
         TRIAGE_SCRIPT = os.path.join(PROJECT_ROOT, "evaluation", "fr_adapt", "triage_all.py")
         click.echo(f"Running triage script {TRIAGE_SCRIPT} on {afl_result_dir} with output to {triage_dir}")
