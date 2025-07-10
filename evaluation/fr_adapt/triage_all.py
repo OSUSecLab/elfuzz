@@ -10,7 +10,15 @@ TRIAGE_ONE = os.path.join(PWD, "triage.py")
 @click.option("--root", "-i", type=str, required=True)
 @click.option("--output", "-o", type=str, default="triage")
 @click.option("--parallel", "-j", type=int, default=10)
-def main(root, output, parallel):
+@click.option("--force-rerun", type=str, default="")
+def main(root, output, parallel, force_rerun):
+    force_rerun_record = {}
+    for token in force_rerun.split(","):
+        benchmark, fuzzer, rep = token.split("_")
+        rep_n = int(rep)
+        if rep_n not in force_rerun_record:
+            force_rerun_record[rep_n] = []
+        force_rerun_record[rep_n].append((benchmark, fuzzer))
     for i in range(1, 11):
         print(f"Triage {i} / 10")
         cmd = [
