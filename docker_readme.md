@@ -12,6 +12,12 @@ This file is a symlink to `/home/appuser/elmfuzz/docker_readme.md`. `docs/` is a
 
 ## Launching and setting up the container
 
+TODO: Before launching docker, set up core_patterns
+
+```bash
+echo core >/proc/sys/kernel/core_pattern
+```
+
 The experiments require [sibling containers](https://stackoverflow.com/questions/39151188/is-there-a-way-to-start-a-sibling-docker-container-mounting-volumes-from-the-hos). You'll need to run the following command to enable them:
 
 ```bash
