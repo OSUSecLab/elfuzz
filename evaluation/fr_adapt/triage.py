@@ -376,7 +376,7 @@ def build_load_cache(cache_dir: str, pickled_encode_filename: bytes, abnormal_tr
                     result.add(line.strip())
     return __load_cache
 
-def triage(afl_root: str, output_dir, cache_dir: str | None = None, parallel: int = 1, load_cache: bool = False, force_rerun: list[tuple[str, str]] = []):
+def triage(afl_root: str, output_dir, cache_dir: str | None = None, parallel: int = 1, load_cache: bool = False, force_rerun: list[str] = []):
     if cache_dir is not None:
         os.makedirs(cache_dir, exist_ok=True)
         persist_result = build_persist_result(cache_dir, pickled_encode_filename)
@@ -403,7 +403,7 @@ def triage(afl_root: str, output_dir, cache_dir: str | None = None, parallel: in
                     continue
 
                 if os.path.exists(os.path.join(output_dir, f'{benchmark}_{fuzzer}.txt')):
-                    if (benchmark, fuzzer) not in force_rerun:
+                    if f"{benchmark}_{fuzzer}" not in force_rerun:
                         print(f'{benchmark}_{fuzzer} already exists')
                         continue
                     else:
@@ -446,9 +446,7 @@ NO_CACHE = set()
 @clk.option('--use-cache', '-c', is_flag=True, default=False)
 @clk.option('--force-rerun', type=str, default="")
 def main(afl_root, output, parallel, use_cache, force_rerun):
-    force_rerun_list = [
-        token.split('_') for token in force_rerun.split(',')
-    ]
+    force_rerun_list = [token.strip() for token in force_rerun.split(',') if token.strip()]
     if 'NO_CACHE' in os.environ:
         NO_CACHE.update(os.environ['NO_CACHE'].strip(' '))
     if not os.path.exists(output):
