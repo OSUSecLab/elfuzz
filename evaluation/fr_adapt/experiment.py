@@ -38,7 +38,7 @@ def run_afl(input_dir, output_dir, binary, env, time, dict_files=[], for_python=
     dict_options = []
     for f in dict_files:
         dict_options += ['-x', f]
-    
+
     cmd = [
         'afl-fuzz',
         '-i', input_dir,
@@ -50,7 +50,7 @@ def run_afl(input_dir, output_dir, binary, env, time, dict_files=[], for_python=
         binary, '@@'
     ]
     # mailogger.log(f'Running {" ".join(cmd)}')
-    
+
     if not for_python:
         try:
             if not test_one:
@@ -97,11 +97,13 @@ EXCLUDES = []
 @clk.option('--id', '-id', type=str, default=None)
 @clk.option('--repeat', '-R', type=int, default=10)
 @clk.option('--test-one', '-T', type=str, default=None)
+@clk.option('--parallel', '-j', type=int, default=25)
 @clk.option('--start-batch', '-sb', type=int, default=None)
 @clk.option('--end-batch', '-eb', type=int, default=None)
 @clk.option('--more-excludes', '-e', type=str, default='')
 @watch(mailogger, report_ok=True)
-def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, start_batch, end_batch, more_excludes):
+def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, start_batch, end_batch,
+         more_excludes, parallel):
     for token in more_excludes.split(','):
         if not token:
             continue
@@ -117,7 +119,7 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
         for benchmark in BENCHMARKS:
             work_dir = os.path.join(workdir, benchmark)
             os.makedirs(work_dir, exist_ok=True)
-            
+
             binary = BINARY_SOURCE[benchmark]
             if binary.endswith('.tar.xz'):
                 cmd = [
@@ -128,7 +130,7 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                 shutil.copy(binary, work_dir)
             #shutil.copy(os.path.join(CWD, benchmark, 'filtered_bugs'), work_dir)
             shutil.copy(os.path.join(CWD, benchmark, 'filtered_bugs_all'), work_dir)
-            
+
             if input is not None:
                 for fuzzer in FUZZERS:
                     if (benchmark, fuzzer) in EXCLUDES:
@@ -149,12 +151,12 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                     ]
                     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         return
-    
+
     def callback(benchmark, fuzzer):
         message = f'{benchmark}_{fuzzer} finished'
         return lambda future: mailogger.log(message)
-    
-    BATCH_SIZE = 25
+
+    BATCH_SIZE = parallel
     original_batches = []
     if test_one is not None:
         batches = [[[0,] + list(test_one.split('_'))]]
@@ -175,26 +177,26 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
         batches = original_batches[:end_batch + 1]
     else:
         batches = original_batches
-    
+
     print('Batches: ', len(original_batches))
-    
+
     with ProcessPoolExecutor(max_workers=BATCH_SIZE) as executor:
         mailogger.log(f'Experiments started with {len(batches)} batches', f"Batch sizes: {', '.join([str(len(b)) for b in batches])}\n{start_batch=}, {end_batch=}")
-        
+
         for batch_idx, batch in enumerate(batches):
             header = f'Batch {batch_idx + 1}/{len(batches)} started at {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}:\n'
             message = ''
-            
+
             futures: list[Future[None]] = []
             for i, benchmark, fuzzer in batch:
                 terminal_msg = f'{benchmark}_{fuzzer} [{i + 1}/{repeat}] started\n'
                 print(terminal_msg)
                 dict_files = []
                 dict_dir = os.path.join(DICT_ROOT, benchmark)
-                
+
                 for f in os.listdir(dict_dir):
                     dict_files.append(os.path.join(dict_dir, f))
-                
+
                 logger.info(f'{fuzzer}_{benchmark} experiment started')
                 if (benchmark, fuzzer) in EXCLUDES:
                     continue
@@ -215,7 +217,7 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                         filtered_bugs.append(l.strip())
                 fr_str = 'off ' + ' '.join(filtered_bugs)
                 env['FIXREVERTER'] = fr_str
-                
+
                 bin_to_run = os.path.join(workdir, f'{benchmark}', binary)
                 if not resume:
                     future = executor.submit(
