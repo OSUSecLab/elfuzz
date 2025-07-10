@@ -1,6 +1,6 @@
 import os
 import os.path
-from typing import Callable, Literal, TypeVar, Generic
+from typing import Callable, Literal
 from enum import Enum
 from tqdm import tqdm
 import subprocess
@@ -14,10 +14,7 @@ from io import FileIO
 from pexpect import run
 
 from itertools import combinations
-
-T = TypeVar('T')
-
-class Lattice(Generic[T]):
+class Lattice[T]:
     def __init__(self, elements: set[T]) -> None:
         if len(elements) > 14:
             logger.warning(f'The number of elements is too large {len(elements)}')
