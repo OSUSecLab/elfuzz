@@ -261,6 +261,7 @@ def minimize(all, fuzzer, benchmark):
 def run():
     pass
 
+# TODO: Add a time option
 @run.command(name="rq1.seed_cov", help=trim_indent("""
     |Collect the seed coverage presented in Figure 7 in RQ1.
     |Note that if you use the original data we provide on Zenodo,
@@ -303,6 +304,7 @@ def rq1_afl(fuzzers, benchmarks, repeat, debug, time):
     entries = rq1_afl_run(fuzzer_list, benchmark_list, time=time, repeat=repeat, debug=debug)
     rq1_afl_update(entries)
 
+# TODO: Add a time option
 @run.command(name="rq2.afl", help="Run the AFL++ fuzzing compaigns on the bug-injected benchmarks for RQ2.")
 @click.option("--fuzzers", "-T", type=str, help="Fuzzer list separated by `,`.", required=True)
 @click.option("--repeat", "-r", type=int, default=1, show_default=True, required=False,
