@@ -24,6 +24,8 @@ def main(root, output, parallel, force_rerun):
         cmd = [
             "python",
             TRIAGE_ONE,
+            "--force-rerun",
+            ",".join([f"{b}_{f}" for b, f in force_rerun_record.get(i, [])]),
             "--afl-root",
             os.path.join(root, str(i)),
             "--output",
