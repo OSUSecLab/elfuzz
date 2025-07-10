@@ -200,11 +200,12 @@ def download_data(ignore_cache: bool, debug: bool, record_id: str | None, only_r
                         click.echo(f"WARNING: File {info.name} already exists but the online information doesn't contain an MD5 checksum. Checksum validation skipped.")
                         continue
                     elif md5 == info.md5:
-                        click.echo(f"File {info.name} already exists and is valid. Skipping download.")
+                        # click.echo(f"File {info.name} already exists and is valid. Skipping download.")
                         download_files.append(download_to)
                         continue
                     else:
-                        click.echo(f"MD5 mismatch: {md5}!={info.md5}. Re-downloading...")
+                        # click.echo(f"MD5 mismatch: {md5}!={info.md5}. Re-downloading...")
+                        pass
                 with open(download_to, "wb") as f, tqdm(total=info.size, unit='B', unit_scale=True, desc=info.name, position=1, leave=False) as pbar:
                     response = requests.get(info.download_url, stream=True)
                     for chunk in response.iter_content(chunk_size=BLOCK_SIZE):
