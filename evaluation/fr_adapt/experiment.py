@@ -166,6 +166,8 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                 original_batches.append([])
             for fuzzer in FUZZERS:
                 for benchmark in BENCHMARKS:
+                    if (benchmark, fuzzer) in EXCLUDES:
+                        continue
                     if len(original_batches[-1]) >= BATCH_SIZE:
                         original_batches.append([])
                     original_batches[-1].append((i, benchmark, fuzzer))
