@@ -209,8 +209,8 @@ def main(time, input, output, prepare, resume, workdir, id, repeat, test_one, st
                     os.makedirs(output_dir)
                 binary = BINARIES[benchmark]
                 env = ENV[benchmark]
-                if 'AFL_I_DONT_CARE_ABOUT_CRASHES' not in os.environ:
-                    env['AFL_I_DONT_CARE_ABOUT_CRASHES'] = os.environ.get('AFL_I_DONT_CARE_ABOUT_CRASHES', '1')
+                if 'AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES' not in os.environ:
+                    env['AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES'] = os.environ.get('AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES', '1')
                 env['AFL_CRASHING_SEEDS_AS_NEW_CRASH'] = '1'
 
                 filtered_bugs = list()
