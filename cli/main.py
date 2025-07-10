@@ -326,7 +326,7 @@ def rq2_afl(fuzzers, benchmarks, repeat, debug, time, parallel):
             click.echo(f"Fuzzer {fuzzer} is not supported.")
             continue
         fuzzer_list.append(fuzzer)
-        for benchmark in benchmark_list:
+        for benchmark in benchmark_list_raw:
             if benchmark not in ["libxml2", "cpython3", "sqlite3"]:
                 click.echo(f"Benchmark {benchmark} is not supported.")
                 continue
