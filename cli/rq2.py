@@ -6,8 +6,10 @@ import pandas as pd
 import click
 import sys
 import itertools
-from rq1 import BENCHMARKS, FUZZERS, prepare
+from rq1 import FUZZERS, prepare
 import itertools
+
+BENCHMARKS = ["libxml2", "cpython3", "sqlite3"]
 
 def rq2_triage_command(fuzzers, benchmarks, repeats):
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -62,7 +64,7 @@ def rq2_triage_command(fuzzers, benchmarks, repeats):
             "python", COUNT_BUG_REP_SCRIPT, triage_dir
         ]
         subprocess.run(cmd_count_bug_rep, check=True)
-        
+
         COUNT_BUG_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "count_bug.py")
         cmd_count_bug = [
             "python", COUNT_BUG_SCRIPT
@@ -74,25 +76,25 @@ def rq2_triage_command(fuzzers, benchmarks, repeats):
             "python", STD_SCRIPT,
         ]
         subprocess.run(cmd_std, check=True)
-        
+
         UNIQUE_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "unique.py")
         cmd_unique = [
             "python", UNIQUE_SCRIPT, triage_dir
         ]
         subprocess.run(cmd_unique, check=True)
-        
+
         SUM_UNIQUE_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "sum_unique.py")
         cmd_sum_unique = [
             "python", SUM_UNIQUE_SCRIPT
         ]
         subprocess.run(cmd_sum_unique, check=True)
-        
+
         _BUG_COUNT_10_MIN_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "bug_count_10_min.py")
         cmd_bug_count_10_min = [
             "python", _BUG_COUNT_10_MIN_SCRIPT, triage_dir
         ]
         subprocess.run(cmd_bug_count_10_min, check=True)
-        
+
         TIME_TO_TRIGGER_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq2", "time_to_trigger.py")
         cmd_time_to_trigger = [
             "python", TIME_TO_TRIGGER_SCRIPT
