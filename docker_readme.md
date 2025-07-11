@@ -238,7 +238,7 @@ The data for Figure 11 will be in `/elfuzz/analysis/rq3/rq3_ablation.xlsx`, and 
 
 ### Conducting RQ4 experiments
 
-Currently, we haven't automated the RQ4 experiments. You will need to manually run them with assitance of some scripts.
+Currently, we haven't automated the RQ4 experiments. You will need to manually run them with assistance of some scripts.
 
 #### The SQLite experiment
 
