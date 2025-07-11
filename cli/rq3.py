@@ -13,10 +13,10 @@ def rq3_input_cov_command():
         for fuzzer in ["elfuzz", "elfuzz_nofs", "elfuzz_nocp", "elfuzz_noin", "elfuzz_nosp"]:
             p = info_tarball_path(benchmark, fuzzer)
             if not os.path.exists(p):
-                print(f"Info tarball not found for {benchmark} with fuzzer {fuzzer}. Use `rq1_seed_cov_cmd` to generate it.")
+                print(f"Info tarball {p} not found. Use `rq1_seed_cov_cmd` to generate it.")
                 cov = rq1_seed_cov_showmap(fuzzer, benchmark)
             else:
-                print(f"Using existing info tarball for {benchmark} with fuzzer {fuzzer}.")
+                print(f"Using existing info tarball {p}.")
                 cov = rq1_seed_cov_cmd_info_tarball(fuzzer, benchmark)
             dataframe.loc[benchmark, fuzzer] = cov
     with pd.ExcelWriter(ablation_file) as writer:
