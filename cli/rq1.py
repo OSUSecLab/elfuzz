@@ -160,7 +160,7 @@ def inside_tarball_path(fuzzer, benchmark):
     return f"{benchmark}{dir_suffix}"
 
 def info_tarball_path(fuzzer, benchmark):
-    gen_info_dir = os.path.join(PROJECT_ROOT, "evaluation", "inputgen", "produce_info")
+    gen_info_dir = os.path.join(PROJECT_ROOT, "extradata", "rq3", "geninfo")
     info_tarball_suffix = ""
     match fuzzer:
         case "elfuzz":
