@@ -38,7 +38,7 @@ def rq3_evolve_trend_command():
                 if not os.path.exists(copy_to):
                     os.makedirs(copy_to)
                 tarball_path = os.path.join(PROJECT_ROOT, "extradata", "evolution_record", fuzzer)
-                candidates = [f for f in os.listdir(tarball_path) if f.endswith(".tar.zst") and benchmark in f]
+                candidates = [f for f in os.listdir(tarball_path) if f.endswith(".tar.xz") and benchmark in f]
                 assert len(candidates) == 1, f"Expected exactly one tarball for {benchmark} in {tarball_path}, found: {candidates}"
                 tarball = os.path.join(tarball_path, candidates[0])
                 with tempfile.TemporaryDirectory() as tmpdir1:
