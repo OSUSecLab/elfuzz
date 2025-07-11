@@ -249,13 +249,13 @@ You will need the following utilities:
 
 #### The cvc5 experiment
 
-You will need to check to `evaluation/workdir` and run the following command to let the Zest adapation generate 10 test cases for cvc5:
+You will need to check to `evaluation/workdir` and run the following command to let the Zest adaptation generate 10 test cases for cvc5:
 
 ```bash
 python batchrun_zest.py zest_batch.toml
 ```
 
-The `zest_verify.py` script in the same directory is to verify the correctness ot the Zest adaptation.
+The `zest_verify.py` script in the same directory is to verify the correctness of the Zest adaptation.
 
 ## Result analysis and visualization
 
