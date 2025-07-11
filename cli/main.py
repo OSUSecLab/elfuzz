@@ -370,8 +370,9 @@ def rq2_real_world(time, resume, checkpoint):
 
 # TODO: Refine the help message
 @run.command(name="rq3", help="Collect the RQ3 data for Figures 11 and 12 from previous data.")
-def rq3():
-    rq3_input_cov_command()
+@click.option("--debug", is_flag=True, default=False, hidden=True)
+def rq3(debug):
+    rq3_input_cov_command(debug)
     rq3_evolve_trend_command()
     click.echo("RQ3 data collection completed.")
 

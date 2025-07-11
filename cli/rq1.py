@@ -103,7 +103,7 @@ def run_afl_showmap(input_dir, output_dir, binary, env) -> tuple[str, int]:
     ]
 
     try:
-        ret = subprocess.run(cmd, env=env, stdout=sys.stdout, stderr=sys.stderr)
+        ret = subprocess.run(cmd, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         assert ret.returncode == 0
     except Exception as e:
         print(f'Error: {" ".join(cmd)}\n{ret.returncode=}')
@@ -129,7 +129,7 @@ def run_afl_for_librsvg_showmap(input_dir, output_dir, binary, env):
     ]
     for key, value in env.items():
         os.environ[key] = value
-    retcode = os.system(" ".join(cmd))
+    retcode = os.system(" ".join(cmd) + " > /dev/null 2>&1")
     if retcode != 0:
         print(f'Error: {" ".join(cmd)}')
         sys.exit(1)

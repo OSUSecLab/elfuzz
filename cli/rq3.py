@@ -6,10 +6,12 @@ import tempfile
 import subprocess
 import shutil
 
-def rq3_input_cov_command():
+def rq3_input_cov_command(debug: bool):
     ablation_file = os.path.join(PROJECT_ROOT, "analysis", "rq3", "results", "rq3_ablation.xlsx")
     dataframe = pd.read_excel(ablation_file, header=0, index_col=0)
     for benchmark in BENCHMARKS:
+        if debug and benchmark == "cvc5":
+            continue # It's too slow...
         for fuzzer in ["elfuzz", "elfuzz_nofs", "elfuzz_nocp", "elfuzz_noin", "elfuzz_nosp"]:
             p = info_tarball_path(fuzzer, benchmark)
             if not os.path.exists(p):
