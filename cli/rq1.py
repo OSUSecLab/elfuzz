@@ -180,7 +180,7 @@ def info_tarball_path(fuzzer, benchmark):
         case "islearn":
             info_tarball_suffix = "_islearn"
     info_tarball = os.path.join(
-        gen_info_dir, f"{benchmark}_{info_tarball_suffix}.tar.zst"
+        gen_info_dir, f"{benchmark}{info_tarball_suffix}.tar.zst"
     )
     return info_tarball
 
