@@ -205,7 +205,7 @@ def rq1_seed_cov_showmap(fuzzer, benchmark) -> int:
             subname = "alt"
         case _:
             subname = fuzzer
-    seed_dir = os.path.join("extradata", "seeds", "cmined_with_control_bytes", benchmark, subname)
+    seed_dir = os.path.join(PROJECT_ROOT, "extradata", "seeds", "cmined_with_control_bytes", benchmark, subname)
     candidates = [
         f for f in os.listdir(seed_dir) if f.endswith(".tar.zst")
     ]
