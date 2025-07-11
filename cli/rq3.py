@@ -11,7 +11,7 @@ def rq3_input_cov_command():
     dataframe = pd.read_excel(ablation_file, header=0, index_col=0)
     for benchmark in BENCHMARKS:
         for fuzzer in ["elfuzz", "elfuzz_nofs", "elfuzz_nocp", "elfuzz_noin", "elfuzz_nosp"]:
-            p = info_tarball_path(benchmark, fuzzer)
+            p = info_tarball_path(fuzzer, benchmark)
             if not os.path.exists(p):
                 print(f"Info tarball {p} not found. Use `rq1_seed_cov_cmd` to generate it.")
                 cov = rq1_seed_cov_showmap(fuzzer, benchmark)
