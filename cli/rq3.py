@@ -7,7 +7,7 @@ import subprocess
 import shutil
 
 def rq3_input_cov_command():
-    ablation_file = os.path.join(PROJECT_ROOT, "analysis", "rq3", "results", "rq3_ablation.py")
+    ablation_file = os.path.join(PROJECT_ROOT, "analysis", "rq3", "results", "rq3_ablation.xlsx")
     dataframe = pd.read_excel(ablation_file, header=0, index_col=0)
     for benchmark in BENCHMARKS:
         for fuzzer in ["elfuzz", "elfuzz_nofs", "elfuzz_nocp", "elfuzz_noin", "elfuzz_nosp"]:
