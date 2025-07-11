@@ -34,7 +34,7 @@ def rq3_evolve_trend_command():
                 ("nospl", "elfuzz_noSpl"),
                 ("alt", "elfuzz_noFS")
             ]:
-                copy_to = os.path.join(tmpdir, f"{benchmark}_{alias}")
+                copy_to = os.path.join(tmpdir, alias, benchmark)
                 if not os.path.exists(copy_to):
                     os.makedirs(copy_to)
                 tarball_path = os.path.join(PROJECT_ROOT, "extradata", "evolution_record", fuzzer)
