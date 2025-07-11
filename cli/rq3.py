@@ -54,6 +54,7 @@ def rq3_evolve_trend_command():
                     else:
                         copy_from = tmpdir1
                     for f in os.listdir(copy_from):
+                        print(f"Moving {f} from {copy_from} to {copy_to}")
                         p = os.path.join(copy_from, f)
                         shutil.move(p, copy_to)
         COLLECT_EVOLVE_COV_SCRIPT = os.path.join(PROJECT_ROOT, "analysis", "rq3", "collect_evolve_cov.py")
