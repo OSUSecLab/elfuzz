@@ -101,7 +101,7 @@ def synthesize_grammar(benchmark):
     def parse_time(text: str) -> float:
         from datetime import datetime
         time_str = text.removesuffix(".gram")
-        t = datetime.strptime(time_str, "%Y-%m-%d_%H-%M")
+        t = datetime.strptime(time_str, "%Y-%m-%d_%H:%M")
         return t.timestamp()
     gram_file_generated.sort(key=parse_time)
 
