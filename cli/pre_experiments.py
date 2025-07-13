@@ -97,7 +97,13 @@ def synthesize_grammar(benchmark):
         if file.endswith(".gram"):
             os.remove(os.path.join(gram_dir, file))
     gram_file_generated = [file for file in os.listdir(GLADE_DIR) if file.endswith(".gram")]
-    assert len(gram_file_generated) == 1, f"Expected exactly one grammar file, found {len(gram_file_generated)}"
+    assert len(gram_file_generated) > 0, f"Expected at least one grammar file, found 0"
+    def parse_time(text: str) -> float:
+        from datetime import datetime
+        time_str = text.removesuffix(".gram")
+        t = datetime.strptime(time_str, "%Y-%m-%d_%H-%M")
+        return t.timestamp()
+    gram_file_generated.sort(key=parse_time)
 
     shutil.move(os.path.join(GLADE_DIR, gram_file_generated[0]), os.path.join(gram_dir, gram_file_generated[0]))
     click.echo(f"Grammar for {benchmark} synthesized successfully: {os.path.join(gram_dir, gram_file_generated[0])}.")
