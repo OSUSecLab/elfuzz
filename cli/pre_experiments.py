@@ -91,6 +91,8 @@ def synthesize_grammar(benchmark):
     subprocess.run(" ".join(learn_cmd), check=True, env=os.environ.copy() | {"JAVA_HOME": "/home/appuser/.sdkman/candidates/java/current/"},
                    cwd=GLADE_DIR, user=USER, shell=True)
     gram_dir = os.path.join(GLADE_DIR, "evaluation", "gramgen", benchmark)
+    if not os.path.exists(gram_dir):
+        os.makedirs(gram_dir)
     for file in os.listdir(gram_dir):
         if file.endswith(".gram"):
             os.remove(os.path.join(gram_dir, file))
