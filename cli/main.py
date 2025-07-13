@@ -57,9 +57,9 @@ def setup():
     if not os.path.exists(fuzzdata_dir):
         os.makedirs(fuzzdata_dir)
     cmd = [
-        "sudo", "/usr/bin/bash", "/home/appuser/elmfuzz/.devcontainer/setup_docker.sh"
+        "/home/appuser/elmfuzz/.devcontainer/setup_docker.sh"
     ]
-    subprocess.run(cmd, check=True)
+    subprocess.run(" ".join(cmd), check=True, shell=True)
     click.echo("Done! Now please restart the container manually.")
 
 @cli.command(name="sync_repo", hidden=True)
