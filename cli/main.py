@@ -104,7 +104,7 @@ def synthesize(target, benchmark, tgi_waiting, debug, no_select_semantic_constra
         case "grammar.glade":
             synthesize_grammar(benchmark)
             return
-        case "semantic.islearn":
+        case "semantics.islearn":
             synthesize_semantics(benchmark, no_select=no_select_semantic_constraints)
             return
         case _:
