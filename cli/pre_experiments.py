@@ -168,58 +168,61 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
     except Exception as e:
         raise e
 
-    rundir = os.path.join("preset", benchmark)
+    try:
+        rundir = os.path.join("preset", benchmark)
 
-    if evolution_iterations != 50:
-        cmd = ["sudo", f"NUM_GENERATIONS={evolution_iterations}", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
-    else:
-        cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
-    print(f"Running command: {' '.join(cmd)}", flush=True)
-    subprocess.run(" ".join(cmd), check=True, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+        if evolution_iterations != 50:
+            cmd = ["sudo", f"NUM_GENERATIONS={evolution_iterations}", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+        else:
+            cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+        print(f"Running command: {' '.join(cmd)}", flush=True)
+        subprocess.run(" ".join(cmd), check=True, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
 
-    match target:
-        case "elfuzz":
-            target_cap = "elfuzz"
-            fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "elmfuzzers")
-        case "elfuzz_nofs":
-            target_cap = "elfuzz_noFS"
-            fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "alt_elmfuzzers")
-        case "elfuzz_nocp":
-            target_cap = "elfuzz_noCompletion"
-            fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "nocomp_fuzzers")
-        case "elfuzz_noin":
-            target_cap = "elfuzz_noInfilling"
-            fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "noinf_fuzzers")
-        case "elfuzz_nosp":
-            target_cap = "elfuzz_noSpl"
-            fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "nospl_fuzzers")
+        match target:
+            case "elfuzz":
+                target_cap = "elfuzz"
+                fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "elmfuzzers")
+            case "elfuzz_nofs":
+                target_cap = "elfuzz_noFS"
+                fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "alt_elmfuzzers")
+            case "elfuzz_nocp":
+                target_cap = "elfuzz_noCompletion"
+                fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "nocomp_fuzzers")
+            case "elfuzz_noin":
+                target_cap = "elfuzz_noInfilling"
+                fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "noinf_fuzzers")
+            case "elfuzz_nosp":
+                target_cap = "elfuzz_noSpl"
+                fuzzer_dir = os.path.join(PROJECT_ROOT, "evaluation", "nospl_fuzzers")
 
-    evolution_record_dir = os.path.join(PROJECT_ROOT, "extradata", "evolution_record", target_cap)
-    if not os.path.exists(evolution_record_dir):
-        os.makedirs(evolution_record_dir)
-    else:
-        for file in os.listdir(evolution_record_dir):
-            os.remove(os.path.join(evolution_record_dir, file))
-    tar_evolution_cmd = ["tar", "-cJf", os.path.join(evolution_record_dir, "evolution.tar.xz"), rundir]
-    subprocess.run(tar_evolution_cmd, check=True, cwd=PROJECT_ROOT)
+        evolution_record_dir = os.path.join(PROJECT_ROOT, "extradata", "evolution_record", target_cap)
+        if not os.path.exists(evolution_record_dir):
+            os.makedirs(evolution_record_dir)
+        else:
+            for file in os.listdir(evolution_record_dir):
+                os.remove(os.path.join(evolution_record_dir, file))
+        tar_evolution_cmd = ["tar", "-cJf", os.path.join(evolution_record_dir, "evolution.tar.xz"), rundir]
+        subprocess.run(tar_evolution_cmd, check=True, cwd=PROJECT_ROOT)
 
-    if not os.path.exists(fuzzer_dir):
-        os.makedirs(fuzzer_dir)
-    else:
-        for file in os.listdir(fuzzer_dir):
-            os.remove(os.path.join(fuzzer_dir, file))
-    datesuffix = datetime.now().strftime("%y%m%d")
-    with tempfile.TemporaryDirectory() as tmpdir:
-        result_name = f"{benchmark}_{datesuffix}.fuzzers"
-        tmpdir = os.path.join(tmpdir, result_name)
-        os.makedirs(tmpdir, exist_ok=True)
-        result_dir = os.path.join(PROJECT_ROOT, rundir, f"gen{evolution_iterations}", "seeds")
-        for file in os.listdir(result_dir):
-            shutil.copy(os.path.join(result_dir, file), tmpdir)
-        tar_result_cmd = ["tar", "-cJf", os.path.join(fuzzer_dir, f"{result_name}.tar.xz"), "-C", tmpdir, result_name]
-        subprocess.run(tar_result_cmd, check=True, cwd=PROJECT_ROOT)
+        if not os.path.exists(fuzzer_dir):
+            os.makedirs(fuzzer_dir)
+        else:
+            for file in os.listdir(fuzzer_dir):
+                os.remove(os.path.join(fuzzer_dir, file))
+        datesuffix = datetime.now().strftime("%y%m%d")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            result_name = f"{benchmark}_{datesuffix}.fuzzers"
+            tmpdir = os.path.join(tmpdir, result_name)
+            os.makedirs(tmpdir, exist_ok=True)
+            result_dir = os.path.join(PROJECT_ROOT, rundir, f"gen{evolution_iterations}", "seeds")
+            for file in os.listdir(result_dir):
+                shutil.copy(os.path.join(result_dir, file), tmpdir)
+            tar_result_cmd = ["tar", "-cJf", os.path.join(fuzzer_dir, f"{result_name}.tar.xz"), "-C", tmpdir, result_name]
+            subprocess.run(tar_result_cmd, check=True, cwd=PROJECT_ROOT)
 
-    click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
+        click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
+    finally:
+        subprocess.run(["sudo", "docker", "stop", "tgi-server"], check=True, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
 
 def produce_glade(benchmark, timelimit: int=600):
     glade_gram_dir = os.path.join(PROJECT_ROOT, "evaluation", "gramgen", benchmark)

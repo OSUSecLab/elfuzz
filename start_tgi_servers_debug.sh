@@ -17,7 +17,8 @@ token=$(cat ${HOME}/.config/huggingface/token)
 INPUT_TOKEN=2048
 port=8192
 model=google/gemma-3-1b-pt
-docker run --rm --gpus all -e HUGGING_FACE_HUB_TOKEN=$token --shm-size 1g \
+
+docker run --name="${DOCKER_NAME:-tgi-server}" --rm --gpus all -e HUGGING_FACE_HUB_TOKEN=$token --shm-size 1g \
     -p ${port}:80 -v $volume:/data ghcr.io/huggingface/text-generation-inference:3.3.4 \
     --model-id $model --trust-remote-code --dtype bfloat16 \
     --max-total-tokens 8192 --max-input-length $INPUT_TOKEN --max-batch-prefill-tokens $INPUT_TOKEN

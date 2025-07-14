@@ -16,7 +16,7 @@ token=$(cat ${HOME}/.config/huggingface/token)
 # Code Llama: 8193, GPUs 2,3
 port=8192
 model=codellama/CodeLlama-13b-hf
-docker run --rm --gpus all -e HUGGING_FACE_HUB_TOKEN=$token --shm-size 1g \
+docker run --name="${DOCKER_NAME:-tgi-server}" --rm --gpus all -e HUGGING_FACE_HUB_TOKEN=$token --shm-size 1g \
     -p ${port}:80 -v $volume:/data ghcr.io/huggingface/text-generation-inference:1.4.5 \
     --model-id $model --trust-remote-code --dtype bfloat16 \
     --max-total-tokens 8192 --max-input-length 8000 --max-batch-prefill-tokens 8000 --enable-cuda-graphs
