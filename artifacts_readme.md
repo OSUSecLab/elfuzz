@@ -1,6 +1,6 @@
 # Replication Package of ELFuzz
 
-[![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-cychen2021%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/OSUSecLab/elfuzz/blob/main/artifacts_readme.md)
+[![Read on GitHub](https://img.shields.io/badge/Read%20on%20GitHub-OSUSecLab%2Felfuzz%3Aartifacts__readme.md-yellow)](https://github.com/OSUSecLab/elfuzz/blob/main/artifacts_readme.md)
 
 ## Overview
 
