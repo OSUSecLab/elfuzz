@@ -9,6 +9,7 @@ from datetime import datetime
 import tempfile
 import json
 from typing import Dict
+import select
 
 def synthesize_semantics(benchmark, no_select: bool):
     click.echo(f"Preparing environments...")
@@ -146,6 +147,9 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
                                  env=env, cwd=PROJECT_ROOT, user=USER, text=True)
         start = datetime.now()
         print(f"TGI server started at {start}.", flush=True)
+        poll_obj = select.poll()
+        assert tgi_p.stdout is not None, "TGI server stdout is None."
+        poll_obj.register(tgi_p.stdout, select.POLLIN)
         while True:
             if tgi_p.poll() is not None:
                 print("TGI server failed to start.", flush=True)
@@ -156,10 +160,10 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
                 raise RuntimeError("TGI server failed to start.")
             if (datetime.now() - start).total_seconds() > tgi_waiting:
                 break
-            assert tgi_p.stdout is not None, "TGI server stdout is None."
-            line = tgi_p.stdout.readline().strip()
-            if line:
-                print(line, flush=True)
+            if poll_obj.poll(20):
+                line = tgi_p.stdout.readline().strip()
+                if line:
+                    print(line, flush=True)
         click.echo("Text-generation-inference server started.")
     except Exception as e:
         raise e
