@@ -13,7 +13,7 @@ The experiment data are published on [Zenodo](https://doi.org/10.5281/zenodo.158
 The code and environment to replicate the experiments are published as a Docker image. Run the following command to pull it:
 
 ```bash
-docker pull ghcr.io/osuseclab/elfuzz:25.07.0
+docker pull ghcr.io/osuseclab/elfuzz:25.07.2
 ```
 
 Before launching docker, set up core_patterns for the host machine, which is required by AFL++ later:
@@ -33,7 +33,7 @@ After pulling/importing the image, run the following command to start the contai
 
 ```bash
 mkdir -p /tmp/host
-docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v /tmp/host:/tmp/host -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.07.0
+docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v /tmp/host:/tmp/host -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.07.2
 ```
 
 Explanation of the command is as follows:
@@ -45,7 +45,7 @@ Explanation of the command is as follows:
 - `-v /tmp/host:/tmp/host`: Mounts the `/tmp/host` directory on the host machine into the container as a shared temporary directory with sibling containers.
 - `-v "/var/run/docker.sock:/var/run/docker.sock"`: Mounts the Docker socket into the container, allowing it to run sibling containers.
 - `--name elfuzz`: Names the container `elfuzz`.
-- `ghcr.io/osuseclab/elfuzz:25.07.0`: Specifies the Docker image to use.
+- `ghcr.io/osuseclab/elfuzz:25.07.2`: Specifies the Docker image to use.
 
 This will enter a shell into the container. Then, following the instructions in `/elfuzz/README.md` (which is a symlink to [docker_readme.md](docker_readme.md) in this repository) to replicate the experiments.
 
@@ -58,7 +58,7 @@ Before building the Docker image, you should `cd` to the root of the ELFuzz sour
 The Docker image is built by the following command:
 
 ```bash
-docker build -t ghcr.io/osuseclab/elfuzz:25.07.0 -f .devcontainer/Dockerfile --target publish .
+docker build -t ghcr.io/osuseclab/elfuzz:25.07.2 -f .devcontainer/Dockerfile --target publish .
 ```
 
 ## Source code layout
