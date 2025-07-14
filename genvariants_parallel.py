@@ -53,6 +53,15 @@ def infilling_prompt_llama(
     """
     return f'<PRE> {pre} <SUF>{suf} <MID>'
 
+def infilling_prompt_qwen(
+    pre: str,
+    suf: str,
+) -> str:
+    """
+    Format an infilling problem for Qwen.
+    """
+    return f'<|fim_prefix|>{pre}<|fim_suffix|>{suf}<|fim_middle|>'
+
 def infilling_prompt_starcoder(
     pre: str,
     suf: str,
@@ -312,8 +321,8 @@ def main():
     elif model in ('codellama/CodeLlama-13b-hf',
                    'codellama/CodeLlama-7b-hf'):
         infilling_prompt = infilling_prompt_llama
-    else:
-        infilling_prompt = None
+    elif model == 'Qwen/Qwen2.5-Coder-1.5B':
+        infilling_prompt = infilling_prompt_qwen
 
     if infilling_prompt is None and not args.no_fim:
         config.parser.error(f'Model {model} does not support FIM')
