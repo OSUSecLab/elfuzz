@@ -93,15 +93,15 @@ value for the estimation.")
 select one semantic constraint from the mined semantic constraints \
 and put it into evaluation/islearn_adapt/selected/<benchmark>_isla<timetag>.isla. If this option is not set, \
 a random one from the constraints with the best recall and precision will be selected from the mined constraints and put into the file.")
-@click.option("--debug", is_flag=True, default=False, hidden=True)
-def synthesize(target, benchmark, tgi_waiting, evolution_iterations, debug, no_select_semantic_constraints):
+@click.option("--use-small-model", is_flag=True, default=False, help="Use Qwen2.5-Coder-1.5B instead of CodeLlama-13b-hf to verify the functionality on a GPU with limited VRAM. This option only works for targets <fuzzer.*>.")
+def synthesize(target, benchmark, tgi_waiting, evolution_iterations, use_small_model, no_select_semantic_constraints):
     match target, benchmark:
         case ("semantic.islearn", "jsoncpp"):
             click.echo("The JSON format doesn't need semantic constraints, so no synthesis will be conducted.")
             return
     match target:
         case "fuzzer.elfuzz" | "fuzzer.elfuzz_nofs" | "fuzzer.elfuzz_nocp" | "fuzzer.elfuzz_noin" | "fuzzer.elfuzz_nosp":
-            synthesize_fuzzer(target.split(".")[1], benchmark, tgi_waiting=tgi_waiting, evolution_iterations=evolution_iterations, debug=debug)
+            synthesize_fuzzer(target.split(".")[1], benchmark, tgi_waiting=tgi_waiting, evolution_iterations=evolution_iterations, use_small_model=use_small_model)
             return
         case "grammar.glade":
             synthesize_grammar(benchmark)

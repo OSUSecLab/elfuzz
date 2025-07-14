@@ -109,7 +109,7 @@ def synthesize_grammar(benchmark):
     shutil.move(os.path.join(GLADE_DIR, gram_file_generated[0]), os.path.join(gram_dir, gram_file_generated[0]))
     click.echo(f"Grammar for {benchmark} synthesized successfully: {os.path.join(gram_dir, gram_file_generated[0])}.")
 
-def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iterations=50, debug=False):
+def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iterations=50, use_small_model=False):
     match target:
         case "elfuzz":
             env = os.environ.copy() | {
@@ -139,7 +139,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
         case _:
             raise ValueError(f"Unknown target: {target}")
 
-    cmd_tgi = ["sudo", os.path.join(PROJECT_ROOT, "start_tgi_servers.sh" if not debug else "start_tgi_servers_debug.sh")]
+    cmd_tgi = ["sudo", os.path.join(PROJECT_ROOT, "start_tgi_servers.sh" if not use_small_model else "start_tgi_servers_debug.sh")]
     click.echo(f"Starting the text-gneration-inference server. This may take a while as it has to download the model...")
 
     try:
