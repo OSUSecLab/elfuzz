@@ -142,21 +142,22 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
     click.echo(f"Starting the text-gneration-inference server. This may take a while as it has to download the model...")
 
     try:
-        tgi_p = subprocess.Popen(" ".join(cmd_tgi), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, cwd=PROJECT_ROOT, user=USER)
+        tgi_p = subprocess.Popen(" ".join(cmd_tgi), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, 
+                                 env=env, cwd=PROJECT_ROOT, user=USER, text=True)
         start = datetime.now()
         print(f"TGI server started at {start}.", flush=True)
         while True:
             if tgi_p.poll() is not None:
                 print("TGI server failed to start.", flush=True)
                 print("stderr:", flush=True)
-                print(tgi_p.stderr.read().decode("utf-8"), flush=True) # type: ignore
+                print(tgi_p.stderr.read(), flush=True) # type: ignore
                 print("stdout:", flush=True)
-                print(tgi_p.stdout.read().decode("utf-8"), flush=True) # type: ignore
+                print(tgi_p.stdout.read(), flush=True) # type: ignore
                 raise RuntimeError("TGI server failed to start.")
             if (datetime.now() - start).total_seconds() > tgi_waiting:
                 break
             assert tgi_p.stdout is not None, "TGI server stdout is None."
-            line = tgi_p.stdout.readline().decode("utf-8").strip()
+            line = tgi_p.stdout.readline().strip()
             if line:
                 print(line, flush=True)
         click.echo("Text-generation-inference server started.")
