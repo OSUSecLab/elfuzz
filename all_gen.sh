@@ -17,7 +17,11 @@ fi
 export ELMFUZZ_RUNDIR="$1"
 export ELMFUZZ_RUN_NAME=$(basename "$ELMFUZZ_RUNDIR")
 seeds=$(./elmconfig.py get run.seeds)
-num_gens=$(./elmconfig.py get run.num_generations)
+if [ -n "${NUM_GENERATIONS}" ]; then
+    num_gens=${NUM_GENERATIONS}
+else
+    num_gens=$(./elmconfig.py get run.num_generations)
+fi
 # Generations are zero-indexed
 last_gen=$((num_gens - 1))
 genout_dir=$(./elmconfig.py get run.genoutput_dir -s GEN=. -s MODEL=.)

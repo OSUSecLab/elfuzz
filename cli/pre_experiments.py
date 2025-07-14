@@ -108,7 +108,7 @@ def synthesize_grammar(benchmark):
     shutil.move(os.path.join(GLADE_DIR, gram_file_generated[0]), os.path.join(gram_dir, gram_file_generated[0]))
     click.echo(f"Grammar for {benchmark} synthesized successfully: {os.path.join(gram_dir, gram_file_generated[0])}.")
 
-def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
+def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iterations=50, debug=False):
     match target:
         case "elfuzz":
             env = os.environ.copy() | {
@@ -138,7 +138,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
         case _:
             raise ValueError(f"Unknown target: {target}")
 
-    cmd_tgi = ["sudo", os.path.join(PROJECT_ROOT, "start_tgi_servers.sh")]
+    cmd_tgi = ["sudo", os.path.join(PROJECT_ROOT, "start_tgi_servers.sh" if not debug else "start_tgi_servers_debug.sh")]
     click.echo(f"Starting the text-gneration-inference server. This may take a while as it has to download the model...")
 
     try:
@@ -155,15 +155,16 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
                 print(line, flush=True)
         click.echo("Text-generation-inference server started.")
     except Exception as e:
-        if debug:
-            click.echo(f"Error starting TGI server: {e}")
-            click.echo(f"It will be ignored in the debug mode.")
-        else:
-            raise e
+        raise e
 
     rundir = os.path.join("preset", benchmark)
+
+    if evolution_iterations != 50:
+        env = os.environ.copy() | {"NUM_GENERATIONS": str(evolution_iterations)}
+    else:
+        env = os.environ.copy()
     cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
-    subprocess.run(" ".join(cmd), check=True, env=env, shell=True, user=USER, cwd=PROJECT_ROOT)
+    subprocess.run(" ".join(cmd), check=True, env=env, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
 
     match target:
         case "elfuzz":
@@ -201,7 +202,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, debug=False):
         result_name = f"{benchmark}_{datesuffix}.fuzzers"
         tmpdir = os.path.join(tmpdir, result_name)
         os.makedirs(tmpdir, exist_ok=True)
-        result_dir = os.path.join(PROJECT_ROOT, rundir, "gen50", "seeds")
+        result_dir = os.path.join(PROJECT_ROOT, rundir, f"gen{evolution_iterations}", "seeds")
         for file in os.listdir(result_dir):
             shutil.copy(os.path.join(result_dir, file), tmpdir)
         tar_result_cmd = ["tar", "-cJf", os.path.join(fuzzer_dir, f"{result_name}.tar.xz"), "-C", tmpdir, result_name]
