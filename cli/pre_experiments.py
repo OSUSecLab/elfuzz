@@ -146,6 +146,11 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
         start = datetime.now()
         while True:
             if tgi_p.poll() is not None:
+                print("TGI server failed to start.", flush=True)
+                print("stderr:", flush=True)
+                print(tgi_p.stderr.read().decode("utf-8"), flush=True) # type: ignore
+                print("stdout:", flush=True)
+                print(tgi_p.stdout.read().decode("utf-8"), flush=True) # type: ignore
                 raise RuntimeError("TGI server failed to start.")
             if (datetime.now() - start).total_seconds() > tgi_waiting:
                 break
