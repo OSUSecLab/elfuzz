@@ -30,8 +30,8 @@ def synthesize_semantics(benchmark, no_select: bool):
     stored_dir = os.path.join(PROJECT_ROOT, "extradata", "islearn_constraints")
     if not os.path.exists(stored_dir):
         os.makedirs(stored_dir)
-    with tempfile.TemporaryDirectory() as tmpdir:
-        cmd_mine = ["sudo", "docker", "run", "--rm", "-v", f"{tmpdir}:/tmp/semantics/", f"elmfuzz/{benchmark}_islearn",
+    with tempfile.TemporaryDirectory(prefix="/tmp/host/") as tmpdir:
+        cmd_mine = ["sudo", "docker", "run", "--rm", "-v", f"{tmpdir}:/tmp/semantics", f"elmfuzz/{benchmark}_islearn",
                     "conda", "run", "-n", "py310", "/bin/bash", "-c", f"python infer_semantics.py -o /tmp/semantics/{benchmark}.json grammar.bnf"]
         subprocess.run(cmd_mine, check=True, env=os.environ.copy(), cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
         existing = [os.path.join(stored_dir, f) for f in os.listdir(stored_dir) if f.endswith(".json") and benchmark in f]

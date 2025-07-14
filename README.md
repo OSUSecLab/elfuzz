@@ -26,7 +26,7 @@ docker load --input "elfuzz_docker_<timetag>.tar"
 After pulling/importing the image, run the following command to start the container:
 
 ```bash
-docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.07.0
+docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v /tmp/host:/tmp/host -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.07.0
 ```
 
 Explanation of the command is as follows:
@@ -35,6 +35,7 @@ Explanation of the command is as follows:
 - `--cpus 32`: Allocates 32 CPU cores to the container. This is to speed up operations such as minimizing seed test cases via parallelization.
 - `-it`: Runs the container in interactive mode with a terminal.
 - `--add-host=host.docker.internal:host-gateway`: Adds a host entry to the container so that it can access the host machine. This is needed for query the LLM served in a [sibling container](https://stackoverflow.com/questions/39151188/is-there-a-way-to-start-a-sibling-docker-container-mounting-volumes-from-the-hos).
+- `-v /tmp/host:/tmp/host`: Mounts the `/tmp/host` directory on the host machine into the container as a shared temporary directory with sibling containers.
 - `-v "/var/run/docker.sock:/var/run/docker.sock"`: Mounts the Docker socket into the container, allowing it to run sibling containers.
 - `--name elfuzz`: Names the container `elfuzz`.
 - `ghcr.io/osuseclab/elfuzz:25.07.0`: Specifies the Docker image to use.
