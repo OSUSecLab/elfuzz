@@ -93,7 +93,7 @@ value for the estimation.")
 select one semantic constraint from the mined semantic constraints \
 and put it into evaluation/islearn_adapt/selected/<benchmark>_isla<timetag>.isla. If this option is not set, \
 a random one from the constraints with the best recall and precision will be selected from the mined constraints and put into the file.")
-@click.option("--use-small-model", is_flag=True, default=False, help="Use Qwen2.5-Coder-1.5B instead of CodeLlama-13b-hf to verify the functionality on a GPU with limited VRAM. This option only works for targets <fuzzer.*>.")
+@click.option("--use-small-model", is_flag=True, default=False, help="Use Qwen2.5-Coder-0.5B instead of CodeLlama-13b-hf to verify the functionality on a GPU with limited VRAM. This option only works for targets <fuzzer.*>.")
 def synthesize(target, benchmark, tgi_waiting, evolution_iterations, use_small_model, no_select_semantic_constraints):
     match target, benchmark:
         case ("semantic.islearn", "jsoncpp"):
