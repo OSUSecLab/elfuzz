@@ -222,7 +222,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
 
         click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
     finally:
-        subprocess.run(["sudo", "docker", "stop", "tgi-server"], check=True, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+        subprocess.run(["sudo", "docker", "stop", "tgi-server"], check=True, cwd=PROJECT_ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def produce_glade(benchmark, timelimit: int=600):
     glade_gram_dir = os.path.join(PROJECT_ROOT, "evaluation", "gramgen", benchmark)
