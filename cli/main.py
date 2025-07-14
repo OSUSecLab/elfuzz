@@ -263,7 +263,6 @@ def minimize(all, fuzzer, benchmark):
 def run():
     pass
 
-# TODO: Add a time option
 @run.command(name="rq1.seed_cov", help=trim_indent("""
     |Collect the seed coverage presented in Figure 7 in RQ1.
     |Note that if you use the original data we provide on Zenodo,
