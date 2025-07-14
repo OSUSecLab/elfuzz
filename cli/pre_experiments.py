@@ -165,11 +165,10 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
     rundir = os.path.join("preset", benchmark)
 
     if evolution_iterations != 50:
-        env = os.environ.copy() | {"NUM_GENERATIONS": str(evolution_iterations)}
+        cmd = ["sudo", f"NUM_GENERATIONS={evolution_iterations}", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
     else:
-        env = os.environ.copy()
-    cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
-    subprocess.run(" ".join(cmd), check=True, env=env, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
+        cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+    subprocess.run(" ".join(cmd), check=True, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
 
     match target:
         case "elfuzz":

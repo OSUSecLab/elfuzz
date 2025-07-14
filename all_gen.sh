@@ -17,7 +17,7 @@ fi
 export ELMFUZZ_RUNDIR="$1"
 export ELMFUZZ_RUN_NAME=$(basename "$ELMFUZZ_RUNDIR")
 seeds=$(./elmconfig.py get run.seeds)
-if [ -n "${NUM_GENERATIONS}" ]; then
+if [ -n "${NUM_GENERATIONS:-}" ]; then
     num_gens=${NUM_GENERATIONS}
 else
     num_gens=$(./elmconfig.py get run.num_generations)
