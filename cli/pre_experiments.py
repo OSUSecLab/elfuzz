@@ -48,7 +48,7 @@ def synthesize_semantics(benchmark, no_select: bool):
         else:
             best_constraint = max(constraints.values(), key=lambda x: (x.get("recall", 0), x.get("precision", 0)))
             selected_dir = os.path.join(PROJECT_ROOT, "evaluation", "islearn_adapt", "selected")
-            files = [os.path.join(selected_dir, f) for f in os.listdir(selected_dir) if f.endswith(".json") and benchmark in f]
+            files = [os.path.join(selected_dir, f) for f in os.listdir(selected_dir) if f.endswith(".isla") and benchmark in f]
             assert len(files) == 1, f"Expected exactly one selected semantic constraints file for {benchmark}, found {len(files)}"
             with open(files[0], "w") as f:
                 f.write(best_constraint["rule"])
