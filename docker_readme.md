@@ -52,6 +52,10 @@ Besides, you can optionally use `elfuzz config` to configure settings such as em
 
 The following sections describe how to reproduce the experiments presented in the paper. Note that we include all intermediate results acquired in our previous experiments, so you can skip any steps that you don't have time or resources to run.
 
+### Notes on small-scale experiments
+
+Commands listed hereafter are for full-scale experiments that reproduce exactly the results in the paper. If you just want to verify the functionality of the replication package, or don't have enough time or resources to verify the complete reproducibility and only require results produced by smaller-scale experiments to provide partial support for the claims in the paper, we will also provide options to shrink the scale of the experiments (like running for a shorter time or using smaller models) for each experiment.
+
 ### Synthesizing fuzzers by ELFuzz and its four variants
 
 Run the following command to synthesize fuzzers using ELFuzz or one of its variants:
@@ -69,6 +73,13 @@ where `<benchmark>` can be chosen from the seven benchmarks used in the paper, v
 - `sqlite3` (SQLite in the paper)
 - `cvc5`
 - `librsvg`
+
+Several options are available to shrink the scale of the experiments to synthesize fuzzers by ELFuzz and its variants:
+
+- `--use-small-model` to use `Qwen/Qwen2.5-Coder-1.5B` instead of `codellama/CodeLlama-13b-hf` to verify the functionality. This 1.5B model is able to run on PC GPUs with 8GiB VRAM, such as NVIDIA RTX 4070.
+- `--evolution-iterations <it_n>` to set the number of evolution iterations to `<it_n>` which could be less than the default 50.
+
+Use these options can largely reduce the time cost of the synthesis processes. However, the synthesized fuzzers would be less effective than that presented in the paper. If you use these options, I suggest you to re-set up the Docker container and skip the synthesis process to use the original fuzzers for later experiments.
 
 The evolution iterations will be recorded in folders named `preset/<benchmark>/gen<it_n>/`, where `<it_n>` can be 0 to 50. The `*.py` files in `preset/<benchmark>/gen50/seeds/` are the final result of the evolution.
 
@@ -114,9 +125,8 @@ The semantic constraints will be put in `extradata/islearn_constraints/<benchmar
 
 #### WARNINGS
 
-- This step will produce enormous amounts of test cases, especially when using ELFuzz or its variants. There will be data of more than 50 GiB consisting of small files, so even deleting them will take a long time.
+- This step with the default settings (i.e., conducting the full-scale experiments) will produce enormous amounts of test cases, especially when using ELFuzz or its variants. There will be data of more than 50 GiB consisting of small files, so even deleting them will take a long time.
 - The generation process typically takes a long time to finish. We produce the test cases in batches and use the total time of the batches as the generation time. For example, if we generate three batches, which take 10 min, 15 min, and 20 min respectively, the generation time is 45 min. Between batches, we use `afl-showmap` to incrementally compute the coverage of the test cases, and that is why the overall time (typically one day for ELFuzz) is much longer than the generation time.
-- Due to the above reasons, I suggest you to just skip this step and start the experiments from seed test cases we produced ahead of time if you don't have enough time or resources to run it.
 
 #### Producing test cases
 
@@ -125,6 +135,12 @@ After synthesizing all the fuzzers/grammars/semantic constraints, you can produc
 ```bash
 elfuzz produce -T "(elfuzz|elfuzz_nofs|elfuzz_nocp|elfuzz_noin|elfuzz_nosp|glade|isla|islearn|grmr)" "<benchmark>"
 ```
+
+The following option can run the seed test case generation process in a shorter time:
+
+- `--time <time_in_seconds>` to set the time limit for the generation process.
+
+You can use a small time limit (i.e., 60 seconds) to verify the functionality. The short time limit will also be enough to show the coverage promotion of the ELFuzz fuzzers.
 
 The test cases will be stored in subdirectories of `extradata/seeds/raw/<benchmark>/`:
 
@@ -178,6 +194,12 @@ To replicate the results in Figure 8, run the following command:
 elfuzz run rq1.afl --fuzzers "elfuzz,grmr,isla,islearn,glade" --repeat 10 "jsoncpp,libxml2,re2,cpython3,sqlite3,cvc5,librsvg"
 ```
 
+You can decrease the number of repetitions if you don't have enough time and the stability of the results is less important. You can also use the following option to run the fuzzing campaigns for a shorter time:
+
+- `--time <time_in_seconds>` to set the time limit for the fuzzing campaign in seconds to a value less than 1 day.
+
+A 1-hour fuzzing campaign will be enough to show the advantage of ELFuzz over the baselines.
+
 This command will run the AFL++ fuzzing campaigns for the fuzzers and benchmarks listed 10 times. The campaigns will be run in batches each running 25 campaigns in parallel. The raw AFL++ outputs will be put in `extradata/rq1/afl_results/<benchmark>_<fuzzer>_<rep_n>.tar.zst`. The analysis results will be updated in `/elfuzz/analysis/rq1/results/rq1_(std|sum|sum_<rep_n>).xlsx`.
 
 ### Conducting RQ2 experiments
@@ -189,6 +211,10 @@ To reproduce the results in Figure 9, Figure 10, and Table 6, we need to run the
 ```bash
 elfuzz run rq2.afl --fuzzers "elfuzz,grmr,isla,islearn,glade" --repeat 10 "libxml2,cpython3,sqlite3"
 ```
+
+Similarly, you can decrease the number of repetitions or use the following option to run the fuzzing campaigns for a shorter time, such as 1 hour, which is still enough to show the advantage of ELFuzz over the baselines:
+
+- `--time <time_in_seconds>` to set the time limit for the fuzzing campaign in seconds to a value less than 1 day.
 
 The output of AFL++ will be stored in tarballs in `extradata/rq2/afl_results/<benchmark>_<fuzzer>_<rep_n>.tar.zst`.
 
@@ -205,6 +231,8 @@ The outputs of the analysis will be in `/elfuzz/analysis/rq2/results/`:
 - `rq2_count_bug_<rep_n>.xlsx` are the data for Figure 9 per repetition. `rq2_count_bugs.xlsx` is the averaged data, and `rq2_std.xlsx` is the standard deviations.
 - `rq2_bug_count_10_min_<rep_n>.xlsx` are the data for Table 6 per repetition. `rq2_time_to_trigger.xlsx` is the averaged data presented in the table.
 - `unique_<benchmark>_<fuzzer>.txt` (ELFuzz represented as `elm`) contains the unique bugs triggered by each fuzzer on each benchmark. `unique.xlsx` is the aggregated value of each fuzzer presented in Figure 10.
+
+Note that the triage command will merge the newly got results with the original experiment results we originally provided if you only run part of the experiments in the previous steps.
 
 #### Running the real-world experiment on cvc5
 
