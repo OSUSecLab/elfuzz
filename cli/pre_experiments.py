@@ -144,6 +144,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
     try:
         tgi_p = subprocess.Popen(" ".join(cmd_tgi), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, cwd=PROJECT_ROOT, user=USER)
         start = datetime.now()
+        print(f"TGI server started at {start}.", flush=True)
         while True:
             if tgi_p.poll() is not None:
                 print("TGI server failed to start.", flush=True)
@@ -168,6 +169,7 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
         cmd = ["sudo", f"NUM_GENERATIONS={evolution_iterations}", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
     else:
         cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+    print(f"Running command: {' '.join(cmd)}", flush=True)
     subprocess.run(" ".join(cmd), check=True, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
 
     match target:
