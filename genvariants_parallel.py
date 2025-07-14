@@ -305,7 +305,7 @@ def main():
     info = model_info()
     model = info['model_id']
     if model != args.model_name:
-        config.parser.error(f'Expected model {args.model_name}, but {ENDPOINT} is actually {model}')
+        print(f'WARNING: Expected model {args.model_name}, but {ENDPOINT} is actually {model}', file=sys.stderr)
 
     if model == 'bigcode/starcoder':
         infilling_prompt = infilling_prompt_starcoder
