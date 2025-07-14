@@ -172,9 +172,9 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
         rundir = os.path.join("preset", benchmark)
 
         if evolution_iterations != 50:
-            cmd = ["sudo", f"NUM_GENERATIONS={evolution_iterations}", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+            cmd = ["sudo", "REPROUDCE_MODE=true", f"NUM_GENERATIONS={evolution_iterations}", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
         else:
-            cmd = ["sudo", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
+            cmd = ["sudo", "REPROUDCE_MODE=true", os.path.join(PROJECT_ROOT, "all_gen.sh"), rundir]
         print(f"Running command: {' '.join(cmd)}", flush=True)
         subprocess.run(" ".join(cmd), check=True, shell=True, user=USER, cwd=PROJECT_ROOT, stdout=sys.stdout, stderr=sys.stderr)
 

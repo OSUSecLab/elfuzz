@@ -40,6 +40,8 @@ def main(image: str, input: str, persist: bool, covfile: str, parallel_num: int)
     cwd = os.path.dirname(os.path.abspath(__file__))
     if access_info is not None:
         prefix = os.path.join(cwd, 'tmp', 'fuzzdata') + '/'
+    elif bool(os.environ.get('REPROUDCE_MODE', 'false')):
+        prefix = '/tmp/host/fuzzdata/'
     else:
         prefix = '/tmp/fuzzdata/'
     if not os.path.exists(prefix):

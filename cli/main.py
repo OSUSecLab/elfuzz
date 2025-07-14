@@ -53,7 +53,7 @@ def setup():
     if not y:
         return
     click.echo("Setting up...")
-    fuzzdata_dir = "/tmp/fuzzdata"
+    fuzzdata_dir = "/tmp/host/fuzzdata"
     if not os.path.exists(fuzzdata_dir):
         os.makedirs(fuzzdata_dir)
     cmd = [
