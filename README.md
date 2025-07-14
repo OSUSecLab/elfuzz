@@ -26,6 +26,7 @@ docker load --input "elfuzz_docker_<timetag>.tar"
 After pulling/importing the image, run the following command to start the container:
 
 ```bash
+mkdir -p /tmp/host
 docker run --storage-opt size=150G --cpus 30 -it --add-host=host.docker.internal:host-gateway -v /tmp/host:/tmp/host -v "/var/run/docker.sock:/var/run/docker.sock" --name elfuzz ghcr.io/osuseclab/elfuzz:25.07.0
 ```
 
