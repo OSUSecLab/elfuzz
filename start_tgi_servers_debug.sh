@@ -15,7 +15,7 @@ token=$(cat ${HOME}/.config/huggingface/token)
 
 # Code Llama: 8193, GPUs 2,3
 port=8192
-model=google/gemma-3-1b-pt
+model=microsoft/phi-2
 docker run --rm --gpus all -e HUGGING_FACE_HUB_TOKEN=$token --shm-size 1g \
     -p ${port}:80 -v $volume:/data ghcr.io/huggingface/text-generation-inference:1.4.5 \
     --model-id $model --trust-remote-code --dtype bfloat16 \
