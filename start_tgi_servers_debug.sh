@@ -16,7 +16,7 @@ token=$(cat ${HOME}/.config/huggingface/token)
 # Code Llama: 8193, GPUs 2,3
 INPUT_TOKEN=4000
 port=8192
-model=Qwen/Qwen2.5-Coder-1.5B-Instruct-GPTQ-Int4
+model=Qwen/Qwen2.5-Coder-1.5B
 
 docker run --name="${DOCKER_NAME:-tgi-server}" --rm --gpus all -e HUGGING_FACE_HUB_TOKEN=$token --shm-size 1g \
     -p ${port}:80 -v $volume:/data ghcr.io/huggingface/text-generation-inference:3.3.4 \
