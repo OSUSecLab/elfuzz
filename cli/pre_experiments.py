@@ -210,14 +210,14 @@ def synthesize_fuzzer(target, benchmark, *, tgi_waiting=600, evolution_iteration
             for file in os.listdir(fuzzer_dir):
                 os.remove(os.path.join(fuzzer_dir, file))
         datesuffix = datetime.now().strftime("%y%m%d")
-        with tempfile.TemporaryDirectory() as tmpdir:
+        with tempfile.TemporaryDirectory() as tmpdir_raw:
             result_name = f"{benchmark}_{datesuffix}.fuzzers"
-            tmpdir = os.path.join(tmpdir, result_name)
+            tmpdir = os.path.join(tmpdir_raw, result_name)
             os.makedirs(tmpdir, exist_ok=True)
             result_dir = os.path.join(PROJECT_ROOT, rundir, f"gen{evolution_iterations}", "seeds")
             for file in os.listdir(result_dir):
                 shutil.copy(os.path.join(result_dir, file), tmpdir)
-            tar_result_cmd = ["tar", "-cJf", os.path.join(fuzzer_dir, f"{result_name}.tar.xz"), "-C", tmpdir, result_name]
+            tar_result_cmd = ["tar", "-cJf", os.path.join(fuzzer_dir, f"{result_name}.tar.xz"), "-C", tmpdir_raw, result_name]
             subprocess.run(tar_result_cmd, check=True, cwd=PROJECT_ROOT)
 
         click.echo(f"Fuzzer synthesized for {benchmark} by {target}")
