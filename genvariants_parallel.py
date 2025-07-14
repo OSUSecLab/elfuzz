@@ -321,7 +321,7 @@ def main():
     elif model in ('codellama/CodeLlama-13b-hf',
                    'codellama/CodeLlama-7b-hf'):
         infilling_prompt = infilling_prompt_llama
-    elif model == 'Qwen/Qwen2.5-Coder-0.5B':
+    elif model.startswith('Qwen/Qwen2.5-Coder'):
         infilling_prompt = infilling_prompt_qwen
 
     if infilling_prompt is None and not args.no_fim:
