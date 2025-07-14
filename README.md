@@ -16,6 +16,12 @@ The code and environment to replicate the experiments are published as a Docker 
 docker pull ghcr.io/osuseclab/elfuzz:25.07.0
 ```
 
+Before launching docker, set up core_patterns for the host machine, which is required by AFL++ later:
+
+```bash
+echo core > /proc/sys/kernel/core_pattern
+```
+
 Instead, if you download the Docker image as a tarball from Zenodo, you can import it using the following commands:
 
 ```bash
