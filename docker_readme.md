@@ -15,6 +15,7 @@ This file is a symlink to `/home/appuser/elmfuzz/docker_readme.md`. `docs/` is a
 The experiments require [sibling containers](https://stackoverflow.com/questions/39151188/is-there-a-way-to-start-a-sibling-docker-container-mounting-volumes-from-the-hos). You'll need to run the following command to enable them:
 
 ```bash
+sudo chwon -R appuser /tmp/host/
 elfuzz setup
 ```
 
