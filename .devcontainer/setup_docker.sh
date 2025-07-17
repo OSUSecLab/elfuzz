@@ -12,4 +12,4 @@ if [ -S ${DOCKER_SOCKET} ]; then
 fi
 
 sudo chown appuser:appuser /tmp/host/fuzzdata
-sudo chmod 777 /tmp/fuzzdata
+sudo chmod 777 /tmp/host/fuzzdata
