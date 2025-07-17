@@ -11,5 +11,5 @@ if [ -S ${DOCKER_SOCKET} ]; then
     usermod -aG ${DOCKER_GROUP} appuser
 fi
 
-sudo chown appuser:appuser /tmp/fuzzdata
+sudo chown appuser:appuser /tmp/host/fuzzdata
 sudo chmod 777 /tmp/fuzzdata
