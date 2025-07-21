@@ -6,9 +6,11 @@ ENV CXX=clang++
 RUN apt-get update -y && apt-get install -y wget
 
 ENV SRC=/src
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O install-miniconda.sh && bash install-miniconda.sh -b -p /home/appuser/miniconda3
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py310_25.5.1-1-Linux-x86_64.sh -O install-miniconda.sh && bash install-miniconda.sh -b -p /home/appuser/miniconda3
 RUN rm -rf install-miniconda.sh
 ENV PATH=/home/appuser/miniconda3/bin:$PATH
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main/
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r/
 RUN conda create -y -n py310 python=3.10
 SHELL ["conda", "run", "-n", "py310", "/bin/bash", "-c"]
 
