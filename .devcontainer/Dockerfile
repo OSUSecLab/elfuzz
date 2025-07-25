@@ -100,7 +100,7 @@ RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | bash -s -- -y
 RUN /home/appuser/.cargo/bin/cargo install cargo-afl@0.15.10
 RUN conda init
 RUN conda config --set changeps1 false
-RUN echo "conda activate py310" >> /home/appuser/.bash_profile
+RUN echo "conda activate py310" >> /home/appuser/.bashrc
 RUN echo "conda config --set changeps1 false" >> /home/appuser/.bash_profile
 ENV LD_LIBRARY_PATH=/home/appuser/miniconda3/envs/py310/lib:$LD_LIBRARY_PATH
 # RUN pip install https://github.com/cychen2021/isla/archive/refs/tags/240804.zip
