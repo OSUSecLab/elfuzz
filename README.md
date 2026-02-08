@@ -1,6 +1,6 @@
 # ELFuzz
 
-[![Paper DOI](https://img.shields.io/badge/Artifacts_DOI-10.5555%2F3766078.3766401-blue)](https://doi.org/10.5555/3766078.3766401) [![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.5281%2Fzenodo.15833146-green)](https://doi.org/10.5281/zenodo.15833146)
+[![Paper DOI](https://img.shields.io/badge/Paper_DOI-10.5555%2F3766078.3766401-blue)](https://doi.org/10.5555/3766078.3766401) [![Artifacts DOI](https://img.shields.io/badge/Artifacts_DOI-10.5281%2Fzenodo.15833146-green)](https://doi.org/10.5281/zenodo.15833146)
 
 This repository contains the source code of the replication package of the paper "ELFuzz: Efficient Input Generation via LLM-driven Synthesis Over Fuzzer Space."
 
